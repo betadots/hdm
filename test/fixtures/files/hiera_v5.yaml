@@ -1,0 +1,24 @@
+version: 5
+defaults:
+  datadir: "./test/fixtures/files/hieradata"
+
+hierarchy:
+  - name: "Secret data: per-node, per-datacenter, common"
+    lookup_key: eyaml_lookup_key
+    paths:
+      - "nodes/%{trusted.certname}.eyaml"
+      - "roles/%{facts.role}.eyaml"
+      - "organizations/%{facts.organization}.eyaml"
+    options:
+      pkcs7_private_key: ./keys/private_key.pkcs7.pem
+      pkcs7_public_key:  ./keys/public_key.pkcs7.pem
+
+  - name: "Normal data"
+    data_hash: yaml_data
+    paths:
+      - "nodes/%{trusted.certname}.yaml"
+      - "roles/%{facts.role}.yaml"
+      - "organizations/%{facts.organization}.yaml"
+      - "os/%{facts.os.family}/%{facts.os.lsbdistcodename}.yaml"
+      - "os/%{facts.os.family}.yaml"
+      - "common.yaml"

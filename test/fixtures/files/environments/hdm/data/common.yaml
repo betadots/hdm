@@ -1,0 +1,10 @@
+---
+a: value a
+mod_a::a: value mod_a::a (from environment)
+mod_a::hash_a:
+  a: value mod_a::hash_a.a (from environment)
+mod_a::hash_b:
+  a: value mod_a::hash_b.a (from environment)
+lookup_options:
+  mod_a::hash_b:
+    merge: hash

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- jss-insertion-point -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HDM</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta name="turbolinks-cache-control" content="no-cache">
+    <%= stylesheet_packs_with_chunks_tag 'application', 'data-turbolinks-track': 'reload', media: 'all' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_packs_with_chunks_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+  </head>
+
+  <body>
+    <style>
+      body {
+        background-color: white;
+      }
+      #side-nav {
+        position: fixed;
+        width: 256px;
+        height: calc(100vh - 64px);
+        left: 0;
+        right: 0;
+        overflow-y: auto;
+        top: 64px;
+      }
+
+      #content-wrapper {
+        margin: 70px 0 0 256px;
+        padding: 0 30px;
+        overflow-y: auto;
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: calc(100vh - 64px);
+        width: calc(100% - 256px);
+      }
+      </style>
+
+      <%= react_component("theme/Snackbar", messages: flash_messages) %>
+      <%= react_component("theme/Baseline") %>
+      <%= react_component("theme/MainBar") %>
+      <div id="container" style="width: 100%;">
+        <div id="side-nav">
+          <%= react_component("theme/Drawer") %>
+        </div>
+        <div id="content-wrapper">
+          <%= yield %>
+          <p>
+          &copy; example42 GmbH <%= Time.now.year %> <a href="http://www.example42.com">example42.com</a>
+          </p>
+        </div>
+      </div>
+  </body>
+</html>

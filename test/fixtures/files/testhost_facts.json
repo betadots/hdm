@@ -1,0 +1,6 @@
+{
+  "fqdn": "testhost",
+  "role": "hdm_test",
+  "env": "development",
+  "zone": "internal"
+}
