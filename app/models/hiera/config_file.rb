@@ -12,7 +12,7 @@ class Hiera
     end
 
     def default_yaml_data?
-      defaults.has_key?("data_hash") && defaults["data_hash"] == "yaml_data"
+      defaults && defaults.has_key?("data_hash") && defaults["data_hash"] == "yaml_data"
     end
 
     def defaults
