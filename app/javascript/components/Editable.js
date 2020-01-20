@@ -69,7 +69,7 @@ function Editable({ classes, model, hierarchy, file, enqueueSnackbar }) {
       const meta_csrf = document.querySelector("meta[name=csrf-token]")
       axios({
         method: "patch",
-        url: `${window.location.href}.json`,
+        url: `${window.location.href}`,
         data: {
           path: file.path,
           value: value
@@ -100,7 +100,7 @@ function Editable({ classes, model, hierarchy, file, enqueueSnackbar }) {
     const meta_csrf = document.querySelector("meta[name=csrf-token]")
     axios({
       method: "delete",
-      url: `${window.location.href}.json`,
+      url: `${window.location.href}`,
       data: {
         path: file.path,
       },
