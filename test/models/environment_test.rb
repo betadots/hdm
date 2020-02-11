@@ -5,6 +5,10 @@ class EnvironmentTest < ActiveSupport::TestCase
     Settings.puppet_db.enabled = false
   end
 
+  teardown do
+    Settings.puppet_db.enabled = false
+  end
+
   test "list the environments" do
     assert_equal ['development', 'hdm', 'test'], Environment.all
   end
