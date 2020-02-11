@@ -12,7 +12,7 @@ class LookupTest < ActiveSupport::TestCase
       only_explain_options = false
       # formar :s or :yaml
       renderer = Puppet::Network::FormatHandler.format(:s)
-    
+
       lookup_invocation = Puppet::Pops::Lookup::Invocation.new(scope, {}, {}, explain ? Puppet::Pops::Lookup::Explainer.new(explain_options, only_explain_options) : nil)
       begin
         # type = options.include?(:type) ? Puppet::Pops::Types::TypeParser.singleton.parse(options[:type], scope) : nil
@@ -30,18 +30,18 @@ class LookupTest < ActiveSupport::TestCase
 
   def generate_scope
     env_name = 'development'
-    env_dir = '/Users/fernandes/src/hdm/puppet/environments'
-    Puppet.settings[:vardir] = '/Users/fernandes/src/hdm/tmp'
-    Puppet.settings[:codedir] = '/Users/fernandes/src/hdm/puppet'
-    Puppet.settings[:confdir] = '/Users/fernandes/src/hdm/puppet'
-    Puppet.settings[:rundir] = '/Users/fernandes/src/hdm/puppet'
-    Puppet.settings[:logdir] = '/Users/fernandes/src/hdm/puppet'
+    env_dir = File.join(Settings.config_dir, 'environments')
+    Puppet.settings[:vardir] = Rails.root.join("tmp")
+    Puppet.settings[:codedir] = Settings.config_dir
+    Puppet.settings[:confdir] = Settings.config_dir
+    Puppet.settings[:rundir] = Settings.config_dir
+    Puppet.settings[:logdir] = Settings.config_dir
     env = Puppet::Node::Environment.create(env_name.to_sym, [File.join(env_dir, env_name, 'modules')])
     environments = Puppet::Environments::Directories.new(env_dir, [])
-  
+
     Puppet.override(:environments => environments, :current_environment => env) do
       node = Puppet::Node.new('testhost', :environment => env)
-      fact_file = '/Users/fernandes/src/hdm/puppet/testhost_facts.json'
+      fact_file = File.join(Settings.config_dir, 'testhost_facts.json')
       given_facts = Puppet::Util::Json.load(Puppet::FileSystem.read(fact_file, :encoding => 'utf-8'))
       node.fact_merge(Puppet::Node::Facts.new('me', given_facts))
       compiler = Puppet::Parser::Compiler.new(node)

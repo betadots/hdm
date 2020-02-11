@@ -62,7 +62,7 @@
 8. run hdm:
 
 ```
-    export HDM__CONFIG_DIR="/etc/puppetlabs/code/environments"
+    export HDM__CONFIG_DIR="/etc/puppetlabs/code"
 
     export HDM__PUPPET_DB__ENABLED=true
     # If you are using a self signed certificate, you need to set:

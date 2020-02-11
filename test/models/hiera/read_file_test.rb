@@ -3,7 +3,7 @@ require 'test_helper'
 class Hiera::ReadFileTest < ActiveSupport::TestCase
   test "full path" do
     file = Hiera::ReadFile.new(config_dir: config_dir, path: "role/%{::role}-%{::env}.yaml", facts: facts)
-    assert_equal "/Users/fernandes/src/hdm/test/fixtures/files/environments/development/data/role/hdm_test-development.yaml", file.full_path
+    assert_equal File.join(Settings.config_dir, "environments/development/data/role/hdm_test-development.yaml"), file.full_path
   end
 
   test "#exit? return false for non existing file" do
