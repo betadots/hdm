@@ -2,6 +2,8 @@ language: ruby
 cache:
   bundler: true
   yarn: true
+before_install:
+  - gem install bundler
 install:
   - bundle install
   - yarn install
