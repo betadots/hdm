@@ -1,0 +1,11 @@
+language: ruby
+dist: bionic
+cache:
+  bundler: true
+  yarn: true
+before_install:
+  - yes | gem update --system --force
+  - gem install bundler
+install:
+  - bundle install
+  - yarn install
