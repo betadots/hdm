@@ -246,7 +246,7 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (3.0.3)
-    puma (3.12.2)
+    puma (3.12.4)
     puppet (6.4.0)
       facter (> 2.0.1, < 4)
       fast_gettext (~> 1.1.2)
@@ -430,7 +430,7 @@ DEPENDENCIES
   pry-byebug
   pry-doc
   pry-rails
-  puma (~> 3.11)
+  puma (~> 3.12)
   puppet
   puppet-spec
   puppetdb-ruby
