@@ -4,7 +4,6 @@ class Node
   attr_reader :host
 
   def self.all
-    return ["testhost"] unless Settings.puppet_db.enabled
     PuppetDBClient.nodes
   end
 
@@ -15,14 +14,6 @@ class Node
   end
 
   def facts(environment:)
-    return @facts if @facts
-
-    if Settings.puppet_db.enabled
-      @facts = PuppetDBClient.facts(certname: host, environment: environment)
-    else
-      @facts = YAML.load(
-        File.read(Pathname.new(Settings.config_dir).join("#{host}_facts.yaml"))
-      )
-    end
+    PuppetDBClient.facts(certname: host, environment: environment)
   end
 end

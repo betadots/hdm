@@ -16,7 +16,7 @@ contract.rule(:config_dir) do
 end
 
 contract.rule(puppet_db: :server) do
-  if values[:puppet_db][:enabled] && !values[:puppet_db][:server]
+  if !values[:puppet_db] || !values[:puppet_db][:server]
     key.failure("You must set a value for PuppetDB Server")
   end
 end
