@@ -65,6 +65,16 @@ class Hiera::ReadFileTest < ActiveSupport::TestCase
     assert_equal key_as_string, file.content_for_key('psick::postfix::tp::resources_hash')
   end
 
+  test "#content_for_key returns integer as integer" do
+    file = Hiera::ReadFile.new(config_dir: config_dir, path: "common.yaml", facts: facts)
+    assert_equal 1, file.content_for_key('hdm::integer')
+  end
+
+  test "#content_for_key returns float as float" do
+    file = Hiera::ReadFile.new(config_dir: config_dir, path: "common.yaml", facts: facts)
+    assert_equal 0.1, file.content_for_key('hdm::float')
+  end
+
   test "#write_key goes fine" do
     path = Rails.root.join('test', 'fixtures', 'files', 'environments', 'development', 'data', 'nodes', 'writehost.yaml')
 
