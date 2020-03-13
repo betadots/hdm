@@ -31,7 +31,7 @@ class Hiera
       value = content[key]
       return "true" if value == true
       return "false" if value == false
-      return value if value.is_a?(String)
+      return value if [String, Integer, Float].include?(value.class)
 
       value_string = value.to_yaml
       value_string.gsub!("---\n", '').gsub!(/^$\n/, '')

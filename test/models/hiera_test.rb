@@ -63,7 +63,7 @@ class HieraTest < ActiveSupport::TestCase
     hiera = Hiera.new('development')
     expected_result = {
       "_all_keys" => [
-        "noop_mode", "psick::enable_firstrun", "psick::firstrun::linux_classes", "psick::postfix::tp::resources_hash", "psick::time::servers", "psick::timezone"
+        "hdm::float", "hdm::integer", "noop_mode", "psick::enable_firstrun", "psick::firstrun::linux_classes", "psick::postfix::tp::resources_hash", "psick::time::servers", "psick::timezone"
       ],
       "Eyaml hierarchy" =>
       [
@@ -71,7 +71,7 @@ class HieraTest < ActiveSupport::TestCase
         { path: "role/hdm_test-development.yaml", present: false, keys: [] },
         { path: "role/hdm_test.yaml",             present: true, keys: ["psick::firstrun::linux_classes"] },
         { path: "zone/internal.yaml",             present: false, keys: [] },
-        { path: "common.yaml",                    present: true, keys: ["psick::enable_firstrun", "psick::firstrun::linux_classes", "psick::time::servers", "psick::timezone", "psick::postfix::tp::resources_hash"] }
+        { path: "common.yaml",                    present: true, keys: ["hdm::float", "hdm::integer", "psick::enable_firstrun", "psick::firstrun::linux_classes", "psick::time::servers", "psick::timezone", "psick::postfix::tp::resources_hash"] }
       ]
     }
 

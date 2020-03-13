@@ -1,5 +1,7 @@
 ---
 # noop_mode: true
+hdm::float: 0.1
+hdm::integer: 1
 psick::enable_firstrun: false
 psick::firstrun::linux_classes:
   hostname: common::hostname

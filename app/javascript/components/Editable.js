@@ -74,8 +74,8 @@ function Editable({ classes, model, hierarchy, file, enqueueSnackbar }) {
           path: file.path,
           value: value
         },
-        dataType: "json",
         headers: {
+          'Accept': 'application/json',
           'X-CSRF-Token': (meta_csrf ? meta_csrf.content : null)
         }
       })
@@ -104,8 +104,8 @@ function Editable({ classes, model, hierarchy, file, enqueueSnackbar }) {
       data: {
         path: file.path,
       },
-      dataType: "json",
       headers: {
+        'Accept': 'application/json',
         'X-CSRF-Token': (meta_csrf ? meta_csrf.content : null)
       }
     })
