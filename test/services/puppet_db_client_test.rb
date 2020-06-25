@@ -1,21 +1,7 @@
 require 'test_helper'
 
 class PuppetDBClientTest < ActiveSupport::TestCase
-  def teardown
-    Settings.puppet_db.enabled = false
-  end
-
-  test "default is disabled" do
-    refute Settings.puppet_db.enabled
-
-    assert_equal [], PuppetDBClient.nodes
-  end
-
   test "when enabled get nodes from PuppetDB" do
-    Settings.puppet_db.server = "http://localhost:32769"
-    Settings.puppet_db.enabled = true
-    assert Settings.puppet_db.enabled
-
     @commander = Minitest::Mock.new
     @commander.expect :request, puppetdb_data, ["nodes", nil, {}]
 
