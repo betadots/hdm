@@ -71,17 +71,11 @@ class Hiera
   end
 
   private
-    def content
-      @content ||= YAML.load(
-        File.read(Pathname.new(Settings.config_dir).join("environments", environment, "hiera.yaml"))
-      )
-    end
-
     def data_path
       Pathname.new(Settings.config_dir).join("environments", environment, "data")
     end
 
     def config_file
-      @config_file ||= ConfigFile.new(content)
+      @config_file ||= ConfigFile.new(Pathname.new(Settings.config_dir).join("environments", environment))
     end
 end

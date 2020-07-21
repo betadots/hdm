@@ -1,0 +1,11 @@
+version: 5
+defaults:
+  datadir: data
+  data_hash: yaml_data
+
+hierarchy:
+  - name: "Per-datacenter business group data" # Uses custom facts.
+    path: "location/%{facts.whereami}/%{facts.group}.yaml"
+
+  - name: "Global business group data"
+    path: "groups/%{facts.group}.yaml"
