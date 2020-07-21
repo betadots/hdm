@@ -1,10 +1,10 @@
 class Hiera
   class ConfigFile
-    attr_reader :content, :environments
+    attr_reader :content, :hierarchies
 
     def initialize(content)
       @content = content
-      initialize_environments
+      initialize_hierarchies
     end
 
     def version5?
@@ -19,9 +19,11 @@ class Hiera
       content["defaults"]
     end
 
-    def initialize_environments
-      return @environments = [] unless content.has_key?("hierarchy")
-      @environments = content['hierarchy'].map do |hierarchy|
+    private
+
+    def initialize_hierarchies
+      return @hierarchies = [] unless content.has_key?("hierarchy")
+      @hierarchies = content['hierarchy'].map do |hierarchy|
         default_data_hash = default_yaml_data? ? 'yaml_data' : nil
         Hierarchy.new(hierarchy: hierarchy, default_data_hash: default_data_hash)
       end

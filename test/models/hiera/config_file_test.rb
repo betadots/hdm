@@ -6,7 +6,7 @@ class Hiera::ConfigFileTest < ActiveSupport::TestCase
       config = Hiera::ConfigFile.new(hiera_file)
       assert config.version5?
       assert config.default_yaml_data?
-      assert config.environments.empty?
+      assert config.hierarchies.empty?
     end
 
     def hiera_file
@@ -26,7 +26,7 @@ class Hiera::ConfigFileTest < ActiveSupport::TestCase
       config = Hiera::ConfigFile.new(hiera_file)
       assert config.version5?
       assert config.default_yaml_data?
-      assert_equal 2, config.environments.size
+      assert_equal 2, config.hierarchies.size
     end
 
     def hiera_file
