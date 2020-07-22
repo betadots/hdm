@@ -19,7 +19,7 @@ const styles = theme => ({
   }
 });
 
-function ValueInspector({ classes, model, data, keyData }) {
+function ValueInspector({ classes, model, data, keyData, readOnly }) {
   return (
     <div className={classes.root}>
       {Object.keys(keyData).map(hierarchy => {
@@ -33,6 +33,7 @@ function ValueInspector({ classes, model, data, keyData }) {
                   key={`${hierarchy}-${file.path}`}
                   hierarchy={hierarchy}
                   file={file}
+                  readOnly={readOnly}
                 />
               );
             })}

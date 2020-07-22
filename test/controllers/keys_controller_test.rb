@@ -47,6 +47,16 @@ class KeysControllerTest < ActionDispatch::IntegrationTest
     assert_equal ["specified value for key is not a valid YAML"], json["errors"]["value"]
   end
 
+  test "#update not possible in read-only mode" do
+    Settings.read_only = true
+    Rails.application.reload_routes!
+    assert_raise ActionController::RoutingError do
+      patch key_url('psick::enable_firstrun'), params: key_params, as: :json
+    end
+    Settings.read_only = false
+    Rails.application.reload_routes!
+  end
+
   test "#delete the key" do
     path = File.join(@role_dir, 'hdm_test.yaml')
 

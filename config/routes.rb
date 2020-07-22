@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   resources :editor, only: [:index]
   resources :environments, only: [:show], id: /[^\/]+/ do
     resources :nodes, only: [:show], on: :member  do
-      resources :keys, only: [:show, :update, :create, :destroy], on: :member
+      if Settings.read_only
+        resources :keys, only: [:show], on: :member
+      else
+        resources :keys, only: [:show, :update, :create, :destroy], on: :member
+      end
     end
   end
   root to: "editor#index"
