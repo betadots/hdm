@@ -6,6 +6,7 @@ module Keys::Operation
     step :node!
     step :node_data!
     step :nodes!
+    step :read_only!
 
     def model!(opts, params:, current_user:, **)
       opts[:model] = OpenStruct.new(
@@ -31,6 +32,11 @@ module Keys::Operation
 
     def nodes!(opts, params:, current_user:, **)
       opts[:view][:nodes] = Node.all
+    end
+
+    def read_only!(opts, params:, current_user:, **)
+      opts[:view][:read_only] = (Settings.read_only == true)
+      true
     end
   end
 end

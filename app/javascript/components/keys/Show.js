@@ -41,7 +41,8 @@ function Show({
   node,
   nodes,
   node_data,
-  key_data
+  key_data,
+  read_only
 }) {
   const handleEnvironmentChange = e =>
     Turbolinks.visit(`/environments/${e.target.value}`);
@@ -99,6 +100,7 @@ function Show({
         data={node_data}
         model={model}
         keyData={key_data}
+        readOnly={read_only}
       />
     </Grid>
   );

@@ -43,7 +43,7 @@ const styles = theme => ({
   }
 });
 
-function DataEditor({ classes, model, environment, node, data, keyData }) {
+function DataEditor({ classes, model, environment, node, data, keyData, readOnly }) {
   const [selectedKeys, setSelectedKeys] = useState(data._all_keys);
   const [searchString, setSearchString] = useState("");
 
@@ -88,7 +88,7 @@ function DataEditor({ classes, model, environment, node, data, keyData }) {
       </Grid>
       {model && (
         <Grid item xs={12} md={6}>
-          <ValueInspector model={model} data={data} keyData={keyData} />
+          <ValueInspector model={model} data={data} keyData={keyData} readOnly={readOnly} />
         </Grid>
       )}
     </Grid>

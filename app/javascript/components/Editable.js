@@ -41,7 +41,7 @@ const styles = theme => ({
   }
 });
 
-function Editable({ classes, model, hierarchy, file, enqueueSnackbar }) {
+function Editable({ classes, model, hierarchy, file, enqueueSnackbar, readOnly }) {
   const [defaultValue, setDefaultValue] = useState(file.value || '');
   const [value, setValue] = useState(file.value || '');
   const [present, setPresent] = useState(file.present || false);
@@ -156,15 +156,20 @@ function Editable({ classes, model, hierarchy, file, enqueueSnackbar }) {
           className={classes.textField}
           margin="normal"
           variant="outlined"
+          disabled={readOnly}
         />
       </ExpansionPanelDetails>
       <Divider />
       <ExpansionPanelActions>
-        {(status() == "editablePresent") &&
+        {(status() == "editablePresent") && !readOnly &&
           <Button size="small" onClick={() => removeValue()} color="secondary">Remove Value</Button>
         }
-        <Button size="small" onClick={() => setValue(defaultValue)}>Cancel</Button>
-        <Button size="small" onClick={() => saveChanges(value)} color="primary">Save</Button>
+        { !readOnly &&
+          <Button size="small" onClick={() => setValue(defaultValue)}>Cancel</Button>
+        }
+        { !readOnly &&
+          <Button size="small" onClick={() => saveChanges(value)} color="primary">Save</Button>
+        }
       </ExpansionPanelActions>
     </ExpansionPanel>
   )
