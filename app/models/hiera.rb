@@ -11,13 +11,13 @@ class Hiera
 
   def paths
     paths = {}
-    config_file.environments.each { |x| paths[x.name] = x.paths }
+    config_file.hierarchies.each { |x| paths[x.name] = x.paths }
     paths
   end
 
   def expected_facts
     expected_facts = []
-    config_file.environments.map { |x| expected_facts.concat(x.expected_facts) }
+    config_file.hierarchies.map { |x| expected_facts.concat(x.expected_facts) }
     expected_facts.sort.uniq
   end
 
@@ -71,17 +71,11 @@ class Hiera
   end
 
   private
-    def content
-      @content ||= YAML.load(
-        File.read(Pathname.new(Settings.config_dir).join("environments", environment, "hiera.yaml"))
-      )
-    end
-
     def data_path
       Pathname.new(Settings.config_dir).join("environments", environment, "data")
     end
 
     def config_file
-      @config_file ||= ConfigFile.new(content)
+      @config_file ||= ConfigFile.new(Pathname.new(Settings.config_dir).join("environments", environment))
     end
 end

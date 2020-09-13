@@ -10,7 +10,16 @@ class EnvironmentTest < ActiveSupport::TestCase
   end
 
   test "list the environments" do
-    assert_equal ['development', 'hdm', 'test'], Environment.all
+    expected_environments = %w(
+      development
+      hdm
+      minimal
+      multiple_hierarchies
+      no_config
+      test
+      v3
+    )
+    assert_equal expected_environments, Environment.all
   end
 
   test "create development environment" do

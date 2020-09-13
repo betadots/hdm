@@ -52,6 +52,8 @@ module PuppetDBClient
         {}
       )
       response.data.map { |x| x["name"] }
+    rescue => e
+      raise Hdm::Error, e
     end
 
     def client
