@@ -1,4 +1,11 @@
-# HDM
+# Hiera Data Manager
+
+Hiera Data Manager, aka HDM, is a webfrontend for vizualising and managing Hiera data.
+
+The data is able to be viewed and modified by a person:
+* without knowledge on Git
+* without knowledge on Puppet
+* simply with a web browser
 
 ## Prerequisites:
 
