@@ -18,7 +18,7 @@ The data is able to be viewed and modified by a person:
 
 1. you must have a hiera.yaml file in each Puppet environment
 1. you must use config version 5
-1. you must set defaults like data_hash in hiera.yaml file
+1. you must set defaults like data\_hash in hiera.yaml file
 1. you must access PuppetDB via https (either with certificate or token)
 1. Hiera Data must be in directory data within puppet environment
 
@@ -50,17 +50,16 @@ You need a Puppet Master with PupeptDB. The most simple approach is to use our P
 1. Preparation (on Workstation)
 
 Besides vagrant you need two plugins:
-```
+
     # You need the pe_build plugin
     vagrant plugin install vagrant-pe_build
     # You need the vagrant-vbguest plugin to inject the vbguest extension into the box at runtime
     vagrant plugin install vagrant-vbguest
-```
 
 2. Use vagrant from PSICK repo
 
 Now you can clone PSICK repo:
-```
+
     git clone https://github.com/example42/psick.git
     cd psick/vagrant/environments/pe
     # Start the puppet. It will download PE tarball, install it and run puppet agent
@@ -70,31 +69,32 @@ Now you can clone PSICK repo:
     # Login into puppet
     vagrant ssh puppet.pe.psick.io
     sudo -i
-    # generate an access token - note: username: admin, password: puppetlabs
-    puppet-access login -l 2y
-```
 
 Note 1: The first time a new PE tarball is downloaded from the net you may have an error as what follows, when provisioning the puppet:
 
     bash: line 2: /vagrant/.pe_build/puppet-enterprise-2016.2.1-el-7-x86_64/puppet-enterprise-installer: No such file or directory
 
-It looks like the newly downloaded PE tarball, placed in the ```.pe_build``` directory of this Vagrant environment, is not immediately available on the VM under its ```/vagrant``` directory.
+It looks like the newly downloaded PE tarball, placed in the `.pe_build` directory of this Vagrant environment, is not immediately available on the VM under its `/vagrant` directory.
 
+
+Next the puppet access token is required:
+
+    # generate an access token - note: username: admin, password: puppetlabs
+    puppet-access login -l 2y
+
+If this produces an error like `Unhandled exception: locale::facet::_S_create_c_locale name not valid` you want to check your locale settings by running `locale`.
+When running on a macOS System you have to unset the LC\_CTYPE local: `unset LC_CTYPE`
 
 
 3. Clone HDM repo:
 
-```
     cd
     git clone https://github.com/example42/hdm.git
     cd hdm/
-```
 
 4. add required packages
 
-```
     yum install -y gcc-c++ sqlite-devel zlib-devel
-```
 
 
 5. sqlite database
@@ -102,40 +102,31 @@ It looks like the newly downloaded PE tarball, placed in the ```.pe_build``` dir
 
 6. install gems
 
-```
     /opt/puppetlabs/puppet/bin/gem install bundler
     /opt/puppetlabs/puppet/bin/bundle install --path vendor
-```
 
 7. install nodejs and yarn
 
-```
     curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash
     sudo yum install -y nodejs
     curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
     sudo rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg
     sudo yum install -y yarn
-```
 
 
 8. yarn updates
 
-```
     /opt/puppetlabs/puppet/bin/bundle exec yarn install --check-files
-```
 
 9. generate db content
 
-```
     mkdir puppet
     /opt/puppetlabs/puppet/bin/bundle exec rails db:migrate
-```
 
 10. run hdm:
 
 You can use our start shell script `bash ./start.sh` or you can run the following set of commands:
 
-```
     # Where can HDM find the Puppet environemnts directory?
     export HDM__CONFIG_DIR="/etc/puppetlabs/code"
 
@@ -155,7 +146,6 @@ You can use our start shell script `bash ./start.sh` or you can run the followin
     export RAILS_ENV=development
     /opt/puppetlabs/puppet/bin/bundle exec ./bin/webpack-dev-server &
     /opt/puppetlabs/puppet/bin/bundle exec rails s -b 0.0.0.0 &
-```
 
 11. Open Webservices in your browser
 
@@ -189,4 +179,8 @@ Configure Nginx, you can use the [example](docs/nginx_example.conf) as base conf
 ### Assets
 
 Rails in production does not compile assets dynamically, needs to precompile all the assets with `rails assets:precompile`
+
+# Copyright
+
+example42 GmbH - 2019 - 2020
 
