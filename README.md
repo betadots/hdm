@@ -133,6 +133,8 @@ It looks like the newly downloaded PE tarball, placed in the ```.pe_build``` dir
 
 10. run hdm:
 
+You can use our start shell script `bash ./start.sh` or you can run the following set of commands:
+
 ```
     # Where can HDM find the Puppet environemnts directory?
     export HDM__CONFIG_DIR="/etc/puppetlabs/code"
@@ -141,6 +143,7 @@ It looks like the newly downloaded PE tarball, placed in the ```.pe_build``` dir
     export HDM__PUPPET_DB__ENABLED=true
     # If you are using a self signed certificate, you need to set:
     export HDM__PUPPET_DB__SELF_SIGNED_CERT=true
+    # URL of PuppetDB service - we prefer https
     export HDM__PUPPET_DB__SERVER="https://localhost:8081"
     # In Puppet Enterprise one can use a token to access PuppetDB. In Puppet Open SOurce you need to configre a SSL certificate and add it to PuppetDB whitelisted clients
     export HDM__PUPPET_DB__TOKEN=$(cat ~/.puppetlabs/token)
@@ -154,9 +157,15 @@ It looks like the newly downloaded PE tarball, placed in the ```.pe_build``` dir
     /opt/puppetlabs/puppet/bin/bundle exec rails s -b 0.0.0.0 &
 ```
 
-11. access via ip and port 3000
+11. Open Webservices in your browser
 
-consider opening port 3000 or disable the firewall.
+HDM:
+    http://puppet.pe.psick.io:3000
+
+Puppet Master:
+    https://puppet.pe.psick.io
+
+Login: admin/puppetlabs
 
 
 ## Production Setup
