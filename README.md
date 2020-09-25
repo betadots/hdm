@@ -86,7 +86,7 @@ It looks like the newly downloaded PE tarball, placed in the ```.pe_build``` dir
 
 ```
     cd
-    git clone git@gitlab.com:example42/hdm.git
+    git clone https://github.com/example42/hdm.git
     cd hdm/
 ```
 
