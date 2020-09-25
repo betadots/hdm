@@ -19,19 +19,19 @@ The data is able to be viewed and modified by a person:
 
 HDM starts with letting you select a desired environment where you want to check or change data.
 
-![select environment](/docs/hdm/02_HDM_env.png){:height="50%" width="50%"}
+![select environment](/docs/hdm/02_HDM_env.png)
 
 Next you can select a node. We query PuppetDB to find existing environments, nodes and their facter values:
 
-![select node](/docs/hdm/03_HDM_node.png){:height="50%" width="50%"}
+![select node](/docs/hdm/03_HDM_node.png)
 
 Now you can see all hiera keys a node has within the environment hiera data:
 
-![hiera keys](/docs/hdm/04_HDM_node_data.png){:height="50%" width="50%"}
+![hiera keys](/docs/hdm/04_HDM_node_data.png)
 
 When selecting a key we show the hierachies and vizualize whether a hierarchy has data for a key and which one is the default:
 
-![hiera data](/docs/hdm/05_HDM_node_data_view.png){:height="50%" width="50%"}
+![hiera data](/docs/hdm/05_HDM_node_data_view.png)
 
 You can now change data on node level.
 HDM writes the data back to a file.
