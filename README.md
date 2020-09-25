@@ -10,14 +10,72 @@ The data is able to be viewed and modified by a person:
 ## Prerequisites:
 
 1. you must have a hiera.yaml file in each Puppet environment
+1. you must use config version 5
 1. you must set defaults like data_hash in hiera.yaml file
-1. you must have a single hierarchy entry and use paths parameter
-1. you must access PuppetDB via https
+1. you must access PuppetDB via https (either with certificate or token)
 1. Hiera Data must be in directory data within puppet environment
+
+# Using HDM
+
+HDM starts with letting you select a desired environment where you want to check or change data.
+
+![select environment](/docs/hdm/02_HDM_env.png){:height="50%" width="50%"}
+
+Next you can select a node. We query PuppetDB to find existing environments, nodes and their facter values:
+
+![select node](/docs/hdm/03_HDM_node.png){:height="50%" width="50%"}
+
+Now you can see all hiera keys a node has within the environment hiera data:
+
+![hiera keys](/docs/hdm/04_HDM_node_data.png){:height="50%" width="50%"}
+
+When selecting a key we show the hierachies and vizualize whether a hierarchy has data for a key and which one is the default:
+
+![hiera data](/docs/hdm/05_HDM_node_data_view.png){:height="50%" width="50%"}
+
+You can now change data on node level.
+HDM writes the data back to a file.
 
 ## Development Setup
 
-1. Clone repo:
+You need a Puppet Master with PupeptDB. The most simple approach is to use our PSICK vagrant environemnts.
+
+1. Preparation (on Workstation)
+
+Besides vagrant you need two plugins:
+```
+    # You need the pe_build plugin
+    vagrant plugin install vagrant-pe_build
+    # You need the vagrant-vbguest plugin to inject the vbguest extension into the box at runtime
+    vagrant plugin install vagrant-vbguest
+```
+
+2. Use vagrant from PSICK repo
+
+Now you can clone PSICK repo:
+```
+    git clone https://github.com/example42/psick.git
+    cd psick/vagrant/environments/pe
+    # Start the puppet. It will download PE tarball, install it and run puppet agent
+    vagrant up puppet.pe.psick.io
+    vagrant reload puppet.pe.psick.io   # In case of errors. See Note 1
+    vagrant provision puppet.pe.psick.io # See Note 1
+    # Login into puppet
+    vagrant ssh puppet.pe.psick.io
+    sudo -i
+    # generate an access token - note: username: admin, password: puppetlabs
+    puppet-access login -l 2y
+```
+
+Note 1: The first time a new PE tarball is downloaded from the net you may have an error as what follows, when provisioning the puppet:
+
+    bash: line 2: /vagrant/.pe_build/puppet-enterprise-2016.2.1-el-7-x86_64/puppet-enterprise-installer: No such file or directory
+
+It looks like the newly downloaded PE tarball, placed in the ```.pe_build``` directory of this Vagrant environment, is not immediately available on the VM under its ```/vagrant``` directory.
+
+
+
+3. Clone HDM repo:
 
 ```
     cd
@@ -25,24 +83,24 @@ The data is able to be viewed and modified by a person:
     cd hdm/
 ```
 
-2. add required packages
+4. add required packages
 
 ```
     yum install -y gcc-c++ sqlite-devel zlib-devel
 ```
 
 
-3. sqlite database
+5. sqlite database
   it's just a file, no need to configure any service
 
-4. install gems
+6. install gems
 
 ```
     /opt/puppetlabs/puppet/bin/gem install bundler
     /opt/puppetlabs/puppet/bin/bundle install --path vendor
 ```
 
-5. install nodejs and yarn
+7. install nodejs and yarn
 
 ```
     curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash
@@ -53,20 +111,20 @@ The data is able to be viewed and modified by a person:
 ```
 
 
-6. yarn updates
+8. yarn updates
 
 ```
     /opt/puppetlabs/puppet/bin/bundle exec yarn install --check-files
 ```
 
-7. generate db content
+9. generate db content
 
 ```
     mkdir puppet
     /opt/puppetlabs/puppet/bin/bundle exec rails db:migrate
 ```
 
-8. run hdm:
+10. run hdm:
 
 ```
     export HDM__CONFIG_DIR="/etc/puppetlabs/code"
@@ -75,6 +133,7 @@ The data is able to be viewed and modified by a person:
     # If you are using a self signed certificate, you need to set:
     export HDM__PUPPET_DB__SELF_SIGNED_CERT=true
     export HDM__PUPPET_DB__SERVER="https://localhost:8081"
+    export HDM__PUPPET_DB__TOKEN=$(cat ~/.puppetlabs/token)
 
     export WEBPACKER_DEV_SERVER_HOST=0.0.0.0
     export RAILS_ENV=development
@@ -82,20 +141,7 @@ The data is able to be viewed and modified by a person:
     /opt/puppetlabs/puppet/bin/bundle exec rails s -b 0.0.0.0 &
 ```
 
-When using Puppet Enterprise you must create a token:
-
-```
-    puppet-access login -l 2y
-```
-
-and add the following environment variable:
-
-```
-    export HDM__PUPPET_DB__TOKEN=$(cat ~/.puppetlabs/token)
-```
-
-
-9. access via ip and port 3000
+11. access via ip and port 3000
 
 consider opening port 3000 or disable the firewall.
 
