@@ -134,13 +134,19 @@ It looks like the newly downloaded PE tarball, placed in the ```.pe_build``` dir
 10. run hdm:
 
 ```
+    # Where can HDM find the Puppet environemnts directory?
     export HDM__CONFIG_DIR="/etc/puppetlabs/code"
 
+    # At the moment having PuppetDB is a hard requirement. HDM gets list of Puppet environments and nodes from PuppetDB
     export HDM__PUPPET_DB__ENABLED=true
     # If you are using a self signed certificate, you need to set:
     export HDM__PUPPET_DB__SELF_SIGNED_CERT=true
     export HDM__PUPPET_DB__SERVER="https://localhost:8081"
+    # In Puppet Enterprise one can use a token to access PuppetDB. In Puppet Open SOurce you need to configre a SSL certificate and add it to PuppetDB whitelisted clients
     export HDM__PUPPET_DB__TOKEN=$(cat ~/.puppetlabs/token)
+
+    # HDM can now run in read-only mode:
+    export HDM__READ_ONLY=true
 
     export WEBPACKER_DEV_SERVER_HOST=0.0.0.0
     export RAILS_ENV=development
@@ -155,7 +161,7 @@ consider opening port 3000 or disable the firewall.
 
 ## Production Setup
 
-Run the steps from 1 to 7, only how we run HDM will be different
+Run the steps from [Development Setup](#development-setup) steps 1 to 9, only how we run HDM will be different
 
 ### Passenger
 
