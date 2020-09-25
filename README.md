@@ -7,6 +7,13 @@ The data is able to be viewed and modified by a person:
 * without knowledge on Puppet
 * simply with a web browser
 
+#### Table of Contents
+
+1. [Prerequisites](#prerequisites)
+1. [Using HDM](#using-hdm)
+1. [Development Setup](#development-setup)
+1. [Production Setup](#production-setup)
+
 ## Prerequisites:
 
 1. you must have a hiera.yaml file in each Puppet environment
