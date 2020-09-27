@@ -66,9 +66,6 @@ Now you can clone PSICK repo:
     vagrant up puppet.pe.psick.io
     vagrant reload puppet.pe.psick.io   # In case of errors. See Note 1
     vagrant provision puppet.pe.psick.io # See Note 1
-    # Login into puppet
-    vagrant ssh puppet.pe.psick.io
-    sudo -i
 
 Note 1: The first time a new PE tarball is downloaded from the net you may have an error as what follows, when provisioning the puppet:
 
@@ -76,6 +73,10 @@ Note 1: The first time a new PE tarball is downloaded from the net you may have 
 
 It looks like the newly downloaded PE tarball, placed in the `.pe_build` directory of this Vagrant environment, is not immediately available on the VM under its `/vagrant` directory.
 
+
+    # Login into puppet
+    vagrant ssh puppet.pe.psick.io
+    sudo -i
 
 Next the puppet access token is required:
 
