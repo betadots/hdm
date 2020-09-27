@@ -121,7 +121,6 @@ When running on a macOS System you have to unset the LC\_CTYPE local: `unset LC_
 
 9. generate db content
 
-    mkdir puppet
     /opt/puppetlabs/puppet/bin/bundle exec rails db:migrate
 
 10. run hdm:
