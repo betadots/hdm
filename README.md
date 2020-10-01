@@ -56,6 +56,9 @@ Besides vagrant you need two plugins:
     # You need the vagrant-vbguest plugin to inject the vbguest extension into the box at runtime
     vagrant plugin install vagrant-vbguest
 
+If any of the commands cuase errors, please verify that you are using system ruby.
+If you are using `rvm` you can check with `rvm list` and switch to system ruby running `rvm use system`
+
 2. Use vagrant from PSICK repo
 
 Now you can clone PSICK repo:
