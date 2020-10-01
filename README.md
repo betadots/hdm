@@ -56,7 +56,7 @@ Besides vagrant you need two plugins:
     # You need the vagrant-vbguest plugin to inject the vbguest extension into the box at runtime
     vagrant plugin install vagrant-vbguest
 
-If you want to connect mupltiple machsines you want to install vagrant hostmanager plugin:
+If you want to connect mupltiple machines you want to install vagrant hostmanager plugin:
 
     # Optional (might require your sudo password when starting VM with vagrant
     # the plugin will add ip/hostname to your local machine /etc/hosts file)
