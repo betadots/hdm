@@ -49,7 +49,7 @@ You need a Puppet Master with PupeptDB. The most simple approach is to use our P
 
 1. Preparation (on Workstation)
 
-Besides vagrant you need two plugins:
+Besides [vagrant](https://www.vagrantup.com/) you need two plugins:
 
     # You need the pe_build plugin
     vagrant plugin install vagrant-pe_build
