@@ -69,7 +69,29 @@ If you are using `rvm` you can check with `rvm list` and switch to system ruby r
 
 Now you can clone PSICK repo:
 
+```
     git clone https://github.com/example42/psick.git
+```
+
+Now we need to prepare the local Ruby environment.
+Usually you will need ruby and the gems command.
+If you have never installed bundler, please do so first.
+
+The install the Ruby GEMS into the PSICK project:
+
+```
+    gem install bundler
+    bundle install --path vendor
+```
+
+Next we need to install the rewuired Puppet Modules:
+
+```
+    bundle exec r10k puppetfile install -v
+```
+
+Now you can continue with the vargant PSICK envuironment.
+
     cd psick/vagrant/environments/pe
     # Start the puppet. It will download PE tarball, install it and run puppet agent
     vagrant up puppet.pe.psick.io
