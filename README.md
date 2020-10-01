@@ -82,6 +82,19 @@ Note 1: The first time a new PE tarball is downloaded from the net you may have 
 
 It looks like the newly downloaded PE tarball, placed in the `.pe_build` directory of this Vagrant environment, is not immediately available on the VM under its `/vagrant` directory.
 
+The whole provisioning might take a very lomg time and needs to be done everytime when you create the VM new.
+Once you have a VM running, you can more easily save (suspend) and restore your vm using vagrant:
+
+```
+    vagrant suspend puppet.pe.psick.io
+```
+
+If you want to continue you must be in PSICK control repo in `vagrant/environment/pe` directory and run:
+
+```
+    vagrant resume puppet.pe.psick.io
+```
+
 
     # Login into puppet
     vagrant ssh puppet.pe.psick.io
