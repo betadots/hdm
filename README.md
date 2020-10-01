@@ -56,6 +56,12 @@ Besides vagrant you need two plugins:
     # You need the vagrant-vbguest plugin to inject the vbguest extension into the box at runtime
     vagrant plugin install vagrant-vbguest
 
+If you want to connect mupltiple machsines you want to install vagrant hostmanager plugin:
+
+    # Optional (might require your sudo password when starting VM with vagrant
+    # the plugin will add ip/hostname to your local machine /etc/hosts file)
+    vagrant plugin install vagrant-hostmanager
+
 If any of the commands cuase errors, please verify that you are using system ruby.
 If you are using `rvm` you can check with `rvm list` and switch to system ruby running `rvm use system`
 
