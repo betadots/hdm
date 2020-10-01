@@ -89,13 +89,17 @@ When running on a macOS System you have to unset the LC\_CTYPE local: `unset LC_
 
 3. Clone HDM repo:
 
+```
     cd
     git clone https://github.com/example42/hdm.git
     cd hdm/
+```
 
 4. add required packages
 
+```
     yum install -y gcc-c++ sqlite-devel zlib-devel
+```
 
 
 5. sqlite database
@@ -103,25 +107,33 @@ When running on a macOS System you have to unset the LC\_CTYPE local: `unset LC_
 
 6. install gems
 
+```
     /opt/puppetlabs/puppet/bin/gem install bundler
     /opt/puppetlabs/puppet/bin/bundle install --path vendor
+```
 
 7. install nodejs and yarn
 
+```
     curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash
     sudo yum install -y nodejs
     curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
     sudo rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg
     sudo yum install -y yarn
+```
 
 
 8. yarn updates
 
+```
     /opt/puppetlabs/puppet/bin/bundle exec yarn install --check-files
+```
 
 9. generate db content
 
+```
     /opt/puppetlabs/puppet/bin/bundle exec rails db:migrate
+```
 
 10. run hdm:
 
