@@ -130,6 +130,11 @@ Next the puppet access token is required:
 If this produces an error like `Unhandled exception: locale::facet::_S_create_c_locale name not valid` you want to check your locale settings by running `locale`.
 When running on a macOS System you have to unset the LC\_CTYPE local: `unset LC_CTYPE`
 
+If the error still occurs, check your locale and switch to en\_US.UTF-8
+
+```
+    export LANG=en_US.UTF-8
+```
 
 3. Clone HDM repo:
 
