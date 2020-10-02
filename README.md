@@ -221,6 +221,8 @@ Puppet Master:
 
 Login: admin/puppetlabs
 
+To prevent this whole setup to be done any time, you can suspend and resume the VM anytime.
+Please keep in mind that you must ensure to use sytem ruby whenever you run a vagrant command.
 
 ## Production Setup
 
