@@ -208,6 +208,9 @@ You can use our start shell script `bash ./start.sh` or you can run the followin
     /opt/puppetlabs/puppet/bin/bundle exec ./bin/webpack-dev-server &
     /opt/puppetlabs/puppet/bin/bundle exec rails s -b 0.0.0.0 &
 
+Wait a couple of seconds (maybe a minute) until you see `[wdm] Compiled successfully`.
+This means that all processes have started sucessfully.
+
 11. Open Webservices in your browser
 
 HDM:
