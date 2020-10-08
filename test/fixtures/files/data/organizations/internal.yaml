@@ -1,0 +1,7 @@
+---
+
+profile::usermanagement::users:
+  'remote':
+    uid: 6565
+    shell: '/bin/false'
+

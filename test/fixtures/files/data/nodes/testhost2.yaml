@@ -1,0 +1,6 @@
+---
+ntp::servers:
+  - 'ntp.domain.tld'
+
+default_packages:
+  - 'mariadb-server'

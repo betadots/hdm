@@ -1,0 +1,8 @@
+---
+lookup_options:
+  default:packages:
+    merge: first
+
+
+default_packages:
+  - 'w3m'
