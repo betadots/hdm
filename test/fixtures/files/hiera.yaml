@@ -1,6 +1,6 @@
 version: 5
 defaults:
-  datadir: "./test/fixtures/files/hieradata"
+  datadir: "data"
 
 hierarchy:
   - name: "Secret data: per-node, per-datacenter, common"

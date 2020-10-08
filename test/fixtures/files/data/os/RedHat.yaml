@@ -1,0 +1,6 @@
+---
+profile::application::pkg_name: 'app-foo'
+
+default_packages:
+  - 'http'
+  - 'ntpdate'

@@ -1,0 +1,7 @@
+---
+profile::application::pkg_name: 'app'
+default_packages:
+  - 'tree'
+  - 'curl'
+  - wget
+
