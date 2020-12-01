@@ -1,0 +1,2 @@
+module PuppetEnvironmentsHelper
+end

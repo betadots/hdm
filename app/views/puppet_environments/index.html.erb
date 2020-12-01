@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <h1>Environments</h1>
+  <%= render partial: "puppet_environments/table", locals: {puppet_environments: @puppet_environments} %>
+
+  <% if can? :create, PuppetEnvironment.new %>
+    <br>
+    <%= link_to 'New Puppet Environment', new_puppet_environment_path,class:"btn btn-success min-width-btn" %>
+  <% end %>
+</div>

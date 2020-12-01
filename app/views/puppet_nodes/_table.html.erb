@@ -1,0 +1,55 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>FQDN</th>
+      <th>Role</th>
+      <th>Environment</th>
+      <th>Zone</th>
+      <th>OS family</th>
+      <th>Organization</th>
+    <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% puppet_nodes.each do |puppet_node| %>
+      <tr>
+        <td>
+          <%= puppet_node.fqdn %>
+        </td>      
+        <td>
+          <%= puppet_node.role %>
+        </td>      
+        <td>
+          <% if can? :show, puppet_node.puppet_environment %>
+            <%= link_to puppet_node.puppet_environment, puppet_node.puppet_environment %>
+          <% else %>
+            <%= puppet_node.puppet_environment %>
+          <% end %>
+        </td>      
+        <td>
+          <%= puppet_node.zone %>
+        </td>      
+        <td>
+          <%= puppet_node.os_family %>
+          <% if puppet_node.os_lsbdistcodename %>
+            <br/><%= puppet_node.os_lsbdistcodename %>
+          <% end %>
+        </td>      
+        <td>
+          <%= puppet_node.organization %>
+        </td>          
+        <td>
+          <% if can? :show, puppet_node %>
+            <%= link_to 'Show', puppet_node, class:"btn btn-light min-width-btn" %>
+          <% end %>
+          <% if can? :edit, puppet_node %>
+            <%= link_to 'Edit', edit_puppet_node_path(puppet_node),class:"btn btn-primary min-width-btn"  %>     
+          <% end %>
+          <% if can? :delete, puppet_node %>
+            <%= link_to 'Delete', puppet_node, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger min-width-btn"%>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

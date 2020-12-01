@@ -1,4 +1,0 @@
----
-read_only: false
-puppet_db:
-  server: "http://localhost:8083"

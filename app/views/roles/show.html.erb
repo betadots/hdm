@@ -1,0 +1,10 @@
+<div class="container-fluid">
+  <h1>Role Details</h1>
+  <%= form_with(model: @role, local: true) do |form| %>
+    <div class="form-group">
+      <%= form.label :name %>
+      <%= form.text_field :name ,class:"form-control", readonly:true%>
+    </div>
+  <% end %>
+  <%= link_to 'Back', roles_path,class:"btn btn-light min-width-btn" %>
+</div>

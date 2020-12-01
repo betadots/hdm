@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fqdn: MyString
+  role: MyString
+  puppet_environment: one
+  zone: MyString
+  os_family: MyString
+  os_lsbdistcodename: MyString
+  organization: MyString
+  config_file_name: MyString
+
+two:
+  fqdn: MyString
+  role: MyString
+  puppet_environment: two
+  zone: MyString
+  os_family: MyString
+  os_lsbdistcodename: MyString
+  organization: MyString
+  config_file_name: MyString

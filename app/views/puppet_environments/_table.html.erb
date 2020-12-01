@@ -1,0 +1,32 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Number of Nodes</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% puppet_environments.each do |puppet_environment| %>
+      <tr>
+        <td>
+          <%= puppet_environment.name %>
+        </td>
+        <td>
+          <%= puppet_environment.puppet_nodes.accessible_by(current_ability).count %>
+        </td>
+        <td>
+          <% if can? :show, puppet_environment %>
+            <%= link_to 'Show', puppet_environment, class:"btn btn-light min-width-btn" %>
+          <% end %>
+          <% if can? :edit, puppet_environment %>
+            <%= link_to 'Edit', edit_puppet_environment_path(puppet_environment),class:"btn btn-primary min-width-btn"  %>     
+          <% end %>
+          <% if can? :delete, puppet_environment %>
+            <%= link_to 'Delete', puppet_environment, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger min-width-btn"%>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

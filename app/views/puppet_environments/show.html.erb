@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <h1>Environment Details</h1>
+  <%= form_with(model: @puppet_environment, local: true) do |form| %>
+    <div class="form-group">
+      <%= form.label :name %>
+      <%= form.text_field :name ,class:"form-control", readonly:true%>
+    </div>
+  <% end %>
+  <% if can? :edit, @puppet_environment %>
+    <%= link_to 'Edit', edit_puppet_environment_path(@puppet_environment), class:"btn btn-primary min-width-btn" %> 
+  <% end %>
+  <%= link_to 'Back', puppet_environments_path, class: "btn btn-light min-width-btn" %>
+
+  <h2>Nodes</h2>
+  <%= render partial: "puppet_nodes/table", locals: {puppet_nodes: @puppet_environment.puppet_nodes.accessible_by(current_ability) } %>
+</div>

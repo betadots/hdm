@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <h1>Users</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <%= user.first_name %>
+          </td>      
+          <td>
+            <%= user.last_name %>
+          </td>      
+          <td>
+            <%= user.email %>
+          </td>      
+          <td>
+            <% if can? :show, user.role %>
+              <%= link_to user.role, user.role %>
+            <% else %>
+              <%= user.role %>
+            <% end %>
+          </td>      
+          <td>
+            <% if can? :show, user %>
+              <%= link_to 'Show', user, class:"btn btn-light min-width-btn" %>
+            <% end %>
+            <% if can? :edit, user %>
+              <%= link_to 'Edit', edit_user_path(user),class:"btn btn-primary min-width-btn"  %>     
+            <% end %>
+            <% if can? :delete, user %>
+              <% if user == current_user %>
+                <%= link_to 'Delete', user, method: :delete, data: { confirm: 'THIS IS YOUR ACCOUNT! Are you sure?' }, class:"btn btn-danger min-width-btn"%>
+              <% else %>
+                <%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger min-width-btn"%>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% if can? :create, User.new %>
+    <br>
+    <%= link_to 'New User', new_user_path, class:"btn btn-success min-width-btn" %>
+  <% end %>
+</div>

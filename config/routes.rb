@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :editor, only: [:index]
-  resources :environments, only: [:show], id: /[^\/]+/ do
-    resources :nodes, only: [:show], on: :member  do
-      if Settings.read_only
-        resources :keys, only: [:show], on: :member
-      else
-        resources :keys, only: [:show, :update, :create, :destroy], on: :member
-      end
-    end
-  end
-  root to: "editor#index"
+  resources :puppet_nodes
+  resources :puppet_environments
+  get 'page/index'
+  get 'page/about_us'
+  root to: 'page#index'
+
+  resources :roles, only: [:show, :index]
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+  get 'signup', to: 'users#new', as: 'signup'
+  get 'login', to: 'sessions#new', as: 'login'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

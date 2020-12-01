@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <h1><%= singular_table_name.titleize %> Details</h1>
+  <%%= form_with(model: @<%= singular_table_name %>, local: true) do |form| %>
+    <% attributes.each do |attribute| -%>
+      <% if attribute.type == :boolean -%>
+        <div class="form-group form-check">
+          <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %> ,class:"form-check-input", disabled:true%>
+          <%%= form.label :<%= attribute.column_name %>, class:"form-check-label"%>
+        </div>
+      <% else -%>
+        <div class="form-group">
+          <%%= form.label :<%= attribute.column_name %> %>
+          <%%= form.<%= attribute.field_type %> :<%= attribute.column_name %> ,class:"form-control", readonly:true%>
+        </div>
+      <% end -%>
+    <% end -%>
+  <%% end %>
+  <%%= link_to 'Edit', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>),class:"btn btn-primary min-width-btn" %> 
+  <%%= link_to 'Back', <%= index_helper %>_path,class:"btn btn-light min-width-btn" %>
+</div>

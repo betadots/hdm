@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <h1>Nodes</h1>
+  <%= render partial: "puppet_nodes/table", locals: {puppet_nodes: @puppet_nodes} %>
+
+  <% if can? :create, PuppetNode.new %>
+    <br>
+    <%= link_to 'New Puppet Node', new_puppet_node_path, class: "btn btn-success min-width-btn" %>
+  <% end %>
+</div>

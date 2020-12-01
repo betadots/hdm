@@ -1,0 +1,43 @@
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <h5><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h5>
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= form.label :first_name  %>
+    <%= form.text_field :first_name, class:"form-control", autofocus: true %>
+  </div>
+  <div class="form-group">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, class:"form-control"%>
+  </div>
+  <div class="form-group">
+    <%= form.label :email %>
+    <%= form.text_field :email, class:"form-control"%>
+  </div>
+  <div class="form-group">
+    <%= form.label :password %>
+    <%= form.password_field :password, class:"form-control"%>
+  </div>
+  <div class="form-group">
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation, class:"form-control" %>
+  </div>
+  <% if current_user.try(:admin?) %>
+    <% if current_page?(action: 'new') || current_user != user || Role.find_by_name('Admin').users.count > 1 %>
+      <div class="form-group">
+        <%= form.label :role_id %>
+        <%= form.collection_select(:role_id, Role.order(:name), :id, :name, class:"form-control") %>
+      </div>
+    <% end %>
+  <% end %>
+  <div class="actions">
+    <%= form.submit "Save", class:"btn btn-success min-width-btn" %>
+  </div>
+<% end %>

@@ -1,21 +1,15 @@
 class ApplicationController < ActionController::Base
-  rescue_from Hdm::Error, with: :show_error
+  helper_method :current_user
+  
+  def current_user
+    if User.none?
+      session[:user_id] = nil
+    end
 
-  private
-
-  def show_error(error)
-    render(
-      {
-        html: cell(
-          Reativo::Cell::Component,
-          error,
-          {
-            layout: Theme::Cell::Layout,
-            context: _run_options({ flash: flash, controller: self, component: "errors/Show", props: {error: error} })
-          }
-        ),
-        status: 500
-      }
-    )
+    if session[:user_id]
+      @current_user ||= User.find(session[:user_id])
+    else
+      @current_user = nil
+    end
   end
 end

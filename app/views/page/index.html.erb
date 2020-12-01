@@ -1,0 +1,32 @@
+<h1>HDM</h1>
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+<% unless current_user %>
+  <h2>Login</h2>
+  <%= form_tag sessions_path do |form| %>
+    <div class="form-group">
+      <%= label_tag :email %>
+      <%= text_field_tag :email, nil, class:"form-control", autofocus: true %>
+    </div>
+    <div class="form-group">
+      <%= label_tag :password %>
+      <%= password_field_tag :password, nil, class:"form-control" %>
+    </div>
+    <div class="actions">
+      <%= submit_tag "Login", class:"btn btn-success min-width-btn" %>
+    </div>
+  <% end %>
+<% else %>
+  <% if PuppetEnvironment.accessible_by(current_ability).any? %>
+    <h2>Environments</h2>
+    <%= render partial: "puppet_environments/table", locals: {puppet_environments: PuppetEnvironment.accessible_by(current_ability)} %>
+  <% else %>
+    <% if User.count == 1 && current_user.admin? %>
+      <h2>First step</h2>
+      <p>With admin priviliges you can manage users but you can not see the 
+      puppet configuration. <strong><%= link_to "Please create a new user", new_user_path %></strong> who is not an admin to 
+      get access to the puppet configuration.</p>
+    <% else %>
+      <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+    <% end %>
+  <% end %>
+<% end %>
