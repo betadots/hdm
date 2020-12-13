@@ -1,6 +1,12 @@
 <div class="container-fluid">
+  <% if User.none? %>
+    <h1>Create the initial admin account</h1>
+  <% else %>
     <h1>New User</h1>
-    <%= render 'form', user: @user %>
-    <br>
+  <% end %>
+  <%= render 'form', user: @user %>
+  <br>
+  <% if User.any? %>
     <%= link_to 'Back', users_path, class:"btn btn-light min-width-btn" %>
+  <% end %>
 </div>

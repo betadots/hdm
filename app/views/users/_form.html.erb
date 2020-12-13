@@ -11,19 +11,19 @@
   <% end %>
   <div class="form-group">
     <%= form.label :first_name  %>
-    <%= form.text_field :first_name, class:"form-control", autofocus: true %>
+    <%= form.text_field :first_name, class:"form-control", autofocus: true, autocomplete: "given-name" %>
   </div>
   <div class="form-group">
     <%= form.label :last_name %>
-    <%= form.text_field :last_name, class:"form-control"%>
+    <%= form.text_field :last_name, class:"form-control", autocomplete: "family-name" %>
   </div>
   <div class="form-group">
     <%= form.label :email %>
-    <%= form.text_field :email, class:"form-control"%>
+    <%= form.text_field :email, class:"form-control", autocomplete: "email" %>
   </div>
   <div class="form-group">
     <%= form.label :password %>
-    <%= form.password_field :password, class:"form-control"%>
+    <%= form.password_field :password, class:"form-control" %>
   </div>
   <div class="form-group">
     <%= form.label :password_confirmation %>
