@@ -81,6 +81,11 @@ GEM
     concurrent-ruby (1.1.7)
     crass (1.0.6)
     erubi (1.10.0)
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.1.0)
+      factory_bot (~> 6.1.0)
+      railties (>= 5.0.0)
     faker (2.15.1)
       i18n (>= 1.6, < 2)
     ffi (1.13.1)
@@ -203,6 +208,7 @@ DEPENDENCIES
   byebug
   cancancan
   capybara (>= 2.15)
+  factory_bot_rails
   faker
   listen (~> 3.2)
   puma (~> 4.1)
