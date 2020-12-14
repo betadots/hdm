@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   before_validation :downcase_email, on: [:create, :update]
 
-  validates :email, presence: true, uniqueness: { case_sensitive: false }
+  validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }
   validates :first_name, :last_name, presence: true
 
   def admin?

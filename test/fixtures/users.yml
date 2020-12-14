@@ -3,13 +3,13 @@
 one:
   first_name: MyString
   last_name: MyString
-  email: MyString1
+  email: user1@example.com
   password_digest: <%= BCrypt::Password.create('secret') %>
   role: one
 
 two:
   first_name: MyString
   last_name: MyString
-  email: MyString2
+  email: user2@example.com
   password_digest: <%= BCrypt::Password.create('secret') %>
   role: two
