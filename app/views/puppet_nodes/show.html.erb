@@ -34,4 +34,13 @@
     <%= link_to 'Edit', edit_puppet_node_path(@puppet_node),class:"btn btn-primary min-width-btn" %> 
   <% end %>
   <%= link_to 'Back', puppet_nodes_path,class:"btn btn-light min-width-btn" %>
+
+  <h2>Hiera Configuration</h2>
+
+  <p>The files:</p>
+  <ul>
+  <% @puppet_node.hierachy_paths.each do |hierachy_path| %>
+    <li><%= hierachy_path %>
+  <% end %>
+  </ul>
 </div>

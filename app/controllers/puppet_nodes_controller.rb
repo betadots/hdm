@@ -12,6 +12,9 @@ class PuppetNodesController < ApplicationController
   def show
     add_breadcrumb "Nodes", :puppet_nodes_path
     add_breadcrumb @puppet_node.fqdn, puppet_node_path(@puppet_node)
+
+    # Read the hiera configuration
+    @hiera_config = YAML.load_file(PUPPET_CONF_DIR + "/environments/#{@puppet_node.puppet_environment.name}/hiera.yaml")
   end
 
   # GET /puppet_nodes/new
