@@ -39,8 +39,18 @@
 
   <p>The files:</p>
   <ul>
-  <% @puppet_node.hierachy_paths.each do |hierachy_path| %>
-    <li><%= hierachy_path %>
+  <% @puppet_node.hierachy_paths.each do |hierachy_path| %>    
+      <% file_name = PUPPET_CONF_DIR + "/data/#{hierachy_path}" %>
+      <% if File.exist?(file_name) %>
+        <li>
+          <%= hierachy_path %>
+          <br/>
+          <% config = YAML.load_file(file_name) %>
+          <%= debug(config) %>
+        </li>
+      <% else %>
+        <li class="text-muted"><%= hierachy_path %></li>
+      <% end %>
   <% end %>
   </ul>
 </div>

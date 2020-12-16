@@ -14,9 +14,9 @@ profile::usermanagement::users:
     shell: '/bin/bash'
     managehome: true
     uid: 1234
-   'user2':
-     uid: '1234'
-     home: '/home/user2'
+  'user2':
+    uid: '1234'
+    home: '/home/user2'
 
 profile::application::manage_ssl: true
 
