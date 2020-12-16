@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :puppet_environments
   get 'page/index'
   get 'page/about_us'
+  get 'page/faulty_setup'
   root to: 'page#index'
 
   resources :roles, only: [:show, :index]
