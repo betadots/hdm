@@ -37,20 +37,30 @@
 
   <h2>Hiera Configuration</h2>
 
-  <p>The files:</p>
+  <% complete_config = nil %>
   <ul>
   <% @puppet_node.hierachy_paths.each do |hierachy_path| %>    
       <% file_name = PUPPET_CONF_DIR + "/data/#{hierachy_path}" %>
       <% if File.exist?(file_name) %>
         <li>
-          <%= hierachy_path %>
+          <%= hierachy_path %> (<%= file_name %>)
           <br/>
           <% config = YAML.load_file(file_name) %>
           <%= debug(config) %>
+          <% if complete_config.nil? %>
+            <% complete_config = config %>
+          <% else %>
+            <% complete_config = complete_config.deep_merge!(config) %>
+          <% end %>
         </li>
       <% else %>
         <li class="text-muted"><%= hierachy_path %></li>
       <% end %>
   <% end %>
   </ul>
+
+  <% unless complete_config.nil? %>
+    <h2>Complete config</h2>
+    <%= debug(complete_config) %>
+  <% end %>
 </div>
