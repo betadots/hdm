@@ -1,66 +1,54 @@
-<div class="container-fluid">
-  <h1>Node Details</h1>
-  <%= form_with(model: @puppet_node, local: true) do |form| %>
-    <div class="form-group">
-      <%= form.label :fqdn %>
-      <%= form.text_field :fqdn ,class:"form-control", readonly:true%>
-    </div>
-    <div class="form-group">
-      <%= form.label :role %>
-      <%= form.text_field :role ,class:"form-control", readonly:true%>
-    </div>
-    <div class="form-group">
-      <%= form.label :puppet_environment_id %>
-      <%= form.text_field :puppet_environment ,class:"form-control", readonly:true%>
-    </div>
-    <div class="form-group">
-      <%= form.label :zone %>
-      <%= form.text_field :zone ,class:"form-control", readonly:true%>
-    </div>
-    <div class="form-group">
-      <%= form.label :os_family %>
-      <%= form.text_field :os_family ,class:"form-control", readonly:true%>
-    </div>
-    <div class="form-group">
-      <%= form.label :os_lsbdistcodename %>
-      <%= form.text_field :os_lsbdistcodename ,class:"form-control", readonly:true%>
-    </div>
-    <div class="form-group">
-      <%= form.label :organization %>
-      <%= form.text_field :organization ,class:"form-control", readonly:true%>
-    </div>
-  <% end %>
-  <% if can? :edit, @puppet_node %>
-    <%= link_to 'Edit', edit_puppet_node_path(@puppet_node),class:"btn btn-primary min-width-btn" %> 
-  <% end %>
-  <%= link_to 'Back', puppet_nodes_path,class:"btn btn-light min-width-btn" %>
-
-  <h2>Hiera Configuration</h2>
-
-  <% complete_config = nil %>
-  <ul>
-  <% @puppet_node.hierachy_paths.each do |hierachy_path| %>    
-      <% file_name = PUPPET_CONF_DIR + "/data/#{hierachy_path}" %>
-      <% if File.exist?(file_name) %>
-        <li>
-          <%= hierachy_path %> (<%= file_name %>)
-          <br/>
-          <% config = YAML.load_file(file_name) %>
-          <%= debug(config) %>
-          <% if complete_config.nil? %>
-            <% complete_config = config %>
-          <% else %>
-            <% complete_config = complete_config.deep_merge!(config) %>
-          <% end %>
-        </li>
-      <% else %>
-        <li class="text-muted"><%= hierachy_path %></li>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h1>Node Details</h1>
+      <%= form_with(model: @puppet_node, local: true) do |form| %>
+        <div class="form-group">
+          <%= form.label :fqdn %>
+          <%= form.text_field :fqdn ,class:"form-control", readonly:true%>
+        </div>
+        <div class="form-group">
+          <%= form.label :role %>
+          <%= form.text_field :role ,class:"form-control", readonly:true%>
+        </div>
+        <div class="form-group">
+          <%= form.label :puppet_environment_id %>
+          <%= form.text_field :puppet_environment ,class:"form-control", readonly:true%>
+        </div>
+        <div class="form-group">
+          <%= form.label :zone %>
+          <%= form.text_field :zone ,class:"form-control", readonly:true%>
+        </div>
+        <div class="form-group">
+          <%= form.label :os_family %>
+          <%= form.text_field :os_family ,class:"form-control", readonly:true%>
+        </div>
+        <div class="form-group">
+          <%= form.label :os_lsbdistcodename %>
+          <%= form.text_field :os_lsbdistcodename ,class:"form-control", readonly:true%>
+        </div>
+        <div class="form-group">
+          <%= form.label :organization %>
+          <%= form.text_field :organization ,class:"form-control", readonly:true%>
+        </div>
       <% end %>
-  <% end %>
-  </ul>
-
-  <% unless complete_config.nil? %>
-    <h2>Complete config</h2>
-    <%= debug(complete_config) %>
-  <% end %>
+      <% if can? :edit, @puppet_node %>
+        <%= link_to 'Edit', edit_puppet_node_path(@puppet_node),class:"btn btn-primary min-width-btn" %> 
+      <% end %>
+      <%= link_to 'Back', puppet_nodes_path,class:"btn btn-light min-width-btn" %>
+    </div>
+    <div class="col-sm">
+      <h2>Configuration</h2>
+      <% unless @puppet_node.complete_config.nil? %>
+        <% @puppet_node.complete_config.keys.each do |key| %>
+          <% if @puppet_node.node_config.keys.include? key %>
+            <b><%= key %></b>
+          <% else %>
+            <%= key %>
+          <% end %>
+          <%= debug(@puppet_node.complete_config[key]) %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
