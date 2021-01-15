@@ -59,4 +59,7 @@ Rails.application.configure do
 
   # Puppet configuration
   PUPPET_CONF_DIR = File.join(Dir.pwd,'test','fixtures','files','puppet')
+
+  # Password configuration
+  PASSWORD_MIN_LENGTH = 1
 end

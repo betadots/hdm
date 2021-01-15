@@ -25,10 +25,7 @@
     <%= form.label :password %>
     <%= form.password_field :password, class:"form-control" %>
   </div>
-  <div class="form-group">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation, class:"form-control" %>
-  </div>
+
   <% if current_user.try(:admin?) %>
     <% if current_page?(action: 'new') || current_user != user || Role.find_by_name('Admin').users.count > 1 %>
       <div class="form-group">

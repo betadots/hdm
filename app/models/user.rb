@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }
   validates :first_name, :last_name, presence: true
+  validates :password, length: { minimum: PASSWORD_MIN_LENGTH }
 
   def admin?
     self.role && self.role.name == 'Admin'
