@@ -1,5 +1,5 @@
-<h1>HDM</h1>
-<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+<h1>HDM (Hiera Data Manager)</h1>
+<p>HDM is a webfrontend for vizualising and managing Hiera data.</p>
 <% unless current_user %>
   <h2>Login</h2>
   <%= form_tag sessions_path do |form| %>
@@ -21,9 +21,10 @@
     <%= render partial: "puppet_environments/table", locals: {puppet_environments: PuppetEnvironment.accessible_by(current_ability)} %>
   <% else %>
     <% if User.count == 1 && current_user.admin? %>
-      <h2>First step</h2>
-      <p>With admin priviliges you can manage users but you can not see the 
-      puppet configuration. <strong><%= link_to "Please create a new user", new_user_path %></strong> who is not an admin to 
+      <h2>First Step: Create a User</h2>
+      <p>Your account (<%= current_user.email %>) has admin priviliges which allow to manage users but which do not 
+      allow to manage the puppet configuration.</p>
+      <p><strong>=> <%= link_to "Create a new user", new_user_path %></strong> who is not an admin to 
       get access to the puppet configuration.</p>
     <% else %>
       <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
