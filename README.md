@@ -4,6 +4,9 @@ Please make sure that you have installed the right Ruby version (2.5.8) before y
 
 - Clone the repository and `cd` into the directory.
 - Do a `bundle install`.
+- Install nodejs `brew install node`
+- We need `yarn`, install it: `npm install -g yarn`
+- Install the needed packages: `yarn install --check-files`
 - Create the database with `rails db:create`
 - Run the migrations with `rails db:migrate`
 - Seed the roles with `rails db:seed`
