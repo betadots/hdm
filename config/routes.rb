@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :puppet_nodes
-  resources :puppet_environments
+  resources :puppet_environments do
+    resources :puppet_nodes
+  end
+  
   get 'page/index'
   get 'page/about_us'
   get 'page/faulty_setup'

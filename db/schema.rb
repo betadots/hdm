@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_120803) do
+ActiveRecord::Schema.define(version: 2021_01_25_114050) do
 
   create_table "puppet_environments", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_puppet_environments_on_slug", unique: true
   end
 
   create_table "puppet_nodes", force: :cascade do |t|
@@ -29,7 +31,9 @@ ActiveRecord::Schema.define(version: 2020_11_15_120803) do
     t.string "config_file_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.index ["puppet_environment_id"], name: "index_puppet_nodes_on_puppet_environment_id"
+    t.index ["slug"], name: "index_puppet_nodes_on_slug", unique: true
   end
 
   create_table "roles", force: :cascade do |t|

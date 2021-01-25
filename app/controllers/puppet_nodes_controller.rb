@@ -1,5 +1,5 @@
 class PuppetNodesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :find_by => :slug
   add_breadcrumb "Home", :root_path
 
   # GET /puppet_nodes
@@ -10,8 +10,8 @@ class PuppetNodesController < ApplicationController
 
   # GET /puppet_nodes/1
   def show
-    add_breadcrumb "Nodes", :puppet_nodes_path
-    add_breadcrumb @puppet_node.fqdn, puppet_node_path(@puppet_node)
+    add_breadcrumb "Nodes", puppet_environment_puppet_node_path(@puppet_node.puppet_environment)
+    add_breadcrumb @puppet_node.fqdn, puppet_environment_puppet_node_path(@puppet_node.puppet_environment, @puppet_node)
 
     # Read the hiera configuration
     @hiera_config = YAML.load_file(PUPPET_CONF_DIR + "/environments/#{@puppet_node.puppet_environment.name}/hiera.yaml")

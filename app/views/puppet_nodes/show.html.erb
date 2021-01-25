@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm">
       <h1>Node Details</h1>
-      <%= form_with(model: @puppet_node, local: true) do |form| %>
+      <%= form_with(model: [@puppet_node.puppet_environment, @puppet_node], local: true) do |form| %>
         <div class="form-group">
           <%= form.label :fqdn %>
           <%= form.text_field :fqdn ,class:"form-control", readonly:true%>
@@ -35,7 +35,7 @@
       <% if can? :edit, @puppet_node %>
         <%= link_to 'Edit', edit_puppet_node_path(@puppet_node),class:"btn btn-primary min-width-btn" %> 
       <% end %>
-      <%= link_to 'Back', puppet_nodes_path,class:"btn btn-light min-width-btn" %>
+      <%= link_to 'Back', puppet_environment_path(@puppet_node.puppet_environment) ,class:"btn btn-light min-width-btn" %>
     </div>
     <div class="col-sm">
       <h2>Configuration</h2>

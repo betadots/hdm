@@ -1,4 +1,7 @@
 class PuppetNode < ApplicationRecord
+  extend FriendlyId
+  friendly_id :fqdn, use: :slugged
+
   belongs_to :puppet_environment
 
   def to_s

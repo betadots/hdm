@@ -1,5 +1,5 @@
 class PuppetEnvironmentsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :find_by => :slug
 
   # GET /puppet_environments
   def index

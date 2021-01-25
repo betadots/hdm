@@ -20,7 +20,7 @@
           <%= puppet_node.role %>
         </td>      
         <td>
-          <% if can? :show, puppet_node.puppet_environment %>
+          <% if can? :show, puppet_node.puppet_environment && !current_page?(puppet_environment_path(puppet_node.puppet_environment)) %>
             <%= link_to puppet_node.puppet_environment, puppet_node.puppet_environment %>
           <% else %>
             <%= puppet_node.puppet_environment %>
@@ -40,13 +40,13 @@
         </td>          
         <td>
           <% if can? :show, puppet_node %>
-            <%= link_to 'Show', puppet_node, class:"btn btn-light min-width-btn" %>
+            <%= link_to 'Show', puppet_environment_puppet_node_path(puppet_node.puppet_environment, puppet_node), class:"btn btn-light min-width-btn" %>
           <% end %>
           <% if can? :edit, puppet_node %>
-            <%= link_to 'Edit', edit_puppet_node_path(puppet_node),class:"btn btn-primary min-width-btn"  %>     
+            <%= link_to 'Edit', edit_puppet_environment_puppet_node_path(puppet_node),class:"btn btn-primary min-width-btn"  %>     
           <% end %>
           <% if can? :delete, puppet_node %>
-            <%= link_to 'Delete', puppet_node, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger min-width-btn"%>
+            <%= link_to 'Delete', puppet_environment_puppet_node(puppet_node), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger min-width-btn"%>
           <% end %>
         </td>
       </tr>
