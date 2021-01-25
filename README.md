@@ -3,7 +3,7 @@
 Please make sure that you have installed the right Ruby version (2.5.8) before you start your work. https://rvm.io is a good tool to do that.
 
 In case you are using an Apple M1 Chip you might run into trouble building 
-Ruby. A work around for that is using the command `rvm install 2.5.8 --with-out-ext=fiddle`
+Ruby. A work around for that is using the command `rvm install 2.5.8 --with-cflags="-Wno-error=implicit-function-declaration"`
 
 - Clone the repository and `cd` into the directory.
 - Do a `bundle install`.
