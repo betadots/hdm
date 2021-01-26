@@ -1,9 +1,11 @@
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>FQDN</th>
       <th>Role</th>
-      <th>Environment</th>
+      <% unless defined?(no_environments) && no_environments %>
+        <th>Environment</th>
+      <% end %>
       <th>Zone</th>
       <th>OS family</th>
       <th>Organization</th>
@@ -18,14 +20,16 @@
         </td>      
         <td>
           <%= puppet_node.role %>
-        </td>      
-        <td>
-          <% if can? :show, puppet_node.puppet_environment && !current_page?(puppet_environment_path(puppet_node.puppet_environment)) %>
-            <%= link_to puppet_node.puppet_environment, puppet_node.puppet_environment %>
-          <% else %>
-            <%= puppet_node.puppet_environment %>
-          <% end %>
-        </td>      
+        </td>
+        <% unless defined?(no_environments) && no_environments %>   
+          <td>
+            <% if can? :show, puppet_node.puppet_environment && !current_page?(puppet_environment_path(puppet_node.puppet_environment)) %>
+              <%= link_to puppet_node.puppet_environment, puppet_node.puppet_environment %>
+            <% else %>
+              <%= puppet_node.puppet_environment %>
+            <% end %>
+          </td>   
+        <% end %>   
         <td>
           <%= puppet_node.zone %>
         </td>      

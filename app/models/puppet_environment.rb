@@ -7,4 +7,15 @@ class PuppetEnvironment < ApplicationRecord
   def to_s
     name
   end
+
+  def common_config
+    file_name = PUPPET_CONF_DIR + "/environments/#{self.name}/data/common.yaml"
+
+    if File.exist?(file_name)
+      YAML.load_file(file_name)
+    else
+      nil
+    end
+  end
+
 end

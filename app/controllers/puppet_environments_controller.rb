@@ -3,11 +3,14 @@ class PuppetEnvironmentsController < ApplicationController
 
   # GET /puppet_environments
   def index
+    add_breadcrumb "Environments", puppet_environments_path
     @puppet_environments = @puppet_environments.order(:name)
   end
 
   # GET /puppet_environments/1
   def show
+    add_breadcrumb "Environments", puppet_environments_path
+    add_breadcrumb @puppet_environment.name, @puppet_environment
   end
 
   # GET /puppet_environments/new
