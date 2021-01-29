@@ -1,0 +1,36 @@
+<%= form_with(model: puppet_configuration, url: [puppet_environment, puppet_node, puppet_configuration], local: true) do |form| %>
+  <% if puppet_configuration.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <h5><%= pluralize(puppet_configuration.errors.count, "error") %> prohibited this puppet_configuration from being saved:</h5>
+      <ul>
+      <% puppet_configuration.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= form.select :kind, options_for_select(%w(configuration string integer float)), { allow_blank: false }, class: "form-control" %>
+      <%= form.label :kind do %>
+        <small>What type of content should this config step have?</small>
+      <% end %>
+    </div>
+    <div class="form-group col-md-6">
+      <div class="form-check">
+        <%= form.check_box :multiple_values, class: "form-check-input" %>
+        <%= form.label :multiple_values, class: "form-check-label" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Save", class:"btn btn-success min-width-btn" %>
+  </div>
+<% end %>

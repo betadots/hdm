@@ -3,9 +3,16 @@ class PuppetNode < ApplicationRecord
   friendly_id :fqdn, use: :slugged
 
   belongs_to :puppet_environment
+  has_many :puppet_configurations
 
   def to_s
     fqdn
+  end
+
+  def configurations
+    puppet_configurations.each_with_object({}) do |puppet_configuration, hsh|
+      hsh[puppet_configuration.name] = puppet_configuration.build_configuration_with_values
+    end
   end
 
   def hierachy_paths
@@ -62,7 +69,7 @@ class PuppetNode < ApplicationRecord
 
   def complete_config
     complete_config = nil
-    self.hierachy_paths.each do |hierachy_path|    
+    self.hierachy_paths.each do |hierachy_path|
       file_name = PUPPET_CONF_DIR + "/data/#{hierachy_path}"
       if File.exist?(file_name)
         config = YAML.load_file(file_name)

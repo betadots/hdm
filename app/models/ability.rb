@@ -51,6 +51,8 @@ class Ability
         can :read, User, id: user.id
         can :read, PuppetEnvironment
         can :read, PuppetNode
+        can :manage, PuppetConfiguration
+        can :manage, PuppetValue
       end
     end
 

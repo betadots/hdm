@@ -1,4 +1,14 @@
-# Development
+# The project
+
+This Rails application displays a [Puppet](https://github.com/puppetlabs/puppet) configuration and offers a WebGUI to update/create that configuration.
+
+In the first step we use the example development puppet configuration in `test/fixtures/files/puppet`. After that we impliment an API call to the puppet server.
+
+## Usermanagement
+
+A fresh installation needs an admin which has to be created first with the WebGUI. That admin can not read the Puppet configuration. He/She can only create/delete new users. Normal users have the ability to read/change/delete the Puppet configuration.
+
+## Development
 
 Please make sure that you have installed the right Ruby version (2.5.8) before you start your work. https://rvm.io is a good tool to do that.
 

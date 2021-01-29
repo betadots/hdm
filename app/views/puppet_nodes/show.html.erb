@@ -5,35 +5,35 @@
       <%= form_with(model: [@puppet_node.puppet_environment, @puppet_node], local: true) do |form| %>
         <div class="form-group">
           <%= form.label :fqdn %>
-          <%= form.text_field :fqdn ,class:"form-control", readonly:true%>
+          <%= form.text_field :fqdn ,class:"form-control", readonly:true %>
         </div>
         <div class="form-group">
           <%= form.label :role %>
-          <%= form.text_field :role ,class:"form-control", readonly:true%>
+          <%= form.text_field :role ,class:"form-control", readonly:true %>
         </div>
         <div class="form-group">
           <%= form.label :puppet_environment_id %>
-          <%= form.text_field :puppet_environment ,class:"form-control", readonly:true%>
+          <%= form.text_field :puppet_environment, class:"form-control", readonly:true %>
         </div>
         <div class="form-group">
           <%= form.label :zone %>
-          <%= form.text_field :zone ,class:"form-control", readonly:true%>
+          <%= form.text_field :zone ,class:"form-control", readonly:true %>
         </div>
         <div class="form-group">
           <%= form.label :os_family %>
-          <%= form.text_field :os_family ,class:"form-control", readonly:true%>
+          <%= form.text_field :os_family ,class:"form-control", readonly:true %>
         </div>
         <div class="form-group">
           <%= form.label :os_lsbdistcodename %>
-          <%= form.text_field :os_lsbdistcodename ,class:"form-control", readonly:true%>
+          <%= form.text_field :os_lsbdistcodename ,class:"form-control", readonly:true %>
         </div>
         <div class="form-group">
           <%= form.label :organization %>
-          <%= form.text_field :organization ,class:"form-control", readonly:true%>
+          <%= form.text_field :organization ,class:"form-control", readonly:true %>
         </div>
       <% end %>
       <% if can? :edit, @puppet_node %>
-        <%= link_to 'Edit', edit_puppet_node_path(@puppet_node),class:"btn btn-primary min-width-btn" %> 
+        <%= link_to 'Edit', edit_puppet_node_path(@puppet_node),class:"btn btn-primary min-width-btn" %>
       <% end %>
       <%= link_to 'Back', puppet_environment_path(@puppet_node.puppet_environment) ,class:"btn btn-light min-width-btn" %>
     </div>
