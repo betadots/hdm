@@ -1,0 +1,21 @@
+<%= form_with(model: value, url: puppet_configuration_values_path(value.configuration, value), local: true) do |form| %>
+  <% if value.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <h5><%= pluralize(value.errors.count, "error") %> prohibited this value from being saved:</h5>
+      <ul>
+      <% value.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-row mb-4">
+    <div class="col">
+      <%= form.text_field :value, placeholder: "Add a new value", class: "form-control" %>
+    </div>
+    <div class="col-3" style="width: 100px">
+      <%= form.submit "Save", class:"btn btn-success min-width-btn" %>
+    </div>
+  </div>
+<% end %>

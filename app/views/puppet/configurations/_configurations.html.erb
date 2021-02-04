@@ -1,0 +1,33 @@
+<% configurations.select(&:persisted?).each do |configuration| %>
+  <div id="<%= dom_id(configuration) %>">
+    <div class="d-flex align-items-center form-group">
+      <div class="flex-grow-1">
+        <input type="text" readonly="readonly" value="<%= configuration.name %>", class="form-control" />
+      </div>
+      <small class="px-1"><%= link_to 'Delete', puppet_configuration_path(configuration), method: :delete, data: { confirm: 'Are you sure?' } %></small>
+      <small class="px-1"><%= link_to 'Edit', edit_puppet_configuration_path(configuration) %></small>
+    </div>
+
+    <div class="ml-3">
+      <% configuration.values.each do |value| %>
+        <div id="<%= dom_id(value) %>" class="d-flex align-items-center form-group">
+          <div class="flex-grow-1">
+            <input type="text" readonly="readonly" value="<%= value.value %>", class="form-control" />
+          </div>
+          <small class="px-1"><%= link_to 'Delete', puppet_configuration_value_path(configuration, value), method: :delete, data: { confirm: 'Are you sure?' } %></small>
+        </div>
+      <% end %>
+
+      <% if configuration.values.empty? || configuration.multiple_values? %>
+        <%= render 'puppet/values/form', value: configuration.values.new %>
+      <% end %>
+    </div>
+
+    <% if configuration.child_configurations.any? %>
+      <div class="ml-3">
+        <strong>Child configuration</strong>
+        <%= render 'puppet/configurations/configurations', configurations: configuration.child_configurations %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

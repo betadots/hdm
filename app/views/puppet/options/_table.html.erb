@@ -1,0 +1,28 @@
+<table class="table table-borderd">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% options.each do |option| %>
+      <tr>
+        <td>
+          <%= option.name %>
+        </td>
+        <td>
+        </td>
+        <td class="text-right">
+          <% if can? :edit, option %>
+            <%= link_to 'Edit', edit_puppet_environment_node_option_path(@environment, @node, option), class:"btn btn-sm btn-primary min-width-btn" %>
+          <% end %>
+          <% if can? :delete, option %>
+            <%= link_to 'Delete', puppet_environment_node_option_path(@environment, @node, option), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger min-width-btn" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

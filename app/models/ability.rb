@@ -49,12 +49,12 @@ class Ability
 
       if user.user?
         can :read, User, id: user.id
-        can :read, PuppetEnvironment
-        can :read, PuppetNode
-        can :manage, PuppetConfiguration
-        can :manage, PuppetValue
+        can :manage, Puppet::Environment
+        can :manage, Puppet::Node
+        can :manage, Puppet::Configuration
+        can :manage, Puppet::Value
+        can :manage, Puppet::Option
       end
     end
-
   end
 end

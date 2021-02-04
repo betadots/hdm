@@ -1,11 +1,22 @@
 Rails.application.routes.draw do
-  resources :puppet_environments do
-    resources :puppet_nodes do
-      resources :puppet_configurations do
-        resources :puppet_values, only: [:create, :update, :destroy]
+  namespace :puppet do
+    resources :environments do
+      resources :nodes do
+        resources :options
       end
     end
+    resources :configurations do
+      resources :values, only: [:create, :destroy]
+    end
   end
+
+  # resources :puppet_environments do
+  #   resources :puppet_nodes do
+  #     resources :puppet_configurations do
+  #       resources :puppet_values, only: [:create, :update, :destroy]
+  #     end
+  #   end
+  # end
 
   get 'page/index'
   get 'page/about_us'

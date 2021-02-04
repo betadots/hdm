@@ -16,15 +16,15 @@
     </div>
   <% end %>
 <% else %>
-  <% if PuppetEnvironment.accessible_by(current_ability).any? %>
+  <% if Puppet::Environment.accessible_by(current_ability).any? %>
     <h2>Environments</h2>
-    <%= render partial: "puppet_environments/table", locals: {puppet_environments: PuppetEnvironment.accessible_by(current_ability)} %>
+    <%= render partial: "puppet/environments/table", locals: { environments: Puppet::Environment.accessible_by(current_ability) } %>
   <% else %>
     <% if User.count == 1 && current_user.admin? %>
       <h2>First Step: Create a User</h2>
-      <p>Your account (<%= current_user.email %>) has admin priviliges which allow to manage users but which do not 
+      <p>Your account (<%= current_user.email %>) has admin priviliges which allow to manage users but which do not
       allow to manage the puppet configuration.</p>
-      <p><strong>=> <%= link_to "Create a new user", new_user_path %></strong> who is not an admin to 
+      <p><strong>=> <%= link_to "Create a new user", new_user_path %></strong> who is not an admin to
       get access to the puppet configuration.</p>
     <% else %>
       <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>

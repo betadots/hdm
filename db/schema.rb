@@ -10,20 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_29_053631) do
+ActiveRecord::Schema.define(version: 2021_02_03_192655) do
 
   create_table "puppet_configurations", force: :cascade do |t|
     t.string "name"
-    t.string "slug"
-    t.integer "puppet_node_id"
     t.integer "parent_id"
     t.string "kind"
     t.boolean "multiple_values", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "configurable_type"
+    t.integer "configurable_id"
+    t.index ["configurable_id", "configurable_type"], name: "index_puppet_configurations_on_configurable"
     t.index ["parent_id"], name: "index_puppet_configurations_on_parent_id"
-    t.index ["puppet_node_id"], name: "index_puppet_configurations_on_puppet_node_id"
-    t.index ["slug"], name: "index_puppet_configurations_on_slug"
   end
 
   create_table "puppet_environments", force: :cascade do |t|
@@ -46,8 +45,19 @@ ActiveRecord::Schema.define(version: 2021_01_29_053631) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
+    t.string "name"
     t.index ["puppet_environment_id"], name: "index_puppet_nodes_on_puppet_environment_id"
     t.index ["slug"], name: "index_puppet_nodes_on_slug", unique: true
+  end
+
+  create_table "puppet_options", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.integer "puppet_node_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["puppet_node_id"], name: "index_puppet_options_on_puppet_node_id"
+    t.index ["slug"], name: "index_puppet_options_on_slug"
   end
 
   create_table "puppet_values", force: :cascade do |t|
@@ -79,6 +89,7 @@ ActiveRecord::Schema.define(version: 2021_01_29_053631) do
   end
 
   add_foreign_key "puppet_nodes", "puppet_environments"
+  add_foreign_key "puppet_options", "puppet_nodes"
   add_foreign_key "puppet_values", "puppet_configurations"
   add_foreign_key "users", "roles"
 end
