@@ -2,22 +2,24 @@ class Puppet::Node < ApplicationRecord
   include Puppet::Configurable
 
   belongs_to :environment, foreign_key: :puppet_environment_id
-  has_many :options, foreign_key: :puppet_node_id
+  has_many :options, foreign_key: :puppet_node_id, dependent: :destroy
+
+  def hiera_config
+    # Read the hiera configuration
+    @hiera_config ||= YAML.load_file(PUPPET_CONF_DIR + "/environments/#{self.environment.name}/hiera.yaml")
+  end
 
   def hierachy_paths
-    # Read the hiera configuration
-    hiera_config = YAML.load_file(PUPPET_CONF_DIR + "/environments/#{self.puppet_environment.name}/hiera.yaml")
-
     if hiera_config["version"] == 5 # Only works with version 5.
       # Read the paths and replaces %{::...}
       result = []
       hiera_config["hierarchy"].each do |hierarchy|
         hierarchy["paths"].each do |hierachy_path|
           resolved_path = hierachy_path
-          resolved_path = resolved_path.gsub("%{::fqdn}", self.fqdn)
-          resolved_path = resolved_path.gsub("%{::zone}", self.zone)
-          resolved_path = resolved_path.gsub("%{::role}", self.role)
-          resolved_path = resolved_path.gsub("%{::env}", self.puppet_environment.name)
+          resolved_path = resolved_path.gsub("%{::fqdn}", display_configs['fqdn'])
+          resolved_path = resolved_path.gsub("%{::zone}", display_configs['zone'])
+          resolved_path = resolved_path.gsub("%{::role}", display_configs['role'])
+          resolved_path = resolved_path.gsub("%{::env}", display_configs['env'])
           result.push(resolved_path)
         end
       end
@@ -27,9 +29,6 @@ class Puppet::Node < ApplicationRecord
   end
 
   def node_config
-    # Read the hiera configuration
-    hiera_config = YAML.load_file(PUPPET_CONF_DIR + "/environments/#{self.puppet_environment.name}/hiera.yaml")
-
     if hiera_config["version"] == 5 # Only works with version 5.
       # Read the paths and replaces %{::...}
       result = []
@@ -58,7 +57,8 @@ class Puppet::Node < ApplicationRecord
 
   def complete_config
     complete_config = nil
-    self.hierachy_paths.each do |hierachy_path|
+
+    hierachy_paths.each do |hierachy_path|
       file_name = PUPPET_CONF_DIR + "/data/#{hierachy_path}"
       if File.exist?(file_name)
         config = YAML.load_file(file_name)

@@ -15,12 +15,43 @@ module Puppet
     end
 
     def display_configs
-      configurations.select(&:persisted?).sort_by(&:id).each_with_object({}) do |configuration, hsh|
+      @display_configs ||= configurations.select(&:persisted?).sort_by(&:id).each_with_object({}) do |configuration, hsh|
         hsh[configuration.name] = build_configuration_block(configuration)
       end
     end
 
+    def create_config_for(hash, parent_config = nil)
+      hash.each do |key, value|
+        kind = get_kind_for_value(value)
+        multiple_values = value.is_a?(Array)
+
+        config = if parent_config
+                   parent_config.child_configurations.where(name: key).first_or_create
+                 else
+                   configurations.where(name: key).first_or_create
+                 end
+
+        config.update multiple_values: multiple_values, kind: kind
+
+        if value.is_a?(Hash)
+          create_config_for(value, config)
+        else
+          [value].flatten.each { |val| config.values.find_or_create_by(value: val) }
+        end
+      end
+    end
+
     private
+
+    def get_kind_for_value(value)
+      if %w(integer float string).any? { |kind| value.class.name.downcase == kind }
+        value.class.name.downcase
+      elsif value.is_a?(Array)
+        get_kind_for_value(value.first)
+      else
+        'string'
+      end
+    end
 
     def build_configuration_block(configuration)
       if configuration.child_configurations.any?
