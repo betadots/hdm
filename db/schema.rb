@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2021_02_03_192655) do
   create_table "puppet_nodes", force: :cascade do |t|
     t.string "fqdn"
     t.string "role"
-    t.integer "puppet_environment_id", null: false
+    t.bigint "puppet_environment_id", null: false
     t.string "zone"
     t.string "os_family"
     t.string "os_lsbdistcodename"
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 2021_02_03_192655) do
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
-    t.integer "role_id", null: false
+    t.bigint "role_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

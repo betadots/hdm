@@ -6,7 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
-/vendor/bundle
+/vendor
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -43,3 +43,7 @@ yarn-debug.log*
 
 # macOS
 .DS_Store
+
+# nodejs and yarn
+package-lock.json
+
