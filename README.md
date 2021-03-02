@@ -16,14 +16,16 @@ In case you are using an Apple M1 Chip you might run into trouble building
 Ruby. A work around for that is using the command `rvm install 2.5.8 --with-cflags="-Wno-error=implicit-function-declaration"`
 
 - Clone the repository and `cd` into the directory.
-- Do a `bundle install`.
-- Install nodejs `brew install node` (https://brew.sh)
-- We need `yarn`, install it: `npm install -g yarn`
+- Do a `bundle install --path vendor`.
+- Install nodejs:
+  - `brew install node` (https://brew.sh) or
+  - `port install nmp6`
+- We need `yarn`, install it: `npm install yarn`
 - Install the needed packages: `yarn install --check-files`
-- Create the database with `rails db:create`
-- Run the migrations with `rails db:migrate`
-- Seed the roles with `rails db:seed`
-- Start the webserver with `rails server`
+- Create the database with `bundle exec rails db:create`
+- Run the migrations with `bundle exec rails db:migrate`
+- Seed the roles with `bundle exec rails db:seed`
+- Start the webserver with `bundle exec rails server`
 - Use your browser to open http://localhost:3000
 
 You can reset your database anytime with a `rails db:reset`.
