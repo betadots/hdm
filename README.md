@@ -19,7 +19,7 @@ Ruby. A work around for that is using the command `rvm install 2.5.8 --with-cfla
 - Do a `bundle install --path vendor`.
 - Install nodejs:
   - `brew install node` (https://brew.sh) or
-  - `port install nmp6`
+  - `sudo port install nmp6 yarn`
 - We need `yarn`, install it: `npm install yarn`
 - Install the needed packages: `yarn install --check-files`
 - Create the database with `bundle exec rails db:create`
