@@ -41,8 +41,10 @@ Now a puppet access token must be generated:
     # generate an access token - note: username: admin, password: puppetlabs
     puppet-access login -l 2y
 
+The token will be saved in `/root/.puppetlabs/token`
+
 If this produces an error like `Unhandled exception: locale::facet::_S_create_c_locale name not valid` you want to check your locale settings by running locale.
-When running on a macOS System you have to unset the LC_CTYPE local: `unset LC_CTYPE`
+When logging in from a macOS System you have to unset the LC\_CTYPE local: `unset LC_CTYPE`
 
 Setting a localw can be done by running
 
