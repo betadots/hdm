@@ -17,5 +17,5 @@ class PageController < ApplicationController
 
   def faulty_setup
     add_breadcrumb "Faulty setup", :page_faulty_setup_path
-  end  
+  end
 end
