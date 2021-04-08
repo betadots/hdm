@@ -24,6 +24,6 @@ class ApplicationController < ActionController::Base
 
   def display_error_page(error)
     @error = error
-    render template: "page/errors"
+    render template: "page/error", status: :internal_server_error
   end
 end
