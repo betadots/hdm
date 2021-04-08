@@ -9,3 +9,4 @@ before_install:
 install:
   - bundle install
   - yarn install
+  - cp config/hdm.yml.template config/hdm.yml

@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  rescue_from Hdm::Error, with: :display_error_page
+
   helper_method :current_user
 
   private
@@ -18,5 +20,10 @@ class ApplicationController < ActionController::Base
   def load_environments
     @environments = Environment.all
     @environment = Environment.find(params[:environment_id])
+  end
+
+  def display_error_page(error)
+    @error = error
+    render template: "page/errors"
   end
 end
