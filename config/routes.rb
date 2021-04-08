@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  resources :environments, only: :index do
+    resources :nodes, only: :index do
+      if Rails.configuration.hdm['read_only']
+        resources :keys, only: [:index, :show]
+      else
+        resources :keys, only: [:index, :show, :update, :destroy]
+      end
+    end
+  end
   resources :roles, only: [:show, :index]
   resources :sessions, only: [:new, :create, :destroy]
   resources :users

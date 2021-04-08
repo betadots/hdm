@@ -24,6 +24,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'faker'
 gem 'friendly_id', '~> 5.4.0'
+gem 'puppet'
+gem 'puppetdb-ruby', require: 'puppetdb'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

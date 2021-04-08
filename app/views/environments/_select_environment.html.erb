@@ -1,0 +1,11 @@
+<%= form_tag "" do |form| %>
+  <div class="form-group">
+    <%= label_tag :environment, "Select environment" %>
+    <select name="environment" class="form-control" data-navigation="true">
+      <option value="" <%= "selected" if @environment.nil? %> data-url="<%= environments_path %>"></option>
+      <% @environments.each do |environment| %>
+        <option data-url="<%= environment_nodes_path(environment) %>" <%= "selected" if environment == @environment %>><%= environment.name %></option>
+      <% end %>
+    </select>
+  </div>
+<% end %>

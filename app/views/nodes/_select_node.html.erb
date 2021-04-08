@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-6">
+    <%= render "environments/select_environment" %>
+  </div>
+  <div class="col-6">
+    <%= form_tag "" do |form| %>
+      <div class="form-group">
+        <%= label_tag :node, "Select node" %>
+        <select name="node" class="form-control" data-navigation="true">
+          <option value="" <% "selected" if @node.nil? %> data-url="<%= environment_nodes_path(@environment) %>"></option>
+          <% @nodes.each do |node| %>
+            <option data-url="<%= environment_node_keys_path(@environment, node) %>" <%= "selected" if node == @node %>><%= node.hostname %></option>
+          <% end %>
+        </select>
+      </div>
+    <% end %>
+  </div>
+</div>

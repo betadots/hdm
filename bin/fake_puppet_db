@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+# begin
+#   load File.expand_path('../spring', __FILE__)
+# rescue LoadError => e
+#   raise unless e.message.include?('spring')
+# end
+require_relative '../test/support/fake_puppet_db'
+
+Rack::Server.start(app: FakePuppetDB.new, Host: "localhost", Port: 8083)

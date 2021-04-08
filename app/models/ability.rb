@@ -49,6 +49,9 @@ class Ability
 
       if user.user?
         can :read, User, id: user.id
+        can :manage, Environment
+        can :manage, Node
+        can :manage, Key
       end
     end
   end

@@ -1,0 +1,37 @@
+<%= render "nodes/select_node" %>
+
+<div class="row mt-4">
+  <div class="col-6">
+    <%= render "key_list" %>
+  </div>
+  <div class="col-6">
+    <% index = 0 %>
+    <% @key.hierarchies.each do |hierarchy_name, paths| %>
+      <b><%= hierarchy_name %></b>
+      <div class="accordion">
+        <% paths.each do |path_data| %>
+          <% index += 1 %>
+          <div class="card">
+            <div class="card-header" id="path-<%= index %>">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse-<%= index %>" aria-expanded="true" aria-controls="collapse-<%= index %>">
+                  <% if path_data[:key_present] %>
+                    <b><%= path_data[:path] %></b>
+                  <% else %>
+                    <span class="text-muted"><%= path_data[:path] %></span>
+                  <% end %>
+                </button>
+              </h2>
+            </div>
+
+            <div id="collapse-<%= index %>" class="collapse" aria-labelledby="path-<%= index %>">
+              <div class="card-body">
+                <%= render "form", path_data: path_data %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -14,4 +14,9 @@ class ApplicationController < ActionController::Base
       @current_user = nil
     end
   end
+
+  def load_environments
+    @environments = Environment.all
+    @environment = Environment.find(params[:environment_id])
+  end
 end

@@ -47,3 +47,5 @@ yarn-debug.log*
 # nodejs and yarn
 package-lock.json
 
+# HDM Settings
+/config/hdm.yml

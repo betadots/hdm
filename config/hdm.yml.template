@@ -1,0 +1,14 @@
+development:
+  read_only: false
+  puppet_db_server: "http://localhost:8083"
+  config_dir: <%= Rails.root.join('test','fixtures','files','puppet') %>
+
+test:
+  read_only: false
+  puppet_db_server: "http://localhost:8084"
+  config_dir: <%= Rails.root.join('test','fixtures','files','puppet') %>
+
+production:
+  read_only: false
+  puppet_db_server: "http://localhost:8083"
+  config_dir: "/etc/puppetlabs/code"

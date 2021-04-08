@@ -22,7 +22,11 @@
     allow to manage the puppet configuration.</p>
     <p><strong>=> <%= link_to "Create a new user", new_user_path %></strong> who is not an admin to
     get access to the puppet configuration.</p>
-  <% else %>
-    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+  <% end %>
+  <% if can? :index, Environment %>
+    <%= link_to "Show Environments", environments_path, class: "btn btn-primary" %>
+  <% end %>
+  <% if can? :create, User %>
+    <%= link_to "Manage Users", users_path, class: "btn btn-primary" %>
   <% end %>
 <% end %>

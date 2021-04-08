@@ -22,6 +22,7 @@ Ruby. A work around for that is using the command `rvm install 2.5.8 --with-cfla
   - `sudo port install nmp6 yarn`
 - We need `yarn`, install it: `npm install yarn`
 - Install the needed packages: `yarn install --check-files`
+- Create a configuration file using the template: `cp config/hdm.yml.template config/hdm.yml`
 - Create the database with `bundle exec rails db:create`
 - Run the migrations with `bundle exec rails db:migrate`
 - Seed the roles with `bundle exec rails db:seed`
