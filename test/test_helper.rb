@@ -3,6 +3,7 @@ require_relative '../config/environment'
 require 'rails/test_help'
 require 'minitest/mock'
 require_relative "support/fake_puppet_db"
+require_relative "support/sign_in_helper"
 
 # Start FakePuppetDB-Server
 server_thread = Thread.new do
@@ -30,4 +31,8 @@ class ActiveSupport::TestCase
   def json
     JSON.parse(response.body)
   end
+end
+
+class ActionDispatch::IntegrationTest
+  include SignInHelper
 end

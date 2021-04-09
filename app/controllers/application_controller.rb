@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   rescue_from Hdm::Error, with: :display_error_page
+  rescue_from CanCan::AccessDenied, with: :access_denied
 
   helper_method :current_user
 
@@ -25,5 +26,9 @@ class ApplicationController < ActionController::Base
   def display_error_page(error)
     @error = error
     render template: "page/error", status: :internal_server_error
+  end
+
+  def access_denied
+    head :forbidden
   end
 end
