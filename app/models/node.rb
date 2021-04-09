@@ -27,7 +27,9 @@ class Node
 
   def facts(environment:)
     environment_name = environment.is_a?(String) ? environment : environment.name
-    @facts ||= PuppetDbClient.facts(certname: hostname, environment: environment_name)
+    @facts ||= {}
+    @facts[environment_name] ||=
+      PuppetDbClient.facts(certname: hostname, environment: environment_name)
   end
 
   def to_param

@@ -10,33 +10,7 @@ class HieraDataTest < ActiveSupport::TestCase
     assert_match("Environment 'unknown' does not exist", err.message)
   end
 
-  test "#paths return lookup paths" do
-    hiera = HieraData.new('development')
-    existing_paths = {
-      "Eyaml hierarchy" =>
-      [
-        "nodes/%{::fqdn}.yaml",
-        "role/%{::role}-%{::env}.yaml",
-        "role/%{::role}.yaml",
-        "zone/%{::zone}.yaml",
-        "common.yaml"
-      ]
-    }
-    assert_equal existing_paths, hiera.paths
-  end
-
-  test "#needs_facts return which facts are expected" do
-    hiera = HieraData.new('development')
-    expected_facts = [
-      "::env",
-      "::fqdn",
-      "::role",
-      "::zone",
-    ]
-    assert_equal expected_facts, hiera.expected_facts
-  end
-
-  test "#find_key return all hierarchies and files that contains the key" do
+  test "#search_key return all hierarchies and files that contains the key" do
     hiera = HieraData.new('development')
     expected_result = {
       "Eyaml hierarchy" =>
@@ -49,7 +23,9 @@ class HieraDataTest < ActiveSupport::TestCase
       ]
     }
 
-    result = hiera.search_key('testhost', 'psick::firstrun::linux_classes')
+    node = Node.new("testhost")
+    facts = node.facts(environment: "development")
+    result = hiera.search_key(facts , 'psick::firstrun::linux_classes')
     assert_equal ["Eyaml hierarchy"], result.keys
     assert_equal 5, result["Eyaml hierarchy"].size
     assert_equal expected_result["Eyaml hierarchy"][0], result["Eyaml hierarchy"][0], "element 1"
@@ -59,32 +35,15 @@ class HieraDataTest < ActiveSupport::TestCase
     assert_equal expected_result["Eyaml hierarchy"][4], result["Eyaml hierarchy"][4], "element 5"
   end
 
-  test "#all_keys return all keys, in the hierarchy and ready to list" do
+  test "#all_keys return all keys" do
     hiera = HieraData.new('development')
-    expected_result = {
-      "_all_keys" => [
+    expected_result = [
         "hdm::float", "hdm::integer", "noop_mode", "psick::enable_firstrun", "psick::firstrun::linux_classes", "psick::postfix::tp::resources_hash", "psick::time::servers", "psick::timezone"
-      ],
-      "Eyaml hierarchy" =>
-      [
-        { path: "nodes/testhost.yaml",            present: true, keys: ["noop_mode", "psick::enable_firstrun", "psick::firstrun::linux_classes", "psick::time::servers", "psick::timezone", "psick::postfix::tp::resources_hash"] },
-        { path: "role/hdm_test-development.yaml", present: false, keys: [] },
-        { path: "role/hdm_test.yaml",             present: true, keys: ["psick::firstrun::linux_classes"] },
-        { path: "zone/internal.yaml",             present: false, keys: [] },
-        { path: "common.yaml",                    present: true, keys: ["hdm::float", "hdm::integer", "psick::enable_firstrun", "psick::firstrun::linux_classes", "psick::time::servers", "psick::timezone", "psick::postfix::tp::resources_hash"] }
-      ]
-    }
+    ]
 
-    result = hiera.all_keys('testhost')
-    assert_equal expected_result.keys, result.keys
-    assert_equal expected_result["_all_keys"], result["_all_keys"]
-
-    assert_equal 5, result["Eyaml hierarchy"].size
-    assert_equal expected_result["Eyaml hierarchy"][0], result["Eyaml hierarchy"][0], "element 1"
-    assert_equal expected_result["Eyaml hierarchy"][1], result["Eyaml hierarchy"][1], "element 2"
-    assert_equal expected_result["Eyaml hierarchy"][2], result["Eyaml hierarchy"][2], "element 3"
-    assert_equal expected_result["Eyaml hierarchy"][3], result["Eyaml hierarchy"][3], "element 4"
-    assert_equal expected_result["Eyaml hierarchy"][4], result["Eyaml hierarchy"][4], "element 5"
+    node = Node.new("testhost")
+    result = hiera.all_keys(node.facts(environment: "development"))
+    assert_equal expected_result, result
   end
 
   test "#write_key goes fine for the first one" do

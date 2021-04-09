@@ -6,49 +6,28 @@ class HieraData
   def initialize(environment)
     @environment = environment
 
-    raise EnvironmentNotFound.new("Environment '#{environment}' does not exist") unless Environment.all_names.include?(environment)
+    raise EnvironmentNotFound.new("Environment '#{environment}' does not exist") unless PuppetDbClient.environments.include?(environment)
   end
 
-  def paths
-    paths = {}
-    config_file.hierarchies.each { |x| paths[x.name] = x.paths }
-    paths
-  end
-
-  def expected_facts
-    expected_facts = []
-    config_file.hierarchies.map { |x| expected_facts.concat(x.expected_facts) }
-    expected_facts.sort.uniq
-  end
-
-  def all_keys(node)
-    node = Node.new(node)
-    search_results = {"_all_keys" => []}
-    paths.each_pair do |hiera_env, paths|
-      search_results[hiera_env] = []
-      paths.map do |path|
-        file = ReadFile.new(config_dir: data_path, path: path, facts: node.facts(environment: environment))
-        search_results[hiera_env] << {
-          path: file.calculated_path,
-          present: file.exist?,
-          keys: file.keys,
-        }
-        search_results["_all_keys"].concat(file.keys)
+  def all_keys(facts)
+    keys = []
+    config_file.hierarchies.each do |hierarchy|
+      hierarchy.paths.each do |path|
+        file = ReadFile.new(config_dir: data_path, path: path, facts: facts)
+        keys.concat(file.keys)
       end
     end
-    search_results["_all_keys"].sort!.uniq!
-    search_results
+    keys.sort.uniq
   end
 
-  def search_key(node, key)
-    node = Node.new(node)
+  def search_key(facts, key)
     search_results = {}
-    paths.each_pair do |hiera_env, paths|
-      search_results[hiera_env] = []
-      paths.map do |path|
-        file = ReadFile.new(config_dir: data_path, path: path, facts: node.facts(environment: environment))
+    config_file.hierarchies.each do |hierarchy|
+      search_results[hierarchy.name] = []
+      hierarchy.paths.map do |path|
+        file = ReadFile.new(config_dir: data_path, path: path, facts: facts)
         if file.fact_matched
-          search_results[hiera_env] << {
+          search_results[hierarchy.name] << {
             path: file.calculated_path,
             present: file.exist?,
             key_present: file.keys.include?(key),
