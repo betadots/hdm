@@ -1,5 +1,5 @@
 class Key
-  attr_reader :name
+  attr_reader :name, :environment, :node
 
   def self.all(environment, node)
     facts = node.facts(environment: environment)
@@ -28,7 +28,11 @@ class Key
   end
 
   def ==(other)
-    other.is_a?(Key) && name == other.name
+    other.is_a?(Key) && (
+      name == other.name &&
+      environment == other.environment &&
+      node == other.node
+    )
   end
 
   def to_param
