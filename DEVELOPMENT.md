@@ -50,6 +50,15 @@ Setting a localw can be done by running
 
     export LANG=en_US.UTF-8
 
+## Mock certificate information
+
+Create a new external fact file:
+
+    mkdir -p /etc/puppetlabs/facter/facts.d
+    echo -e "role=puppet\nzone=pe\nenv=devel\ndatacenter=vagrant\n" > /etc/puppetlabs/facter/facts.d/hdm.txt
+
+Now run puppet agent to add new facts to puppetdb: `puppet agent --test`
+
 ## HDM
 
 Add required packages
