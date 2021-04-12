@@ -6,6 +6,12 @@ class KeysControllerTest < ActionDispatch::IntegrationTest
     @node = Node.new("testhost")
   end
 
+  test "routing works for nodes with dot in name" do
+    assert_routing "/environments/development/nodes/www.example.com/keys",
+      controller: "keys", action: "index", environment_id: "development",
+      node_id: "www.example.com"
+  end
+
   test "an admin cannot access the index page" do
     sign_in_as(users(:admin))
 

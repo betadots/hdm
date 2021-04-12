@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :environments, only: :index do
-    resources :nodes, only: :index do
+    resources :nodes, only: :index, constraints: {id: /[^\/]+/} do
       if Rails.configuration.hdm['read_only']
         resources :keys, only: [:index, :show]
       else
