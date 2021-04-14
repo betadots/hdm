@@ -27,7 +27,7 @@ class KeysController < ApplicationController
     authorize! :update, Key
 
     @key = Key.new(@environment, @node, params[:id])
-    @key.save_value(params[:path], params[:value])
+    @key.save_value(params[:hierarchy], params[:path], params[:value])
 
     redirect_to environment_node_key_path(@environment, @node, @key),
       notice: "Value was saved successfully"
@@ -37,7 +37,7 @@ class KeysController < ApplicationController
     authorize! :destroy, Key
 
     @key = Key.new(@environment, @node, params[:id])
-    @key.remove_value(params[:path])
+    @key.remove_value(params[:hierarchy], params[:path])
 
     redirect_to environment_node_key_path(@environment, @node, @key),
       notice: "Value was removed successfully"

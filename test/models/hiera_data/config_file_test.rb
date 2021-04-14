@@ -15,8 +15,6 @@ class HieraData::ConfigFileTest < ActiveSupport::TestCase
   class HieraData::ConfigFileNoYamlFilePresent < ActiveSupport::TestCase
     test "uses defaults from puppet" do
       config = HieraData::ConfigFile.new(base_path)
-      assert config.version5?
-      assert config.default_yaml_data?
       assert_equal 1, config.hierarchies.size
     end
 
@@ -28,8 +26,6 @@ class HieraData::ConfigFileTest < ActiveSupport::TestCase
   class HieraData::ConfigFileMinimalIncompleteYamlFile < ActiveSupport::TestCase
     test "merges with defaults from puppet" do
       config = HieraData::ConfigFile.new(base_path)
-      assert config.version5?
-      assert config.default_yaml_data?
       assert_equal 1, config.hierarchies.size
     end
 
@@ -41,8 +37,6 @@ class HieraData::ConfigFileTest < ActiveSupport::TestCase
   class HieraData::ConfigFileWithSomeHierarchiesTest < ActiveSupport::TestCase
     test "when only defaults, return the yaml paths" do
       config = HieraData::ConfigFile.new(base_path)
-      assert config.version5?
-      assert config.default_yaml_data?
       assert_equal 2, config.hierarchies.size
     end
 

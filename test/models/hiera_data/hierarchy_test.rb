@@ -1,132 +1,99 @@
 require 'test_helper'
 
 class HieraData::HierarchyTest < ActiveSupport::TestCase
-  test "the expected paths" do
-    defaults = hiera_file["defaults"]
-    hierarchy = hiera_file["hierarchy"][0]
-    config = HieraData::Hierarchy.new(hierarchy: hierarchy, default_data_hash: "yaml_data")
-    existing_paths = [
+  test "#paths returns all non-interpolated path names" do
+    hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
+    expected_paths = [
       "nodes/%{::fqdn}.yaml",
       "role/%{::role}-%{::env}.yaml",
       "role/%{::role}.yaml",
       "zone/%{::zone}.yaml",
       "common.yaml"
     ]
-    assert_equal existing_paths, config.paths
-
-
-    config = HieraData::Hierarchy.new(hierarchy: {}, default_data_hash: "yaml_data")
-    assert config.paths.empty?
+    assert_equal expected_paths, hierarchy.paths
   end
 
-  test "the expected facts" do
-    defaults = hiera_file["defaults"]
-    hierarchy = hiera_file["hierarchy"][0]
-    config = HieraData::Hierarchy.new(hierarchy: hierarchy, default_data_hash: "yaml_data")
-    expected_facts = [
-      "::env",
-      "::fqdn",
-      "::role",
-      "::zone",
+  test "#paths returns an empty array if no data is available" do
+    hierarchy = HieraData::Hierarchy.new(raw_hash: {}, base_path: ".")
+    assert hierarchy.paths.empty?
+  end
+
+  test "#resolved_paths uses facts to resolve paths" do
+    hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
+    facts = {
+      "fqdn" => "testhost",
+      "role" => "hdm_test",
+      "env" => "development",
+      "zone" => "internal"
+    }
+    expected_resolved_paths = [
+      "nodes/testhost.yaml",
+      "role/hdm_test-development.yaml",
+      "role/hdm_test.yaml",
+      "zone/internal.yaml",
+      "common.yaml"
     ]
-    assert_equal expected_facts, config.expected_facts
-
-
-    config = HieraData::Hierarchy.new(hierarchy: {}, default_data_hash: "yaml_data")
-    assert config.paths.empty?
+    assert_equal expected_resolved_paths, hierarchy.resolved_paths(facts: facts)
   end
 
   test "#name returns the existing name" do
-    defaults = hiera_file["defaults"]
-    hierarchy = hiera_file["hierarchy"][0]
-    config = HieraData::Hierarchy.new(hierarchy: hierarchy, default_data_hash: "yaml_data")
-    assert_equal "Yaml hierarchy", config.name
+    hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
+    assert_equal "Yaml hierarchy", hierarchy.name
   end
 
-  def hiera_file
-    YAML.load(
-      <<~EOF
-      hierarchy:
-        - name: "Yaml hierarchy"
-          paths:
-            - "nodes/%{::fqdn}.yaml"
-            - "role/%{::role}-%{::env}.yaml"
-            - "role/%{::role}.yaml"
-            - "zone/%{::zone}.yaml"
-            - "common.yaml"
-      EOF
-    )
+  def raw_hash
+    {
+      "name" => "Yaml hierarchy",
+      "paths" => [
+        "nodes/%{::fqdn}.yaml",
+        "role/%{::role}-%{::env}.yaml",
+        "role/%{::role}.yaml",
+        "zone/%{::zone}.yaml",
+        "common.yaml"
+      ]
+    }
   end
 
   class HieraData::HierarchyForYamlDataTest < ActiveSupport::TestCase
-    test "if default is yaml and not specificied, is yaml" do
-      defaults = hiera_file["defaults"]
-      hierarchy = hiera_file["hierarchy"][0]
-      config = HieraData::Hierarchy.new(hierarchy: hierarchy, default_data_hash: "yaml_data")
-      assert config.yaml?
+    test "data_hash specified and yaml" do
+      hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
+      assert hierarchy.yaml?
     end
 
-    def hiera_file
-      YAML.load(
-        <<~EOF
-        hierarchy:
-          - name: "Yaml hierarchy"
-            paths:
-              - "nodes/%{::fqdn}.yaml"
-              - "role/%{::role}-%{::env}.yaml"
-              - "role/%{::role}.yaml"
-              - "zone/%{::zone}.yaml"
-              - "common.yaml"
-        EOF
-      )
+    def raw_hash
+      {
+        "name" => "Yaml hierarchy",
+        "data_hash" => "yaml_data"
+      }
     end
   end
+
+  class HieraData::HierarchyForJSONDataTest < ActiveSupport::TestCase
+    test "data_hash specified and json" do
+      hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
+      refute hierarchy.yaml?
+    end
+
+    def raw_hash
+      {
+        "name" => "JSON hierarchy",
+        "data_hash" => "json_data"
+      }
+    end
+  end
+
 
   class HieraData::HierarchyForEyamlDataTest < ActiveSupport::TestCase
-    test "if default is yaml and not specificied, is yaml" do
-      hierarchy = hiera_file["hierarchy"][0]
-      config = HieraData::Hierarchy.new(hierarchy: hierarchy, default_data_hash: "yaml_data")
-      refute config.yaml?
+    test "lookup function is not data_hash" do
+      hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
+      refute hierarchy.yaml?
     end
 
-    def hiera_file
-      YAML.load(
-        <<~EOF
-        hierarchy:
-          - name: "Yaml hierarchy"
-            lookup_key: eyaml_lookup_key
-            paths:
-              - "nodes/%{::fqdn}.eyaml"
-              - "role/%{::role}-%{::env}.eyaml"
-              - "role/%{::role}.eyaml"
-              - "zone/%{::zone}.eyaml"
-              - "common.eyaml"
-        EOF
-      )
-    end
-  end
-
-  class HieraData::HierarchyForSpecificYamlDataTest < ActiveSupport::TestCase
-    test "if default is yaml and not specificied, is yaml" do
-      hierarchy = hiera_file["hierarchy"][0]
-      config = HieraData::Hierarchy.new(hierarchy: hierarchy, default_data_hash: nil)
-      assert config.yaml?
-    end
-
-    def hiera_file
-      YAML.load(
-        <<~EOF
-        hierarchy:
-          - name: "Yaml hierarchy"
-            data_hash: yaml_data
-            paths:
-              - "nodes/%{::fqdn}.eyaml"
-              - "role/%{::role}-%{::env}.eyaml"
-              - "role/%{::role}.eyaml"
-              - "zone/%{::zone}.eyaml"
-              - "common.eyaml"
-        EOF
-      )
+    def raw_hash
+      {
+        "name" => "EYaml hierarchy",
+        "lookup_key" => "eyaml_lookup_key"
+      }
     end
   end
 end

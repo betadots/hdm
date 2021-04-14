@@ -18,13 +18,13 @@ class Key
     @hierarchies ||= hiera_data.search_key(facts, name)
   end
 
-  def save_value(path, value)
+  def save_value(hierarchy_name, path, value)
     value = YAML.load(value)
-    hiera_data.write_key(path, name, value)
+    hiera_data.write_key(hierarchy_name, path, name, value)
   end
 
-  def remove_value(path)
-    hiera_data.remove_key(path, name)
+  def remove_value(hierarchy_name, path)
+    hiera_data.remove_key(hierarchy_name, path, name)
   end
 
   def ==(other)

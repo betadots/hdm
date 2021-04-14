@@ -1,27 +1,17 @@
 require 'test_helper'
 
 class HieraData::ReadFileTest < ActiveSupport::TestCase
-  test "full path" do
-    file = HieraData::ReadFile.new(config_dir: config_dir, path: "role/%{::role}-%{::env}.yaml", facts: facts)
-    assert_equal File.join(Rails.configuration.hdm["config_dir"], "environments/development/data/role/hdm_test-development.yaml"), file.full_path
-  end
-
-  test "#exit? return false for non existing file" do
-    file = HieraData::ReadFile.new(config_dir: config_dir, path: "role/%{::role}-%{::env}.yaml", facts: facts)
+  test "#exist? return false for non existing file" do
+    file = HieraData::ReadFile.new(path: config_dir.join("role/hdm_test-development.yaml"))
     refute file.exist?
   end
 
-  test "#exit? return true for existing file" do
-    file = HieraData::ReadFile.new(config_dir: config_dir, path: "nodes/%{::fqdn}.yaml", facts: facts)
+  test "#exist? return true for existing file" do
+    file = HieraData::ReadFile.new(path: config_dir.join("nodes/testhost.yaml"))
     assert file.exist?
   end
 
-  test "#calculated_path return the name interpolated with facts" do
-    file = HieraData::ReadFile.new(config_dir: config_dir, path: "nodes/%{::fqdn}.yaml", facts: facts)
-    assert_equal "nodes/testhost.yaml", file.calculated_path
-  end
-
-  test "#keys return the top level keys for the file" do
+  test "#keys returns the top level keys for the file" do
     expected_keys = [
       "noop_mode",
       "psick::enable_firstrun",
@@ -31,47 +21,47 @@ class HieraData::ReadFileTest < ActiveSupport::TestCase
       "psick::postfix::tp::resources_hash"
     ]
 
-    file = HieraData::ReadFile.new(config_dir: config_dir, path: "nodes/%{::fqdn}.yaml", facts: facts)
+    file = HieraData::ReadFile.new(path: config_dir.join("nodes/testhost.yaml"))
     assert_equal expected_keys, file.keys
   end
 
-  test "#keys return empty array for non existing file" do
+  test "#keys returns empty array for non existing file" do
     expected_keys = []
+    file = HieraData::ReadFile.new(path: config_dir.join("role/hdm_test-development.yaml"))
 
-    file = HieraData::ReadFile.new(config_dir: config_dir, path: "unknown_file.yaml", facts: facts)
     assert_equal expected_keys, file.keys
   end
 
-  test "#content_for_key return nil for unknown file and key" do
-    file = HieraData::ReadFile.new(config_dir: config_dir, path: "unknown_file", facts: facts)
+  test "#content_for_key returns nil for unknown file and key" do
+    file = HieraData::ReadFile.new(path: config_dir.join("role/hdm_test-development.yaml"))
     assert_nil file.content_for_key('noop_mode')
 
-    file = HieraData::ReadFile.new(config_dir: config_dir, path: "nodes/%{::fqdn}.yaml", facts: facts)
+    file = HieraData::ReadFile.new(path: config_dir.join("nodes/testhost.yaml"))
     assert_nil file.content_for_key('unknown_key')
   end
 
-  test "#content_for_key return true (as string) for boolean" do
-    file = HieraData::ReadFile.new(config_dir: config_dir, path: "nodes/%{::fqdn}.yaml", facts: facts)
+  test "#content_for_key returns true (as string) for boolean" do
+    file = HieraData::ReadFile.new(path: config_dir.join("nodes/testhost.yaml"))
     assert_equal "true", file.content_for_key('noop_mode')
   end
 
-  test "#content_for_key return string for string" do
-    file = HieraData::ReadFile.new(config_dir: config_dir, path: "nodes/%{::fqdn}.yaml", facts: facts)
+  test "#content_for_key returns string for string" do
+    file = HieraData::ReadFile.new(path: config_dir.join("nodes/testhost.yaml"))
     assert_equal "CET", file.content_for_key('psick::timezone')
   end
 
-  test "#content_for_key return yaml structure as string" do
-    file = HieraData::ReadFile.new(config_dir: config_dir, path: "nodes/%{::fqdn}.yaml", facts: facts)
+  test "#content_for_key returns yaml structure as string" do
+    file = HieraData::ReadFile.new(path: config_dir.join("nodes/testhost.yaml"))
     assert_equal key_as_string, file.content_for_key('psick::postfix::tp::resources_hash')
   end
 
   test "#content_for_key returns integer as integer" do
-    file = HieraData::ReadFile.new(config_dir: config_dir, path: "common.yaml", facts: facts)
+    file = HieraData::ReadFile.new(path: config_dir.join("common.yaml"))
     assert_equal 1, file.content_for_key('hdm::integer')
   end
 
   test "#content_for_key returns float as float" do
-    file = HieraData::ReadFile.new(config_dir: config_dir, path: "common.yaml", facts: facts)
+    file = HieraData::ReadFile.new(path: config_dir.join("common.yaml"))
     assert_equal 0.1, file.content_for_key('hdm::float')
   end
 
@@ -80,7 +70,7 @@ class HieraData::ReadFileTest < ActiveSupport::TestCase
 
     with_temp_file(path) do
       expected_hash = {"test_key"=>"true"}
-      file = HieraData::ReadFile.new(config_dir: config_dir, path: "nodes/writehost.yaml", facts: {})
+      file = HieraData::ReadFile.new(path: path)
       file.write_key('test_key', 'true')
       assert_equal expected_hash, YAML.load(File.read(path))
     end
@@ -91,7 +81,7 @@ class HieraData::ReadFileTest < ActiveSupport::TestCase
 
     with_temp_file(path) do
       expected_hash = {}
-      file = HieraData::ReadFile.new(config_dir: config_dir, path: "nodes/writehost.yaml", facts: {})
+      file = HieraData::ReadFile.new(path: path)
       file.remove_key('test_key')
       assert_equal expected_hash, YAML.load(File.read(path))
     end
@@ -100,15 +90,6 @@ class HieraData::ReadFileTest < ActiveSupport::TestCase
   private
     def config_dir
       Pathname.new(Rails.configuration.hdm["config_dir"]).join('environments', 'development', 'data')
-    end
-
-    def facts
-      {
-        "fqdn" => "testhost",
-        "role" => "hdm_test",
-        "env" => "development",
-        "zone" => "internal"
-      }
     end
 
     def key_as_string
