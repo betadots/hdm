@@ -1,5 +1,5 @@
 class HieraData
-  class ReadFile
+  class YamlFile
     attr_reader :path
 
     def initialize(path:)

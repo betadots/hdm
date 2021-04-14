@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class HieraData::ConfigFileTest < ActiveSupport::TestCase
-  class HieraData::ConfigFileV3 < ActiveSupport::TestCase
+class HieraData::ConfigTest < ActiveSupport::TestCase
+  class HieraData::ConfigV3 < ActiveSupport::TestCase
     test "does not support v3 config style" do
       assert_raise Hdm::Error do
-        HieraData::ConfigFile.new(base_path)
+        HieraData::Config.new(base_path)
       end
     end
 
@@ -12,9 +12,9 @@ class HieraData::ConfigFileTest < ActiveSupport::TestCase
       Pathname.new(Rails.configuration.hdm["config_dir"]).join("environments", "v3")
     end
   end
-  class HieraData::ConfigFileNoYamlFilePresent < ActiveSupport::TestCase
+  class HieraData::ConfigNoYamlFilePresent < ActiveSupport::TestCase
     test "uses defaults from puppet" do
-      config = HieraData::ConfigFile.new(base_path)
+      config = HieraData::Config.new(base_path)
       assert_equal 1, config.hierarchies.size
     end
 
@@ -23,9 +23,9 @@ class HieraData::ConfigFileTest < ActiveSupport::TestCase
     end
   end
 
-  class HieraData::ConfigFileMinimalIncompleteYamlFile < ActiveSupport::TestCase
+  class HieraData::ConfigMinimalIncompleteYamlFile < ActiveSupport::TestCase
     test "merges with defaults from puppet" do
-      config = HieraData::ConfigFile.new(base_path)
+      config = HieraData::Config.new(base_path)
       assert_equal 1, config.hierarchies.size
     end
 
@@ -34,9 +34,9 @@ class HieraData::ConfigFileTest < ActiveSupport::TestCase
     end
   end
 
-  class HieraData::ConfigFileWithSomeHierarchiesTest < ActiveSupport::TestCase
+  class HieraData::ConfigWithSomeHierarchiesTest < ActiveSupport::TestCase
     test "when only defaults, return the yaml paths" do
-      config = HieraData::ConfigFile.new(base_path)
+      config = HieraData::Config.new(base_path)
       assert_equal 2, config.hierarchies.size
     end
 

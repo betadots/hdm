@@ -1,5 +1,5 @@
 class HieraData
-  class ConfigFile
+  class Config
     attr_reader :content, :hierarchies
 
     def initialize(base_path)
