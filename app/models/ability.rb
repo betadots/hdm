@@ -38,22 +38,20 @@ class Ability
 
       if user.admin?
         if Role.find_by_name('Admin').users.count > 1
-          can :manage, User, :id => user.id
+          can :manage, User, id: user.id
         else
-          can [:read, :edit, :update], User, :id => user.id
+          can [:read, :edit, :update], User, id: user.id
         end
-        can :manage, User, :id => User.where.not(id: user.id).ids
-        can :create, User, :id => nil
+        can :manage, User, id: User.where.not(id: user.id).ids
+        can :create, User, id: nil
         can :read, Role
       end
 
       if user.user?
         can :read, User, id: user.id
-        can :manage, Puppet::Environment
-        can :manage, Puppet::Node
-        can :manage, Puppet::Configuration
-        can :manage, Puppet::Value
-        can :manage, Puppet::Option
+        can :manage, Environment
+        can :manage, Node
+        can :manage, Key
       end
     end
   end

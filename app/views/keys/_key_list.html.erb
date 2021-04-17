@@ -1,0 +1,5 @@
+<div class="list-group">
+  <% @keys.each do |key| %>
+    <%= link_to key, environment_node_key_path(@environment, @node, key), class: "list-group-item list-group-item-action #{"active" if key == @key}" %>
+  <% end %>
+</div>

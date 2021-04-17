@@ -1,0 +1,15 @@
+<% if Rails.configuration.hdm['read_only'] %>
+  <pre><%= path_data["value"] %></pre>
+<% else %>
+  <%= form_with url: environment_node_key_path(@environment, @node, @key), method: :patch, local: true do |f| %>
+    <%= hidden_field_tag :path, path_data[:path] %>
+    <%= text_area_tag :value, path_data[:value], rows: 4, class: "form-control" %>
+    <div class="d-flex justify-content-end mt-2">
+      <% if path_data[:key_present] %>
+        <%= link_to "Delete", environment_node_key_path(@environment, @node, @key, path: path_data[:path]), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-sm btn-danger" %>
+      <% end %>
+      <%= f.button "Reset", type: :reset, class: "btn btn-sm btn-secondary ml-2" %>
+      <%= f.button "Save", type: :submit, class: "btn btn-sm btn-primary ml-2" %>
+    </div>
+  <% end %>
+<% end %>

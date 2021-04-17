@@ -8,22 +8,17 @@ class PageControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_user_path
   end
 
-  test "system without an existing user nor role shouldn't get index but new user form" do
+  test "system without an existing user nor role shouldn't get index but display an error" do
     User.destroy_all
     Role.destroy_all
     get page_index_url
-    assert_redirected_to page_faulty_setup_path
+    assert_response :internal_server_error
+    assert_select "h5", "HDM Error"
   end
 
   test "system with existing user should get index" do
     FactoryBot.create(:user)
     get page_index_url
-    assert_response :success
-  end
-
-  test "should get about_us" do
-    User.destroy_all
-    get page_about_us_url
     assert_response :success
   end
 end
