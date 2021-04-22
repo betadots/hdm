@@ -1,14 +1,34 @@
 development:
   read_only: false
-  puppet_db_server: "http://localhost:8083"
+  puppet_db:
+    server: "http://localhost:8083"
   config_dir: <%= Rails.root.join('test','fixtures','files','puppet') %>
 
 test:
   read_only: false
-  puppet_db_server: "http://localhost:8084"
+  puppet_db:
+    server: "http://localhost:8084"
   config_dir: <%= Rails.root.join('test','fixtures','files','puppet') %>
 
 production:
   read_only: false
-  puppet_db_server: "http://localhost:8083"
+  puppet_db:
+    # When using https make sure the server name matches
+    # the one in the certificate
+    server: "https://localhost:8081"
+    pem:
+      key: "/path/to/keyfile"
+      cert: "/path/to/certfile"
+      ca_file: "/path/to/cafile"
   config_dir: "/etc/puppetlabs/code"
+
+# Example for PE token authentication
+# production:
+#   read_only: false
+#   puppet_db:
+#     # When using https make sure the server name matches
+#     # the one in the certificate
+#     server: "https://localhost:8081"
+#     token: "secret_token"
+#     cacert: "/path/to/cacert"
+#   config_dir: "/etc/puppetlabs/code"
