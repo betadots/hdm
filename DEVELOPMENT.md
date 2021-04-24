@@ -102,8 +102,9 @@ Edit config file:
 
     development:
       read_only: false
-      puppet_db_server: "http://localhost:8080"
-      config_dir: <%= Rails.root.join('test','fixtures','files','puppet') %>
+      puppet_db:
+        server: "http://localhost:8080"
+      config_dir: "/etc/puppetlabs/code"
 
 Start the webserver with:
 
