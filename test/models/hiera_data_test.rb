@@ -52,7 +52,7 @@ class HieraDataTest < ActiveSupport::TestCase
     with_temp_file(path) do
       expected_hash = {"test_key"=>"true"}
       hiera = HieraData.new('development')
-      hiera.write_key('nodes/writehost.yaml', 'test_key', 'true')
+      hiera.write_key("Eyaml hierarchy", 'nodes/writehost.yaml', 'test_key', 'true')
       assert_equal expected_hash, YAML.load(File.read(path))
     end
   end
@@ -63,8 +63,8 @@ class HieraDataTest < ActiveSupport::TestCase
     with_temp_file(path) do
       expected_hash = {"abc" => "def", "test_key"=>"true"}
       hiera = HieraData.new('development')
-      hiera.write_key('nodes/writehost.yaml', 'test_key', 'true')
-      hiera.write_key('nodes/writehost.yaml', 'abc', 'def')
+      hiera.write_key("Eyaml hierarchy", 'nodes/writehost.yaml', 'test_key', 'true')
+      hiera.write_key("Eyaml hierarchy", 'nodes/writehost.yaml', 'abc', 'def')
       assert_equal expected_hash, YAML.load(File.read(path))
     end
   end
@@ -75,7 +75,7 @@ class HieraDataTest < ActiveSupport::TestCase
     with_temp_file(path) do
       expected_hash = {}
       hiera = HieraData.new('development')
-      hiera.remove_key('nodes/writehost.yaml', 'test_key')
+      hiera.remove_key("Eyaml hierarchy", 'nodes/writehost.yaml', 'test_key')
       assert_equal expected_hash, YAML.load(File.read(path))
     end
   end

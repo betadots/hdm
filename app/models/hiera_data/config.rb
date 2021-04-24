@@ -1,28 +1,17 @@
 class HieraData
-  class ConfigFile
+  class Config
     attr_reader :content, :hierarchies
 
     def initialize(base_path)
-      @content = load_content(base_path)
+      @base_path = base_path
+      @content = load_content
       initialize_hierarchies
-    end
-
-    def version5?
-      content["version"] == 5
-    end
-
-    def default_yaml_data?
-      defaults && defaults.has_key?("data_hash") && defaults["data_hash"] == "yaml_data"
-    end
-
-    def defaults
-      content["defaults"]
     end
 
     private
 
-    def load_content(base_path)
-      full_path = base_path.join("hiera.yaml")
+    def load_content
+      full_path = @base_path.join("hiera.yaml")
       defaults = Puppet::Pops::Lookup::HieraConfigV5::DEFAULT_CONFIG_HASH
       config = if File.exist?(full_path)
                  parsed_file = YAML.load(File.read(full_path))
@@ -39,10 +28,11 @@ class HieraData
     end
 
     def initialize_hierarchies
-      return @hierarchies = [] unless content.has_key?("hierarchy")
       @hierarchies = content['hierarchy'].map do |hierarchy|
-        default_data_hash = default_yaml_data? ? 'yaml_data' : nil
-        Hierarchy.new(hierarchy: hierarchy, default_data_hash: default_data_hash)
+        Hierarchy.new(
+          raw_hash: content['defaults'].merge(hierarchy),
+          base_path: @base_path
+        )
       end
     end
   end
