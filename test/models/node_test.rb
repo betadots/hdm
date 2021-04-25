@@ -2,7 +2,7 @@ require 'test_helper'
 
 class NodeTest < ActiveSupport::TestCase
   test "list the nodes" do
-    assert_equal ['testhost', 'testhost2', 'testhost3'], Node.all_names.sort
+    assert_equal ['test.host', 'testhost', 'testhost2', 'testhost3'], Node.all_names.sort
   end
 
   test "create node object" do

@@ -37,7 +37,7 @@ class HieraData::ConfigTest < ActiveSupport::TestCase
   class HieraData::ConfigWithSomeHierarchiesTest < ActiveSupport::TestCase
     test "when only defaults, return the yaml paths" do
       config = HieraData::Config.new(base_path)
-      assert_equal 2, config.hierarchies.size
+      assert_equal 3, config.hierarchies.size
     end
 
     def base_path
