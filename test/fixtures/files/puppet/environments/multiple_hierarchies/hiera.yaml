@@ -4,8 +4,15 @@ defaults:
   data_hash: yaml_data
 
 hierarchy:
-  - name: "Per-datacenter business group data" # Uses custom facts.
-    path: "location/%{facts.whereami}/%{facts.group}.yaml"
+  - name: "Host specific"
+    path: "nodes/%{::fqdn}.yaml"
 
-  - name: "Global business group data"
-    path: "groups/%{facts.group}.yaml"
+  - name: "Per-datacenter business group data" # Uses custom facts.
+    paths:
+      - "role/%{::role}-%{::env}.yaml"
+      - "role/%{::role}.yaml"
+      - "zone/%{::zone}.yaml"
+
+  - name: "Global data"
+    path: "common.yaml"
+
