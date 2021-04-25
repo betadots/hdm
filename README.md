@@ -27,7 +27,8 @@ Ruby. A work around for that is using the command `rvm install 2.5.8 --with-cfla
 - Run the migrations with `bundle exec rails db:migrate`
 - Seed the roles with `bundle exec rails db:seed`
 - Generate a new encrypted credentials file: `echo "test" |EDITOR=vim bundle exec rails credentials:edit` (Note: You may need to adopt this. Never forget to set  the `EDITOR` env variable)
-- Start the webserver with `bundle exec rails server`
+- Start the webserver with `bundle exec rails server &`
+- STart the fake puppetdb process (if configured in hdm.yml) `./bin/fake_puppet_db &`
 - Use your browser to open http://localhost:3000
 
 You can reset your database anytime with a `rails db:reset`.
