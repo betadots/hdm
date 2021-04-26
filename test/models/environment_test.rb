@@ -4,6 +4,7 @@ class EnvironmentTest < ActiveSupport::TestCase
   test "list the environments" do
     expected_environments = %w(
       development
+      eyaml
       hdm
       minimal
       multiple_hierarchies
