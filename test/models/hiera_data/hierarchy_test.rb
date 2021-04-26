@@ -1,6 +1,13 @@
 require 'test_helper'
 
 class HieraData::HierarchyTest < ActiveSupport::TestCase
+  test "#paths supports the singular `path` setting" do
+    path = "/test/singular/path"
+    raw_hash = {"name" => "Singular path", "path" => path}
+    hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
+    assert_equal [path], hierarchy.paths
+  end
+
   test "#paths returns all non-interpolated path names" do
     hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
     expected_paths = [

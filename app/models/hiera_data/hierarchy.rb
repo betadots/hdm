@@ -31,7 +31,8 @@ class HieraData
     end
 
     def paths
-      @paths ||= raw_hash.fetch("paths", [])
+      @paths ||=
+        Array(raw_hash["path"] || raw_hash.fetch("paths", []))
     end
 
     def resolved_paths(facts:)

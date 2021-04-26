@@ -7,8 +7,12 @@
   <div class="col-6">
     <% index = 0 %>
     <% @key.hierarchies.each do |hierarchy_name, paths| %>
-      <b><%= hierarchy_name %></b>
       <div class="accordion">
+        <div class="card">
+          <div class="card-body">
+            <b><%= hierarchy_name %></b>
+          </div>
+        </div>
         <% paths.each do |path_data| %>
           <% index += 1 %>
           <div class="card">
