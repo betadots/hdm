@@ -26,6 +26,7 @@ gem 'faker'
 gem 'friendly_id', '~> 5.4.0'
 gem 'puppet'
 gem 'puppetdb-ruby', require: 'puppetdb'
+gem 'hiera-eyaml'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

@@ -1,0 +1,1355 @@
+---
+psick::firstrun::linux_classes:
+  hostname: hostname-role
+profile::ssh_tunnel::target_user: 'ft-e2-n'
+profile::ssh_tunnel::ssh_config: |
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  ServerAliveInterval 10
+  ServerAliveCountMax 3
+  TCPKeepAlive yes
+  Host jump-host
+   Hostname 10.152.2.2
+   User ft-e2-n
+   ProxyCommand none
+  Host *
+   ProxyCommand ssh ft-e2-n@jump-host nc -w 120 %h %p
+
+profile::ssh_tunnel::tunnel_configs:
+  jump-host:
+    '10000':
+      comment: 'monitoring tunnel to check connection to jump-host'
+      endpoint_address: localhost
+      endpoint_port: '22'
+  jump13vn:
+    '34993':
+      comment: 'ITU JUMPHOST 1'
+      endpoint_address: jump13vn.domain.tld
+      endpoint_port: '22'
+    '44127':
+      comment: 'ITU JUMPHOST 2'
+      endpoint_address: 10.1.5.11
+      endpoint_port: '443'
+    '54127':
+      comment: 'ITU JUMPHOST 3'
+      endpoint_address: 10.1.5.21
+      endpoint_port: '443'
+  jump14vn:
+    '34994':
+      comment: 'ITU JUMPHOST 4'
+      endpoint_address: jump14vn.domain.tld
+      endpoint_port: '22'
+  dp1aaa1af:
+    '54240':
+      comment: ''
+      endpoint_address: dp1aaa1af.domain.tld
+      endpoint_port: '8448'
+  dp1aaa1at:
+    '44240':
+      comment: ''
+      endpoint_address: dp1aaa1at.domain.tld
+      endpoint_port: '8448'
+  dp1aaa1au:
+    '34240':
+      comment: ''
+      endpoint_address: dp1aaa1au.domain.tld
+      endpoint_port: '8448'
+  dp1aaa1bf:
+    '54241':
+      comment: ''
+      endpoint_address: dp1aaa1bf.domain.tld
+      endpoint_port: '8448'
+  dp1aaa1bt:
+    '44241':
+      comment: ''
+      endpoint_address: dp1aaa1bt.domain.tld
+      endpoint_port: '8448'
+  dp1aaa1bu:
+    '34241':
+      comment: ''
+      endpoint_address: dp1aaa1bu.domain.tld
+      endpoint_port: '8448'
+  dp1aut1af:
+    '54032':
+      comment: zugriff auf auth
+      endpoint_address: dp1aut1af.domain.tld
+      endpoint_port: '8060'
+    '54033':
+      comment: zugriff auf auth2
+      endpoint_address: dp1aut1af.domain.tld
+      endpoint_port: '8443'
+    '54069':
+      comment: zugriff auf auth3
+      endpoint_address: dp1aut1af.domain.tld
+      endpoint_port: '8442'
+  dp1aut1at:
+    '44032':
+      comment: zugriff auf auth4
+      endpoint_address: dp1aut1at.domain.tld
+      endpoint_port: '8060'
+    '44033':
+      comment: zugriff auf auth4
+      endpoint_address: dp1aut1at.domain.tld
+      endpoint_port: '8443'
+    '44069':
+      comment: zugriff auf auth5
+      endpoint_address: dp1aut1at.domain.tld
+      endpoint_port: '8442'
+  dp1aut1au:
+    '34032':
+      comment: zugriff auf auth5
+      endpoint_address: dp1aut1au.domain.tld
+      endpoint_port: '8060'
+    '34033':
+      comment: zugriff auf auth6
+      endpoint_address: dp1aut1au.domain.tld
+      endpoint_port: '8443'
+    '34069':
+      comment: zugriff auf auth7
+      endpoint_address: dp1aut1au.domain.tld
+      endpoint_port: '8442'
+  dp1bcd1af:
+    '54039':
+      comment: ''
+      endpoint_address: dp1bcd1af.domain.tld
+      endpoint_port: '22'
+  dp1bcd1at:
+    '44039':
+      comment: ''
+      endpoint_address: dp1bcd1at.domain.tld
+      endpoint_port: '22'
+  dp1bcd1au:
+    '34039':
+      comment: ''
+      endpoint_address: dp1bcd1au.domain.tld
+      endpoint_port: '22'
+  dp1bcd1bf:
+    '54040':
+      comment: ''
+      endpoint_address: dp1bcd1bf.domain.tld
+      endpoint_port: '22'
+  dp1bcd1bt:
+    '44040':
+      comment: ''
+      endpoint_address: dp1bcd1bt.domain.tld
+      endpoint_port: '22'
+  dp1bcd1bu:
+    '34040':
+      comment: ''
+      endpoint_address: dp1bcd1bu.domain.tld
+      endpoint_port: '22'
+  dp1bir1af:
+    '54035':
+      comment: ''
+      endpoint_address: dp1bir1af.domain.tld
+      endpoint_port: '22'
+  dp1bir1at:
+    '44035':
+      comment: ''
+      endpoint_address: dp1bir1at.domain.tld
+      endpoint_port: '22'
+  dp1bir1au:
+    '34035':
+      comment: ''
+      endpoint_address: dp1bir1au.domain.tld
+      endpoint_port: '22'
+  dp1bir1bf:
+    '54036':
+      comment: ''
+      endpoint_address: dp1bir1bf.domain.tld
+      endpoint_port: '22'
+  dp1bir1bt:
+    '44036':
+      comment: ''
+      endpoint_address: dp1bir1bt.domain.tld
+      endpoint_port: '22'
+  dp1bir1bu:
+    '34036':
+      comment: ''
+      endpoint_address: dp1bir1bu.domain.tld
+      endpoint_port: '22'
+  dp1bob1af:
+    '54228':
+      comment: ''
+      endpoint_address: dp1bob1af.domain.tld
+      endpoint_port: '8080'
+    '54229':
+      comment: ''
+      endpoint_address: dp1bob1af.domain.tld
+      endpoint_port: '8443'
+    '54230':
+      comment: ''
+      endpoint_address: dp1bob1bf.domain.tld
+      endpoint_port: '8080'
+    '54231':
+      comment: ''
+      endpoint_address: dp1bob1bf.domain.tld
+      endpoint_port: '8443'
+  dp1bob1at:
+    '44228':
+      comment: ''
+      endpoint_address: dp1bob1at.domain.tld
+      endpoint_port: '8080'
+    '44229':
+      comment: ''
+      endpoint_address: dp1bob1at.domain.tld
+      endpoint_port: '8443'
+    '44230':
+      comment: ''
+      endpoint_address: dp1bob1bt.domain.tld
+      endpoint_port: '8080'
+    '44231':
+      comment: ''
+      endpoint_address: dp1bob1bt.domain.tld
+      endpoint_port: '8443'
+  dp1bob1au:
+    '34229':
+      comment: ''
+      endpoint_address: dp1bob1au.domain.tld
+      endpoint_port: '8443'
+    '34230':
+      comment: ''
+      endpoint_address: dp1bob1bu.domain.tld
+      endpoint_port: '8080'
+    '34231':
+      comment: ''
+      endpoint_address: dp1bob1bu.domain.tld
+      endpoint_port: '8443'
+    '34236':
+      comment: ''
+      endpoint_address: dp1bob1au.domain.tld
+      endpoint_port: '8080'
+  dp1bof1af:
+    '54050':
+      comment: zugriff auf abs
+      endpoint_address: dp1bof1af.domain.tld
+      endpoint_port: '443'
+    '54052':
+      comment: zugriff auf abs
+      endpoint_address: dp1bof1af.domain.tld
+      endpoint_port: '4509'
+  dp1bof1at:
+    '44050':
+      comment: zugriff auf abs
+      endpoint_address: dp1bof1at.domain.tld
+      endpoint_port: '443'
+    '44052':
+      comment: zugriff auf abs
+      endpoint_address: dp1bof1at.domain.tld
+      endpoint_port: '4509'
+  dp1bof1au:
+    '34050':
+      comment: zugriff auf abs
+      endpoint_address: dp1bof1au.domain.tld
+      endpoint_port: '443'
+    '34052':
+      comment: zugriff auf abs
+      endpoint_address: dp1bof1au.domain.tld
+      endpoint_port: '4509'
+  dp1bro1af:
+    '54080':
+      comment: ''
+      endpoint_address: dp1bro1af.domain.tld
+      endpoint_port: '8443'
+  dp1bro1at:
+    '44080':
+      comment: ''
+      endpoint_address: dp1bro1at.domain.tld
+      endpoint_port: '8443'
+  dp1bro1au:
+    '34080':
+      comment: ''
+      endpoint_address: dp1bro1au.domain.tld
+      endpoint_port: '8443'
+  dp1bro1bf:
+    '54081':
+      comment: ''
+      endpoint_address: dp1bro1bf.domain.tld
+      endpoint_port: '8443'
+  dp1bro1bt:
+    '44081':
+      comment: ''
+      endpoint_address: dp1bro1bt.domain.tld
+      endpoint_port: '8443'
+  dp1bro1bu:
+    '34081':
+      comment: ''
+      endpoint_address: dp1bro1bu.domain.tld
+      endpoint_port: '8443'
+  dp1cdd1af:
+    '54219':
+      comment: ''
+      endpoint_address: dp1cdd1af.domain.tld
+      endpoint_port: '8443'
+    '54220':
+      comment: ''
+      endpoint_address: dp1cdd1af.domain.tld
+      endpoint_port: '8080'
+    '54221':
+      comment: ''
+      endpoint_address: dp1cdd1af.domain.tld
+      endpoint_port: '2022'
+  dp1cdd1at:
+    '44219':
+      comment: ''
+      endpoint_address: dp1cdd1at.domain.tld
+      endpoint_port: '8443'
+    '44220':
+      comment: ''
+      endpoint_address: dp1cdd1at.domain.tld
+      endpoint_port: '8080'
+    '44221':
+      comment: ''
+      endpoint_address: dp1cdd1at.domain.tld
+      endpoint_port: '2022'
+  dp1cdd1au:
+    '34219':
+      comment: ''
+      endpoint_address: dp1cdd1au.domain.tld
+      endpoint_port: '8443'
+    '34220':
+      comment: ''
+      endpoint_address: dp1cdd1au.domain.tld
+      endpoint_port: '8080'
+    '34221':
+      comment: ''
+      endpoint_address: dp1cdd1au.domain.tld
+      endpoint_port: '2022'
+  dp1cdd1bf:
+    '54222':
+      comment: ''
+      endpoint_address: dp1cdd1bf.domain.tld
+      endpoint_port: '8443'
+    '54223':
+      comment: ''
+      endpoint_address: dp1cdd1bf.domain.tld
+      endpoint_port: '8080'
+    '54224':
+      comment: ''
+      endpoint_address: dp1cdd1af.domain.tld
+      endpoint_port: '2022'
+  dp1cdd1bt:
+    '44222':
+      comment: ''
+      endpoint_address: dp1cdd1bt.domain.tld
+      endpoint_port: '8443'
+    '44223':
+      comment: ''
+      endpoint_address: dp1cdd1bt.domain.tld
+      endpoint_port: '8080'
+    '44224':
+      comment: ''
+      endpoint_address: dp1cdd1at.domain.tld
+      endpoint_port: '2022'
+  dp1cdd1bu:
+    '34222':
+      comment: ''
+      endpoint_address: dp1cdd1bu.domain.tld
+      endpoint_port: '8443'
+    '34223':
+      comment: ''
+      endpoint_address: dp1cdd1bu.domain.tld
+      endpoint_port: '8080'
+    '34224':
+      comment: ''
+      endpoint_address: dp1cdd1au.domain.tld
+      endpoint_port: '2022'
+  dp1con1af:
+    '54023':
+      comment: ''
+      endpoint_address: dp1con1af.domain.tld
+      endpoint_port: '22'
+  dp1con1at:
+    '44023':
+      comment: ''
+      endpoint_address: dp1con1at.domain.tld
+      endpoint_port: '22'
+  dp1con1au:
+    '34023':
+      comment: ''
+      endpoint_address: dp1con1au.domain.tld
+      endpoint_port: '22'
+  dp1cot1af:
+    '54213':
+      comment: ''
+      endpoint_address: dp1cot1af.domain.tld
+      endpoint_port: '8443'
+  dp1cot1at:
+    '44213':
+      comment: ''
+      endpoint_address: dp1cot1at.domain.tld
+      endpoint_port: '8443'
+  dp1cot1au:
+    '34213':
+      comment: ''
+      endpoint_address: dp1cot1au.domain.tld
+      endpoint_port: '8443'
+  dp1cot1bf:
+    '54214':
+      comment: ''
+      endpoint_address: dp1cot1bf.domain.tld
+      endpoint_port: '8443'
+  dp1cot1bt:
+    '44214':
+      comment: ''
+      endpoint_address: dp1cot1bt.domain.tld
+      endpoint_port: '8443'
+  dp1cot1bu:
+    '34214':
+      comment: ''
+      endpoint_address: dp1cot1bu.domain.tld
+      endpoint_port: '8443'
+  dp1dgs1af:
+    '54061':
+      comment: ''
+      endpoint_address: dp1dgs1af.domain.tld
+      endpoint_port: '8855'
+    '54062':
+      comment: ''
+      endpoint_address: dp1dgs1af.domain.tld
+      endpoint_port: '8443'
+  dp1dgs1at:
+    '44061':
+      comment: ''
+      endpoint_address: dp1dgs1at.domain.tld
+      endpoint_port: '8855'
+    '44062':
+      comment: ''
+      endpoint_address: dp1dgs1at.domain.tld
+      endpoint_port: '8443'
+  dp1dgs1au:
+    '34061':
+      comment: ''
+      endpoint_address: dp1dgs1au.domain.tld
+      endpoint_port: '8855'
+    '34062':
+      comment: ''
+      endpoint_address: dp1dgs1au.domain.tld
+      endpoint_port: '8443'
+  dp1dgs1bf:
+    '54063':
+      comment: ''
+      endpoint_address: dp1dgs1bf.domain.tld
+      endpoint_port: '8855'
+    '54085':
+      comment: ''
+      endpoint_address: dp1dgs1bf.domain.tld
+      endpoint_port: '8443'
+  dp1dgs1bt:
+    '44063':
+      comment: ''
+      endpoint_address: dp1dgs1bt.domain.tld
+      endpoint_port: '8855'
+    '44085':
+      comment: ''
+      endpoint_address: dp1dgs1bt.domain.tld
+      endpoint_port: '8443'
+  dp1dgs1bu:
+    '34063':
+      comment: ''
+      endpoint_address: dp1dgs1bu.domain.tld
+      endpoint_port: '8855'
+    '34085':
+      comment: ''
+      endpoint_address: dp1dgs1bu.domain.tld
+      endpoint_port: '8443'
+  dp1dka1af:
+    '54151':
+      comment: ''
+      endpoint_address: dp1dka1af.domain.tld
+      endpoint_port: '22'
+  dp1dka1at:
+    '44151':
+      comment: ''
+      endpoint_address: dp1dka1at.domain.tld
+      endpoint_port: '22'
+  dp1dka1au:
+    '34151':
+      comment: ''
+      endpoint_address: dp1dka1au.domain.tld
+      endpoint_port: '22'
+  dp1dkc1af:
+    '54250':
+      comment: ''
+      endpoint_address: dp1dkc1af.domain.tld
+      endpoint_port: '8443'
+    '54251':
+      comment: ''
+      endpoint_address: dp1dkc1af.domain.tld
+      endpoint_port: '8080'
+  dp1dkc1at:
+    '44250':
+      comment: ''
+      endpoint_address: dp1dkc1at.domain.tld
+      endpoint_port: '8443'
+    '44251':
+      comment: ''
+      endpoint_address: dp1dkc1at.domain.tld
+      endpoint_port: '8080'
+  dp1dkc1au:
+    '34250':
+      comment: ''
+      endpoint_address: dp1dkc1au.domain.tld
+      endpoint_port: '8443'
+    '34251':
+      comment: ''
+      endpoint_address: dp1dkc1au.domain.tld
+      endpoint_port: '8080'
+  dp1dkc1bf:
+    '54252':
+      comment: ''
+      endpoint_address: dp1dkc1bf.domain.tld
+      endpoint_port: '8443'
+    '54253':
+      comment: ''
+      endpoint_address: dp1dkc1bf.domain.tld
+      endpoint_port: '8080'
+  dp1dkc1bt:
+    '44252':
+      comment: ''
+      endpoint_address: dp1dkc1bt.domain.tld
+      endpoint_port: '8443'
+    '44253':
+      comment: ''
+      endpoint_address: dp1dkc1bt.domain.tld
+      endpoint_port: '8080'
+  dp1dkc1bu:
+    '34252':
+      comment: ''
+      endpoint_address: dp1dkc1bu.domain.tld
+      endpoint_port: '8443'
+    '34253':
+      comment: ''
+      endpoint_address: dp1dkc1bu.domain.tld
+      endpoint_port: '8080'
+  dp1dkl1af:
+    '54254':
+      comment: ''
+      endpoint_address: dp1dkl1af.domain.tld
+      endpoint_port: '8443'
+    '54255':
+      comment: ''
+      endpoint_address: dp1dkl1af.domain.tld
+      endpoint_port: '8080'
+    '54256':
+      comment: ''
+      endpoint_address: dp1dkl1af.domain.tld
+      endpoint_port: '2022'
+  dp1dkl1at:
+    '44254':
+      comment: ''
+      endpoint_address: dp1dkl1at.domain.tld
+      endpoint_port: '8443'
+    '44255':
+      comment: ''
+      endpoint_address: dp1dkl1at.domain.tld
+      endpoint_port: '8080'
+    '44256':
+      comment: ''
+      endpoint_address: dp1dkl1at.domain.tld
+      endpoint_port: '2022'
+  dp1dkl1au:
+    '34254':
+      comment: ''
+      endpoint_address: dp1dkl1au.domain.tld
+      endpoint_port: '8443'
+    '34255':
+      comment: ''
+      endpoint_address: dp1dkl1au.domain.tld
+      endpoint_port: '8080'
+    '34256':
+      comment: ''
+      endpoint_address: dp1dkl1au.domain.tld
+      endpoint_port: '2022'
+  dp1dkl1bf:
+    '54257':
+      comment: ''
+      endpoint_address: dp1dkl1bf.domain.tld
+      endpoint_port: '8443'
+    '54258':
+      comment: ''
+      endpoint_address: dp1dkl1bf.domain.tld
+      endpoint_port: '8080'
+    '54259':
+      comment: ''
+      endpoint_address: dp1dkl1bf.domain.tld
+      endpoint_port: '2022'
+
+# prometheus::version helps prometheus Puppet module to determine correct data type for $alerts
+prometheus::version: 2.3.0
+profile::monitoring::prometheus_server::version: 2.3.0
+profile::monitoring::prometheus_server::alerts:
+  groups:
+  - name: /etc/prometheus/alert.rules
+    rules:
+    - alert: InstanceDown
+      expr: up == 0
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        description: '{{$labels.instance}} has been down for more than 5 minutes.'
+        summary: Instance {{$labels.instance}} down
+    - alert: CriticalLowDisk_rootfs
+      expr: ((node_filesystem_size{mountpoint="/"} - node_filesystem_free{mountpoint="/"})
+        / node_filesystem_size{mountpoint="/"} * 100) > 80
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        description: '{{$labels.instance}}: Disk usage on / is above 80% (current value
+          is: {{$value}})'
+        summary: '{{$labels.instance}}: Critical disk space on /'
+    - alert: CriticalLowDisk_var
+      expr: ((node_filesystem_size{mountpoint="/var"} - node_filesystem_free{mountpoint="/var"})
+        / node_filesystem_size{mountpoint="/var"} * 100) > 80
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        description: '{{$labels.instance}}: Disk usage on /var is above 80% (current
+          value is: {{$value}})'
+        summary: '{{$labels.instance}}: Critical disk space on /var'
+    - alert: CriticalLowDisk_var_log
+      expr: ((node_filesystem_size{mountpoint="/var/log"} - node_filesystem_free{mountpoint="/var/log"})
+        / node_filesystem_size{mountpoint="/var/log"} * 100) > 80
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        description: '{{$labels.instance}}: Disk usage on /var/log is above 80% (current
+          value is: {{$value}})'
+        summary: '{{$labels.instance}}: Critical disk space on /var/log'
+    - alert: CriticalLowDisk_opt
+      expr: ((node_filesystem_size{mountpoint="/opt"} - node_filesystem_free{mountpoint="/opt"})
+        / node_filesystem_size{mountpoint="/opt"} * 100) > 80
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        description: '{{$labels.instance}}: Disk usage on /opt is above 80% (current
+          value is: {{$value}})'
+        summary: '{{$labels.instance}}: Critical disk space on /opt'
+    - alert: CriticalLowDisk_swap
+      expr: (((node_memory_SwapFreeTotal - node_memory_SwapFree) / node_memory_SwapFreeTotal)
+        * 100) > 80
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        description: '{{$labels.instance}}: Swap usage is above 80% (current value is:
+          {{$value}})'
+        summary: '{{$labels.instance}}: Critical swap usage'
+    - alert: CriticalLowDisk_mnt
+      expr: ((node_filesystem_size{mountpoint=~"/mnt/.*"} - node_filesystem_free{mountpoint=~"/mnt/.*"})
+        / node_filesystem_size{mountpoint=~"/mnt/.*"} * 100) > 80
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        description: '{{$labels.instance}}: Disk usage on /mnt/<mountpoint> is above
+          80% (current value is: {{$value}})'
+        summary: '{{$labels.instance}}: Critical disk space on /mnt/<mountpoint>'
+    - alert: CriticalBlackboxProbeFailing
+      expr: probe_success{job=~"^blackbox-.*"} < 1
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        description: Blackbox probe {{$labels.job}} on {{$labels.instance}} has been
+          failing for 2 minutes
+        summary: Blackbox probe {{$labels.job}} failing
+    - alert: CriticalPuppetRunFailures
+      expr: puppet_production_environment == 0 and puppet_error_count > 0
+      for: 1s
+      labels:
+        severity: critical
+      annotations:
+        description: '{{$labels.instance}}: Puppet run in environment production has
+          failures'
+        summary: '{{$labels.instance}}: Puppet run has failures'
+    - alert: CriticalPuppetRunTooOld
+      expr: time() - puppet_lastrun_time > 7200
+      for: 1s
+      labels:
+        severity: critical
+      annotations:
+        description: '{{$labels.instance}}: Last Puppet run is older than 2 hours'
+        summary: '{{$labels.instance}}: Last Puppet run too old'
+    - alert: NessusAgentStatus
+      expr: nessus_agent_status != 0
+      for: 1d   # Scans take place only once a quarter of a year, so we have enough time to solve a problem
+      labels:
+        severity: critical
+      annotations:
+        description: '{{$labels.instance}}: Nessus Agent has the error code: {{$value}} (2=not linked to a manager, 127=not installed, unknown error otherwise)'
+        summary: '{{$labels.instance}}: Nessus Agent has failures'
+    - alert: InstanceNotInActiveRunningState
+      expr: (opennebula_vms{state!="Active"} OR opennebula_vms{lcm_state!="Running"}) > 0
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        description: '{{$labels.instance}}: {{$labels.fqdn}} with vm id {{$labels.id}} is not in active/running state.'
+        summary: '{{$labels.instance}}: vm {{$labels.id}} not in active/running state'
+
+profile::monitoring::prometheus_blackbox_exporter::modules:
+  bitbucket_server_startpage:
+    prober: http
+    timeout: 2s
+    http:
+      valid_http_versions: ["HTTP/1.1"]
+      valid_status_codes: [200]
+      headers:
+        User-Agent: prometheus
+      fail_if_ssl: false
+      fail_if_not_ssl: true
+      fail_if_not_matches_regexp:
+        - 'Log in - Bitbucket Server'
+      preferred_ip_protocol: "ip4"
+  dashboard_dashing:
+    prober: http
+    timeout: 2s
+    http:
+      valid_http_versions: ["HTTP/1.1"]
+      valid_status_codes: [200]
+      headers:
+        User-Agent: prometheus
+      fail_if_ssl: true
+      fail_if_not_ssl: false
+      fail_if_not_matches_regexp:
+        - 'Dashing'
+      preferred_ip_protocol: "ip4"
+  docker_registry_catalog:
+    prober: http
+    timeout: 2s
+    http:
+      valid_http_versions: ["HTTP/1.1"]
+      valid_status_codes: [200]
+      headers:
+        User-Agent: prometheus
+      fail_if_ssl: true
+      fail_if_not_ssl: false
+      fail_if_not_matches_regexp:
+        - '\"repositories\":\[.+\]'
+      preferred_ip_protocol: "ip4"
+  nexus_startpage:
+    prober: http
+    timeout: 2s
+    http:
+      valid_http_versions: ["HTTP/1.1"]
+      headers:
+        User-Agent: prometheus
+      fail_if_ssl: false
+      fail_if_not_ssl: true
+      fail_if_not_matches_regexp:
+        - "Sonatype Nexus"
+      preferred_ip_protocol: "ip4"
+  puppetca_certificate_status:
+    prober: http
+    timeout: 2s
+    http:
+      valid_http_versions: ["HTTP/1.1"]
+      valid_status_codes: [200]
+      headers:
+        User-Agent: prometheus
+      fail_if_ssl: false
+      fail_if_not_ssl: true
+      fail_if_not_matches_regexp:
+        - '-----BEGIN CERTIFICATE-----'
+      tls_config:
+        insecure_skip_verify: true
+      preferred_ip_protocol: "ip4"
+  puppetdb_endpoint:
+    prober: tcp
+    timeout: 2s
+    tcp:
+      preferred_ip_protocol: "ip4"
+  puppetexplorer_startpage:
+    prober: http
+    timeout: 2s
+    http:
+      valid_http_versions: ["HTTP/1.1"]
+      valid_status_codes: [200]
+      headers:
+        User-Agent: prometheus
+      fail_if_ssl: false
+      fail_if_not_ssl: true
+      fail_if_not_matches_regexp:
+        - 'Puppet Explorer'
+      tls_config:
+        insecure_skip_verify: true
+      preferred_ip_protocol: "ip4"
+  puppetmaster_endpoint:
+    prober: tcp
+    timeout: 2s
+    tcp:
+      preferred_ip_protocol: "ip4"
+  repo_mirror_directory_listing:
+    prober: http
+    timeout: 2s
+    http:
+      valid_http_versions: ["HTTP/1.1"]
+      valid_status_codes: [200]
+      headers:
+        User-Agent: prometheus
+      fail_if_ssl: true
+      fail_if_not_ssl: false
+      fail_if_not_matches_regexp:
+        - 'Index of /'
+      preferred_ip_protocol: "ip4"
+  sonarqube_startpage:
+    prober: http
+    timeout: 2s
+    http:
+      valid_http_versions: ["HTTP/1.1"]
+      valid_status_codes: [200]
+      headers:
+        User-Agent: prometheus
+      fail_if_ssl: false
+      fail_if_not_ssl: true
+      fail_if_not_matches_regexp:
+        - 'SonarQube'
+      preferred_ip_protocol: "ip4"
+  selenium_hub_grid_console:
+    prober: http
+    timeout: 2s
+    http:
+      valid_http_versions: ["HTTP/1.1"]
+      valid_status_codes: [200]
+      headers:
+        User-Agent: prometheus
+      fail_if_ssl: true
+      fail_if_not_ssl: false
+      fail_if_not_matches_regexp:
+        - 'Grid Console'
+      preferred_ip_protocol: "ip4"
+  ssh_generic:
+    prober: tcp
+    timeout: 2s
+    tcp:
+      query_response:
+        - expect: 'SSH-2.0'
+      preferred_ip_protocol: "ip4"
+  tdb_influxdb_ping:
+    prober: http
+    timeout: 2s
+    http:
+      valid_http_versions: ["HTTP/1.1"]
+      valid_status_codes: [204]
+      headers:
+        User-Agent: prometheus
+      fail_if_ssl: true
+      fail_if_not_ssl: false
+      preferred_ip_protocol: "ip4"
+  teamcity_server_startpage:
+    prober: http
+    timeout: 2s
+    http:
+      valid_http_versions: ["HTTP/1.1"]
+      headers:
+        User-Agent: prometheus
+      fail_if_ssl: false
+      fail_if_not_ssl: true
+      fail_if_not_matches_regexp:
+        - "Log in to TeamCity"
+      preferred_ip_protocol: "ip4"
+  yumrepo_directory_listing:
+    prober: http
+    timeout: 2s
+    http:
+      valid_http_versions: ["HTTP/1.1"]
+      valid_status_codes: [200]
+      headers:
+        User-Agent: prometheus
+      fail_if_ssl: true
+      fail_if_not_ssl: false
+      fail_if_not_matches_regexp:
+        - 'Index of /'
+      preferred_ip_protocol: "ip4"
+  tcp_generic:
+    prober: tcp
+    timeout: 2s
+    tcp:
+      preferred_ip_protocol: "ip4"
+
+profile::monitoring::prometheus_server::scrape_configs:
+  # Prometheus services
+  - job_name: "prometheus"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    static_configs:
+      - targets:
+        - "%{::trusted.certname}:9090"
+        - "prometheus-umg-aggregation.bis.domain.tld:9090"
+        labels:
+          alias: "prometheus"
+  # BIS services - Node Exporter
+  - job_name: "bis-services"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    file_sd_configs:
+      - files: ["/etc/prometheus/epost.d/*.json"]
+  # InhouseIT services - Node Exporter
+  - job_name: "firewall"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    static_configs:
+      - targets:
+        - "10.175.16.2:9100"
+        - "10.175.16.3:9100"
+  - job_name: "proxy"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    static_configs:
+      - targets:
+        - "vm-proxy-001.inf.domain.tld:9100"
+        - "vm-proxy-002.inf.domain.tld:9100"
+  # IT Operations services - Node Exporter
+  - job_name: "ohd"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    static_configs:
+      - targets:
+        - "ohd.bis.domain.tld:9100"
+        labels:
+          environment: bis
+      - targets:
+        - "ohd.umg.domain.tld:9100"
+        labels:
+          environment: umg
+  - job_name: "ond"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    static_configs:
+      - targets:
+        - "srv-213.inf.domain.tld:9100"
+        - "srv-214.inf.domain.tld:9100"
+        - "srv-215.inf.domain.tld:9100"
+        - "srv-219.inf.domain.tld:9100"
+        - "srv-220.inf.domain.tld:9100"
+        - "srv-222.inf.domain.tld:9100"
+        - "srv-223.inf.domain.tld:9100"
+        - "srv-224.inf.domain.tld:9100"
+        labels:
+          environment: bis
+      - targets:
+        - "srv-225.inf.domain.tld:9100"
+        - "srv-226.inf.domain.tld:9100"
+        - "srv-228.inf.domain.tld:9100"
+        - "srv-229.inf.domain.tld:9100"
+        - "srv-230.inf.domain.tld:9100"
+        - "srv-231.inf.domain.tld:9100"
+        - "srv-232.inf.domain.tld:9100"
+        - "srv-233.inf.domain.tld:9100"
+        - "srv-234.inf.domain.tld:9100"
+        - "srv-235.inf.domain.tld:9100"
+        - "srv-236.inf.domain.tld:9100"
+        - "srv-237.inf.domain.tld:9100"
+        - "srv-238.inf.domain.tld:9100"
+        - "srv-239.inf.domain.tld:9100"
+        - "srv-241.inf.domain.tld:9100"
+        - "srv-246.inf.domain.tld:9100"
+        labels:
+          environment: umg
+  # Taiga services - Node Exporter - Without Service Discovery
+  - job_name: "puppet-v3-bis"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    static_configs:
+      - targets:
+        - "puppet-05.bis.domain.tld:9100"
+        - "puppetdb-05.bis.domain.tld:9100"
+        labels:
+          environment: bis
+  - job_name: "puppet-v3-umg"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    static_configs:
+      - targets:
+        - "puppet-e42-dev.umg.domain.tld:9100"
+        - "puppet-e42-rc.umg.domain.tld:9100"
+        - "puppet-e42-cr.umg.domain.tld:9100"
+        - "dp1pdb1ai.acs.umg.domain.tld:9100"
+        labels:
+          environment: umg
+  - job_name: "teamcity-bui"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    static_configs:
+      - targets:
+        - "teamcity-bui-01.bis.domain.tld:9100"
+        - "teamcity-bui-02.bis.domain.tld:9100"
+        - "teamcity-bui-03.bis.domain.tld:9100"
+        - "teamcity-bui-04.bis.domain.tld:9100"
+        - "teamcity-bui-05.bis.domain.tld:9100"
+        - "teamcity-bui-06.bis.domain.tld:9100"
+        - "teamcity-bui-07.bis.domain.tld:9100"
+        - "teamcity-bui-08.bis.domain.tld:9100"
+        - "teamcity-bui-09.bis.domain.tld:9100"
+        - "teamcity-bui-10.bis.domain.tld:9100"
+        - "teamcity-bui-11.bis.domain.tld:9100"
+        - "teamcity-bui-12.bis.domain.tld:9100"
+        - "teamcity-bui-13.bis.domain.tld:9100"
+        - "teamcity-bui-14.bis.domain.tld:9100"
+        - "teamcity-bui-15.bis.domain.tld:9100"
+        - "teamcity-bui-16.bis.domain.tld:9100"
+        - "teamcity-bui-17.bis.domain.tld:9100"
+        - "teamcity-bui-18.bis.domain.tld:9100"
+        - "teamcity-bui-19.bis.domain.tld:9100"
+        - "teamcity-bui-20.bis.domain.tld:9100"
+        - "teamcity-bui-21.bis.domain.tld:9100"
+        - "teamcity-bui-22.bis.domain.tld:9100"
+        - "teamcity-bui-23.bis.domain.tld:9100"
+        - "teamcity-bui-24.bis.domain.tld:9100"
+        - "teamcity-bui-25.bis.domain.tld:9100"
+        - "teamcity-bui-26.bis.domain.tld:9100"
+        - "teamcity-bui-27.bis.domain.tld:9100"
+        - "teamcity-bui-28.bis.domain.tld:9100"
+        - "teamcity-bui-29.bis.domain.tld:9100"
+        - "teamcity-bui-30.bis.domain.tld:9100"
+        labels:
+          environment: bis
+  - job_name: "tdb"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    static_configs:
+      - targets:
+        - "tdb-taiga.bis.domain.tld:9100"
+        labels:
+          environment: bis
+  # Taiga services - Blackbox Exporter
+  - job_name: "blackbox-bitbucket-server-git-sshd"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["ssh_generic"]
+    static_configs:
+      - targets:
+        - "bitbucket.bis.domain.tld:7999"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-bitbucket-server-startpage"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["bitbucket_server_startpage"]
+    static_configs:
+      - targets:
+        - "https://bitbucket.bis.domain.tld/login"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-dashboard-dashing"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["dashboard_dashing"]
+    static_configs:
+      - targets:
+        - "http://dashboard.bis.domain.tld:60073/taiga"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-docker-registry-catalog"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["docker_registry_catalog"]
+    static_configs:
+      - targets:
+        - "http://docker-registry.bis.domain.tld:5000/v2/_catalog"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-monaco-sshd"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["ssh_generic"]
+    static_configs:
+      - targets:
+        - "vm-monaco-01.bis.domain.tld:22"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-nexus-startpage"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["nexus_startpage"]
+    static_configs:
+      - targets:
+        - "https://javarepo.bis.domain.tld/nexus"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-puppetca-certificate-status"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["puppetca_certificate_status"]
+    static_configs:
+      - targets:
+        - "https://puppetmaster.bis.domain.tld:8140/puppet-ca/v1/certificate/puppetmaster.bis.domain.tld"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-puppetdb-endpoint"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["puppetdb_endpoint"]
+    static_configs:
+      - targets:
+        - "puppetmaster.bis.domain.tld:8081"
+        - "puppetdb-05.bis.domain.tld:8081"
+        - "dp1pdb1ai.acs.umg.domain.tld:8081"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-puppetexplorer-startpage"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["puppetexplorer_startpage"]
+    static_configs:
+      - targets:
+        - "https://puppetmaster.bis.domain.tld"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-puppetmaster-endpoint"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["puppetmaster_endpoint"]
+    static_configs:
+      - targets:
+        - "puppetmaster.bis.domain.tld:8140"
+        - "puppet-05.bis.domain.tld:8140"
+        - "puppet-e42-dev.umg.domain.tld:8140"
+        - "puppet-e42-rc.umg.domain.tld:8140"
+        - "puppet-e42-cr.umg.domain.tld:8140"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-repo-mirror-directory-listing"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["repo_mirror_directory_listing"]
+    static_configs:
+      - targets:
+        - "http://centos-mirror.bis.domain.tld/"
+        - "http://repo-mirror.epost.de/"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-repo-mirror-sshd"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["ssh_generic"]
+    static_configs:
+      - targets:
+        - "repo-mirror.epost.de:22"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-selenium-hub-grid-console"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["selenium_hub_grid_console"]
+    static_configs:
+      - targets:
+        - "http://selenium-hub.bis.domain.tld:4444/grid/console"
+    relabel_configs:
+      - source_labels: "[__address__]"
+        target_label: "__param_target"
+      - source_labels: "[__param_target]"
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-sonarqube-startpage"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["sonarqube_startpage"]
+    static_configs:
+      - targets:
+        - "https://sonarqube.bis.domain.tld"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-tdb-influxdb-ping"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["tdb_influxdb_ping"]
+    static_configs:
+      - targets:
+        - "http://tdb-taiga.bis.domain.tld:8086/ping"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-teamcity-server-startpage"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["teamcity_server_startpage"]
+    static_configs:
+      - targets:
+        - "https://teamcity.bis.domain.tld/login.html"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-yumrepo-directory-listing"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["yumrepo_directory_listing"]
+    static_configs:
+      - targets:
+        - "http://yum-repo.epost.de/repos/"
+        - "http://yum-repo.dev.domain.tld/"
+        - "http://yum-repo.rc.domain.tld/"
+        - "http://yum-repo.cr.domain.tld/"
+        - "http://yum-repo.bis.domain.tld/"
+        - "http://yum-repo.inf.domain.tld/"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-yumrepo-sshd"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["ssh_generic"]
+    static_configs:
+      - targets:
+        - "yum-repo.epost.de:22"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-umg-http-bridge"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["tcp_generic"]
+    static_configs:
+      - targets:
+        - "umg-http-bridge.bis.domain.tld:80"
+        - "umg-http-bridge.bis.domain.tld:443"
+        - "umg-http-bridge.bis.domain.tld:8080"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"
+  - job_name: "blackbox-nonprod-bridge"
+    scrape_interval: "30s"
+    scrape_timeout: "30s"
+    metrics_path: "/probe"
+    params:
+      module: ["tcp_generic"]
+    static_configs:
+      - targets:
+        - "nonprod-bridge.bis.domain.tld:10000"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: "__param_target"
+      - source_labels: [__param_target]
+        target_label: "instance"
+      - target_label: "__address__"
+        replacement: "127.0.0.1:9115"

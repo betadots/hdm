@@ -1,0 +1,21 @@
+version: 5
+defaults:
+  datadir: data
+  lookup_key: eyaml_lookup_key
+  options:
+      pkcs7_private_key: keys/private_key.pkcs7.pem
+      pkcs7_public_key:  keys/public_key.pkcs7.pem
+
+hierarchy:
+  - name: "Host specific"
+    path: "nodes/%{::fqdn}.yaml"
+
+  - name: "Per-datacenter business group data" # Uses custom facts.
+    paths:
+      - "role/%{::role}-%{::env}.yaml"
+      - "role/%{::role}.yaml"
+      - "zone/%{::zone}.yaml"
+
+  - name: "Global data"
+    path: "common.yaml"
+
