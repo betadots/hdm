@@ -1,4 +1,0 @@
----
-
-ntp::servers:
-  - 'pool-ntp-org'

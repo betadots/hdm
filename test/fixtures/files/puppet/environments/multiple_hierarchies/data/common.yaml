@@ -1,4 +1,10 @@
 ---
+lookup_options:
+  'profile::auth::sudo_configs':
+    merge: deep
+  'profile::auth::sshd_config_allowgroups':
+    merge: unique
+
 # noop_mode: true
 hdm::float: 0.1
 hdm::integer: 1
@@ -12,3 +18,105 @@ psick::postfix::tp::resources_hash:
   tp::conf:
     postfix:
       template: 'psick/postfix/main.cf.erb'
+long_entry: 'üiqeurhfüpiurw3gpieurzgfp  384z7r0cioetzvboerutb03847bz0847bvoquzgcbow4ztboqwt4b0  37t4b0  87t43bro  iwq4bcori 74bzcr08  7tb'
+long_pipe: |
+  cluster.name: dev_cluster
+  path.data: /var/lib/elasticsearch
+  path.logs: /var/log/elasticsearch
+  network.host: %{facts.fqdn}
+  http.port: 9200
+  discovery.seed_hosts: ["localhost"]
+  cluster.initial_master_nodes: ["localhost"]
+  action.destructive_requires_name: true
+
+  xpack.security.enabled: true
+  xpack.security.transport.ssl.enabled: true
+  xpack.security.transport.ssl.verification_mode: certificate
+  xpack.security.transport.ssl.key: /etc/elasticsearch/key.pem
+  xpack.security.transport.ssl.certificate: /etc/elasticsearch/cert.pem
+  xpack.security.transport.ssl.certificate_authorities: [ "/etc/elasticsearch/ca.pem" ]
+  xpack.security.http.ssl.enabled: true
+  xpack.security.http.ssl.key: /etc/elasticsearch/key.pem
+  xpack.security.http.ssl.certificate: /etc/elasticsearch/cert.pem
+  xpack.security.http.ssl.certificate_authorities: [ "/etc/elasticsearch/ca.pem" ]
+  xpack.monitoring.enabled: true
+  xpack.monitoring.collection.enabled: true
+
+
+ldap_url: 'ldap-slave.inf.domain.tld'
+ldap_basedn: 'dc=infraldap,dc=onlinebrief,dc=de'
+ldap_binddn: "cn=nss-ldapd,ou=Linux-Systeme,ou=Systems,%{lookup('ldap_basedn')}"
+ldap_searchdn: "%{lookup('ldap_basedn')}"
+ldap_groupdn: "ou=Groups,%{lookup('ldap_basedn')}"
+
+docker::system_user::create_user: false
+
+profile::time::servers:
+  - 'ntp1.inf.domain.tld'
+  - 'ntp2.inf.domain.tld'
+
+profile::auth::sshd_config_allowgroups:
+  - 'root'
+  - 'biss-admin'
+  - 'infra-admins'
+  - 'vagrant'
+  - 'inventorizer'
+
+profile::auth::sssd_config:
+  'sssd':
+    'domains': 'LDAP'
+    'config_file_version': 2
+    'services':
+      - 'nss'
+      - 'pam'
+      - 'ssh'
+      - 'sudo'
+  'nss':
+    'reconnection_retries': 3
+    'filter_groups': 'root'
+    'filter_users': 'root'
+  'pam':
+    'reconnection_retries': 3
+  'domain/LDAP':
+    'min_id': 1
+    'max_id': 0
+    'cache_credentials': true
+    'entry_cache_timeout': 1800
+    'id_provider': 'ldap'
+    'chpass_provider': 'ldap'
+    'auth_provider': 'ldap'
+    'enumerate': true
+    'access_provider': 'ldap'
+    'ldap_access_filter': '(dpagE2OrganizationalStatus=0)'
+    'ldap_uri': 'ldaps://vm-ldap-slave01.inf.domain.tld/,ldaps://vm-ldap-slave02.inf.domain.tld/'
+    'ldap_referrals': false
+    'ldap_pwd_policy': 'none'
+    'ldap_deref_threshold': 0
+    'ldap_schema': 'rfc2307'
+    'ldap_default_bind_dn': "%{lookup('ldap_binddn')}"
+    'ldap_default_authtok_type': 'password'
+    'ldap_search_base': "%{lookup('ldap_basedn')}"
+    'ldap_group_search_base': "%{lookup('ldap_groupdn')}"
+    'ldap_group_member': 'memberUid'
+    'ldap_user_search_base': "%{lookup('ldap_basedn')}"
+    'ldap_user_ssh_public_key': 'sshPublicKey'
+    'ldap_tls_reqcert': 'demand'
+    'ldap_id_use_start_tls': true
+    'ldap_tls_cacert': '/etc/pki/tls/certs/ca-bundle.crt'
+    'ldap_default_authtok': "%{lookup('ldap_pw')}"
+
+profile::auth::sudo_configs:
+  infra-admins:
+    content: '%infra-admins ALL=(ALL) NOPASSWD:ALL'
+  biss-admin:
+    content: '%biss-admin ALL=(ALL) NOPASSWD:ALL'
+  vagrant:
+    content: '%vagrant ALL=(ALL) NOPASSWD:ALL'
+  bis-inventorizer:
+    content: |
+      Defaults:bis-inventorizer !requiretty
+      bis-inventorizer ALL = NOPASSWD: /bin/netstat *, /opt/puppetlabs/bin/facter *, /e2/bin/openpkg *, /bin/rpm *, /bin/ps *, /bin/ls *, /bin/egrep *, /usr/bin/dpkg-query *
+
+profile::nessus_agent::server_host: 'nessus.inf.domain.tld'
+profile::nessus_agent::server_port: 8834
+profile::nessus_agent::agent_group: 'BIS'

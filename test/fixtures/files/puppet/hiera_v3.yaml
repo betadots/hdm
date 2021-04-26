@@ -1,6 +1,0 @@
-backends:
-  - yaml
-hierarchy:
-  - nodes/%{::trusted.certname}
-  - common
-merge_behavior: native

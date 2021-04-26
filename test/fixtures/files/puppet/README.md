@@ -1,16 +1,17 @@
-Development Data
+Development and Test Data
 
-1. mock selection of "puppet environment" and set it static to "production"
-1. mock selection of nodes and their facts:
-    - hostname: by reading filenames (without .yaml ending) from nodes directory
-    - host facts: by reading the selected node file
+This data structure is used by the fake\_puppetdb service.
 
-hiera config file options to use:
+1. Environments
 
-1. no hiera yaml file (taking defaults from puppet hiera)
-1. minimal hiera: use hiera\_minimal.yaml
-1. complex: use hiera.yaml
-1. wrong config version: use hiera\_v3.yaml (this should produce an error as we only support config:5 hiera.yaml files)
+Puppet environments are located in test/fixtures/files/puppet/environments
 
-Attn: the "environment" directory is old data. We keep it to expand the test data in a later stage.
+Within an environment a hiery.yaml file may exist.
+Data are within the configured datadir.
+
+2. Nodes
+
+Nodes are read from test/fixtures/files/puppet/nodes directory.
+For each node a yaml file exists. The file name is the node name.
+Within the yaml file, the required facts are set.
 

@@ -1,0 +1,3 @@
+---
+psick::firstrun::linux_classes:
+  hostname: common::hostname2
