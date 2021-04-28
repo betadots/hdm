@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
   <head>
     <title>HDM</title>
     <%= csrf_meta_tags %>
@@ -10,26 +10,38 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column h-100">
     <%= render partial: "shared/top_navigation" %>
 
-    <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <%= render_breadcrumbs :tag => :li, :separator => " / " %>
-        </ol>
-      </nav>
+    <main class="flex-shrink-0 mb-4">
+      <div class="container">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <%= render_breadcrumbs :tag => :li, :separator => " > " %>
+          </ol>
+        </nav>
 
-      <% flash.each do |key, value| %>
-        <div class="<%= flash_class(key) %>">
-          <%= value %>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      <% end %>
+        <% flash.each do |key, value| %>
+          <div class="<%= flash_class(key) %>">
+            <%= value %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <% end %>
 
-      <%= yield %>
-    </div>
+        <%= yield %>
+      </div>
+    </main>
+
+    <footer class="footer bg-light mt-auto py-4">
+      <div class="container text-center">
+        © 2019-<%= Date.today.year %>
+        <a href="https://example42.com/" class="text-danger">
+          <%= image_tag "example42.png", alt: "example42 logo", width: "32", height: "32" %>
+          example42 GmbH
+        </a>
+      </div>
+    </footer>
   </body>
 </html>

@@ -9,6 +9,8 @@ Turbolinks.start()
 require("@rails/activestorage").start()
 require("channels")
 
+import "@fontsource/open-sans"
+
 import "bootstrap"
 import "../stylesheets/application"
 
