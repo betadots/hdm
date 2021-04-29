@@ -57,10 +57,7 @@ profile::time::servers:
 
 profile::auth::sshd_config_allowgroups:
   - 'root'
-  - 'biss-admin'
-  - 'infra-admins'
   - 'vagrant'
-  - 'inventorizer'
 
 profile::auth::sssd_config:
   'sssd':

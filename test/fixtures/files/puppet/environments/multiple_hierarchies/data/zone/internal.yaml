@@ -1,0 +1,5 @@
+---
+profile::auth::sshd_config_allowgroups:
+  - 'admins'
+  - 'devs'
+
