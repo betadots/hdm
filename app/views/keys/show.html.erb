@@ -19,11 +19,7 @@
             <div class="card-header" id="path-<%= index %>">
               <h2 class="mb-0">
                 <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse-<%= index %>" aria-expanded="true" aria-controls="collapse-<%= index %>">
-                  <% if path_data[:key_present] %>
-                    <b><%= path_data[:path] %></b>
-                  <% else %>
-                    <span class="text-muted"><%= path_data[:path] %></span>
-                  <% end %>
+                  <%= format_path(path_data) %>
                 </button>
               </h2>
             </div>
