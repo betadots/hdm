@@ -1,14 +1,18 @@
-# The project
+# HDM - Hiera Data Manager
 
-This Rails application displays a [Puppet](https://github.com/puppetlabs/puppet) configuration and offers a WebGUI to update/create that configuration.
+Copyright 2021 example42 GmbH
 
-In the first step we use the example development puppet configuration in `test/fixtures/files/puppet`. After that we impliment an API call to the puppet server.
+This Rails application displays [Puppet](https://github.com/puppetlabs/puppet) Hiera data and offers a WebGUI to read/update/create that configuration.
 
 ## Usermanagement
 
 A fresh installation needs an admin which has to be created first with the WebGUI. That admin can not read the Puppet configuration. He/She can only create/delete new users. Normal users have the ability to read/change/delete the Puppet configuration.
 
-## Development
+## Setup
+
+At the moment setup is ony tested on Mac OS and CentOS 7.
+
+### Mac OS
 
 Please make sure that you have installed the right Ruby version (2.5.8) before you start your work. https://rvm.io is a good tool to do that.
 
@@ -22,6 +26,36 @@ Ruby. A work around for that is using the command `rvm install 2.5.8 --with-cfla
   - `sudo port install nmp6 yarn`
 - We need `yarn`, install it: `npm install yarn`
 - Install the needed packages: `yarn install --check-files`
+
+### CentOS 7
+
+Install Puppet Agent package from Puppetlabs.
+
+This will provide us with an up to date Ruby version.
+
+- Install required packages:
+
+    wget https://kojipkgs.fedoraproject.org//packages/sqlite/3.8.11/1.fc21/x86_64/sqlite-devel-3.8.11-1.fc21.x86_64.rpm
+    wget https://kojipkgs.fedoraproject.org//packages/sqlite/3.8.11/1.fc21/x86_64/sqlite-3.8.11-1.fc21.x86_64.rpm
+    yum install -y sqlite-3.8.11-1.fc21.x86_64.rpm sqlite-devel-3.8.11-1.fc21.x86_64.rpm
+    yum install -y gcc-c++ zlib-devel
+
+- Install Ruby Gems
+
+    /opt/puppetlabs/puppet/bin/gem install bundler
+    /opt/puppetlabs/puppet/bin/bundle install --path vendor
+
+- Install NodeJS
+
+    curl --silent --location https://rpm.nodesource.com/setup_14.x | sudo bash
+    sudo yum install -y nodejs
+    curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+    sudo rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg
+    sudo yum install -y yarn
+    yarn install --check-files
+
+### General HDM Setup
+
 - Create a configuration file using the template: `cp config/hdm.yml.template config/hdm.yml`
 - Create the database with `bundle exec rails db:create`
 - Run the migrations with `bundle exec rails db:migrate`
