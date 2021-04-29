@@ -1,5 +1,5 @@
 <% if Rails.configuration.hdm['read_only'] %>
-  <pre><%= path_data["value"] %></pre>
+  <pre><%= path_data[:value] %></pre>
 <% else %>
   <%= form_with url: environment_node_key_path(@environment, @node, @key), method: :patch, local: true do |f| %>
     <%= hidden_field_tag :hierarchy, hierarchy %>
