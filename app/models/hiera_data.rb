@@ -28,7 +28,7 @@ class HieraData
         file = YamlFile.new(path: hierarchy.datadir.join(path))
         search_results[hierarchy.name] << {
           path: path,
-          present: file.exist?,
+          file_present: file.exist?,
           key_present: file.keys.include?(key),
           value: file.content_for_key(key)
         }

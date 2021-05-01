@@ -15,11 +15,11 @@ class HieraDataTest < ActiveSupport::TestCase
     expected_result = {
       "Eyaml hierarchy" =>
       [
-        { path: "nodes/testhost.yaml",            present: true,  key_present: true, value: "hostname: hostname\n"  },
-        { path: "role/hdm_test-development.yaml", present: false,  key_present: false, value: nil  },
-        { path: "role/hdm_test.yaml",             present: true, key_present: true, value: "hostname: hostname-role\n" },
-        { path: "zone/internal.yaml",             present: false, key_present: false, value: nil },
-        { path: "common.yaml",                    present: true,  key_present: true, value: "hostname: common::hostname\n"  }
+        { path: "nodes/testhost.yaml",            file_present: true,  key_present: true, value: "hostname: hostname\n"  },
+        { path: "role/hdm_test-development.yaml", file_present: false,  key_present: false, value: nil  },
+        { path: "role/hdm_test.yaml",             file_present: true, key_present: true, value: "hostname: hostname-role\n" },
+        { path: "zone/internal.yaml",             file_present: false, key_present: false, value: nil },
+        { path: "common.yaml",                    file_present: true,  key_present: true, value: "hostname: common::hostname\n"  }
       ]
     }
 
