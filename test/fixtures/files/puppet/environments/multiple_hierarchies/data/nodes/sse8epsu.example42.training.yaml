@@ -1,0 +1,4 @@
+---
+lookup_options:
+  'profile::auth::sshd_config_allowgroups':
+    merge: first
