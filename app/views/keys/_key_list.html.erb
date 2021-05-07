@@ -1,5 +1,17 @@
-<div class="list-group">
-  <% @keys.each do |key| %>
-    <%= link_to key, environment_node_key_path(@environment, @node, key), class: "list-group-item list-group-item-action #{"active" if key == @key}" %>
-  <% end %>
-</div>
+<form action="#" data-controller="key-filter" data-action="submit->key-filter#submit">
+  <div class="list-group">
+    <div class="list-group-item p-0">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <%= image_pack_tag "media/icons/search.svg" %>
+          </span>
+        </div>
+        <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search", data: {key_filter_target: "input", action: "keyup->key-filter#filter"} %>
+      </div>
+    </div>
+    <% @keys.each do |key| %>
+      <%= link_to key, environment_node_key_path(@environment, @node, key), class: "list-group-item list-group-item-action #{"active" if key == @key}", data: {key_filter_target: "keys"} %>
+    <% end %>
+  </div>
+</form>
