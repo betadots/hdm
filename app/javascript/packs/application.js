@@ -17,7 +17,7 @@ import "@fontsource/open-sans/400-italic.css"
 import "@fontsource/open-sans/700.css"
 
 // Icons
-import "bootstrap-icons/icons/search.svg"
+import "bootstrap-icons/bootstrap-icons.svg"
 
 // Stylesheets
 import "bootstrap"

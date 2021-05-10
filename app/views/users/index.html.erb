@@ -31,16 +31,21 @@
           </td>      
           <td>
             <% if can? :show, user %>
-              <%= link_to 'Show', user, class:"btn btn-light min-width-btn" %>
+              <%= link_to user, class:"btn btn-sm btn-light min-width-btn" do %>
+                <%= icon "eye" %>
+                Show
+              <% end %>
             <% end %>
             <% if can? :edit, user %>
-              <%= link_to 'Edit', edit_user_path(user),class:"btn btn-primary min-width-btn"  %>     
+              <%= link_to edit_user_path(user), class:"btn btn-sm btn-primary min-width-btn" do %>
+                <%= icon "pencil" %>
+                Edit
+              <% end %>
             <% end %>
             <% if can? :delete, user %>
-              <% if user == current_user %>
-                <%= link_to 'Delete', user, method: :delete, data: { confirm: 'THIS IS YOUR ACCOUNT! Are you sure?' }, class:"btn btn-danger min-width-btn"%>
-              <% else %>
-                <%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger min-width-btn"%>
+              <%= link_to user, method: :delete, data: { confirm: user_deletion_confirmation(user) }, class:"btn btn-sm btn-danger min-width-btn" do %>
+                <%= icon "trash" %>
+                Delete
               <% end %>
             <% end %>
           </td>
@@ -50,6 +55,9 @@
   </table>
   <% if can? :create, User.new %>
     <br>
-    <%= link_to 'New User', new_user_path, class:"btn btn-success min-width-btn" %>
+    <%= link_to new_user_path, class:"btn btn-success min-width-btn" do %>
+      <%= icon "person-plus" %>
+      New User
+    <% end %>
   <% end %>
 </div>

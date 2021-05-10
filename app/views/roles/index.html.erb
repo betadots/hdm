@@ -14,7 +14,10 @@
             <%= role.name %>
           </td>      
           <td>
-            <%= link_to 'Show', role, class:"btn btn-light min-width-btn" %>
+            <%= link_to role, class:"btn btn-sm btn-light min-width-btn" do %>
+              <%= icon "eye" %>
+              Show
+            <% end %>
           </td>
         </tr>
       <% end %>

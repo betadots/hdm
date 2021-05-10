@@ -7,10 +7,19 @@
     <%= text_area_tag :value, path_data[:value], rows: 4, class: "form-control" %>
     <div class="d-flex justify-content-end mt-2">
       <% if path_data[:key_present] %>
-        <%= link_to "Delete", environment_node_key_path(@environment, @node, @key, path: path_data[:path]), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-sm btn-danger" %>
+        <%= link_to environment_node_key_path(@environment, @node, @key, path: path_data[:path]), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-sm btn-danger" do %>
+          <%= icon "trash" %>
+          Delete
+        <% end %>
       <% end %>
-      <%= f.button "Reset", type: :reset, class: "btn btn-sm btn-secondary ml-2" %>
-      <%= f.button "Save", type: :submit, class: "btn btn-sm btn-primary ml-2" %>
+      <%= f.button type: :reset, class: "btn btn-sm btn-secondary ml-2" do %>
+        <%= icon "arrow-counterclockwise" %>
+        Reset
+      <% end %>
+      <%= f.button type: :submit, class: "btn btn-sm btn-primary ml-2" do %>
+        <%= icon "save" %>
+        Save
+      <% end %>
     </div>
   <% end %>
 <% end %>

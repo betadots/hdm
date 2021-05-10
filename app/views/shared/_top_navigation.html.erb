@@ -10,19 +10,21 @@
         <% if current_user %>
           <li class="nav-item active dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <% if current_user %>
-              <%= current_user.email %>
-              <% if current_user.admin? %>
-                (<%= current_user.role %>)
-              <% end %>
-            <% else %>
-              Login
+            <%= current_user.email %>
+            <% if current_user.admin? %>
+              (<%= current_user.role %>)
             <% end %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <% if current_user %>
-                <%= link_to 'Edit profile', edit_user_path(current_user), class: 'dropdown-item' %>
-                <%= link_to "Logout", logout_path, class: 'dropdown-item'  %>
+                <%= link_to edit_user_path(current_user), class: 'dropdown-item' do %>
+                  <%= icon "person" %>
+                  Edit Profile
+                <% end %>
+                <%= link_to logout_path, class: 'dropdown-item' do %>
+                  <%= icon "box-arrow-right" %>
+                  Logout
+                <% end %>
               <% else %>
                 <% if can? :create, User.new %>
                   <%= link_to "Sign up", signup_path, class: 'dropdown-item'  %>
@@ -31,16 +33,25 @@
               <% end %>
               <% if User.accessible_by(current_ability).any? %>
                 <div class="dropdown-divider"></div>
-                <%= link_to "List Users (#{User.accessible_by(current_ability).count})", users_path, class: 'dropdown-item'  %>
+                <%= link_to users_path, class: 'dropdown-item' do %>
+                  <%= icon "people" %>
+                  List Users (<%= User.accessible_by(current_ability).count %>)
+                <% end %>
                 <% if can? :create, User.new %>
-                  <%= link_to "Create a new User", new_user_path, class: 'dropdown-item'  %>
+                  <%= link_to new_user_path, class: 'dropdown-item' do %>
+                    <%= icon "person-plus" %>
+                    Create a new User
+                  <% end %>
                 <% end %>
               <% end %>
             </div>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Login", login_path, class: 'nav-link'  %>
+            <%= link_to login_path, class: 'nav-link' do %>
+              <%= icon "box-arrow-in-right" %>
+              Login
+            <% end %>
           </li>
         <% end %>
       </ul>

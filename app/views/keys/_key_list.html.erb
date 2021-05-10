@@ -4,7 +4,7 @@
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text">
-            <%= image_pack_tag "media/icons/search.svg" %>
+            <%= icon "search" %>
           </span>
         </div>
         <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search", data: {key_filter_target: "input", action: "keyup->key-filter#filter"} %>

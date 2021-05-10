@@ -9,7 +9,10 @@
     <%= password_field_tag :password, nil, class:"form-control" %>
   </div>
   <div class="actions">
-    <%= submit_tag "Login", class:"btn btn-success min-width-btn" %>
+    <%= button_tag class: "btn btn-primary min-width-btn" do %>
+      <%= icon("box-arrow-in-right") %>
+      Login
+    <% end %>
   </div>
 <% end %>
 
