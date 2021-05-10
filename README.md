@@ -65,6 +65,8 @@ This will provide us with an up to date Ruby version.
 - STart the fake puppetdb process (if configured in hdm.yml) `./bin/fake_puppet_db &`
 - Use your browser to open http://localhost:3000
 
+- In case of layout errors: `bundle exec rails tmp:clear`
+
 You can reset your database anytime with a `rails db:reset`.
 
 The example development puppet configuration can be found in the directory
