@@ -6,5 +6,8 @@
       <%= form.text_field :name ,class:"form-control", readonly:true%>
     </div>
   <% end %>
-  <%= link_to 'Back', roles_path,class:"btn btn-light min-width-btn" %>
+  <%= link_to roles_path, class:"btn btn-light min-width-btn" do %>
+    <%= icon "arrow-left-short" %>
+    Back
+  <% end %>
 </div>

@@ -1,20 +1,7 @@
 <h1>HDM (Hiera Data Manager)</h1>
 <p>HDM is a webfrontend for visualizing and managing Hiera data.</p>
 <% unless current_user %>
-  <h2>Login</h2>
-  <%= form_tag sessions_path do |form| %>
-    <div class="form-group">
-      <%= label_tag :email %>
-      <%= text_field_tag :email, nil, class:"form-control", autofocus: true %>
-    </div>
-    <div class="form-group">
-      <%= label_tag :password %>
-      <%= password_field_tag :password, nil, class:"form-control" %>
-    </div>
-    <div class="actions">
-      <%= submit_tag "Login", class:"btn btn-success min-width-btn" %>
-    </div>
-  <% end %>
+  <%= render template: "sessions/new" %>
 <% else %>
   <% if User.count == 1 && current_user.admin? %>
     <h2>First Step: Create a User</h2>
@@ -24,9 +11,15 @@
     get access to the puppet configuration.</p>
   <% end %>
   <% if can? :index, Environment %>
-    <%= link_to "Show Environments", environments_path, class: "btn btn-primary" %>
+    <%= link_to environments_path, class: "btn btn-primary" do %>
+      <%= icon "list" %>
+      Show Environments
+    <% end %>
   <% end %>
   <% if can? :create, User %>
-    <%= link_to "Manage Users", users_path, class: "btn btn-primary" %>
+    <%= link_to users_path, class: "btn btn-primary" do %>
+      <%= icon "people" %>
+      Manage Users
+    <% end %>
   <% end %>
 <% end %>

@@ -7,6 +7,9 @@
   <%= render 'form', user: @user %>
   <br>
   <% if User.any? %>
-    <%= link_to 'Back', users_path, class:"btn btn-light min-width-btn" %>
+    <%= link_to users_path, class:"btn btn-light min-width-btn" do %>
+      <%= icon "arrow-left-short" %>
+      Back
+    <% end %>
   <% end %>
 </div>

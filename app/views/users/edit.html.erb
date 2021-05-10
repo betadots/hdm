@@ -2,6 +2,12 @@
     <h1>Editing User</h1>
     <%= render 'form', user: @user %>
     <br>
-    <%= link_to 'Show', @user, class:"btn btn-light min-width-btn" %>
-    <%= link_to 'Back', users_path, class:"btn btn-light min-width-btn" %>
+    <%= link_to @user, class:"btn btn-light min-width-btn" do %>
+      <%= icon "eye" %>
+      Show
+    <% end %>
+    <%= link_to users_path, class:"btn btn-light min-width-btn" do %>
+      <%= icon "arrow-left-short" %>
+      Back
+    <% end %>
 </div>

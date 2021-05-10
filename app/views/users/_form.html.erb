@@ -35,6 +35,9 @@
     <% end %>
   <% end %>
   <div class="actions">
-    <%= form.submit "Save", class:"btn btn-success min-width-btn" %>
+    <%= form.button type: :submit, class:"btn btn-success min-width-btn" do %>
+      <%= icon "save" %>
+      Save
+    <% end %>
   </div>
 <% end %>

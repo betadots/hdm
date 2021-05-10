@@ -18,4 +18,19 @@ module ApplicationHelper
       end
     tag.send(tag_name, path_data[:path], class: classes)
   end
+
+  def icon(name)
+    path = asset_pack_path("media/bootstrap-icons/bootstrap-icons.svg")
+    tag.svg(class: "bi", fill: "currentColor") do
+      tag.use(href: "#{path}##{name}")
+    end
+  end
+
+  def user_deletion_confirmation(user)
+    if user == current_user
+      'THIS IS YOUR ACCOUNT! Are you sure?'
+    else
+      'Are you sure?'
+    end
+  end
 end

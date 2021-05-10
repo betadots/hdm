@@ -18,6 +18,12 @@
       <%= form.text_field :role ,class:"form-control", readonly:true%>
     </div>
   <% end %>
-  <%= link_to 'Edit', edit_user_path(@user),class:"btn btn-primary min-width-btn" %> 
-  <%= link_to 'Back', users_path,class:"btn btn-light min-width-btn" %>
+  <%= link_to edit_user_path(@user),class:"btn btn-primary min-width-btn" do %>
+    <%= icon "pencil" %>
+    Edit
+  <% end %>
+  <%= link_to users_path,class:"btn btn-light min-width-btn" do %>
+    <%= icon "arrow-left-short" %>
+    Back
+  <% end %>
 </div>
