@@ -3,12 +3,14 @@ development:
   puppet_db:
     server: "http://localhost:8083"
   config_dir: <%= Rails.root.join('test','fixtures','files','puppet') %>
+  hiera_config_file: "hiera_hdm.yaml" # if not set, the default value 'hiera.yaml' is used
 
 test:
   read_only: false
   puppet_db:
     server: "http://localhost:8084"
   config_dir: <%= Rails.root.join('test','fixtures','files','puppet') %>
+  #hiera_config_file: "hiera_hdm.yaml"
 
 production:
   read_only: false
@@ -21,6 +23,7 @@ production:
       cert: "/path/to/certfile"
       ca_file: "/path/to/cafile"
   config_dir: "/etc/puppetlabs/code"
+  #hiera_config_file: "hiera_hdm.yaml"
 
 # Example for PE token authentication
 # production:
@@ -32,3 +35,4 @@ production:
 #     token: "secret_token"
 #     cacert: "/path/to/cacert"
 #   config_dir: "/etc/puppetlabs/code"
+#  hiera_config_file: "hiera_hdm.yaml"
