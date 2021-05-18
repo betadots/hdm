@@ -134,7 +134,7 @@ GEM
       racc (~> 1.4)
     optimist (3.0.1)
     public_suffix (4.0.6)
-    puma (5.2.2)
+    puma (5.3.1)
       nio4r (~> 2.0)
     puppet (7.5.0)
       concurrent-ruby (~> 1.0)
@@ -255,7 +255,7 @@ DEPENDENCIES
   friendly_id (~> 5.4.0)
   hiera-eyaml
   listen (~> 3.2)
-  puma (~> 5.0)
+  puma (~> 5.3)
   puppet
   puppetdb-ruby
   rails (~> 6.1.0, >= 6.1.0.0)
