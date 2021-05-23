@@ -30,7 +30,7 @@ class FakePuppetDB
   end
 
   def nodes
-    nodes = Dir.glob(Pathname.new(@config_dir).join("nodes", "*.yaml"))
+    nodes = Dir.glob(Pathname.new(@config_dir).join("environments", environment).join("nodes", "*.yaml"))
       .map { |f| File.basename(f, ".yaml").sub("_facts", "") }
       .map { |n| {"certname" => n} }
     respond_with(nodes)

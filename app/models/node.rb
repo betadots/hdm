@@ -1,24 +1,24 @@
 class Node
   class NotFound < StandardError; end
 
-  attr_reader :hostname
+  attr_reader :hostname, :environment
 
-  def self.all_names
-    PuppetDbClient.nodes
+  def self.all_names(environment:)
+    PuppetDbClient.nodes(environment: environment)
   end
 
-  def self.all
-    all_names.map { |n| new(n, skip_validation: true) }
+  def self.all(environment:)
+    all_names(environment: environment).map { |n| new(n, skip_validation: true, environment: environment) }
   end
 
   def self.find(name)
     new(name)
   end
 
-  def initialize(hostname, skip_validation: false)
+  def initialize(hostname, skip_validation: false, environment:)
     @hostname = hostname
 
-    raise NotFound.new("Node '#{hostname}' does not exist") unless skip_validation || Node.all_names.include?(hostname)
+    raise NotFound.new("Node '#{hostname}' does not exist") unless skip_validation || Node.all_names(environment: environment).include?(hostname)
   end
 
   def ==(other)

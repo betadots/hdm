@@ -1,0 +1,5 @@
+---
+fqdn: 'lj12xrpa.example42.training'
+role: 'hdm_test'
+env: 'demo'
+zone: 'internal'

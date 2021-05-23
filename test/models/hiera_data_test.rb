@@ -23,7 +23,7 @@ class HieraDataTest < ActiveSupport::TestCase
       ]
     }
 
-    node = Node.new("testhost")
+    node = Node.new("testhost", environment: "development")
     facts = node.facts(environment: "development")
     result = hiera.search_key(facts , 'psick::firstrun::linux_classes')
     assert_equal ["Eyaml hierarchy"], result.keys
@@ -41,7 +41,7 @@ class HieraDataTest < ActiveSupport::TestCase
         "hdm::float", "hdm::integer", "noop_mode", "psick::enable_firstrun", "psick::firstrun::linux_classes", "psick::postfix::tp::resources_hash", "psick::time::servers", "psick::timezone"
     ]
 
-    node = Node.new("testhost")
+    node = Node.new("testhost", environment: "development")
     result = hiera.all_keys(node.facts(environment: "development"))
     assert_equal expected_result, result
   end

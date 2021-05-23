@@ -1,0 +1,5 @@
+---
+fqdn: 'uswpm0lf.example42.training'
+role: 'hdm_test'
+env: 'demo'
+zone: 'internal'

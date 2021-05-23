@@ -1,0 +1,5 @@
+---
+fqdn: 'r48j23ne.example42.training'
+role: 'hdm_test'
+env: 'demo'
+zone: 'internal'

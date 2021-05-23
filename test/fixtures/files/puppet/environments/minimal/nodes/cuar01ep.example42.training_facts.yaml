@@ -1,0 +1,5 @@
+---
+fqdn: 'cuar01ep.example42.training'
+role: 'hdm_test'
+env: 'demo'
+zone: 'internal'

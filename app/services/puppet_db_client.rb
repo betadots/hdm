@@ -1,9 +1,11 @@
 module PuppetDbClient
   module ClassMethods
-    def nodes
+    def nodes(environment:)
       response = client.request(
         'nodes',
-        nil,
+        [:and,
+          [:'=', 'environment', environment]
+        ],
         {}
       )
       response.data.map { |x| x.dig("certname") }

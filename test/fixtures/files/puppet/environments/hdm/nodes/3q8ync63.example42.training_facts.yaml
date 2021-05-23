@@ -1,0 +1,5 @@
+---
+fqdn: '3q8ync63.example42.training'
+role: 'hdm_test'
+env: 'demo'
+zone: 'internal'
