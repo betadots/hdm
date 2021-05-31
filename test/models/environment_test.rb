@@ -19,17 +19,6 @@ class EnvironmentTest < ActiveSupport::TestCase
     assert Environment.new('development')
   end
 
-  test "raise error for non existing environment" do
-    err = assert_raises(Environment::NotFound) { Environment.new('unknown') }
-    assert_match("Environment 'unknown' does not exist", err.message)
-  end
-
-  test "do not raise error when skipping validations" do
-    assert_nothing_raised do
-      Environment.new('unknown', skip_validation: true)
-    end
-  end
-
   test "environments with same name are equal" do
     development_one = Environment.new("development")
     development_two = Environment.new("development")

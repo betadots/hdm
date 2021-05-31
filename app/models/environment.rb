@@ -8,17 +8,15 @@ class Environment
   end
 
   def self.all
-    all_names.map { |e| new(e, skip_validation: true) }
+    all_names.map { |e| new(e) }
   end
 
   def self.find(name)
     new(name)
   end
 
-  def initialize(name, skip_validation: false)
+  def initialize(name)
     @name = name
-
-    raise NotFound.new("Environment '#{name}' does not exist") unless skip_validation || Environment.all_names.include?(name)
   end
 
   def ==(other)

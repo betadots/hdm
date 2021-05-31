@@ -6,34 +6,29 @@ class NodeTest < ActiveSupport::TestCase
   end
 
   test "create node object" do
-    assert Node.new('testhost', environment: "development")
+    assert Node.new(hostname: 'testhost', environment: "development")
   end
 
-  test "raise error for non existing nodes" do
-    err = assert_raises(Node::NotFound) { Node.new('unknown', environment: "development") }
-    assert_match("Node 'unknown' does not exist", err.message)
-  end
-
-  test "do not raise error when skipping validation" do
-    assert_nothing_raised do
-      Node.new("unknown", skip_validation: true, environment: "development")
-    end
-  end
-
-  test "two nodes are equal when their hostnames are identical" do
-    node_one = Node.new("testhost", environment: "development")
-    node_two = Node.new("testhost", environment: "development")
+  test "two nodes are equal when their hostnames and environments are identical" do
+    node_one = Node.new(hostname: "testhost", environment: "development")
+    node_two = Node.new(hostname: "testhost", environment: "development")
     assert_equal node_one, node_two
   end
 
   test "two nodes are not equal when they have different hostnames" do
-    node_one = Node.new("testhost", environment: "development")
-    node_two = Node.new("testhost2", environment: "development")
+    node_one = Node.new(hostname: "testhost", environment: "development")
+    node_two = Node.new(hostname: "testhost2", environment: "development")
+    assert_not_equal node_one, node_two
+  end
+
+  test "two nodes are not equal when they have different environments" do
+    node_one = Node.new(hostname: "testhost", environment: "development")
+    node_two = Node.new(hostname: "testhost", environment: "test")
     assert_not_equal node_one, node_two
   end
 
   test "check facts" do
-    node = Node.new('testhost', environment: "development")
+    node = Node.new(hostname: 'testhost', environment: "development")
     expected_facts = {
       "fqdn"=>"testhost",
       "role"=>"hdm_test",
@@ -42,16 +37,16 @@ class NodeTest < ActiveSupport::TestCase
       "os"=>{"family"=>"RedHat"},
       "organization"=>"internal"
     }
-    assert_equal expected_facts, node.facts(environment: "development")
+    assert_equal expected_facts, node.facts
   end
 
   test "#to_param should return the hostname" do
-    node = Node.new("testhost", environment: "development")
+    node = Node.new(hostname: "testhost", environment: "development")
     assert_equal "testhost", node.to_param
   end
 
   test "#to_s should return the hostname" do
-    node = Node.new("testhost", environment: "development")
+    node = Node.new(hostname: "testhost", environment: "development")
     assert_equal "testhost", node.to_s
   end
 end

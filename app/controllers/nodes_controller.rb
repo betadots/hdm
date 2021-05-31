@@ -4,7 +4,7 @@ class NodesController < ApplicationController
   add_breadcrumb "Home", :root_path
   add_breadcrumb "Environments", :environments_path
 
-  def index(environment:)
+  def index
     @nodes = Node.all(environment: @environment)
     authorize! :index, Node
 

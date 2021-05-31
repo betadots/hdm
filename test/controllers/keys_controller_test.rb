@@ -3,7 +3,7 @@ require "test_helper"
 class KeysControllerTest < ActionDispatch::IntegrationTest
   setup do
     @environment = Environment.new("development")
-    @node = Node.new("testhost", environment: @environment)
+    @node = Node.new(hostname: "testhost", environment: @environment)
   end
 
   test "routing works for nodes with dot in name" do

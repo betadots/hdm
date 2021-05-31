@@ -2,7 +2,7 @@ class Key
   attr_reader :name, :environment, :node
 
   def self.all(environment, node)
-    facts = node.facts(environment: environment)
+    facts = node.facts
     HieraData.new(environment.name).all_keys(facts)
       .map { |name| new(environment, node, name) }
   end
@@ -14,7 +14,7 @@ class Key
   end
 
   def hierarchies
-    facts = @node.facts(environment: @environment)
+    facts = @node.facts
     @hierarchies ||= hiera_data.search_key(facts, name)
   end
 

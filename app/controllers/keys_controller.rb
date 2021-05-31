@@ -47,6 +47,6 @@ class KeysController < ApplicationController
 
   def load_nodes
     @nodes = Node.all(environment: @environment)
-    @node = Node.find(params[:node_id])
+    @node = Node.new(hostname: params[:node_id], environment: @environment)
   end
 end
