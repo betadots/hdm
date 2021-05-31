@@ -8,13 +8,14 @@ class FakePuppetDB
 
   def call(env)
     request = Rack::Request.new(env)
+    query = parsed_query(request.params["query"])
     case request.path
     when "/pdb/query/v4/environments"
       environments
     when "/pdb/query/v4/nodes"
-      nodes(request.params["query"])
+      nodes(query)
     when "/pdb/query/v4/facts"
-      facts(request.params["query"])
+      facts(query)
     else
       [404, {}, ["Not Found"]]
     end
@@ -30,7 +31,7 @@ class FakePuppetDB
   end
 
   def nodes(query)
-    environment = JSON.parse(query).find { |e| e.is_a?(Array) && e[1] == "environment" }[2]
+    environment = query["environment"]
     nodes = Dir.glob(Pathname.new(@config_dir).join("environments", environment).join("nodes", "*.yaml"))
       .map { |f| File.basename(f, ".yaml").sub("_facts", "") }
       .map { |n| {"certname" => n} }
@@ -38,9 +39,10 @@ class FakePuppetDB
   end
 
   def facts(query)
-    host = JSON.parse(query).find { |e| e.is_a?(Array) && e[1] == "certname" }[2]
+    host = query["certname"]
+    environment = query["environment"]
     facts = YAML.load(
-      File.read(Pathname.new(@config_dir).join("nodes", "#{host}_facts.yaml"))
+      File.read(Pathname.new(@config_dir).join("environments", environment, "nodes", "#{host}_facts.yaml"))
     )
     response = facts.map { |k, v| {"name" => k, "value" => v} }
     respond_with(response)
@@ -48,5 +50,15 @@ class FakePuppetDB
 
   def respond_with(data)
     [200, {"Content-Type" => "application/json"}, [data.to_json]]
+  end
+
+  # This does not actually parse any puppet db query. Instead
+  # it assumes simple equality tests combined with AND
+  def parsed_query(query)
+    query ||= "null"
+    query = JSON.parse(query)
+    return {} unless query.is_a?(Array)
+    terms = query.select { |e| e.is_a?(Array) }
+    Hash[terms.map { |e| e[1,2] }]
   end
 end
