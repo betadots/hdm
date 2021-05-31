@@ -12,7 +12,7 @@ class FakePuppetDB
     when "/pdb/query/v4/environments"
       environments
     when "/pdb/query/v4/nodes"
-      nodes
+      nodes(request.params["query"])
     when "/pdb/query/v4/facts"
       facts(request.params["query"])
     else
@@ -29,7 +29,8 @@ class FakePuppetDB
     respond_with(environments)
   end
 
-  def nodes
+  def nodes(query)
+    environment = JSON.parse(query).find { |e| e.is_a?(Array) && e[1] == "environment" }[2]
     nodes = Dir.glob(Pathname.new(@config_dir).join("environments", environment).join("nodes", "*.yaml"))
       .map { |f| File.basename(f, ".yaml").sub("_facts", "") }
       .map { |n| {"certname" => n} }
