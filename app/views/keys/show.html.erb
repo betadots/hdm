@@ -14,20 +14,25 @@
             <span class="badge badge-primary text-light"><%= hierarchy.backend %></span>
           </div>
         </div>
-        <% hierarchy.values_for(@key).each do |path, path_data| %>
+        <% hierarchy.values_for(@key).each do |value| %>
           <% index += 1 %>
           <div class="card">
             <div class="card-header" id="path-<%= index %>">
               <h2 class="mb-0">
                 <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse-<%= index %>" aria-expanded="true" aria-controls="collapse-<%= index %>">
-                  <%= format_path(path, path_data) %>
+                  <%= format_path(value) %>
+                  <% if value.encrypted? %>
+                    <span class="text-danger">
+                      <%= icon("lock-fill") %>
+                    </span>
+                  <% end %>
                 </button>
               </h2>
             </div>
 
             <div id="collapse-<%= index %>" class="collapse" aria-labelledby="path-<%= index %>">
               <div class="card-body">
-                <%= render "form", path: path, path_data: path_data, hierarchy: hierarchy.name %>
+                <%= render "form", value: value, hierarchy: hierarchy.name %>
               </div>
             </div>
           </div>
