@@ -2,6 +2,7 @@ class HieraData
   class EnvironmentNotFound < StandardError; end
 
   attr_reader :environment
+  delegate :hierarchies, to: :config
 
   def initialize(environment)
     @environment = environment
@@ -20,19 +21,15 @@ class HieraData
     keys.sort.uniq
   end
 
-  def search_key(facts, key)
+  def search_key(datadir, files, key)
     search_results = {}
-    config.hierarchies.each do |hierarchy|
-      search_results[hierarchy.name] = []
-      hierarchy.resolved_paths(facts: facts).each do |path|
-        file = YamlFile.new(path: hierarchy.datadir.join(path))
-        search_results[hierarchy.name] << {
-          path: path,
-          file_present: file.exist?,
-          key_present: file.keys.include?(key),
-          value: file.content_for_key(key)
-        }
-      end
+    files.each do |path|
+      file = YamlFile.new(path: datadir.join(path))
+      search_results[path] = {
+        file_present: file.exist?,
+        key_present: file.keys.include?(key),
+        value: file.content_for_key(key)
+      }
     end
     search_results
   end

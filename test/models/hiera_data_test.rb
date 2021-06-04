@@ -10,28 +10,19 @@ class HieraDataTest < ActiveSupport::TestCase
     assert_match("Environment 'unknown' does not exist", err.message)
   end
 
-  test "#search_key return all hierarchies and files that contains the key" do
+  test "#search_key returns key data for all given files" do
     hiera = HieraData.new('development')
+    datadir = hiera.hierarchies.first.datadir
     expected_result = {
-      "Eyaml hierarchy" =>
-      [
-        { path: "nodes/testhost.yaml",            file_present: true,  key_present: true, value: "hostname: hostname\n"  },
-        { path: "role/hdm_test-development.yaml", file_present: false,  key_present: false, value: nil  },
-        { path: "role/hdm_test.yaml",             file_present: true, key_present: true, value: "hostname: hostname-role\n" },
-        { path: "zone/internal.yaml",             file_present: false, key_present: false, value: nil },
-        { path: "common.yaml",                    file_present: true,  key_present: true, value: "hostname: common::hostname\n"  }
-      ]
+      "nodes/testhost.yaml" => {file_present: true,  key_present: true, value: "hostname: hostname\n"},
+      "role/hdm_test-development.yaml" => {file_present: false,  key_present: false, value: nil},
+      "role/hdm_test.yaml" => {file_present: true, key_present: true, value: "hostname: hostname-role\n"},
+      "zone/internal.yaml" => {file_present: false, key_present: false, value: nil },
+      "common.yaml" => {file_present: true,  key_present: true, value: "hostname: common::hostname\n"}
     }
 
-    node = Node.new(hostname: "testhost", environment: "development")
-    result = hiera.search_key(node.facts , 'psick::firstrun::linux_classes')
-    assert_equal ["Eyaml hierarchy"], result.keys
-    assert_equal 5, result["Eyaml hierarchy"].size
-    assert_equal expected_result["Eyaml hierarchy"][0], result["Eyaml hierarchy"][0], "element 1"
-    assert_equal expected_result["Eyaml hierarchy"][1], result["Eyaml hierarchy"][1], "element 2"
-    assert_equal expected_result["Eyaml hierarchy"][2], result["Eyaml hierarchy"][2], "element 3"
-    assert_equal expected_result["Eyaml hierarchy"][3], result["Eyaml hierarchy"][3], "element 4"
-    assert_equal expected_result["Eyaml hierarchy"][4], result["Eyaml hierarchy"][4], "element 5"
+    result = hiera.search_key(datadir, expected_result.keys, 'psick::firstrun::linux_classes')
+    assert_equal expected_result, result
   end
 
   test "#all_keys return all keys" do

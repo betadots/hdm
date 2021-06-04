@@ -6,27 +6,28 @@
   </div>
   <div class="col-6">
     <% index = 0 %>
-    <% @key.hierarchies.each do |hierarchy_name, paths| %>
+    <% @key.hierarchies.each do |hierarchy| %>
       <div class="accordion">
         <div class="card">
           <div class="card-body">
-            <b><%= hierarchy_name %></b>
+            <b><%= hierarchy.name %></b>
+            <span class="badge badge-primary text-light"><%= hierarchy.backend %></span>
           </div>
         </div>
-        <% paths.each do |path_data| %>
+        <% hierarchy.values_for(@key).each do |path, path_data| %>
           <% index += 1 %>
           <div class="card">
             <div class="card-header" id="path-<%= index %>">
               <h2 class="mb-0">
                 <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse-<%= index %>" aria-expanded="true" aria-controls="collapse-<%= index %>">
-                  <%= format_path(path_data) %>
+                  <%= format_path(path, path_data) %>
                 </button>
               </h2>
             </div>
 
             <div id="collapse-<%= index %>" class="collapse" aria-labelledby="path-<%= index %>">
               <div class="card-body">
-                <%= render "form", path_data: path_data, hierarchy: hierarchy_name %>
+                <%= render "form", path: path, path_data: path_data, hierarchy: hierarchy.name %>
               </div>
             </div>
           </div>

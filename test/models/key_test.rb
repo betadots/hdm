@@ -46,15 +46,11 @@ class KeyTest < ActiveSupport::TestCase
     assert_equal "hdm::integer", key.to_s
   end
 
-  test "#hierarchies queries underlying hiera_data object" do
+  test "#hierarchies loads all hierarchies" do
+    hierarchies = [Hierarchy.new(environment: @environment, name: "test", datadir: Dir.pwd, backend: :yaml, files: [])]
     key = Key.new(@environment, @node, "hdm::integer")
-    @node.stub(:facts, {fact: :value}) do
-      hiera_data = MiniTest::Mock.new
-      hiera_data.expect(:search_key, [:data], [{fact: :value}, "hdm::integer"])
-      key.stub(:hiera_data, hiera_data) do
-        assert_equal [:data], key.hierarchies
-      end
-      hiera_data.verify
+    Hierarchy.stub(:all, hierarchies) do
+      assert_equal hierarchies, key.hierarchies
     end
   end
 

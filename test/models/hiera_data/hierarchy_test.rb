@@ -64,7 +64,7 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
   class HieraData::HierarchyForYamlDataTest < ActiveSupport::TestCase
     test "data_hash specified and yaml" do
       hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
-      assert hierarchy.yaml?
+      assert_equal :yaml, hierarchy.backend
     end
 
     def raw_hash
@@ -78,7 +78,7 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
   class HieraData::HierarchyForJSONDataTest < ActiveSupport::TestCase
     test "data_hash specified and json" do
       hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
-      refute hierarchy.yaml?
+      assert_equal :json, hierarchy.backend
     end
 
     def raw_hash
@@ -93,7 +93,7 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
   class HieraData::HierarchyForEyamlDataTest < ActiveSupport::TestCase
     test "lookup function is not data_hash" do
       hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
-      refute hierarchy.yaml?
+      assert_equal :eyaml, hierarchy.backend
     end
 
     def raw_hash
