@@ -58,7 +58,11 @@ class FakePuppetDB
     query ||= "null"
     query = JSON.parse(query)
     return {} unless query.is_a?(Array)
-    terms = query.select { |e| e.is_a?(Array) }
+    terms = if query.first == "and"
+              query.select { |e| e.is_a?(Array) }
+            else
+              [query]
+            end
     Hash[terms.map { |e| e[1,2] }]
   end
 end
