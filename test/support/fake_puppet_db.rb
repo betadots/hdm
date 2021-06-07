@@ -12,7 +12,7 @@ class FakePuppetDB
     case request.path
     when "/pdb/query/v4/environments"
       environments
-    when "/pdb/query/v4/nodes"
+    when "/pdb/query/v4/inventory"
       nodes(query)
     when "/pdb/query/v4/facts"
       facts(query)
