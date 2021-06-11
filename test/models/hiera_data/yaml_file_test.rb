@@ -65,6 +65,12 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
     assert_equal 0.1, file.content_for_key('hdm::float')
   end
 
+  test "#content_for_key can decrypt eyaml" do
+    file = HieraData::YamlFile.new(path: config_dir("eyaml").join("common.yaml"))
+
+    assert_equal "c8hoduj5", file.content_for_key("c8hoduj5", decrypt_with: key_pair)
+  end
+
   test "#write_key goes fine" do
     path = Rails.root.join('test', 'fixtures', 'files', 'puppet', 'environments', 'development', 'data', 'nodes', 'writehost.yaml')
 
@@ -73,6 +79,16 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
       file = HieraData::YamlFile.new(path: path)
       file.write_key('test_key', 'true')
       assert_equal expected_hash, YAML.load(File.read(path))
+    end
+  end
+
+  test "write_key can encrypt values" do
+    path = config_dir("eyaml").join('nodes', 'writehost.yaml')
+
+    with_temp_file(path) do
+      file = HieraData::YamlFile.new(path: path)
+      file.write_key("test_key", "test_data", encrypt_with: key_pair)
+      assert_match(/\AENC\[.*\]\z/, YAML.load(File.read(path))["test_key"])
     end
   end
 
@@ -88,8 +104,13 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
   end
 
   private
-    def config_dir
-      Pathname.new(Rails.configuration.hdm["config_dir"]).join('environments', 'development', 'data')
+    def config_dir(environment = "development")
+      Pathname.new(Rails.configuration.hdm["config_dir"]).join('environments', environment, 'data')
+    end
+
+    def key_pair
+      base_dir = config_dir("eyaml").join("../keys/")
+      [base_dir.join("private_key.pkcs7.pem"), base_dir.join("public_key.pkcs7.pem")]
     end
 
     def key_as_string

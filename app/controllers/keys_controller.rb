@@ -27,7 +27,7 @@ class KeysController < ApplicationController
     authorize! :update, Key
 
     @key = Key.new(@environment, @node, params[:id])
-    @key.save_value(params[:hierarchy], params[:path], params[:value])
+    @key.save_value(params[:hierarchy], params[:path], params[:value], encrypt: params[:encrypt])
 
     redirect_to environment_node_key_path(@environment, @node, @key),
       notice: "Value was saved successfully"

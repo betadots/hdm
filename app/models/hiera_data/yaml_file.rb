@@ -36,9 +36,9 @@ class HieraData
       value_string
     end
 
-    def write_key(key, value)
+    def write_key(key, value, encrypt_with: nil)
       new_content = (content ? content : {})
-      new_content[key] = value
+      new_content[key] = encrypt_with ? encrypt_value(value, *encrypt_with) : value
 
       File.open(path, File::RDWR|File::CREAT, 0644) do |f|
         f.flock(File::LOCK_EX)
@@ -68,8 +68,17 @@ class HieraData
       Hiera::Backend::Eyaml::Options["pkcs7_private_key"] = private_key
       Hiera::Backend::Eyaml::Options["pkcs7_public_key"] = public_key
       parser = Hiera::Backend::Eyaml::Parser::Parser.new([Hiera::Backend::Eyaml::Parser::EncHieraTokenType.new, Hiera::Backend::Eyaml::Parser::EncBlockTokenType.new])
-      tokens = parser.parse(value)
+      tokens = parser.parse(value.chomp)
       tokens.map(&:to_plain_text).join
+    end
+
+    def encrypt_value(value, private_key, public_key)
+      Hiera::Backend::Eyaml::Options["pkcs7_private_key"] = private_key
+      Hiera::Backend::Eyaml::Options["pkcs7_public_key"] = public_key
+      encryptor = Hiera::Backend::Eyaml::Encryptor.find
+      ciphertext = encryptor.encode(encryptor.encrypt(value))
+      token = Hiera::Backend::Eyaml::Parser::EncToken.new(:block, value, encryptor, ciphertext, nil, '  ')
+      token.to_encrypted format: :string
     end
   end
 end

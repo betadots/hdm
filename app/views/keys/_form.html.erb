@@ -1,8 +1,8 @@
 <% if Rails.configuration.hdm['read_only'] %>
   <pre><%= value.value %></pre>
 <% else %>
-  <%= form_with url: environment_node_key_path(@environment, @node, @key), method: :patch, local: true, data: {controller: "update-field", action: "reset->update-field#reset", update_field_url_value: environment_node_decrypted_value_path(@environment, @node, @key, hierarchy: hierarchy, path: value.path)} do |f| %>
-    <%= hidden_field_tag :hierarchy, hierarchy %>
+  <%= form_with url: environment_node_key_path(@environment, @node, @key), method: :patch, local: true, data: ({controller: "update-field", action: "reset->update-field#reset", update_field_url_value: environment_node_decrypted_value_path(@environment, @node, @key, hierarchy: hierarchy.name, path: value.path)} if value.encrypted?) do |f| %>
+    <%= hidden_field_tag :hierarchy, hierarchy.name %>
     <%= hidden_field_tag :path, value.path %>
     <%= text_area_tag :value, value.value, rows: 4, class: "form-control", data: {update_field_target: "field"} %>
     <div class="d-flex justify-content-end mt-2">
@@ -22,9 +22,28 @@
         <%= icon "arrow-counterclockwise" %>
         Reset
       <% end %>
-      <%= f.button type: :submit, class: "btn btn-sm btn-primary ml-2" do %>
-        <%= icon "save" %>
-        Save
+      <% if hierarchy.eyaml? %>
+        <div class="dropdown">
+          <button class="btn btn-sm btn-primary ml-2 dropdown-toggle" type="button" id="save-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= icon "save" %>
+            Save
+          </button>
+          <div class="dropdown-menu" aria-labelledby="save-dropdown">
+            <%= f.button type: :submit, class: "dropdown-item" do %>
+              <%= icon "unlock-fill" %>
+              Unencrypted 
+            <% end %>
+            <%= f.button type: :submit, class: "dropdown-item", data: {controller: "add-field", action: "click->add-field#hidden", add_field_name_value: "encrypt", add_field_value_value: "1"} do %>
+              <%= icon "lock-fill" %>
+              Encrypted 
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <%= f.button type: :submit, class: "btn btn-sm btn-primary ml-2" do %>
+          <%= icon "save" %>
+          Save
+        <% end %>
       <% end %>
     </div>
   <% end %>
