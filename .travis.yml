@@ -1,11 +1,16 @@
 language: ruby
-dist: bionic
+dist: focal
+rvm: 2.5.8
+
 cache:
   bundler: true
   yarn: true
+
 before_install:
   - yes | gem update --system --force
   - gem install bundler
+  - nvm install v14.16.0
+
 install:
   - bundle install
   - yarn install

@@ -16,15 +16,19 @@ At the moment setup is ony tested on Mac OS and CentOS 7.
 
 Please make sure that you have installed the right Ruby version (2.5.8) before you start your work. https://rvm.io is a good tool to do that.
 
-In case you are using an Apple M1 Chip you might run into trouble building 
+In case you are using an Apple M1 Chip you might run into trouble building
 Ruby. A work around for that is using the command `rvm install 2.5.8 --with-cflags="-Wno-error=implicit-function-declaration"`
 
 - Clone the repository and `cd` into the directory.
-- Do a `bundle install --path vendor`.
-- Install nodejs:
-  - `brew install node` (https://brew.sh) or
-  - `sudo port install nmp6 yarn`
-- We need `yarn`, install it: `npm install yarn`
+- Do `bundle config set --local path 'vendor/bundle'`
+- Do `bundle config set --local with 'development'`
+- Do `bundle install`.
+- Install nodejs
+  - `brew install node@14` (https://brew.sh)
+  - or `sudo port install nmp6 yarn`
+  - node 15 does not work yet
+- We need `yarn`, install it: `npm install -g yarn`
+
 - Install the needed packages: `yarn install --check-files`
 
 ### CentOS 7
@@ -71,3 +75,29 @@ You can reset your database anytime with a `rails db:reset`.
 
 The example development puppet configuration can be found in the directory
 `test/fixtures/files/puppet`
+
+## Docker
+
+### Build
+
+There is a Dockerfile to build a container. This can be done with:
+
+    cd hdm
+    docker build -t hdm .
+
+### Docker Compose
+
+For docker-compose see `docker-compose.yaml` or use this example:
+
+    ---
+    version: '3.5'
+    services:
+      hdm:
+        image: example42/hdm:latest
+        container_name: hdm
+        volumes:
+          # keep db outside of container
+          - /srv/data/hdm/db:/hdm/data/db
+        ports:
+          - 3000:3000
+        restart: unless-stopped

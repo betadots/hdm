@@ -6,4 +6,6 @@
 # end
 require_relative '../test/support/fake_puppet_db'
 
-Rack::Server.start(app: FakePuppetDB.new, Host: "localhost", Port: 8083)
+ENV["PIDFILE"] ||= "tmp/pids/fake_puppet_db.pid"
+
+Rack::Server.start(app: FakePuppetDB.new, Host: 'localhost', Port: 8083)
