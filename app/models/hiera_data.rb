@@ -46,6 +46,12 @@ class HieraData
     read_file.remove_key(key)
   end
 
+  def decrypt_value(hierarchy_name, path, key)
+    hierarchy = find_hierarchy(hierarchy_name)
+    file = YamlFile.new(path: hierarchy.datadir.join(path))
+    file.content_for_key(key, decrypt_with: [hierarchy.private_key, hierarchy.public_key])
+  end
+
   private
 
   def config_dir

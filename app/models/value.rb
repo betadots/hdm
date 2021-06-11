@@ -3,7 +3,9 @@ class Value
 
   attr_reader :path
 
-  def initialize(path:, file_present:, key_present:, value:)
+  def initialize(hierarchy:, key:, path:, file_present:, key_present:, value:)
+    @hierarchy = hierarchy
+    @key = key
     @path = path
     @file_present = file_present
     @key_present = key_present
@@ -27,7 +29,8 @@ class Value
 
   def value(decrypt: false)
     if decrypt && encrypted?
-      @value
+      hiera_data = HieraData.new(@hierarchy.environment.name)
+      hiera_data.decrypt_value(@hierarchy.name, @path, @key.name)
     else
       @value
     end

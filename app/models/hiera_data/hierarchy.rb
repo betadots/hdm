@@ -40,6 +40,18 @@ class HieraData
       end
     end
 
+    def private_key
+      if backend == :eyaml
+        @base_path.join(raw_hash.dig("options", "pkcs7_private_key"))
+      end
+    end
+
+    def public_key
+      if backend == :eyaml
+        @base_path.join(raw_hash.dig("options", "pkcs7_public_key"))
+      end
+    end
+
     def paths
       @paths ||=
         Array(raw_hash["path"] || raw_hash.fetch("paths", []))

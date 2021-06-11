@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       if Rails.configuration.hdm['read_only']
         resources :keys, only: [:index, :show]
       else
+        resources :decrypted_values, only: [:show]
         resources :keys, only: [:index, :show, :update, :destroy]
       end
     end

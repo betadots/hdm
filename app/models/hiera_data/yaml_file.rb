@@ -20,11 +20,13 @@ class HieraData
       @content ||= YAML.load(File.read(path))
     end
 
-    def content_for_key(key)
+    def content_for_key(key, decrypt_with: nil)
       return nil unless content
       return nil unless content.has_key?(key)
 
       value = content[key]
+      value = decrypt_value(value, *decrypt_with) if decrypt_with
+
       return "true" if value == true
       return "false" if value == false
       return value if [String, Integer, Float].include?(value.class)
@@ -58,6 +60,16 @@ class HieraData
         f.flush
         f.truncate(f.pos)
       end
+    end
+
+    private
+
+    def decrypt_value(value, private_key, public_key)
+      Hiera::Backend::Eyaml::Options["pkcs7_private_key"] = private_key
+      Hiera::Backend::Eyaml::Options["pkcs7_public_key"] = public_key
+      parser = Hiera::Backend::Eyaml::Parser::Parser.new([Hiera::Backend::Eyaml::Parser::EncHieraTokenType.new, Hiera::Backend::Eyaml::Parser::EncBlockTokenType.new])
+      tokens = parser.parse(value)
+      tokens.map(&:to_plain_text).join
     end
   end
 end
