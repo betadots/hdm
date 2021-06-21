@@ -36,8 +36,4 @@ class Hierarchy
                   value: path_data[:value])
       end
   end
-
-  def eyaml?
-    backend == :eyaml
-  end
 end

@@ -16,7 +16,7 @@
         </div>
         <% hierarchy.values_for(@key).each do |value| %>
           <% index += 1 %>
-          <div class="card overflow-visible">
+          <div class="card">
             <div class="card-header" id="path-<%= index %>">
               <h2 class="mb-0">
                 <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse-<%= index %>" aria-expanded="true" aria-controls="collapse-<%= index %>">
@@ -32,7 +32,7 @@
 
             <div id="collapse-<%= index %>" class="collapse" aria-labelledby="path-<%= index %>">
               <div class="card-body">
-                <%= render "form", value: value, hierarchy: hierarchy %>
+                <%= render "form", value: value, hierarchy: hierarchy.name %>
               </div>
             </div>
           </div>

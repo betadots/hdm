@@ -57,7 +57,7 @@ class KeyTest < ActiveSupport::TestCase
   test "#save_value uses underlying hiera_data object" do
     key = Key.new(@environment, @node, "hdm::integer")
     hiera_data = MiniTest::Mock.new
-    hiera_data.expect(:write_key, true, ["hierarchy", "/path", "hdm::integer", 23, {encrypt: false}])
+    hiera_data.expect(:write_key, true, ["hierarchy", "/path", "hdm::integer", 23])
     key.stub(:hiera_data, hiera_data) do
       key.save_value("hierarchy", "/path", "23")
     end

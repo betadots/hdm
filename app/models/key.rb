@@ -17,9 +17,9 @@ class Key
     @hierarchies ||= Hierarchy.all(@environment, @node)
   end
 
-  def save_value(hierarchy_name, path, value, encrypt: false)
+  def save_value(hierarchy_name, path, value)
     value = YAML.load(value)
-    hiera_data.write_key(hierarchy_name, path, name, value, encrypt: encrypt)
+    hiera_data.write_key(hierarchy_name, path, name, value)
   end
 
   def remove_value(hierarchy_name, path)

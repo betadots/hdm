@@ -34,14 +34,10 @@ class HieraData
     search_results
   end
 
-  def write_key(hierarchy_name, path, key, value, encrypt: false)
+  def write_key(hierarchy_name, path, key, value)
     hierarchy = find_hierarchy(hierarchy_name)
     read_file = YamlFile.new(path: hierarchy.datadir.join(path))
-    if encrypt
-      read_file.write_key(key, value, encrypt_with: [hierarchy.private_key, hierarchy.public_key])
-    else
-      read_file.write_key(key, value)
-    end
+    read_file.write_key(key, value)
   end
 
   def remove_key(hierarchy_name, path, key)
