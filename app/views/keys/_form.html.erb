@@ -1,15 +1,34 @@
 <% if Rails.configuration.hdm['read_only'] %>
   <pre><%= value.value %></pre>
 <% else %>
-  <%= form_with url: environment_node_key_path(@environment, @node, @key), method: :patch, local: true, data: {controller: "update-field", action: "reset->update-field#reset", update_field_url_value: environment_node_decrypted_value_path(@environment, @node, @key, hierarchy: hierarchy, path: value.path)} do |f| %>
-    <%= hidden_field_tag :hierarchy, hierarchy %>
+  <%= form_with url: environment_node_key_path(@environment, @node, @key),
+    method: :patch, local: true,
+    data: {
+      controller: "encryption",
+      action: "reset->encryption#reset",
+      encryption_decrypt_url_value: environment_node_decrypted_values_path(@environment, @node, @key, hierarchy: hierarchy.name),
+      encryption_encrypt_url_value: environment_node_encrypted_values_path(@environment, @node, @key, hierarchy: hierarchy.name)
+    } do |f| %>
+    <%= hidden_field_tag :hierarchy, hierarchy.name %>
     <%= hidden_field_tag :path, value.path %>
-    <%= text_area_tag :value, value.value, rows: 4, class: "form-control", data: {update_field_target: "field"} %>
+    <%= text_area_tag :value, value.value, rows: 4, class: "form-control", data: {encryption_target: "field"} %>
     <div class="d-flex justify-content-end mt-2">
-      <% if value.encrypted? %>
-        <%= link_to "#", class: "btn btn-sm btn-success text-white", data: {update_field_target: "button", action: "click->update-field#updateField"} do %>
+      <% if hierarchy.eyaml? %>
+        <%= link_to "#", class: "btn btn-sm btn-primary text-white ml-2",
+          data: {
+            encryption_target: "decryptButton",
+            action: "click->encryption#decrypt"
+          } do %>
           <%= icon "unlock-fill" %>
           Decrypt
+        <% end %>
+        <%= link_to "#", class: "btn btn-sm btn-primary text-white ml-2",
+          data: {
+            encryption_target: "encryptButton",
+            action: "click->encryption#encrypt"
+          } do %>
+          <%= icon "lock-fill" %>
+          Encrypt
         <% end %>
       <% end %>
       <% if value.key_present? %>
@@ -22,7 +41,7 @@
         <%= icon "arrow-counterclockwise" %>
         Reset
       <% end %>
-      <%= f.button type: :submit, class: "btn btn-sm btn-primary ml-2" do %>
+      <%= f.button type: :submit, class: "btn btn-sm btn-success text-white ml-2" do %>
         <%= icon "save" %>
         Save
       <% end %>

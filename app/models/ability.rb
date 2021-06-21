@@ -52,6 +52,7 @@ class Ability
         can :manage, Environment
         can :manage, Node
         can :manage, Key
+        can :manage, Value
       end
     end
   end

@@ -46,10 +46,23 @@ class HieraData
     read_file.remove_key(key)
   end
 
-  def decrypt_value(hierarchy_name, path, key)
+  def decrypt_value(hierarchy_name, value)
     hierarchy = find_hierarchy(hierarchy_name)
-    file = YamlFile.new(path: hierarchy.datadir.join(path))
-    file.content_for_key(key, decrypt_with: [hierarchy.private_key, hierarchy.public_key])
+    Hiera::Backend::Eyaml::Options["pkcs7_private_key"] = hierarchy.private_key
+    Hiera::Backend::Eyaml::Options["pkcs7_public_key"] = hierarchy.public_key
+    parser = Hiera::Backend::Eyaml::Parser::Parser.new([Hiera::Backend::Eyaml::Parser::EncHieraTokenType.new, Hiera::Backend::Eyaml::Parser::EncBlockTokenType.new])
+    tokens = parser.parse(value)
+    tokens.map(&:to_plain_text).join
+  end
+
+  def encrypt_value(hierarchy_name, value)
+    hierarchy = find_hierarchy(hierarchy_name)
+    Hiera::Backend::Eyaml::Options["pkcs7_private_key"] = hierarchy.private_key
+    Hiera::Backend::Eyaml::Options["pkcs7_public_key"] = hierarchy.public_key
+    encryptor = Hiera::Backend::Eyaml::Encryptor.find
+    ciphertext = encryptor.encode(encryptor.encrypt(value))
+    token = Hiera::Backend::Eyaml::Parser::EncToken.new(:block, value, encryptor, ciphertext, nil, '  ')
+    token.to_encrypted format: :string
   end
 
   private

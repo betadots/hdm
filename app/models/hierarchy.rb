@@ -27,7 +27,7 @@ class Hierarchy
   def values_for(key)
     @values ||= {}
     @values[key] ||=
-      HieraData.new(@environment.name).search_key(@datadir, @files, key.name).map do |path, path_data|
+      hiera_data.search_key(@datadir, @files, key.name).map do |path, path_data|
         Value.new(hierarchy: self,
                   key: key,
                   path: path,
@@ -35,5 +35,23 @@ class Hierarchy
                   key_present: path_data[:key_present],
                   value: path_data[:value])
       end
+  end
+
+  def encrypt_value(value)
+    hiera_data.encrypt_value(name, value)
+  end
+
+  def decrypt_value(value)
+    hiera_data.decrypt_value(name, value)
+  end
+
+  def eyaml?
+    backend == :eyaml
+  end
+
+  private
+
+  def hiera_data
+    @hiera_data ||= HieraData.new(@environment.name)
   end
 end
