@@ -6,34 +6,22 @@ export default class extends Controller {
 
   connect() {
     this.updateDecryptionStatus();
+    this.updateEncryptionStatus();
   }
 
   decrypt(event) {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append('value', this.fieldTarget.value);
-    this.fieldTarget.disabled = true
-    fetch(this.decryptUrlValue, {method: "POST", body: formData, headers: this.csrfHeader()})
-      .then(response => response.text())
-      .then(text => {
-        this.fieldTarget.value = text;
-        this.fieldTarget.disabled = false;
-        this.updateDecryptionStatus();
-      });
+    this.makeRequest(this.decryptUrlValue, this.fieldTarget.value, (value) => value);
   }
 
   encrypt(event) {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append('value', this.fieldTarget.value);
-    this.fieldTarget.disabled = true
-    fetch(this.encryptUrlValue, {method: "POST", body: formData, headers: this.csrfHeader()})
-      .then(response => response.text())
-      .then(text => {
-        this.fieldTarget.value = text;
-        this.fieldTarget.disabled = false;
-        this.updateDecryptionStatus();
-      });
+    const start = this.fieldTarget.selectionStart;
+    const end = this.fieldTarget.selectionEnd;
+    const prefix = this.fieldTarget.value.slice(0, start);
+    const postfix = this.fieldTarget.value.slice(end);
+    const selection = this.fieldTarget.value.slice(start, end);
+    this.makeRequest(this.encryptUrlValue, selection, (value) => `${prefix}${value}${postfix}`);
   }
 
   reset() {
@@ -49,9 +37,31 @@ export default class extends Controller {
     }
   }
 
+  updateEncryptionStatus() {
+    if (this.fieldTarget.selectionStart < this.fieldTarget.selectionEnd) {
+      this.encryptButtonTarget.classList.remove("disabled");
+    } else {
+      this.encryptButtonTarget.classList.add("disabled");
+    }
+  }
+
   csrfHeader () {
     const meta = document.querySelector('meta[name=csrf-token]');
     const token = meta.content;
     return {"X-CSRF-Token": token};
+  }
+
+  makeRequest(url, value, responseHandler) {
+    const formData = new FormData();
+    formData.append('value', value);
+    this.fieldTarget.disabled = true
+    fetch(url, {method: "POST", body: formData, headers: this.csrfHeader()})
+      .then(response => response.text())
+      .then(text => {
+        this.fieldTarget.value = responseHandler(text);
+        this.fieldTarget.disabled = false;
+        this.updateDecryptionStatus();
+        this.updateEncryptionStatus(); 
+      });
   }
 }
