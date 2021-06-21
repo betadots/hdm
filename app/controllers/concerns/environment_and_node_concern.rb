@@ -13,6 +13,6 @@ module EnvironmentAndNodeConcern
   end
 
   def load_node
-    @node = Node.find(params[:node_id])
+    @node = Node.new(hostname: params[:node_id], environment: @environment)
   end
 end
