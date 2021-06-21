@@ -3,7 +3,7 @@ require 'test_helper'
 class KeyTest < ActiveSupport::TestCase
   setup do
     @environment = Environment.new("development")
-    @node = Node.new("testhost")
+    @node = Node.new(hostname: "testhost", environment: @environment)
   end
 
   test "create key object" do
@@ -17,14 +17,14 @@ class KeyTest < ActiveSupport::TestCase
   end
 
   test "two keys are not equal if their environments differ" do
-    hdm_environment = Environment.new("hdm", skip_validation: true)
+    hdm_environment = Environment.new("hdm")
     key_one = Key.new(@environment, @node, "hdm::integer")
     key_two = Key.new(hdm_environment, @node, "hdm::integer")
     assert_not_equal key_one, key_two
   end
 
   test "two keys are not equal if their nodes differ" do
-    other_node = Node.new("testhost2", skip_validation: true)
+    other_node = Node.new(hostname: "testhost2", environment: @environment)
     key_one = Key.new(@environment, @node, "hdm::integer")
     key_two = Key.new(@environment, other_node, "hdm::integer")
     assert_not_equal key_one, key_two

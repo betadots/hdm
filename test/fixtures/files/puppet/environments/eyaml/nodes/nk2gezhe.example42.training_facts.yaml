@@ -1,0 +1,5 @@
+---
+fqdn: 'nk2gezhe.example42.training'
+role: 'hdm_test'
+env: 'demo'
+zone: 'internal'

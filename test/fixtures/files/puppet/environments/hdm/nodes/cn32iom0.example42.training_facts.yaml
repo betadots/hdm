@@ -1,0 +1,5 @@
+---
+fqdn: 'cn32iom0.example42.training'
+role: 'hdm_test'
+env: 'demo'
+zone: 'internal'

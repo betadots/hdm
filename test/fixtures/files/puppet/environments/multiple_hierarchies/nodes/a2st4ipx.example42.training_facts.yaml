@@ -1,0 +1,5 @@
+---
+fqdn: 'a2st4ipx.example42.training'
+role: 'hdm_test'
+env: 'demo'
+zone: 'internal'
