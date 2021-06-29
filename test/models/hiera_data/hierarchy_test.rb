@@ -96,10 +96,24 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
       assert_equal :eyaml, hierarchy.backend
     end
 
+    test "#private_key returns path from options" do
+      hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
+      assert_equal "private.key", hierarchy.private_key.to_s
+    end
+
+    test "#public_key returns path from options" do
+      hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
+      assert_equal "public.key", hierarchy.public_key.to_s
+    end
+
     def raw_hash
       {
         "name" => "EYaml hierarchy",
-        "lookup_key" => "eyaml_lookup_key"
+        "lookup_key" => "eyaml_lookup_key",
+        "options" => {
+          "pkcs7_private_key" => "private.key",
+          "pkcs7_public_key" => "public.key"
+        }
       }
     end
   end
