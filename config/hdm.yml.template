@@ -1,5 +1,6 @@
 development:
   read_only: false
+  allow_encryption: true
   puppet_db:
     server: "http://localhost:8083"
   config_dir: <%= Rails.root.join('test','fixtures','files','puppet') %>
@@ -7,6 +8,7 @@ development:
 
 test:
   read_only: false
+  allow_encryption: true
   puppet_db:
     server: "http://localhost:8084"
   config_dir: <%= Rails.root.join('test','fixtures','files','puppet') %>
@@ -14,6 +16,7 @@ test:
 
 production:
   read_only: false
+  allow_encryption: true
   puppet_db:
     # When using https make sure the server name matches
     # the one in the certificate

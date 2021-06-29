@@ -52,6 +52,12 @@ class HieraData
       end
     end
 
+    def encryptable?
+      backend == :eyaml &&
+        File.readable?(private_key) &&
+        File.readable?(public_key)
+    end
+
     def paths
       @paths ||=
         Array(raw_hash["path"] || raw_hash.fetch("paths", []))

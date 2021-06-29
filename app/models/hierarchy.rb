@@ -8,7 +8,8 @@ class Hierarchy
           name: hierarchy.name,
           datadir: hierarchy.datadir,
           backend: hierarchy.backend,
-          files: hierarchy.resolved_paths(facts: facts))
+          files: hierarchy.resolved_paths(facts: facts),
+          encryptable: hierarchy.encryptable?)
     end
   end
 
@@ -16,12 +17,13 @@ class Hierarchy
     all(environment, node).find { |h| h.name == name }
   end
 
-  def initialize(environment:, name:, datadir:, backend:, files:)
+  def initialize(environment:, name:, datadir:, backend:, files:, encryptable: false)
     @environment = environment
     @name = name
     @datadir = datadir
     @backend = backend
     @files = files
+    @encryptable = encryptable
   end
 
   def values_for(key)
@@ -47,6 +49,12 @@ class Hierarchy
 
   def eyaml?
     backend == :eyaml
+  end
+
+  def encryption_possible?
+    eyaml? &&
+      Rails.configuration.hdm['allow_encryption'] &&
+      @encryptable
   end
 
   private

@@ -18,7 +18,7 @@
       }
     %>
     <div class="d-flex justify-content-end mt-2">
-      <% if hierarchy.eyaml? %>
+      <% if hierarchy.encryption_possible? %>
         <%= link_to "#", class: "btn btn-sm btn-primary text-white ml-2",
           data: {
             encryption_target: "decryptButton",
