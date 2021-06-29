@@ -5,6 +5,11 @@
     <%= render "key_list" %>
   </div>
   <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        Lookup options: <%= @key.lookup_options %>
+      </div>
+    </div>
     <% index = 0 %>
     <% @key.hierarchies.each do |hierarchy| %>
       <div class="accordion">

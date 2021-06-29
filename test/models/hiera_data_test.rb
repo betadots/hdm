@@ -84,4 +84,19 @@ class HieraDataTest < ActiveSupport::TestCase
     assert_match /\AENC\[.+\]\z/, ciphertext
     assert_no_match /top secret/, ciphertext
   end
+
+  test "#lookup_options returns the merged lookup options for the selected environment and facts" do
+    hiera = HieraData.new("multiple_hierarchies")
+    node = Node.new(hostname: "sse8epsu.example42.training", environment: "multiple_hierarchies")
+    expected_hash = {
+      'profile::auth::sudo_configs' => {
+        "merge" => "deep"
+      },
+      'profile::auth::sshd_config_allowgroups' => {
+        "merge" => "first"
+      }
+    }
+
+    assert_equal expected_hash, hiera.lookup_options(node.facts)
+  end
 end

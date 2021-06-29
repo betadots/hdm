@@ -65,6 +65,17 @@ class HieraData
     token.to_encrypted format: :string
   end
 
+  def lookup_options(facts)
+    result = {}
+    config.hierarchies.each do |hierarchy|
+      hierarchy.resolved_paths(facts: facts).each do |path|
+        file = YamlFile.new(path: hierarchy.datadir.join(path))
+        result = (file["lookup_options"] || {}).merge(result)
+      end
+    end
+    result
+  end
+
   private
 
   def config_dir
