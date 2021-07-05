@@ -3,8 +3,17 @@ class Key
 
   def self.all(environment, node)
     facts = node.facts
+    keys = []
     HieraData.new(environment.name).all_keys(facts)
-      .map { |name| new(environment, node, name) }
+      .each do |name|
+      key = new(environment, node, name)
+      if name == "lookup_options"
+        keys.unshift(key)
+      else
+        keys << key
+      end
+    end
+    keys
   end
 
   def initialize(environment, node, name)

@@ -6,6 +6,16 @@ class KeyTest < ActiveSupport::TestCase
     @node = Node.new(hostname: "testhost", environment: @environment)
   end
 
+  test ":all puts `lookup_options` first if present" do
+    hiera_data = MiniTest::Mock.new
+    hiera_data.expect(:all_keys, %w(one lookup_options two), [Hash])
+    HieraData.stub(:new, hiera_data) do
+      keys = Key.all(@environment, @node)
+      key_names = keys.map(&:name)
+      assert_equal %w(lookup_options one two), key_names
+    end
+  end
+
   test "create key object" do
     assert Key.new(@environment, @node, "hdm::integer")
   end
