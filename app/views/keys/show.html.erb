@@ -5,10 +5,9 @@
     <%= render "key_list" %>
   </div>
   <div class="col-6">
-    <div class="card">
-      <div class="card-body">
-        Lookup options: <%= @key.lookup_options %>
-      </div>
+    <div class="text-right pb-2">
+        <b>Lookup options:</b>
+        <span class="badge badge-primary"><%= @key.lookup_options %></span>
     </div>
     <% index = 0 %>
     <% @key.hierarchies.each do |hierarchy| %>
