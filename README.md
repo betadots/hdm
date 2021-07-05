@@ -39,24 +39,29 @@ This will provide us with an up to date Ruby version.
 
 - Install required packages:
 
-    wget https://kojipkgs.fedoraproject.org//packages/sqlite/3.8.11/1.fc21/x86_64/sqlite-devel-3.8.11-1.fc21.x86_64.rpm
-    wget https://kojipkgs.fedoraproject.org//packages/sqlite/3.8.11/1.fc21/x86_64/sqlite-3.8.11-1.fc21.x86_64.rpm
-    yum install -y sqlite-3.8.11-1.fc21.x86_64.rpm sqlite-devel-3.8.11-1.fc21.x86_64.rpm
-    yum install -y gcc-c++ zlib-devel
+```
+yum install -y https://kojipkgs.fedoraproject.org//packages/sqlite/3.8.11/1.fc21/x86_64/sqlite-devel-3.8.11-1.fc21.x86_64.rpm
+yum install -y https://kojipkgs.fedoraproject.org//packages/sqlite/3.8.11/1.fc21/x86_64/sqlite-3.8.11-1.fc21.x86_64.rpm
+yum install -y gcc-c++ zlib-devel
+```
 
 - Install Ruby Gems
 
-    /opt/puppetlabs/puppet/bin/gem install bundler
-    /opt/puppetlabs/puppet/bin/bundle install --path vendor
+```
+/opt/puppetlabs/puppet/bin/gem install bundler
+/opt/puppetlabs/puppet/bin/bundle install --path vendor
+```
 
 - Install NodeJS
 
-    curl --silent --location https://rpm.nodesource.com/setup_14.x | sudo bash
-    sudo yum install -y nodejs
-    curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
-    sudo rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg
-    sudo yum install -y yarn
-    yarn install --check-files
+```
+curl --silent --location https://rpm.nodesource.com/setup_14.x | sudo bash
+sudo yum install -y nodejs
+curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+sudo rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg
+sudo yum install -y yarn
+yarn install --check-files
+```
 
 ### General HDM Setup
 
