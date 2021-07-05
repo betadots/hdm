@@ -10,28 +10,19 @@ class HieraDataTest < ActiveSupport::TestCase
     assert_match("Environment 'unknown' does not exist", err.message)
   end
 
-  test "#search_key return all hierarchies and files that contains the key" do
+  test "#search_key returns key data for all given files" do
     hiera = HieraData.new('development')
+    datadir = hiera.hierarchies.first.datadir
     expected_result = {
-      "Eyaml hierarchy" =>
-      [
-        { path: "nodes/testhost.yaml",            file_present: true,  key_present: true, value: "hostname: hostname\n"  },
-        { path: "role/hdm_test-development.yaml", file_present: false,  key_present: false, value: nil  },
-        { path: "role/hdm_test.yaml",             file_present: true, key_present: true, value: "hostname: hostname-role\n" },
-        { path: "zone/internal.yaml",             file_present: false, key_present: false, value: nil },
-        { path: "common.yaml",                    file_present: true,  key_present: true, value: "hostname: common::hostname\n"  }
-      ]
+      "nodes/testhost.yaml" => {file_present: true,  key_present: true, value: "hostname: hostname\n"},
+      "role/hdm_test-development.yaml" => {file_present: false,  key_present: false, value: nil},
+      "role/hdm_test.yaml" => {file_present: true, key_present: true, value: "hostname: hostname-role\n"},
+      "zone/internal.yaml" => {file_present: false, key_present: false, value: nil },
+      "common.yaml" => {file_present: true,  key_present: true, value: "hostname: common::hostname\n"}
     }
 
-    node = Node.new(hostname: "testhost", environment: "development")
-    result = hiera.search_key(node.facts , 'psick::firstrun::linux_classes')
-    assert_equal ["Eyaml hierarchy"], result.keys
-    assert_equal 5, result["Eyaml hierarchy"].size
-    assert_equal expected_result["Eyaml hierarchy"][0], result["Eyaml hierarchy"][0], "element 1"
-    assert_equal expected_result["Eyaml hierarchy"][1], result["Eyaml hierarchy"][1], "element 2"
-    assert_equal expected_result["Eyaml hierarchy"][2], result["Eyaml hierarchy"][2], "element 3"
-    assert_equal expected_result["Eyaml hierarchy"][3], result["Eyaml hierarchy"][3], "element 4"
-    assert_equal expected_result["Eyaml hierarchy"][4], result["Eyaml hierarchy"][4], "element 5"
+    result = hiera.search_key(datadir, expected_result.keys, 'psick::firstrun::linux_classes')
+    assert_equal expected_result, result
   end
 
   test "#all_keys return all keys" do
@@ -77,5 +68,20 @@ class HieraDataTest < ActiveSupport::TestCase
       hiera.remove_key("Eyaml hierarchy", 'nodes/writehost.yaml', 'test_key')
       assert_equal expected_hash, YAML.load(File.read(path))
     end
+  end
+
+  test "#decrypt_value can decrypt values" do
+    hiera = HieraData.new("eyaml")
+    ciphertext = "ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAe2qPOZxi519fmMyaH47BN1oEnDcluk5ec0jlugSzyInd3v2qirncMYVcAvjg2ckjhWX4h458ZJJuDpT5+ediNG+OQ/BAO+QgjHu7eAR8imjBmeFbjN+dl90y4Lh0S4b/ihpcJ8N9qASWvCePmKafjwFaKNjc6Dws05OQ+G/oBIiXGkXJsE6kbT1qX9DrovHEO6Ve2dANUYmiw1oC8cyqSPi8aBeDdBmZJCQyDrx37QTXf8+b0aVAMG4KPEI1vdoO10ElAsof8Mwx60HkUCCSXRZ2fACp5ODf+hgg9B7Z4eFRxIf4VuqPI+b4pcvPRS/PExI2E99YXIyJz86DD7KPFjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBAgGnfhv3yX43m4aHwqBAB9gBAHgnAZ17HQe3wMCQ2pPuh8]"
+
+    assert_equal "top secret", hiera.decrypt_value("Global data", ciphertext)
+  end
+
+  test "#encrypt_value can encrypt values" do
+    hiera = HieraData.new("eyaml")
+    ciphertext = hiera.encrypt_value("Global data", "top secret")
+
+    assert_match /\AENC\[.+\]\z/, ciphertext
+    assert_no_match /top secret/, ciphertext
   end
 end

@@ -2,6 +2,7 @@ class HieraData
   class EnvironmentNotFound < StandardError; end
 
   attr_reader :environment
+  delegate :hierarchies, to: :config
 
   def initialize(environment)
     @environment = environment
@@ -20,19 +21,15 @@ class HieraData
     keys.sort.uniq
   end
 
-  def search_key(facts, key)
+  def search_key(datadir, files, key)
     search_results = {}
-    config.hierarchies.each do |hierarchy|
-      search_results[hierarchy.name] = []
-      hierarchy.resolved_paths(facts: facts).each do |path|
-        file = YamlFile.new(path: hierarchy.datadir.join(path))
-        search_results[hierarchy.name] << {
-          path: path,
-          file_present: file.exist?,
-          key_present: file.keys.include?(key),
-          value: file.content_for_key(key)
-        }
-      end
+    files.each do |path|
+      file = YamlFile.new(path: datadir.join(path))
+      search_results[path] = {
+        file_present: file.exist?,
+        key_present: file.keys.include?(key),
+        value: file.content_for_key(key)
+      }
     end
     search_results
   end
@@ -47,6 +44,25 @@ class HieraData
     hierarchy = find_hierarchy(hierarchy_name)
     read_file = YamlFile.new(path: hierarchy.datadir.join(path))
     read_file.remove_key(key)
+  end
+
+  def decrypt_value(hierarchy_name, value)
+    hierarchy = find_hierarchy(hierarchy_name)
+    Hiera::Backend::Eyaml::Options["pkcs7_private_key"] = hierarchy.private_key
+    Hiera::Backend::Eyaml::Options["pkcs7_public_key"] = hierarchy.public_key
+    parser = Hiera::Backend::Eyaml::Parser::Parser.new([Hiera::Backend::Eyaml::Parser::EncHieraTokenType.new, Hiera::Backend::Eyaml::Parser::EncBlockTokenType.new])
+    tokens = parser.parse(value)
+    tokens.map(&:to_plain_text).join
+  end
+
+  def encrypt_value(hierarchy_name, value)
+    hierarchy = find_hierarchy(hierarchy_name)
+    Hiera::Backend::Eyaml::Options["pkcs7_private_key"] = hierarchy.private_key
+    Hiera::Backend::Eyaml::Options["pkcs7_public_key"] = hierarchy.public_key
+    encryptor = Hiera::Backend::Eyaml::Encryptor.find
+    ciphertext = encryptor.encode(encryptor.encrypt(value))
+    token = Hiera::Backend::Eyaml::Parser::EncToken.new(:block, value, encryptor, ciphertext, nil, '  ')
+    token.to_encrypted format: :string
   end
 
   private

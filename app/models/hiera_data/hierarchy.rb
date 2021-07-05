@@ -16,8 +16,18 @@ class HieraData
       @lookup_function ||= LOOKUP_FUNCTIONS.find { |f| raw_hash.keys.include?(f) }
     end
 
-    def yaml?
-      lookup_function == "data_hash" && raw_hash["data_hash"] == "yaml_data"
+    def backend
+      @backend ||=
+        case [lookup_function, raw_hash[lookup_function]]
+        when ["data_hash", "yaml_data"]
+          :yaml
+        when ["data_hash", "json_data"]
+          :json
+        when ["lookup_key", "eyaml_lookup_key"]
+          :eyaml
+        else
+          raise HDM::Error, "unknown backend #{raw_hash[lookup_function]}"
+        end
     end
 
     def datadir
@@ -28,6 +38,24 @@ class HieraData
       else
         @base_path.join(path)
       end
+    end
+
+    def private_key
+      if backend == :eyaml
+        @base_path.join(raw_hash.dig("options", "pkcs7_private_key"))
+      end
+    end
+
+    def public_key
+      if backend == :eyaml
+        @base_path.join(raw_hash.dig("options", "pkcs7_public_key"))
+      end
+    end
+
+    def encryptable?
+      backend == :eyaml &&
+        File.readable?(private_key) &&
+        File.readable?(public_key)
     end
 
     def paths

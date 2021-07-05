@@ -64,7 +64,7 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
   class HieraData::HierarchyForYamlDataTest < ActiveSupport::TestCase
     test "data_hash specified and yaml" do
       hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
-      assert hierarchy.yaml?
+      assert_equal :yaml, hierarchy.backend
     end
 
     def raw_hash
@@ -78,7 +78,7 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
   class HieraData::HierarchyForJSONDataTest < ActiveSupport::TestCase
     test "data_hash specified and json" do
       hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
-      refute hierarchy.yaml?
+      assert_equal :json, hierarchy.backend
     end
 
     def raw_hash
@@ -91,15 +91,65 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
 
 
   class HieraData::HierarchyForEyamlDataTest < ActiveSupport::TestCase
+    setup do
+      @tmpdir = Dir.mktmpdir
+    end
+
+    teardown do
+      FileUtils.remove_entry @tmpdir
+    end
+
     test "lookup function is not data_hash" do
       hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
-      refute hierarchy.yaml?
+      assert_equal :eyaml, hierarchy.backend
+    end
+
+    test "#private_key returns path from options" do
+      hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
+      assert_equal "private.key", hierarchy.private_key.to_s
+    end
+
+    test "#public_key returns path from options" do
+      hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
+      assert_equal "public.key", hierarchy.public_key.to_s
+    end
+
+    test "#encryptable? is true if all keys present and readable" do
+      tmpdir_path = Pathname.new(@tmpdir)
+      %w(private.key public.key).each { |f| FileUtils.touch(tmpdir_path.join(f)) }
+      hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: @tmpdir)
+
+      assert hierarchy.encryptable?
+    end
+
+    test "#encryptable? is false if a key is missing" do
+      hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: @tmpdir)
+
+      refute hierarchy.encryptable?
+    end
+
+    test "#encryptable? is false if a key is not readable" do
+      tmpdir_path = Pathname.new(@tmpdir)
+      files = %w(private.key public.key).map { |f| tmpdir_path.join(f) }
+      files.each do |path|
+        FileUtils.touch(path)
+        File.chmod(0000, path)
+      end
+      hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: @tmpdir)
+
+      refute hierarchy.encryptable?
+
+      File.chmod(0600, *files)
     end
 
     def raw_hash
       {
         "name" => "EYaml hierarchy",
-        "lookup_key" => "eyaml_lookup_key"
+        "lookup_key" => "eyaml_lookup_key",
+        "options" => {
+          "pkcs7_private_key" => "private.key",
+          "pkcs7_public_key" => "public.key"
+        }
       }
     end
   end

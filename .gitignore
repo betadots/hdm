@@ -50,3 +50,6 @@ package-lock.json
 
 # HDM Settings
 /config/hdm.yml
+
+# Coverage reports
+/coverage/*

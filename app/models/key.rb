@@ -14,8 +14,7 @@ class Key
   end
 
   def hierarchies
-    facts = @node.facts
-    @hierarchies ||= hiera_data.search_key(facts, name)
+    @hierarchies ||= Hierarchy.all(@environment, @node)
   end
 
   def save_value(hierarchy_name, path, value)

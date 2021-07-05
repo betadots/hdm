@@ -25,6 +25,7 @@ class HieraData
       return nil unless content.has_key?(key)
 
       value = content[key]
+
       return "true" if value == true
       return "false" if value == false
       return value if [String, Integer, Float].include?(value.class)

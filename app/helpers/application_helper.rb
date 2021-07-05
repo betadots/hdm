@@ -7,16 +7,16 @@ module ApplicationHelper
     end
   end
 
-  def format_path(path_data)
+  def format_path(value)
     tag_name, classes =
-      if path_data[:key_present]
+      if value.key_present?
         [:b, nil]
-      elsif path_data[:file_present]
+      elsif value.file_present?
         [:span, "text-dark"]
       else
         [:em, "text-muted"]
       end
-    tag.send(tag_name, path_data[:path], class: classes)
+    tag.send(tag_name, value.path, class: classes)
   end
 
   def icon(name)
