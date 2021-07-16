@@ -1,4 +1,4 @@
-<% if Rails.configuration.hdm['read_only'] %>
+<% if !value.file_writable? %>
   <pre><%= value.value %></pre>
 <% else %>
   <%= form_with url: environment_node_key_path(@environment, @node, @key),

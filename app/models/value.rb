@@ -3,17 +3,22 @@ class Value
 
   attr_reader :path
 
-  def initialize(hierarchy:, key:, path:, file_present:, key_present:, value:)
+  def initialize(hierarchy:, key:, path:, file_present:, file_writable:, key_present:, value:)
     @hierarchy = hierarchy
     @key = key
     @path = path
     @file_present = file_present
+    @file_writable = file_writable
     @key_present = key_present
     @value = value
   end
 
   def file_present?
     @file_present
+  end
+
+  def file_writable?
+    !Rails.configuration.hdm['read_only'] && @file_writable
   end
 
   def key_present?

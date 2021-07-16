@@ -14,11 +14,11 @@ class HieraDataTest < ActiveSupport::TestCase
     hiera = HieraData.new('development')
     datadir = hiera.hierarchies.first.datadir
     expected_result = {
-      "nodes/testhost.yaml" => {file_present: true,  key_present: true, value: "hostname: hostname\n"},
-      "role/hdm_test-development.yaml" => {file_present: false,  key_present: false, value: nil},
-      "role/hdm_test.yaml" => {file_present: true, key_present: true, value: "hostname: hostname-role\n"},
-      "zone/internal.yaml" => {file_present: false, key_present: false, value: nil },
-      "common.yaml" => {file_present: true,  key_present: true, value: "hostname: common::hostname\n"}
+      "nodes/testhost.yaml" => {file_present: true,  file_writable: true, key_present: true, value: "hostname: hostname\n"},
+      "role/hdm_test-development.yaml" => {file_present: false,  file_writable: true, key_present: false, value: nil},
+      "role/hdm_test.yaml" => {file_present: true, file_writable: true, key_present: true, value: "hostname: hostname-role\n"},
+      "zone/internal.yaml" => {file_present: false, file_writable: false, key_present: false, value: nil },
+      "common.yaml" => {file_present: true,  file_writable: true, key_present: true, value: "hostname: common::hostname\n"}
     }
 
     result = hiera.search_key(datadir, expected_result.keys, 'psick::firstrun::linux_classes')
