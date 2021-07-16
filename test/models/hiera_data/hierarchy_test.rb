@@ -1,6 +1,20 @@
 require 'test_helper'
 
 class HieraData::HierarchyTest < ActiveSupport::TestCase
+  test "#uses_globs? returns true if `glob` key present" do
+    glob = "/*/singular/glob"
+    raw_hash = {"name" => "Singular path", "glob" => glob}
+    hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
+    assert hierarchy.uses_globs?
+  end
+
+  test "#uses_globs? returns true if `globs` key present" do
+    globs = ["/*/array/globs", "/test/**/globs"]
+    raw_hash = {"name" => "Singular path", "globs" => globs}
+    hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
+    assert hierarchy.uses_globs?
+  end
+
   test "#paths supports the singular `path` setting" do
     path = "/test/singular/path"
     raw_hash = {"name" => "Singular path", "path" => path}
@@ -25,6 +39,20 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
     assert hierarchy.paths.empty?
   end
 
+  test "#paths supports the singular `glob` setting" do
+    glob = "/*/singular/glob"
+    raw_hash = {"name" => "Singular path", "glob" => glob}
+    hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
+    assert_equal [glob], hierarchy.paths
+  end
+
+  test "#paths supports the `globs` array setting" do
+    globs = ["/*/array/globs", "/test/**/globs"]
+    raw_hash = {"name" => "Singular path", "globs" => globs}
+    hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
+    assert_equal globs, hierarchy.paths
+  end
+
   test "#resolved_paths uses facts to resolve paths" do
     hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
     facts = {
@@ -39,6 +67,19 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
       "role/hdm_test.yaml",
       "zone/internal.yaml",
       "common.yaml"
+    ]
+    assert_equal expected_resolved_paths, hierarchy.resolved_paths(facts: facts)
+  end
+
+  test "#resolved_paths resolves globs" do
+    base_path = Rails.root.join("test/fixtures/files/puppet/environments/development")
+    globs = ["nodes/%{::fqdn}.yaml", "**/hdm*.yaml"]
+    raw_hash = {"name" => "Singular path", "datadir" => "data", "globs" => globs}
+    hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: base_path)
+    facts = {"fqdn" => "testhost"}
+    expected_resolved_paths = [
+      "nodes/testhost.yaml",
+      "role/hdm_test.yaml"
     ]
     assert_equal expected_resolved_paths, hierarchy.resolved_paths(facts: facts)
   end
