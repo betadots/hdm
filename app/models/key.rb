@@ -58,8 +58,12 @@ class Key
   private
 
   def load_lookup_options
-    result = hiera_data.lookup_options(@node.facts).find do |key, options|
-      key == name || name.match(Regexp.new("\A#{key}\z"))
+    lookup_option_candidates = hiera_data.lookup_options(@node.facts)
+    result = lookup_option_candidates.find do |key, options|
+      key == name
+    end
+    result ||= lookup_option_candidates.find do |key, options|
+      name.match(Regexp.new("\\A#{key}\\z"))
     end
     merge = result&.last&.dig("merge")
     case merge
