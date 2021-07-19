@@ -1,0 +1,15 @@
+version: 5
+defaults:
+  datadir: data
+  data_hash: yaml_data
+
+hierarchy:
+  - name: "Eyaml hierarchy"
+    paths:
+      - "nodes/%{::fqdn}.yaml"
+      - "role/%{::role}-%{::env}.yaml"
+      - "role/%{::role}.yaml"
+      - "zone/%{::zone}.yaml"
+  - name: "Common"
+    globs:
+      - "common/*.yaml"
