@@ -20,6 +20,10 @@ class HieraData
       @content ||= YAML.load(File.read(path))
     end
 
+    def [](key)
+      content[key] if content
+    end
+
     def content_for_key(key)
       return nil unless content
       return nil unless content.has_key?(key)
