@@ -87,6 +87,31 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
     end
   end
 
+  test "#writable? returns true if file exists and is writable" do
+    path = Rails.root.join('test', 'fixtures', 'files', 'puppet', 'environments', 'development', 'data', 'nodes', 'writehost.yaml')
+    file = HieraData::YamlFile.new(path: path)
+
+    assert file.writable?
+  end
+
+  test "#writable? returns true if file does not exist but directory is writable" do
+    path = Rails.root.join('test', 'fixtures', 'files', 'puppet', 'environments', 'development', 'data', 'nodes', 'does_not_exist.yaml')
+    file = HieraData::YamlFile.new(path: path)
+
+    assert file.writable?
+  end
+
+  test "writable? returns false if file exists but is not writable" do
+    Dir.mktmpdir do |tmpdir|
+      path = File.join(tmpdir, "test.yaml")
+      File.write(path, {"test" => 23}.to_yaml)
+      File.chmod(0400, path)
+      file = HieraData::YamlFile.new(path: path)
+
+      refute file.writable?
+    end
+  end
+
   private
     def config_dir
       Pathname.new(Rails.configuration.hdm["config_dir"]).join('environments', 'development', 'data')
