@@ -72,14 +72,14 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
   end
 
   test "#resolved_paths resolves globs" do
-    base_path = Rails.root.join("test/fixtures/files/puppet/environments/development")
-    globs = ["nodes/%{::fqdn}.yaml", "**/hdm*.yaml"]
-    raw_hash = {"name" => "Singular path", "datadir" => "data", "globs" => globs}
+    base_path = Rails.root.join("test/fixtures/files/puppet/environments/globs")
+    globs = ["common/*.yaml"]
+    raw_hash = {"name" => "Common", "datadir" => "data", "globs" => globs}
     hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: base_path)
     facts = {"fqdn" => "testhost"}
     expected_resolved_paths = [
-      "nodes/testhost.yaml",
-      "role/hdm_test.yaml"
+      "common/hdm.yaml",
+      "common/psick.yaml"
     ]
     assert_equal expected_resolved_paths, hierarchy.resolved_paths(facts: facts)
   end

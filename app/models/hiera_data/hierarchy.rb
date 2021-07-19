@@ -77,7 +77,7 @@ class HieraData
     private
 
     def interpolate_globs(path)
-      Dir.glob(path, base: datadir)
+      Dir.glob(path, base: datadir).sort
     end
 
     def interpolate_facts(path, facts)
