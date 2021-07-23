@@ -16,6 +16,10 @@ class User < ApplicationRecord
     self.role && self.role.name == 'User'
   end
 
+  def full_name
+    [first_name, last_name].join(" ")
+  end
+
   private
   def downcase_email
     self.email = self.email.downcase
