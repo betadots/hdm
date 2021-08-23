@@ -5,12 +5,16 @@ class HieraData
     def initialize(url)
       @url = Gitable::URI.parse(url)
       @repo = setup_repo
+    rescue TypeError, Git::GitExecuteError, Addressable::URI::InvalidURIError => e
+      raise Hdm::Error.new(e)
     end
 
     def commit!(action, path)
       @repo.add(path)
       @repo.commit(message_for(action))
       @repo.push("origin", @repo.current_branch)
+    rescue Git::GitExecuteError => e
+      raise Hdm::Error.new(e)
     end
 
     def local_path
