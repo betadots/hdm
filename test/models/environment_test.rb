@@ -5,6 +5,7 @@ class EnvironmentTest < ActiveSupport::TestCase
     expected_environments = %w(
       development
       eyaml
+      globs
       hdm
       minimal
       multiple_hierarchies

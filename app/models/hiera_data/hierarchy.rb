@@ -58,27 +58,47 @@ class HieraData
         File.readable?(public_key)
     end
 
+    def uses_globs?
+      raw_hash.has_key?("glob") || raw_hash.has_key?("globs")
+    end
+
     def paths
-      @paths ||=
-        Array(raw_hash["path"] || raw_hash.fetch("paths", []))
+      @paths ||= setup_paths
     end
 
     def resolved_paths(facts:)
-      paths.map do |path|
-        groups = path.scan(/%{([^}]+)}/)
-        groups.flatten!
-        groups.each { |x| x.gsub!(/^::/, '')}
-
-        resolved_path = path.dup
-
-        groups.each do |fact|
-          facts_value = facts.dig(*fact.split("."))
-          next unless facts_value
-          resolved_path.gsub!(/%{(::)?#{fact}}/, facts_value)
-        end
-
+      paths.flat_map do |path|
+        resolved_path = interpolate_facts(path, facts)
+        resolved_path = interpolate_globs(resolved_path) if uses_globs?
         resolved_path
       end
+    end
+
+    private
+
+    def interpolate_globs(path)
+      Dir.glob(path, base: datadir).sort
+    end
+
+    def interpolate_facts(path, facts)
+      groups = path.scan(/%{([^}]+)}/)
+      groups.flatten!
+      groups.each { |x| x.gsub!(/^::/, '')}
+
+      resolved_path = path.dup
+
+      groups.each do |fact|
+        facts_value = facts.dig(*fact.split("."))
+        next unless facts_value
+        resolved_path.gsub!(/%{(::)?#{fact}}/, facts_value)
+      end
+
+      resolved_path
+    end
+
+    def setup_paths
+      base_key = uses_globs? ? "glob" : "path"
+      Array(raw_hash[base_key] || raw_hash.fetch("#{base_key}s", []))
     end
   end
 end
