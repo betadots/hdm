@@ -34,6 +34,7 @@ class Hierarchy
                   key: key,
                   path: path,
                   file_present: path_data[:file_present],
+                  file_writable: path_data[:file_writable],
                   key_present: path_data[:key_present],
                   value: path_data[:value])
       end

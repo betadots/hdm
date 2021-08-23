@@ -10,6 +10,14 @@ class HieraData
       File.exist?(path)
     end
 
+    def writable?
+      if exist?
+        File.writable?(path)
+      else
+        File.writable?(File.dirname(path))
+      end
+    end
+
     def keys
       return [] unless exist?
       content.keys
