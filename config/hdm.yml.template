@@ -39,3 +39,19 @@ production:
 #     cacert: "/path/to/cacert"
 #   config_dir: "/etc/puppetlabs/code"
 #  hiera_config_file: "hiera_hdm.yaml"
+
+# Example for using a git repository
+# Here, hdm will substitute all files from `/etc/puppetlabs/code/myenv/data`
+# with files from a git repository. The corresponding directory in the git
+# repository is called `environments/myenv/data`:
+#
+# production:
+#   read_only: false
+#   allow_encryption: true
+#   puppet_db:
+#     server: "http://localhost:8081"
+#   config_dir: "/etc/puppetlabs/code" 
+#   git_data:
+#     - datadir: /etc/puppetlabs/code/myenv/data
+#       git_url: git@githost.example.com:puppet/hiera_data.git
+#       path_in_repo: environments/myenv/data 
