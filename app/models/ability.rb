@@ -37,18 +37,18 @@ class Ability
       user ||= User.new # guest user (not logged in)
 
       if user.admin?
-        if Role.find_by_name('Admin').users.count > 1
+        if User.admins.count > 1
           can :manage, User, id: user.id
         else
           can [:read, :edit, :update], User, id: user.id
         end
         can :manage, User, id: User.where.not(id: user.id).ids
         can :create, User, id: nil
-        can :read, Role
       end
 
       if user.user?
         can :read, User, id: user.id
+        can :update, User, id: user.id
         can :manage, Environment
         can :manage, Node
         can :manage, Key

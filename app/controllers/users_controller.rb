@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def new
     add_breadcrumb "Users", :users_path
     add_breadcrumb "Sign up", :signup_path
-    @user = User.new(role: Role.find_by_name('User'))
+    @user = User.new
   end
 
   # GET /users/1/edit
@@ -33,11 +33,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if User.none?
-      @user.role = Role.find_by_name('Admin')
-    end
-
-    if @user.role.nil?
-      @user.role = Role.find_by_name('User')
+      @user.admin = true
     end
 
     if @user.save
@@ -78,11 +74,11 @@ class UsersController < ApplicationController
     def user_params
       # The last admin can't change his/her role to a non admin role.
       #
-      if Role.find_by_name('Admin').users.count == 1 && current_user == @user
+      if User.admins.count == 1 && current_user == @user
         params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
       else
         if current_user.try(:admin?)
-          params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role_id)
+          params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :admin)
         else
           params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
         end
