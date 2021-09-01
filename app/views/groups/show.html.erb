@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <h1>Group Details</h1>
+  <%= form_with(model: @group, local: true) do |form| %>
+    <div class="form-group">
+      <%= form.label :name  %>
+      <%= form.text_field :name, class:"form-control", readonly: true %>
+    </div>
+    <div class="form-group">
+      <%= form.label :restrict %>
+      <%= form.text_field :restrict, class:"form-control", readonly: true %>
+    </div>
+    <div class="form-group">
+      <%= form.label :rules %>
+      <% form.object.rules.each do |rule| %>
+        <%= render "rule", rule: rule, read_only: true %>
+      <% end %>
+    </div>
+  <% end %>
+  <%= link_to edit_group_path(@group),class:"btn btn-primary min-width-btn" do %>
+    <%= icon "pencil" %>
+    Edit
+  <% end %>
+  <%= link_to groups_path,class:"btn btn-light min-width-btn" do %>
+    <%= icon "arrow-left-short" %>
+    Back
+  <% end %>
+</div>

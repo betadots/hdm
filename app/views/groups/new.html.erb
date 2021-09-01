@@ -1,0 +1,12 @@
+<div class="container-fluid">
+  <h1>New Group</h1>
+
+  <%= render 'form', group: @group %>
+
+  <br>
+
+  <%= link_to groups_path, class:"btn btn-light min-width-btn" do %>
+    <%= icon "arrow-left-short" %>
+    Back
+  <% end %>
+</div>

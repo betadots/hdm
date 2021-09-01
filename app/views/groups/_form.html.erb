@@ -1,0 +1,63 @@
+<%= form_with(model: group, local: true) do |form| %>
+  <% if group.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <h5><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h5>
+      <ul>
+      <% group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= form.label :name  %>
+    <%= form.text_field :name, class:"form-control", autofocus: true %>
+  </div>
+  <fieldset>
+    <legend>Access Control</legend>
+
+    <p class="text-muted">
+      You can restrict which environments, nodes or keys can be seen
+      by members of this group.
+      <br>
+      Each restriction is a pattern (regular expression) that will be
+      matched against the name of the environment/node/key.
+      <br>
+      Enter <code>.*</code> to allow everything.
+      <br>
+      To experiment with (ruby's) regular expressions, have a look at
+      <%= link_to "https://rubular.com" do %>
+        rubular.com <%= icon("box-arrow-up-right") %>
+      <% end %>
+    </p>
+
+    <div class="form-group">
+      <%= form.label :restrict %>
+      <%= form.select :restrict, Group::RESTRICTABLES, {}, class:"form-control" %>
+    </div>
+    <div class="form-group" data-controller="append">
+      <template data-append-target="template">
+        <%= render "rule", rule: "" %>
+      </template>
+      <div data-append-target="container">
+        <%= form.label :rules %>
+        <% form.object.rules.each do |rule| %>
+          <%= render "rule", rule: rule %>
+        <% end %>
+        <% if form.object.rules.none? %>
+          <%= render "rule", rule: "" %>
+        <% end %>
+      </div>
+      <%= button_tag type: 'button', class: "btn btn-primary", data: {action: "append#append"} do %>
+        <%= icon("plus-circle") %> Add Rule
+      <% end %>
+    </div>
+  </fieldset>
+
+  <div class="actions">
+    <%= form.button type: :submit, class:"btn btn-success min-width-btn" do %>
+      <%= icon "save" %>
+      Save
+    <% end %>
+  </div>
+<% end %>

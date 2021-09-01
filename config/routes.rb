@@ -1,5 +1,7 @@
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
+  resources :groups
+
   resources :environments, only: :index do
     resources :hierarchies, only: [] do
       resources :decrypted_values, only: [:create]

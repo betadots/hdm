@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include HasGroups
+
   has_secure_password validations: false
 
   before_validation :downcase_email, on: [:create, :update]

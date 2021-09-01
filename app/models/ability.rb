@@ -44,6 +44,7 @@ class Ability
         end
         can :manage, User, id: User.where.not(id: user.id).ids
         can :create, User, id: nil
+        can :manage, Group
       end
 
       if user.user?
