@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   has_secure_password
-  belongs_to :role
 
   before_validation :downcase_email, on: [:create, :update]
 
@@ -8,15 +7,15 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   validates :password, length: { minimum: PASSWORD_MIN_LENGTH }
 
-  def admin?
-    self.role && self.role.name == 'Admin'
-  end
+  scope :admins, -> { where(admin: true) }
+  scope :regular, -> { where(admin: false) }
 
   def user?
-    self.role && self.role.name == 'User'
+    !admin?
   end
 
   private
+
   def downcase_email
     self.email = self.email.downcase
   end

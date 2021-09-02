@@ -3,10 +3,9 @@ admin:
   last_name: Admin
   email: admin@example.com
   password_digest: "$2a$12$DqQSeLUn7H3hBgT2JXnwtOwKo2iWGUzS.YqUYoxZK70jvMHmpOOe2" # password
-  role: admin
+  admin: true
 user:
   first_name: Regular
   last_name: User
   email: user@example.com
   password_digest: "$2a$12$DqQSeLUn7H3hBgT2JXnwtOwKo2iWGUzS.YqUYoxZK70jvMHmpOOe2" # password
-  role: user

@@ -6,7 +6,7 @@
         <th>First name</th>
         <th>Last name</th>
         <th>Email</th>
-        <th>Role</th>
+        <th>Admin?</th>
         <th></th>
       </tr>
     </thead>
@@ -23,10 +23,8 @@
             <%= user.email %>
           </td>      
           <td>
-            <% if can? :show, user.role %>
-              <%= link_to user.role, user.role %>
-            <% else %>
-              <%= user.role %>
+            <% if user.admin? %>
+              <%= icon "check" %>
             <% end %>
           </td>      
           <td>

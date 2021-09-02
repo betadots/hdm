@@ -10,7 +10,6 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :roles, only: [:show, :index]
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
 

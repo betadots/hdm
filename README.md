@@ -66,9 +66,7 @@ yarn install --check-files
 ### General HDM Setup
 
 - Create a configuration file using the template: `cp config/hdm.yml.template config/hdm.yml`
-- Create the database with `bundle exec rails db:create`
-- Run the migrations with `bundle exec rails db:migrate`
-- Seed the roles with `bundle exec rails db:seed`
+- Create the database with `bundle exec rails db:setup`
 - Generate a new encrypted credentials file: `echo "test" |EDITOR=vim bundle exec rails credentials:edit` (Note: You may need to adopt this. Never forget to set  the `EDITOR` env variable)
 - Start the webserver with `bundle exec rails server &`
 - STart the fake puppetdb process (if configured in hdm.yml) `./bin/fake_puppet_db &`

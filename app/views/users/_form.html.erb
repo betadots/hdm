@@ -27,10 +27,10 @@
   </div>
 
   <% if current_user.try(:admin?) %>
-    <% if current_page?(action: 'new') || current_user != user || Role.find_by_name('Admin').users.count > 1 %>
-      <div class="form-group">
-        <%= form.label :role_id %>
-        <%= form.collection_select(:role_id, Role.order(:name), :id, :name, class:"form-control") %>
+    <% if current_page?(action: 'new') || current_user != user || User.admins.count > 1 %>
+      <div class="form-check">
+        <%= form.check_box :admin, class:"form-check-input" %>
+        <%= form.label :admin, class: "form-check-label" %>
       </div>
     <% end %>
   <% end %>

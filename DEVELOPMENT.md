@@ -90,9 +90,7 @@ install nodejs and yarn
 
 Create the database with:
 
-    bundle exec rails db:create
-    bundle exec rails db:migrate
-    bundle exec rails db:seed
+    bundle exec rails db:setup
 
 Configure hdm:
 

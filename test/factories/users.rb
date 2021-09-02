@@ -5,6 +5,5 @@ FactoryBot.define do
     email { Faker::Internet.unique.email }
     password { "never-use-this-as-a-password" }
     password_digest { BCrypt::Password.create('secret') }
-    association :role, factory: :role
   end
 end
