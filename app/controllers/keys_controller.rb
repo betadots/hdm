@@ -7,7 +7,7 @@ class KeysController < ApplicationController
 
   def index
     authorize! :show, Key
-    @keys = Key.all(@environment, @node)
+    @keys = Key.all(@node)
 
     add_breadcrumb @environment, environment_nodes_path(@environment)
     add_breadcrumb @node, environment_node_keys_path(@environment, @node)
@@ -15,8 +15,8 @@ class KeysController < ApplicationController
 
   def show
     authorize! :show, Key
-    @keys = Key.all(@environment, @node)
-    @key = Key.new(@environment, @node, params[:id])
+    @keys = Key.all(@node)
+    @key = Key.new(@node, params[:id])
 
     add_breadcrumb @environment, environment_nodes_path(@environment)
     add_breadcrumb @node, environment_node_keys_path(@environment, @node)
@@ -26,7 +26,7 @@ class KeysController < ApplicationController
   def update
     authorize! :update, Key
 
-    @key = Key.new(@environment, @node, params[:id])
+    @key = Key.new(@node, params[:id])
     @key.save_value(params[:hierarchy], params[:path], params[:value])
 
     redirect_to environment_node_key_path(@environment, @node, @key),
@@ -36,7 +36,7 @@ class KeysController < ApplicationController
   def destroy
     authorize! :destroy, Key
 
-    @key = Key.new(@environment, @node, params[:id])
+    @key = Key.new(@node, params[:id])
     @key.remove_value(params[:hierarchy], params[:path])
 
     redirect_to environment_node_key_path(@environment, @node, @key),

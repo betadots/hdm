@@ -1,10 +1,11 @@
 class Hierarchy
-  attr_reader :name, :environment, :datadir, :backend, :files
+  attr_reader :name, :environment, :node, :datadir, :backend, :files
 
-  def self.all(environment, node)
+  def self.all(node)
     facts = node.facts
+    environment = node.environment
     HieraData.new(environment.name).hierarchies.map do |hierarchy|
-      new(environment: environment,
+      new(node: node,
           name: hierarchy.name,
           datadir: hierarchy.datadir,
           backend: hierarchy.backend,
@@ -13,12 +14,13 @@ class Hierarchy
     end
   end
 
-  def self.find(environment, node, name)
-    all(environment, node).find { |h| h.name == name }
+  def self.find(node, name)
+    all(node).find { |h| h.name == name }
   end
 
-  def initialize(environment:, name:, datadir:, backend:, files:, encryptable: false)
-    @environment = environment
+  def initialize(node:, name:, datadir:, backend:, files:, encryptable: false)
+    @node = node
+    @environment = node.environment
     @name = name
     @datadir = datadir
     @backend = backend
@@ -61,6 +63,6 @@ class Hierarchy
   private
 
   def hiera_data
-    @hiera_data ||= HieraData.new(@environment.name)
+    @hiera_data ||= HieraData.new(environment.name)
   end
 end
