@@ -14,17 +14,17 @@ class HieraData
     keys = []
     config.hierarchies.each do |hierarchy|
       hierarchy.resolved_paths(facts: facts).each do |path|
-        file = YamlFile.new(path: hierarchy.datadir.join(path))
+        file = DataFile.new(path: hierarchy.datadir.join(path))
         keys.concat(file.keys)
       end
     end
     keys.sort.uniq
   end
 
-  def search_key(datadir, files, key)
+  def search_key(datadir, files, key, facts = {})
     search_results = {}
     files.each do |path|
-      file = YamlFile.new(path: datadir.join(path))
+      file = DataFile.new(path: datadir.join(path))
       search_results[path] = {
         file_present: file.exist?,
         file_writable: file.writable?,
@@ -37,13 +37,13 @@ class HieraData
 
   def write_key(hierarchy_name, path, key, value)
     hierarchy = find_hierarchy(hierarchy_name)
-    read_file = YamlFile.new(path: hierarchy.datadir.join(path))
+    read_file = DataFile.new(path: hierarchy.datadir.join(path))
     read_file.write_key(key, value)
   end
 
   def remove_key(hierarchy_name, path, key)
     hierarchy = find_hierarchy(hierarchy_name)
-    read_file = YamlFile.new(path: hierarchy.datadir.join(path))
+    read_file = DataFile.new(path: hierarchy.datadir.join(path))
     read_file.remove_key(key)
   end
 
@@ -70,7 +70,7 @@ class HieraData
     result = {}
     config.hierarchies.each do |hierarchy|
       hierarchy.resolved_paths(facts: facts).each do |path|
-        file = YamlFile.new(path: hierarchy.datadir.join(path))
+        file = DataFile.new(path: hierarchy.datadir.join(path))
         result = (file["lookup_options"] || {}).merge(result)
       end
     end
