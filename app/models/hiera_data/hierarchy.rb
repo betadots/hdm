@@ -68,33 +68,16 @@ class HieraData
 
     def resolved_paths(facts:)
       paths.flat_map do |path|
-        resolved_path = interpolate_facts(path, facts)
-        resolved_path = interpolate_globs(resolved_path) if uses_globs?
+        resolved_path = Interpolation.interpolate_facts(path: path, facts: facts)
+        if uses_globs?
+          resolved_path = Interpolation
+            .interpolate_globs(path: resolved_path, datadir: datadir)
+        end
         resolved_path
       end
     end
 
     private
-
-    def interpolate_globs(path)
-      Dir.glob(path, base: datadir).sort
-    end
-
-    def interpolate_facts(path, facts)
-      groups = path.scan(/%{([^}]+)}/)
-      groups.flatten!
-      groups.each { |x| x.gsub!(/^::/, '')}
-
-      resolved_path = path.dup
-
-      groups.each do |fact|
-        facts_value = facts.dig(*fact.split("."))
-        next unless facts_value
-        resolved_path.gsub!(/%{(::)?#{fact}}/, facts_value)
-      end
-
-      resolved_path
-    end
 
     def setup_paths
       base_key = uses_globs? ? "glob" : "path"

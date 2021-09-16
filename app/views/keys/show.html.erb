@@ -33,10 +33,19 @@
                     <% end %>
                   </span>
                   <span class="text-muted">
+                    <% if value.replaced_from_git? %>
+                      <span title="This value is taken from a git repository and not from live production data. Changes will be made to the git repository.">
+                        <%= icon("layers") %>
+                      </span>
+                    <% end %>
                     <% if value.file_writable? %>
-                      <%= icon("pencil") %>
+                      <span title="Value can be edited">
+                        <%= icon("pencil") %>
+                      </span>
                     <% else %>
-                      <%= icon("eye") %>
+                      <span title="Value is read-only">
+                        <%= icon("eye") %>
+                      </span>
                     <% end %>
                   </span>
                 </button>

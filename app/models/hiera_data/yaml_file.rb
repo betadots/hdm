@@ -32,6 +32,10 @@ class HieraData
       content[key] if content
     end
 
+    def has_key?(key)
+      (content || {}).has_key?(key)
+    end
+
     def content_for_key(key)
       return nil unless content
       return nil unless content.has_key?(key)
@@ -48,8 +52,7 @@ class HieraData
     end
 
     def write_key(key, value)
-      new_content = (content ? content : {})
-      action = new_content.has_key?(key) ? :change : :add
+      new_content = (content || {})
       new_content[key] = value
 
       File.open(path, File::RDWR|File::CREAT, 0644) do |f|

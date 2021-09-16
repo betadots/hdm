@@ -31,13 +31,14 @@ class Hierarchy
   def values_for(key)
     @values ||= {}
     @values[key] ||=
-      hiera_data.search_key(@datadir, @files, key.name).map do |path, path_data|
+      hiera_data.search_key(@datadir, @files, key.name, facts: @node.facts).map do |path, path_data|
         Value.new(hierarchy: self,
                   key: key,
                   path: path,
                   file_present: path_data[:file_present],
                   file_writable: path_data[:file_writable],
                   key_present: path_data[:key_present],
+                  replaced_from_git: path_data[:replaced_from_git],
                   value: path_data[:value])
       end
   end

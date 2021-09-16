@@ -29,11 +29,11 @@ class Key
 
   def save_value(hierarchy_name, path, value)
     value = YAML.load(value)
-    hiera_data.write_key(hierarchy_name, path, name, value)
+    hiera_data.write_key(hierarchy_name, path, name, value, facts: @node.facts)
   end
 
   def remove_value(hierarchy_name, path)
-    hiera_data.remove_key(hierarchy_name, path, name)
+    hiera_data.remove_key(hierarchy_name, path, name, facts: @node.facts)
   end
 
   def ==(other)
