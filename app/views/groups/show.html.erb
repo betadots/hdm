@@ -24,4 +24,22 @@
     <%= icon "arrow-left-short" %>
     Back
   <% end %>
+  <h2 class="mt-4">Members</h2>
+
+  <div class="row">
+    <% @group.users.order(:email).in_groups(3) do |users| %>
+      <div class="col-4">
+        <ul>
+          <% users.compact.each do |user| %>
+            <li><%= link_to user.full_name_with_email, user %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to edit_group_group_memberships_path(@group), class:"btn btn-primary min-width-btn" do %>
+    <%= icon "pencil" %>
+    Add/Remove Members 
+  <% end %>
 </div>

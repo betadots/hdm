@@ -1,6 +1,8 @@
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
-  resources :groups
+  resources :groups do
+    resource :group_memberships, only: [:edit, :update]
+  end
 
   resources :environments, only: :index do
     resources :hierarchies, only: [] do
