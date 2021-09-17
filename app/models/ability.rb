@@ -50,9 +50,15 @@ class Ability
       if user.user?
         can :read, User, id: user.id
         can :update, User, id: user.id
-        can :manage, Environment
-        can :manage, Node
-        can :manage, Key
+        can :manage, Environment do |environment|
+          user.may_access?(environment)
+        end
+        can :manage, Node do |node|
+          user.may_access?(node)
+        end
+        can :manage, Key do |key|
+          user.may_access?(key)
+        end
         can :manage, Value
       end
     end

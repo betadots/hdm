@@ -8,15 +8,17 @@ class KeysController < ApplicationController
   def index
     authorize! :show, Key
     @keys = Key.all_for(@node)
+    @keys.select! { |k| current_user.may_access?(k) }
 
     add_breadcrumb @environment, environment_nodes_path(@environment)
     add_breadcrumb @node, environment_node_keys_path(@environment, @node)
   end
 
   def show
-    authorize! :show, Key
     @keys = Key.all_for(@node)
+    @keys.select! { |k| current_user.may_access?(k) }
     @key = Key.new(environment: @environment, name: params[:id])
+    authorize! :show, @key
 
     add_breadcrumb @environment, environment_nodes_path(@environment)
     add_breadcrumb @node, environment_node_keys_path(@environment, @node)
@@ -24,9 +26,8 @@ class KeysController < ApplicationController
   end
 
   def update
-    authorize! :update, Key
-
     @key = Key.new(@node, params[:id])
+    authorize! :update, @key
     @key.save_value(params[:hierarchy], params[:path], params[:value])
 
     redirect_to environment_node_key_path(@environment, @node, @key),
@@ -34,9 +35,8 @@ class KeysController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, Key
-
     @key = Key.new(@node, params[:id])
+    authorize! :destroy, @key
     @key.remove_value(params[:hierarchy], params[:path])
 
     redirect_to environment_node_key_path(@environment, @node, @key),
@@ -47,6 +47,8 @@ class KeysController < ApplicationController
 
   def load_nodes
     @nodes = Node.all(environment: @environment)
+    @nodes.select! { |n| current_user.may_access?(n) }
     @node = Node.new(hostname: params[:node_id], environment: @environment)
+    authorize! :show, @node
   end
 end

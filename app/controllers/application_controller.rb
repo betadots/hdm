@@ -35,7 +35,9 @@ class ApplicationController < ActionController::Base
 
   def load_environments
     @environments = Environment.all
+    @environments.select! { |e| current_user.may_access?(e) }
     @environment = Environment.find(params[:environment_id])
+    authorize! :show, @environment
   end
 
   def display_error_page(error)
