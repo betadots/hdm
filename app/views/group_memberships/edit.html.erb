@@ -6,7 +6,7 @@
       <% User.regular.order(:email).in_groups(3) do |users| %>
         <div class="col-4">
           <ul class="list-unstyled">
-            <%= form.collection_check_boxes :user_ids, users, :id, :full_name_with_email do |b| %>
+            <%= form.collection_check_boxes :user_ids, users.compact, :id, :full_name_with_email do |b| %>
               <li>
                 <%= b.check_box %>
                 <%= b.label %>
