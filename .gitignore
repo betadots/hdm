@@ -53,3 +53,6 @@ package-lock.json
 
 # Coverage reports
 /coverage/*
+
+# Git repo clones
+/repos

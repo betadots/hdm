@@ -1,12 +1,13 @@
 class Key
   attr_reader :name, :environment, :node
 
-  def self.all(environment, node)
+  def self.all(node)
     facts = node.facts
+    environment = node.environment
     keys = []
     HieraData.new(environment.name).all_keys(facts)
       .each do |name|
-      key = new(environment, node, name)
+      key = new(node, name)
       if name == "lookup_options"
         keys.unshift(key)
       else
@@ -16,23 +17,23 @@ class Key
     keys
   end
 
-  def initialize(environment, node, name)
-    @environment = environment
+  def initialize(node, name)
+    @environment = node.environment
     @node = node
     @name = name
   end
 
   def hierarchies
-    @hierarchies ||= Hierarchy.all(@environment, @node)
+    @hierarchies ||= Hierarchy.all(@node)
   end
 
   def save_value(hierarchy_name, path, value)
     value = YAML.load(value)
-    hiera_data.write_key(hierarchy_name, path, name, value)
+    hiera_data.write_key(hierarchy_name, path, name, value, facts: @node.facts)
   end
 
   def remove_value(hierarchy_name, path)
-    hiera_data.remove_key(hierarchy_name, path, name)
+    hiera_data.remove_key(hierarchy_name, path, name, facts: @node.facts)
   end
 
   def ==(other)

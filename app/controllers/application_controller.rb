@@ -12,9 +12,7 @@ class ApplicationController < ActionController::Base
     end
 
     if session[:user_id]
-      @current_user ||= User.find(session[:user_id])
-    else
-      @current_user = nil
+      Current.user ||= User.find(session[:user_id])
     end
   end
 

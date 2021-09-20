@@ -1,10 +1,11 @@
 class Hierarchy
-  attr_reader :name, :environment, :datadir, :backend, :files
+  attr_reader :name, :environment, :node, :datadir, :backend, :files
 
-  def self.all(environment, node)
+  def self.all(node)
     facts = node.facts
+    environment = node.environment
     HieraData.new(environment.name).hierarchies.map do |hierarchy|
-      new(environment: environment,
+      new(node: node,
           name: hierarchy.name,
           datadir: hierarchy.datadir,
           backend: hierarchy.backend,
@@ -13,12 +14,13 @@ class Hierarchy
     end
   end
 
-  def self.find(environment, node, name)
-    all(environment, node).find { |h| h.name == name }
+  def self.find(node, name)
+    all(node).find { |h| h.name == name }
   end
 
-  def initialize(environment:, name:, datadir:, backend:, files:, encryptable: false)
-    @environment = environment
+  def initialize(node:, name:, datadir:, backend:, files:, encryptable: false)
+    @node = node
+    @environment = node.environment
     @name = name
     @datadir = datadir
     @backend = backend
@@ -29,13 +31,14 @@ class Hierarchy
   def values_for(key)
     @values ||= {}
     @values[key] ||=
-      hiera_data.search_key(@datadir, @files, key.name).map do |path, path_data|
+      hiera_data.search_key(@datadir, @files, key.name, facts: @node.facts).map do |path, path_data|
         Value.new(hierarchy: self,
                   key: key,
                   path: path,
                   file_present: path_data[:file_present],
                   file_writable: path_data[:file_writable],
                   key_present: path_data[:key_present],
+                  replaced_from_git: path_data[:replaced_from_git],
                   value: path_data[:value])
       end
   end
@@ -61,6 +64,6 @@ class Hierarchy
   private
 
   def hiera_data
-    @hiera_data ||= HieraData.new(@environment.name)
+    @hiera_data ||= HieraData.new(environment.name)
   end
 end
