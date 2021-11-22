@@ -4,6 +4,8 @@ Copyright 2021 example42 GmbH
 
 This Rails application displays [Puppet](https://github.com/puppetlabs/puppet) Hiera data and offers a WebGUI to read/update/create that configuration.
 
+You can find screenshots in the [screenshots](screenshots) directory.
+
 ## Usermanagement
 
 A fresh installation needs an admin which has to be created first with the WebGUI. That admin can not read the Puppet configuration. He/She can only create/delete new users. Normal users have the ability to read/change/delete the Puppet configuration.
