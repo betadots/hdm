@@ -34,7 +34,7 @@ class Ability
     if User.none?
       can :create, User
     else
-      user ||= User.new # guest user (not logged in)
+      return unless user.present?
 
       if user.admin?
         if User.admins.count > 1

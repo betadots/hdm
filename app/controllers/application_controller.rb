@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   rescue_from Hdm::Error, with: :display_error_page
   rescue_from CanCan::AccessDenied, with: :access_denied
 
+  before_action :authentication_required
+
   helper_method :current_user
 
   private
@@ -13,6 +15,16 @@ class ApplicationController < ActionController::Base
 
     if session[:user_id]
       Current.user ||= User.find(session[:user_id])
+    end
+  end
+
+  def authentication_required
+    unless current_user
+      if User.none?
+        redirect_to new_user_path, notice: 'Please create an admin user first.'
+      else
+        redirect_to login_path
+      end
     end
   end
 
