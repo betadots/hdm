@@ -1,0 +1,10 @@
+require: rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 2.5
+  NewCops: enable
+  Include:
+    - '**/*.rb'
+  Exclude:
+    - vendor/**/*
+    - .vendor/**/*
