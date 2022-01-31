@@ -71,7 +71,7 @@ Add required packages
 Now one can clone the hdm repository:
 
     cd
-    git clone https://github.com/example42/hdm.git
+    git clone https://github.com/betadots/hdm.git
     cd hdm/
 
 install gems
