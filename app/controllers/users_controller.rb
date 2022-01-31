@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  skip_before_action :authentication_required, only: [:new, :create]
+  before_action :conditional_authentication, only: [:new, :create]
+
   load_and_authorize_resource
   add_breadcrumb "Home", :root_path
 
@@ -83,5 +86,9 @@ class UsersController < ApplicationController
           params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
         end
       end
+    end
+
+    def conditional_authentication
+      authentication_required if User.exists?
     end
 end

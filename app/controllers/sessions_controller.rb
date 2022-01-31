@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :authentication_required
+
   add_breadcrumb "Home", :root_path
 
   def new
