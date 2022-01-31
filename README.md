@@ -1,5 +1,6 @@
 # HDM - Hiera Data Manager
 
+Copyright 2022 betadots GmbH
 Copyright 2021 example42 GmbH
 
 This Rails application displays [Puppet](https://github.com/puppetlabs/puppet) Hiera data and offers a WebGUI to read/update/create that configuration.
@@ -12,7 +13,7 @@ A fresh installation needs an admin which has to be created first with the WebGU
 
 ## Setup
 
-At the moment setup is ony tested on Mac OS and CentOS 7.
+At the moment setup is ony tested on Mac OS and CentOS 7 and 8.
 
 ### Mac OS
 
@@ -44,7 +45,7 @@ This will provide us with an up to date Ruby version.
 ```
 yum install -y https://kojipkgs.fedoraproject.org//packages/sqlite/3.8.11/1.fc21/x86_64/sqlite-devel-3.8.11-1.fc21.x86_64.rpm
 yum install -y https://kojipkgs.fedoraproject.org//packages/sqlite/3.8.11/1.fc21/x86_64/sqlite-3.8.11-1.fc21.x86_64.rpm
-yum install -y gcc-c++ zlib-devel
+yum install -y gcc-c++ zlib-devel make
 ```
 
 - Install Ruby Gems
@@ -65,12 +66,49 @@ sudo yum install -y yarn
 yarn install --check-files
 ```
 
+### CentOS 8
+
+Install Puppet Agent package from Puppetlabs.
+
+This will provide us with an up to date Ruby version.
+
+Fetch HDM: `git clone https://github.com/betadots/hdm.git`
+
+Switch into HDM directory: `cd hdm`
+
+- Install required packages:
+
+```
+dnf install -y gcc-c++ zlib-devel sqlite-devel make
+```
+
+- Install Ruby Gems
+
+```
+/opt/puppetlabs/puppet/bin/gem install bundler
+/opt/puppetlabs/puppet/bin/bundle config set --local path 'vendor'
+/opt/puppetlabs/puppet/bin/bundle install
+```
+
+- Install NodeJS
+
+```
+curl --silent --location https://rpm.nodesource.com/setup_14.x | sudo bash
+sudo dnf install -y nodejs
+curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+sudo rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg
+sudo dnf install -y yarn
+yarn install --check-files
+```
+
+
 ### General HDM Setup
 
 - Create a configuration file using the template: `cp config/hdm.yml.template config/hdm.yml`
-- Create the database with `bundle exec rails db:setup`
-- Generate a new encrypted credentials file: `echo "test" |EDITOR=vim bundle exec rails credentials:edit` (Note: You may need to adopt this. Never forget to set  the `EDITOR` env variable)
-- Start the webserver with `bundle exec rails server &`
+- Create the database with `/opt/puppetlabs/puppet/bin/bundle exec rails db:setup`
+- Generate a new encrypted credentials file: `echo "test" |EDITOR=vim /opt/puppetlabs/puppet/bin/bundle exec rails credentials:edit` (Note: You may need to adopt this. Never forget to set  the `EDITOR` env variable)
+- Start the webserver with `/opt/puppetlabs/puppet/bin/bundle exec rails server &`
+- Expand PATH variable `export PATH=/opt/puppetlabs/puppet/bin:$PATH`
 - STart the fake puppetdb process (if configured in hdm.yml) `./bin/fake_puppet_db &`
 - Use your browser to open http://localhost:3000
 
