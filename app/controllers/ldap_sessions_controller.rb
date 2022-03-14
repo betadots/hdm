@@ -1,0 +1,38 @@
+class LdapSessionsController < ApplicationController
+  skip_before_action :authentication_required
+
+  add_breadcrumb "Home", :root_path
+
+  def new
+    add_breadcrumb "Login (LDAP)", :login_path
+
+    if session[:user_id]
+      redirect_to root_url, alert: "You have to logout first to login!"
+    end
+  end
+
+  def create
+    ldap = Ldap.new
+    if entries = ldap.authenticate(params[:email], params[:password])
+      user = find_or_create_user(entries.first)
+      session[:user_id] = user.id
+      if user.admin?
+        redirect_to users_path, notice: "Logged in!"
+      else
+        redirect_to root_url, notice: "Logged in!"
+      end
+    else
+      flash.now[:alert] = "Email or password is invalid"
+      render "new"
+    end
+  end
+
+  private
+
+  def find_or_create_user(ldap_user)
+    User.find_or_create_by!(email: params[:email].downcase) do |user|
+      user.first_name = ldap_user.givenname.first || "ldap"
+      user.last_name = ldap_user.sn.first || "user"
+    end
+  end
+end

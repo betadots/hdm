@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
 
+  resource :ldap_session, only: [:new, :create]
+
   get 'page/index'
 
   get 'signup', to: 'users#new', as: 'signup'
