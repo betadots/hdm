@@ -121,30 +121,7 @@ The example development puppet configuration can be found in the directory
 
 ## Docker
 
-### Build
-
-There is a Dockerfile to build a container. This can be done with:
-
-    cd hdm
-    docker build -t hdm .
-
-### Docker Compose
-
-For docker-compose see `docker-compose.yaml` or use this example:
-
-    ---
-    version: '3.5'
-    services:
-      hdm:
-        image: betadots/hdm:latest
-        container_name: hdm
-        volumes:
-          # keep db outside of container
-          - /srv/data/hdm/db:/hdm/data/db
-          - /srv/data/hdm/env:/etc/puppetlabs/code
-        ports:
-          - 3000:3000
-        restart: unless-stopped
+[click me](DOCKER.md)
 
 ## Use git repositories instead of "live" yaml files
 
