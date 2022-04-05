@@ -3,7 +3,7 @@ FROM ruby:2.5.8
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list
 RUN apt-get update && apt-get install -y build-essential npm nodejs yarn
-RUN gem install bundler -v 2.2.15
+RUN gem install bundler -v 2.3.6
 
 ENV APP_HOME /hdm
 RUN mkdir $APP_HOME
