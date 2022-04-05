@@ -136,11 +136,12 @@ For docker-compose see `docker-compose.yaml` or use this example:
     version: '3.5'
     services:
       hdm:
-        image: example42/hdm:latest
+        image: betadots/hdm:latest
         container_name: hdm
         volumes:
           # keep db outside of container
           - /srv/data/hdm/db:/hdm/data/db
+          - /srv/data/hdm/env:/etc/puppetlabs/code
         ports:
           - 3000:3000
         restart: unless-stopped
@@ -188,4 +189,3 @@ Any changes made to files from a git repository will be commited and pushed back
 to the origin repository. Please note that HDM will not pull updates from the
 origin repository and is **not** able to resolve possible conflicts, so you might
 want to make sure that your repository is only edited by HDM.
-

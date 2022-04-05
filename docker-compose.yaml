@@ -2,7 +2,7 @@
 version: "3.5"
 services:
   hdm:
-    image: example42/hdm:latest
+    image: betadots/hdm:latest
     container_name: hdm
     environment:
       - PUID=1001
@@ -10,8 +10,12 @@ services:
       - USER_UID=1001
       - USER_GID=1001
       - TZ=Europe/Berlin
-    # volumes:
-    #   - /srv/data/hdm/db:/app/data/db
+    volumes:
+      - /srv/data/hdm/db:/app/data/db
+      - /srv/data/hdm/env:/etc/puppetlabs/code
+      - /srv/data/hdm/hdm.yaml:/hdm/config/hdm.yaml
+      - /srv/data/hdm/master.key:/hdm/config/master.key
+      - /srv/data/hdm/credentials.yml.enc:/hdm/config/credentials.yml.enc
     ports:
       - 3000:3000
     restart: unless-stopped
