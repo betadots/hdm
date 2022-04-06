@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-# cd /hdm
-
 bundle exec rails db:create
 bundle exec rails db:migrate
 

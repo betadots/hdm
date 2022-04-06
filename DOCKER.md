@@ -11,7 +11,8 @@ The structure might look like this:
       ├── database.yml
       ├── db
       │   ├── development.sqlite3
-      │   └── test.sqlite3
+      │   ├── ...
+      │   └── production.sqlite3
       ├── hdm.yml
       ├── hiera
       │   └── hiera files ...
@@ -19,7 +20,13 @@ The structure might look like this:
 
 If you are running this directly on the puppet compiler the hiera directory might not be needed. But if you have hiera as a seperate repository this might be helpfull. You also can mount it directly in the compose file.
 
+To avoid any trouble with access to the cert files, it might be better to copy them to certs/ directory and adjust the mode so you can use them for sure.
+
+The db folder might be a volume mounted into your container to save the user database outside of the container.
+
 ## hdm config example
+
+This file is used inside the container, so paths have to match to your mounted docker volume.
 
     development:
       read_only: true
@@ -38,7 +45,9 @@ If you are running this directly on the puppet compiler the hiera directory migh
 
 ## hdm database config example
 
-to save the SQLite DB files outside of the container, we habe to inject a different database.yml to change the path. When there is a mount into the container for hdm_env you might place it there, or change it to your desired location.
+This file is used inside the container, so paths have to match to your mounted docker volume.
+
+To save the SQLite DB files outside of the container, we habe to inject a different database.yml to change the path.
 
     default: &default
       adapter: sqlite3
@@ -59,7 +68,9 @@ to save the SQLite DB files outside of the container, we habe to inject a differ
 
 ## hdm hiera config example (Optional)
 
-This file can be used as default file for all or only one environment. You dont need this if you have this already in your environment. But it is usefull if you have a seperate hiera repository and only mounting pseudo environments into your docker.
+This file is used inside the container, so paths have to match to your mounted docker volume.
+
+This file can be used as default file for all or only one environment. You dont need this if you have this already in your environment. But it can be usefull if you have a seperate hiera repository and only mounting pseudo environments into your docker (see [docker-compose](docker-compose.yaml) example).
 
     ---
     version: 5
@@ -84,11 +95,12 @@ This file can be used as default file for all or only one environment. You dont 
 
 # Docker Compose
 
-For docker compose see [`docker-compose.yaml`](docker-compose.yaml).
+See [`docker-compose.yaml`](docker-compose.yaml).
 
 # Build the container
 
-If you want to build the container locally, there is a Dockerfile for the container. This can be done with:
+If you want to build the container locally, use the Dockerfile from this repo.
+If you don't use BuildKit yet, give it a try.
 
     cd hdm
-    docker build -t hdm .
+    DOCKER_BUILDKIT=1 docker build -t hdm .

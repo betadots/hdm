@@ -121,7 +121,7 @@ The example development puppet configuration can be found in the directory
 
 ## Docker
 
-[click me](DOCKER.md)
+See [DOCKER.md](DOCKER.md)
 
 ## Use git repositories instead of "live" yaml files
 
