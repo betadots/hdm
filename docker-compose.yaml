@@ -2,7 +2,7 @@
 version: "3.5"
 services:
   hdm:
-    image: betadots/hdm
+    image: ghcr.io/betadots/hdm
     container_name: hdm
     environment:
       - TZ=Europe/Berlin
@@ -16,11 +16,14 @@ services:
       # hdm database config
       - { type: 'bind', source: '/hdm_env/database.yml', target: '/hdm/config/database.yml', read_only: true }
 
-      ##### mount hiera as data dir
-      - /hdm_env/hiera:/etc/puppetlabs/code/environments/pre_development/data:ro
-      - /hdm_env/hiera:/etc/puppetlabs/code/environments/development/data:ro
-      - /hdm_env/hiera:/etc/puppetlabs/code/environments/test/data:ro
-      - /hdm_env/hiera:/etc/puppetlabs/code/environments/production/data:ro
+      ##### mount hiera as data dir in each pseudo env, if you have a seperate hiera repo
+      # - /hdm_env/hiera:/etc/puppetlabs/code/environments/pre_development/data:ro
+      # - /hdm_env/hiera:/etc/puppetlabs/code/environments/development/data:ro
+      # - /hdm_env/hiera:/etc/puppetlabs/code/environments/test/data:ro
+      # - /hdm_env/hiera:/etc/puppetlabs/code/environments/production/data:ro
+
+      ### mount actual code directory from puppetserver
+      # - /etc/puppetlabs/code/environments:/etc/puppetlabs/code/environments:ro
 
     ports:
       - 3000:3000
