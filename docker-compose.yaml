@@ -2,19 +2,22 @@
 version: "3.5"
 services:
   hdm:
-    image: ghcr.io/betadots/hdm
+    # image: ghcr.io/betadots/hdm
+    image: hdm
     container_name: hdm
     environment:
       - TZ=Europe/Berlin
+      # whether to enable dev mode with fake puppetdb or not
+      # - DEVELOP=1
     volumes:
       # folder to save the rails sqlite
       - /hdm_env/db:/hdm_env/db
       # certs to talk to puppetdb
-      - /hdm_env/certs:/hdm_env/certs:ro
+      # - /hdm_env/certs:/hdm_env/certs:ro
       # hdm main config
-      - { type: 'bind', source: '/hdm_env/hdm.yml', target: '/hdm/config/hdm.yml', read_only: true }
+      # - { type: 'bind', source: '/hdm_env/hdm.yml', target: '/hdm/config/hdm.yml', read_only: true }
       # hdm database config
-      - { type: 'bind', source: '/hdm_env/database.yml', target: '/hdm/config/database.yml', read_only: true }
+      # - { type: 'bind', source: '/hdm_env/database.yml', target: '/hdm/config/database.yml', read_only: true }
 
       ##### mount hiera as data dir in each pseudo env, if you have a seperate hiera repo
       # - /hdm_env/hiera:/etc/puppetlabs/code/environments/pre_development/data:ro
