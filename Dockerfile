@@ -31,8 +31,8 @@ RUN apk add --update --no-cache \
       sqlite-dev \
       # not needed for gems, but for runtime
       git \
-      tzdata \
-      # yarn # works without this but produces a short error, that yarn is not found
+      # yarn \ # works without this but produces a short error, that yarn is not found
+      tzdata
 
 RUN gem install bundler -v 2.3.6
 
