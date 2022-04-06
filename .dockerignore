@@ -6,9 +6,6 @@
 db/*.sqlite3
 docker-compose.yml
 Gemfile.lock
-log/
 node_modules/
 screenshots/
-test/
-tmp/
 vendor/
