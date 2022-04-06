@@ -12,6 +12,7 @@ COPY yarn.lock $APP_HOME
 RUN yarn install --check-files
 
 COPY . $APP_HOME
+COPY config/hdm.yml.template $APP_HOME/config/hdm.yml
 
 FROM ruby:2.5.8-alpine
 
@@ -41,5 +42,4 @@ WORKDIR /hdm
 
 RUN bundle check || bundle install --without test
 
-# ENTRYPOINT ["/hdm/bin/entry.sh"]
 CMD ["/hdm/bin/entry.sh"]
