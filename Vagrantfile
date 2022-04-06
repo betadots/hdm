@@ -20,6 +20,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
     sudo yum install -y docker-ce docker-ce-cli docker-compose-plugin containerd.io
+    sudo mkdir -p /etc/docker
     sudo echo '{ "features": { "buildkit": true } }' > /etc/docker/daemon.json
     sudo systemctl enable --now docker.service
   SHELL
