@@ -8,7 +8,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.3.0",
     "bootstrap": "^4.5.3",
-    "bootstrap-icons": "^1.4.1",
+    "bootstrap-icons": "^1.8.1",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "slim-select": "^1.27.0",
