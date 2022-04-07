@@ -10,7 +10,7 @@ test:
   read_only: false
   allow_encryption: true
   puppet_db:
-    server: "http://localhost:8084"
+    server: "http://localhost:8085"
   config_dir: <%= Rails.root.join('test','fixtures','files','puppet') %>
   #hiera_config_file: "hiera_hdm.yaml"
 
