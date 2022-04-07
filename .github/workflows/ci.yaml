@@ -16,7 +16,6 @@ jobs:
       uses: ludeeus/action-shellcheck@1.1.0
       with:
         scandir: './bin'
-jobs:
   rubocop:
     runs-on: ubuntu-latest
     env:
