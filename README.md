@@ -121,29 +121,7 @@ The example development puppet configuration can be found in the directory
 
 ## Docker
 
-### Build
-
-There is a Dockerfile to build a container. This can be done with:
-
-    cd hdm
-    docker build -t hdm .
-
-### Docker Compose
-
-For docker-compose see `docker-compose.yaml` or use this example:
-
-    ---
-    version: '3.5'
-    services:
-      hdm:
-        image: example42/hdm:latest
-        container_name: hdm
-        volumes:
-          # keep db outside of container
-          - /srv/data/hdm/db:/hdm/data/db
-        ports:
-          - 3000:3000
-        restart: unless-stopped
+See [DOCKER.md](DOCKER.md)
 
 ## Use git repositories instead of "live" yaml files
 
@@ -188,4 +166,3 @@ Any changes made to files from a git repository will be commited and pushed back
 to the origin repository. Please note that HDM will not pull updates from the
 origin repository and is **not** able to resolve possible conflicts, so you might
 want to make sure that your repository is only edited by HDM.
-

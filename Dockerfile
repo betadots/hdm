@@ -1,22 +1,45 @@
-FROM ruby:2.5.8
+FROM ruby:2.5.8-alpine as build
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list.d/yarn.list
-RUN apt-get update && apt-get install -y build-essential npm nodejs yarn
-RUN gem install bundler -v 2.2.15
+RUN apk add --update --no-cache \
+      nodejs \
+      yarn
 
 ENV APP_HOME /hdm
-RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
-COPY Gemfile $APP_HOME/
-RUN bundle config set --local path 'vendor/bundle' && bundle install
+COPY package.json $APP_HOME
+COPY yarn.lock $APP_HOME
+RUN yarn install --check-files
 
 COPY . $APP_HOME
 COPY config/hdm.yml.template $APP_HOME/config/hdm.yml
 
-RUN yarn install --check-files
+FROM ruby:2.5.8-alpine
 
-EXPOSE 3000
+RUN apk add --update --no-cache \
+      binutils-gold \
+      build-base \
+      g++ \
+      gcc \
+      libstdc++ \
+      libffi-dev \
+      libc-dev \
+      libxml2-dev \
+      libxslt-dev \
+      libgcrypt-dev \
+      make \
+      sqlite \
+      sqlite-dev \
+      # not needed for gems, but for runtime
+      git \
+      # yarn \ # works without this but produces a short error, that yarn is not found
+      tzdata
+
+RUN gem install bundler -v 2.3.6
+
+COPY --from=build /hdm /hdm
+WORKDIR /hdm
+
+RUN bundle check || bundle install --without test
 
 CMD ["/hdm/bin/entry.sh"]
