@@ -134,9 +134,9 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     nio4r (2.5.8)
-    nokogiri (1.11.5-x86_64-darwin)
+    nokogiri (1.12.5-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.11.5-x86_64-linux)
+    nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
     optimist (3.0.1)
     public_suffix (4.0.6)
@@ -169,7 +169,7 @@ GEM
       hocon (>= 1.0)
     puppetdb-ruby (1.2.0)
       httparty
-    racc (1.5.2)
+    racc (1.6.0)
     rack (2.2.3)
     rack-proxy (0.6.5)
       rack
