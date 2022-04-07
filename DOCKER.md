@@ -81,11 +81,11 @@ This file can be used as default file for all or only one environment. You dont 
     hierarchy:
       - name: "Hiera general Yaml"
         paths:
-          - "os/%{::os.name}-%{::os.release.full}.yaml"
-          - "os/%{::os.name}-%{::os.release.major}.yaml"
-          - "os/%{::os.name}.yaml"
-          - "os/%{::os.family}-%{::os.release.major}.yaml"
-          - "os/%{::os.family}.yaml"
+          - "os/%{facts.os.name}-%{facts.os.release.full}.yaml"
+          - "os/%{facts.os.name}-%{facts.os.release.major}.yaml"
+          - "os/%{facts.os.name}.yaml"
+          - "os/%{facts.os.family}-%{facts.os.release.major}.yaml"
+          - "os/%{facts.os.family}.yaml"
 
       - name: "Puppet Environments"
         path: "env/%{::environment}.yaml"
