@@ -384,6 +384,15 @@ Rails/FilePath:
     - 'test/models/hiera_data/yaml_file_test.rb'
     - 'test/models/hiera_data_test.rb'
 
+# Offense count: 13
+Rails/I18nLocaleTexts:
+  Exclude:
+    - 'app/controllers/application_controller.rb'
+    - 'app/controllers/keys_controller.rb'
+    - 'app/controllers/page_controller.rb'
+    - 'app/controllers/sessions_controller.rb'
+    - 'app/controllers/users_controller.rb'
+
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: NotNilAndNotEmpty, NotBlank, UnlessBlank.
