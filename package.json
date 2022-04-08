@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "@fontsource/open-sans": "^4.5.8",
+    "@popperjs/core": "^2.11.5",
     "@rails/actioncable": "^6.1.5",
     "@rails/activestorage": "^6.1.5",
     "@rails/ujs": "^6.1.5",
