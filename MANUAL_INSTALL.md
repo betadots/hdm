@@ -7,6 +7,7 @@ HDM binds per default to port 3000.
 ## Ruby
 
 Make sure you have the necessary ruby version on your system avaiable. You might use rvm or rbenv.
+The needed version cann be found here: [.ruby-version](.ruby-version).
 
 ## CentOS 8 Streams
 
@@ -14,8 +15,8 @@ Make sure you have the necessary ruby version on your system avaiable. You might
 
 As root do:
 
-    command curl -sSL https://rvm.io/mpapis.asc | sudo gpg2 --import -
-    command curl -sSL https://rvm.io/pkuczynski.asc | sudo gpg2 --import -
+    command curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
+    command curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import -
     curl -sSL https://get.rvm.io | bash -s stable
 
     source /etc/profile.d/rvm.sh
@@ -26,8 +27,8 @@ As root do:
 
 ### **yarn/nodejs**
 
-    curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
-    curl --silent --location https://rpm.nodesource.com/setup_14.x | sudo bash
+    curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
+    curl --silent --location https://rpm.nodesource.com/setup_14.x | bash
     yum install -y yarn
 
 ### **Main part**
