@@ -1,0 +1,17 @@
+[Unit]
+Description=HDM
+Requires=network.target
+
+[Service]
+Type=simple
+# User=rails
+# Group=rails
+WorkingDirectory=/opt/hdm
+# ExecStart=/bin/bash -lc 'bundle exec rails server -e production --bind 0.0.0.0 --port 80'
+ExecStart=/bin/bash -lc 'bundle exec rails server -b 0.0.0.0'
+TimeoutSec=30
+RestartSec=15s
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
