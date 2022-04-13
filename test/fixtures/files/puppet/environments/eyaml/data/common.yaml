@@ -8,16 +8,16 @@ lookup_options:
 # noop_mode: true
 hdm::float: 0.1
 hdm::integer: 1
-psick::enable_firstrun: false
-psick::firstrun::linux_classes:
+foobar::enable_firstrun: false
+foobar::firstrun::linux_classes:
   hostname: common::hostname
-psick::time::servers:
+foobar::time::servers:
   - pool.ntp.org
-psick::timezone: UTC
-psick::postfix::tp::resources_hash:
+foobar::timezone: UTC
+foobar::postfix::tp::resources_hash:
   tp::conf:
     postfix:
-      template: 'psick/postfix/main.cf.erb'
+      template: 'foobar/postfix/main.cf.erb'
 long_entry: 'üiqeurhfüpiurw3gpieurzgfp  384z7r0cioetzvboerutb03847bz0847bvoquzgcbow4ztboqwt4b0  37t4b0  87t43bro  iwq4bcori 74bzcr08  7tb'
 long_pipe: |
   cluster.name: dev_cluster
@@ -238,5 +238,3 @@ cpuyvhnl: >
   F0Z+UqhRJpI1h4HKIflP9kBez7to+n+orN7cgAelQDP5gwH5e70vbi/GmIyv
   DH5T4m1ZV8WZPxGjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBDllmo7aX
   wTeVsjEqMBnFDWgBBzsBL4PlCYcbwEvgMShdkr]
-
-

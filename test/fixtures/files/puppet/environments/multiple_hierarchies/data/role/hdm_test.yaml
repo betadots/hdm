@@ -1,5 +1,5 @@
 ---
-psick::firstrun::linux_classes:
+foobar::firstrun::linux_classes:
   hostname: hostname-role
 profile::ssh_tunnel::target_user: 'ft-e2-n'
 profile::ssh_tunnel::ssh_config: |

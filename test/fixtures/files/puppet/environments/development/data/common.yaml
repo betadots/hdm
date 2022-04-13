@@ -1,13 +1,13 @@
 ---
 hdm::float: 0.1
 hdm::integer: 1
-psick::enable_firstrun: false
-psick::firstrun::linux_classes:
+foobar::enable_firstrun: false
+foobar::firstrun::linux_classes:
   hostname: common::hostname
-psick::time::servers:
+foobar::time::servers:
 - pool.ntp.org
-psick::timezone: UTC
-psick::postfix::tp::resources_hash:
+foobar::timezone: UTC
+foobar::postfix::tp::resources_hash:
   tp::conf:
     postfix:
-      template: psick/postfix/main.cf.erb
+      template: foobar/postfix/main.cf.erb

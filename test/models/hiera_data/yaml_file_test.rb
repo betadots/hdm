@@ -14,11 +14,11 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
   test "#keys returns the top level keys for the file" do
     expected_keys = [
       "noop_mode",
-      "psick::enable_firstrun",
-      "psick::firstrun::linux_classes",
-      "psick::time::servers",
-      "psick::timezone",
-      "psick::postfix::tp::resources_hash"
+      "foobar::enable_firstrun",
+      "foobar::firstrun::linux_classes",
+      "foobar::time::servers",
+      "foobar::timezone",
+      "foobar::postfix::tp::resources_hash"
     ]
 
     file = HieraData::YamlFile.new(path: config_dir.join("nodes/testhost.yaml"))
@@ -47,12 +47,12 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
 
   test "#content_for_key returns string for string" do
     file = HieraData::YamlFile.new(path: config_dir.join("nodes/testhost.yaml"))
-    assert_equal "CET", file.content_for_key('psick::timezone')
+    assert_equal "CET", file.content_for_key('foobar::timezone')
   end
 
   test "#content_for_key returns yaml structure as string" do
     file = HieraData::YamlFile.new(path: config_dir.join("nodes/testhost.yaml"))
-    assert_equal key_as_string, file.content_for_key('psick::postfix::tp::resources_hash')
+    assert_equal key_as_string, file.content_for_key('foobar::postfix::tp::resources_hash')
   end
 
   test "#content_for_key returns integer as integer" do
@@ -121,7 +121,7 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
       <<~HEREDOC
       tp::conf:
         postfix:
-          template: psick/postfix/main.cf.epp
+          template: foobar/postfix/main.cf.epp
       HEREDOC
     end
 end

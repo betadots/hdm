@@ -78,8 +78,8 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
     hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: base_path)
     facts = {"fqdn" => "testhost"}
     expected_resolved_paths = [
-      "common/hdm.yaml",
-      "common/psick.yaml"
+      "common/foobar.yaml",
+      "common/hdm.yaml"
     ]
     assert_equal expected_resolved_paths, hierarchy.resolved_paths(facts: facts)
   end

@@ -1,12 +1,12 @@
 ---
 noop_mode: true
-psick::enable_firstrun: true
-psick::firstrun::linux_classes:
+foobar::enable_firstrun: true
+foobar::firstrun::linux_classes:
   hostname: hostname
-psick::time::servers:
+foobar::time::servers:
 - debian.pool.ntp.org
-psick::timezone: CET
-psick::postfix::tp::resources_hash:
+foobar::timezone: CET
+foobar::postfix::tp::resources_hash:
   tp::conf:
     postfix:
-      template: psick/postfix/main.cf.epp
+      template: foobar/postfix/main.cf.epp

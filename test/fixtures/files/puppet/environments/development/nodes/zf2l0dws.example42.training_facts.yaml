@@ -1,5 +1,0 @@
----
-fqdn: 'zf2l0dws.example42.training'
-role: 'hdm_test'
-env: 'demo'
-zone: 'internal'

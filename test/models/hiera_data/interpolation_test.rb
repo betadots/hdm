@@ -5,8 +5,8 @@ class HieraData::InterpolationTest < ActiveSupport::TestCase
     datadir = Rails.root.join("test/fixtures/files/puppet/environments/globs/data")
     path = "common/*.yaml"
     expected_result = [
-      "common/hdm.yaml",
-      "common/psick.yaml"
+      "common/foobar.yaml",
+      "common/hdm.yaml"
     ]
 
     assert_equal expected_result, HieraData::Interpolation.interpolate_globs(path: path, datadir: datadir)

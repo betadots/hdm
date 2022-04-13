@@ -1,5 +1,0 @@
----
-fqdn: 'dhplrtv.example42.training'
-role: 'hdm_test'
-env: 'demo'
-zone: 'internal'
