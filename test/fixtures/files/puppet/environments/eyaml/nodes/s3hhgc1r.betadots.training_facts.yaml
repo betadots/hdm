@@ -1,0 +1,5 @@
+---
+fqdn: 's3hhgc1r.betadots.training'
+role: 'hdm_test'
+env: 'demo'
+zone: 'internal'

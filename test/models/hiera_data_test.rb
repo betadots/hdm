@@ -21,14 +21,14 @@ class HieraDataTest < ActiveSupport::TestCase
       "common.yaml" => {file_present: true,  file_writable: true, replaced_from_git: false, key_present: true, value: "hostname: common::hostname\n"}
     }
 
-    result = hiera.search_key(datadir, expected_result.keys, 'psick::firstrun::linux_classes')
+    result = hiera.search_key(datadir, expected_result.keys, 'foobar::firstrun::linux_classes')
     assert_equal expected_result, result
   end
 
   test "#all_keys return all keys" do
     hiera = HieraData.new('development')
     expected_result = [
-        "hdm::float", "hdm::integer", "noop_mode", "psick::enable_firstrun", "psick::firstrun::linux_classes", "psick::postfix::tp::resources_hash", "psick::time::servers", "psick::timezone"
+        "foobar::enable_firstrun", "foobar::firstrun::linux_classes", "foobar::postfix::tp::resources_hash", "foobar::time::servers", "foobar::timezone", "hdm::float", "hdm::integer", "noop_mode"
     ]
 
     node = Node.new(hostname: "testhost", environment: "development")
@@ -87,7 +87,7 @@ class HieraDataTest < ActiveSupport::TestCase
 
   test "#lookup_options returns the merged lookup options for the selected environment and facts" do
     hiera = HieraData.new("multiple_hierarchies")
-    node = Node.new(hostname: "sse8epsu.example42.training", environment: "multiple_hierarchies")
+    node = Node.new(hostname: "sse8epsu.betadots.training", environment: "multiple_hierarchies")
     expected_hash = {
       'profile::auth::sudo_configs' => {
         "merge" => "deep"

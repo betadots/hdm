@@ -1,0 +1,5 @@
+---
+fqdn: 'tgsy3idb.betadots.training'
+role: 'hdm_test'
+env: 'demo'
+zone: 'internal'

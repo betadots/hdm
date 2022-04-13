@@ -1,5 +1,0 @@
----
-fqdn: 'fnp4tnay.example42.training'
-role: 'hdm_test'
-env: 'demo'
-zone: 'internal'

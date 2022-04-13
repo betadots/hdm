@@ -1,5 +1,0 @@
----
-fqdn: 'j6kant58.example42.training'
-role: 'hdm_test'
-env: 'demo'
-zone: 'internal'

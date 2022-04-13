@@ -1,0 +1,5 @@
+---
+fqdn: 'gki2r2ip.betadots.training'
+role: 'hdm_test'
+env: 'demo'
+zone: 'internal'

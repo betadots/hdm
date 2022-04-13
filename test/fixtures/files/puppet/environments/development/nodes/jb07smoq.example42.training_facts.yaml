@@ -1,5 +1,0 @@
----
-fqdn: 'jb07smoq.example42.training'
-role: 'hdm_test'
-env: 'demo'
-zone: 'internal'

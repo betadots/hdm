@@ -1,5 +1,0 @@
----
-fqdn: 'gki2r2ip.example42.training'
-role: 'hdm_test'
-env: 'demo'
-zone: 'internal'

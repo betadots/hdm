@@ -1,5 +1,0 @@
----
-fqdn: 'xda8efsx.example42.training'
-role: 'hdm_test'
-env: 'demo'
-zone: 'internal'

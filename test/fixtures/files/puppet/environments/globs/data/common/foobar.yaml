@@ -1,0 +1,11 @@
+---
+foobar::enable_firstrun: false
+foobar::firstrun::linux_classes:
+  hostname: common::hostname
+foobar::time::servers:
+- pool.ntp.org
+foobar::timezone: UTC
+foobar::postfix::tp::resources_hash:
+  tp::conf:
+    postfix:
+      template: foobar/postfix/main.cf.erb
