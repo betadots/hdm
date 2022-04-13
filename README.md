@@ -11,113 +11,11 @@ You can find screenshots in the [screenshots](screenshots) directory.
 
 A fresh installation needs an admin which has to be created first with the WebGUI. That admin can not read the Puppet configuration. He/She can only create/delete new users. Normal users have the ability to read/change/delete the Puppet configuration.
 
-## Setup
+## Manual installation
 
-At the moment setup is ony tested on Mac OS and CentOS 7 and 8.
+At the moment manual install is only tested on macOS, CentOS 7 and 8 Streams. But we highly recommend to use the Docker image!
 
-### Mac OS
-
-Please make sure that you have installed the right Ruby version (2.5.8) before you start your work. https://rvm.io is a good tool to do that.
-
-In case you are using an Apple M1 Chip you might run into trouble building
-Ruby. A work around for that is using the command `rvm install 2.5.8 --with-cflags="-Wno-error=implicit-function-declaration"`
-
-- Clone the repository and `cd` into the directory.
-- Do `bundle config set --local path 'vendor/bundle'`
-- Do `bundle config set --local with 'development'`
-- Do `bundle install`.
-- Install nodejs
-  - `brew install node@14` (https://brew.sh)
-  - or `sudo port install nmp6 yarn`
-  - node 15 does not work yet
-- We need `yarn`, install it: `npm install -g yarn`
-
-- Install the needed packages: `yarn install --check-files`
-
-### CentOS 7
-
-Install Puppet Agent package from Puppetlabs.
-
-This will provide us with an up to date Ruby version.
-
-- Install required packages:
-
-```
-yum install -y https://kojipkgs.fedoraproject.org//packages/sqlite/3.8.11/1.fc21/x86_64/sqlite-devel-3.8.11-1.fc21.x86_64.rpm
-yum install -y https://kojipkgs.fedoraproject.org//packages/sqlite/3.8.11/1.fc21/x86_64/sqlite-3.8.11-1.fc21.x86_64.rpm
-yum install -y gcc-c++ zlib-devel make
-```
-
-- Install Ruby Gems
-
-```
-/opt/puppetlabs/puppet/bin/gem install bundler
-/opt/puppetlabs/puppet/bin/bundle install --path vendor
-```
-
-- Install NodeJS
-
-```
-curl --silent --location https://rpm.nodesource.com/setup_14.x | sudo bash
-sudo yum install -y nodejs
-curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
-sudo rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg
-sudo yum install -y yarn
-yarn install --check-files
-```
-
-### CentOS 8
-
-Install Puppet Agent package from Puppetlabs.
-
-This will provide us with an up to date Ruby version.
-
-Fetch HDM: `git clone https://github.com/betadots/hdm.git`
-
-Switch into HDM directory: `cd hdm`
-
-- Install required packages:
-
-```
-dnf install -y gcc-c++ zlib-devel sqlite-devel make
-```
-
-- Install Ruby Gems
-
-```
-/opt/puppetlabs/puppet/bin/gem install bundler
-/opt/puppetlabs/puppet/bin/bundle config set --local path 'vendor'
-/opt/puppetlabs/puppet/bin/bundle install
-```
-
-- Install NodeJS
-
-```
-curl --silent --location https://rpm.nodesource.com/setup_14.x | sudo bash
-sudo dnf install -y nodejs
-curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
-sudo rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg
-sudo dnf install -y yarn
-yarn install --check-files
-```
-
-
-### General HDM Setup
-
-- Create a configuration file using the template: `cp config/hdm.yml.template config/hdm.yml`
-- Create the database with `/opt/puppetlabs/puppet/bin/bundle exec rails db:setup`
-- Generate a new encrypted credentials file: `echo "test" |EDITOR=vim /opt/puppetlabs/puppet/bin/bundle exec rails credentials:edit` (Note: You may need to adopt this. Never forget to set  the `EDITOR` env variable)
-- Start the webserver with `/opt/puppetlabs/puppet/bin/bundle exec rails server &`
-- Expand PATH variable `export PATH=/opt/puppetlabs/puppet/bin:$PATH`
-- STart the fake puppetdb process (if configured in hdm.yml) `./bin/fake_puppet_db &`
-- Use your browser to open http://localhost:3000
-
-- In case of layout errors: `bundle exec rails tmp:clear`
-
-You can reset your database anytime with a `rails db:reset`.
-
-The example development puppet configuration can be found in the directory
-`test/fixtures/files/puppet`
+See [MANUAL_INSTALL.md](MANUAL_INSTALL.md)
 
 ## Docker
 
