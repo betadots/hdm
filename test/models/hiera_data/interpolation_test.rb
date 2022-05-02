@@ -28,6 +28,14 @@ class HieraData::InterpolationTest < ActiveSupport::TestCase
     assert_equal expected_result, HieraData::Interpolation.interpolate_facts(path: path, facts: facts)
   end
 
+  test "::interpolate_facts replaces facts with `facts.` scope" do
+    path = "/test/%{facts.test_fact}/file"
+    facts = {"test_fact" => "replaced"}
+    expected_result = "/test/replaced/file"
+
+    assert_equal expected_result, HieraData::Interpolation.interpolate_facts(path: path, facts: facts)
+  end
+
   test "::interpolate_facts replaces nested facts" do
     path = "/test/%{nested.fact}/file"
     facts = {"nested" => {"fact" => "deep"}}

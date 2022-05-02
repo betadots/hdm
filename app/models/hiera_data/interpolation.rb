@@ -10,14 +10,14 @@ class HieraData
     def interpolate_facts(path:, facts:)
       groups = path.scan(/%{([^}]+)}/)
       groups.flatten!
-      groups.each { |x| x.gsub!(/^::/, '')}
+      groups.each { |x| x.gsub!(/^(::|facts\.)/, '')}
 
       resolved_path = path.dup
 
       groups.each do |fact|
         facts_value = facts.dig(*fact.split("."))
         next unless facts_value
-        resolved_path.gsub!(/%{(::)?#{fact}}/, facts_value)
+        resolved_path.gsub!(/%{(::|facts\.)?#{fact}}/, facts_value)
       end
 
       resolved_path
