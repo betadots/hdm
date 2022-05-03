@@ -1,4 +1,4 @@
-FROM ruby:2.7.6-alpine as build
+FROM ruby:3.1.2-alpine as build
 
 RUN apk add --update --no-cache \
       nodejs \
@@ -14,7 +14,7 @@ RUN yarn install --check-files
 COPY . $APP_HOME
 COPY config/hdm.yml.template $APP_HOME/config/hdm.yml
 
-FROM ruby:2.7.6-alpine
+FROM ruby:3.1.2-alpine
 
 RUN apk add --update --no-cache \
       binutils-gold \
@@ -35,7 +35,7 @@ RUN apk add --update --no-cache \
       # yarn \ # works without this but produces a short error, that yarn is not found
       tzdata
 
-RUN gem install bundler -v 2.3.6
+RUN gem install bundler -v 2.3.11
 
 COPY --from=build /hdm /hdm
 WORKDIR /hdm
