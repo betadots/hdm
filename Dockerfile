@@ -1,4 +1,4 @@
-FROM ruby:2.5.9-alpine as build
+FROM ruby:2.7.6-alpine as build
 
 RUN apk add --update --no-cache \
       nodejs \
@@ -14,7 +14,7 @@ RUN yarn install --check-files
 COPY . $APP_HOME
 COPY config/hdm.yml.template $APP_HOME/config/hdm.yml
 
-FROM ruby:2.5.9-alpine
+FROM ruby:2.7.6-alpine
 
 RUN apk add --update --no-cache \
       binutils-gold \
