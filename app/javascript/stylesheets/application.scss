@@ -12,6 +12,25 @@ $breadcrumb-padding-x: 0;
 $breadcrumb-font-size: .875em;
 $breadcrumb-bg: #fff;
 
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+  xxxl: 1900px
+) !default;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+  xxxl: 1540px
+) !default;
+
 @import "~bootstrap/scss/bootstrap";
 
 ol.breadcrumb li:first-child {
