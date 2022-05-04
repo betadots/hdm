@@ -1,9 +1,9 @@
-import { Controller } from "stimulus"
-const Turbolinks = require("turbolinks")
+import { Controller } from "@hotwired/stimulus"
+import { Turbo } from "@hotwired/turbo-rails"
 
 export default class extends Controller {
   navigate() {
     const selectedOption = this.element.options[this.element.selectedIndex];
-    Turbolinks.visit(selectedOption.dataset.url);
+    Turbo.visit(selectedOption.dataset.url);
   }
 }

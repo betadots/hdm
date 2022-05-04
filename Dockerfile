@@ -1,15 +1,7 @@
 FROM ruby:3.1.2-alpine as build
 
-RUN apk add --update --no-cache \
-      nodejs \
-      yarn
-
 ENV APP_HOME /hdm
 WORKDIR $APP_HOME
-
-COPY package.json $APP_HOME
-COPY yarn.lock $APP_HOME
-RUN yarn install --check-files
 
 COPY . $APP_HOME
 COPY config/hdm.yml.template $APP_HOME/config/hdm.yml

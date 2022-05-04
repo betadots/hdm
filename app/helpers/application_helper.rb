@@ -20,10 +20,7 @@ module ApplicationHelper
   end
 
   def icon(name)
-    path = asset_pack_path("media/bootstrap-icons/bootstrap-icons.svg")
-    tag.svg(class: "bi", fill: "currentColor") do
-      tag.use(href: "#{path}##{name}")
-    end
+    bootstrap_icon(name)
   end
 
   def user_deletion_confirmation(user)

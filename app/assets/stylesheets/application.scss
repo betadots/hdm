@@ -1,4 +1,4 @@
-$font-family-sans-serif:      "Open Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-sans-serif: "Open Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 
 $blue: #0c71c3;
 $green: #6BBE6B;
@@ -31,13 +31,13 @@ $container-max-widths: (
   xxxl: 1540px
 ) !default;
 
-@import "~bootstrap/scss/bootstrap";
+@import "bootstrap";
 
 ol.breadcrumb li:first-child {
   padding-left: 0;
 }
 
-@import "~slim-select/dist/slimselect";
+@import "slimselect.scss";
 
 .bi {
   width: 1em;
