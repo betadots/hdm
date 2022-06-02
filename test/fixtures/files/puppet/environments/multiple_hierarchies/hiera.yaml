@@ -5,13 +5,13 @@ defaults:
 
 hierarchy:
   - name: "Host specific"
-    path: "nodes/%{::fqdn}.yaml"
+    path: "nodes/%{::facts.fqdn}.yaml"
 
   - name: "Per-datacenter business group data" # Uses custom facts.
     paths:
-      - "role/%{::role}-%{::env}.yaml"
-      - "role/%{::role}.yaml"
-      - "zone/%{::zone}.yaml"
+      - "role/%{::facts.role}-%{::facts.env}.yaml"
+      - "role/%{::facts.role}.yaml"
+      - "zone/%{::facts.zone}.yaml"
 
   - name: "Global data"
     path: "common.yaml"

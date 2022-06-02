@@ -25,10 +25,10 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
   test "#paths returns all non-interpolated path names" do
     hierarchy = HieraData::Hierarchy.new(raw_hash: raw_hash, base_path: ".")
     expected_paths = [
-      "nodes/%{::fqdn}.yaml",
-      "role/%{::role}-%{::env}.yaml",
-      "role/%{::role}.yaml",
-      "zone/%{::zone}.yaml",
+      "nodes/%{::facts.fqdn}.yaml",
+      "role/%{::facts.role}-%{::facts.env}.yaml",
+      "role/%{::facts.role}.yaml",
+      "zone/%{::facts.zone}.yaml",
       "common.yaml"
     ]
     assert_equal expected_paths, hierarchy.paths
@@ -93,10 +93,10 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
     {
       "name" => "Yaml hierarchy",
       "paths" => [
-        "nodes/%{::fqdn}.yaml",
-        "role/%{::role}-%{::env}.yaml",
-        "role/%{::role}.yaml",
-        "zone/%{::zone}.yaml",
+        "nodes/%{::facts.fqdn}.yaml",
+        "role/%{::facts.role}-%{::facts.env}.yaml",
+        "role/%{::facts.role}.yaml",
+        "zone/%{::facts.zone}.yaml",
         "common.yaml"
       ]
     }

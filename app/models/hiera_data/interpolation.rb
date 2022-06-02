@@ -1,5 +1,6 @@
 class HieraData
   module Interpolation
+    VARIABLE_REGEXP = /%{(::)?(facts|trusted)\.([^}]+)}/.freeze
 
     module_function
 
@@ -8,19 +9,12 @@ class HieraData
     end
 
     def interpolate_facts(path:, facts:)
-      groups = path.scan(/%{([^}]+)}/)
-      groups.flatten!
-      groups.each { |x| x.gsub!(/^(::|facts\.)/, '')}
-
-      resolved_path = path.dup
-
-      groups.each do |fact|
-        facts_value = facts.dig(*fact.split("."))
-        next unless facts_value
-        resolved_path.gsub!(/%{(::|facts\.)?#{fact}}/, facts_value)
+      path.gsub(VARIABLE_REGEXP) do |variable_string|
+        _, _, scope, name = variable_string.match(VARIABLE_REGEXP).to_a
+        name = "trusted.#{name}" if scope == "trusted"
+        value = facts.dig(*name.split("."))
+        value || variable_string
       end
-
-      resolved_path
     end
   end
 end
