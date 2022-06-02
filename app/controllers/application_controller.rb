@@ -9,18 +9,23 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    if User.none?
-      session[:user_id] = nil
-    end
+    @current_user ||=
+      if Rails.configuration.hdm.authentication_disabled
+        DummyUser.new
+      else
+        if User.none?
+          session[:user_id] = nil
+        end
 
-    if session[:user_id]
-      Current.user ||= User.find(session[:user_id])
-    end
+        if session[:user_id]
+          Current.user ||= User.find(session[:user_id])
+        end
+      end
   end
 
   def authentication_required
     unless current_user
-      if User.none?
+      if User.none? && !(Rails.configuration.hdm.authentication_disabled)
         redirect_to new_user_path, notice: 'Please create an admin user first.'
       else
         redirect_to login_path
