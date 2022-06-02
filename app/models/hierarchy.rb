@@ -57,7 +57,7 @@ class Hierarchy
 
   def encryption_possible?
     eyaml? &&
-      Rails.configuration.hdm['allow_encryption'] &&
+      Rails.configuration.hdm.allow_encryption &&
       @encryptable
   end
 

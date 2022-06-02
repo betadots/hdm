@@ -11,7 +11,7 @@ class HieraData
     private
 
     def load_content
-      full_path = @base_path.join(Rails.configuration.hdm["hiera_config_file"] || "hiera.yaml")
+      full_path = @base_path.join(Rails.configuration.hdm.hiera_config_file || "hiera.yaml")
       defaults = Puppet::Pops::Lookup::HieraConfigV5::DEFAULT_CONFIG_HASH
       config = if File.exist?(full_path)
                  parsed_file = YAML.load(File.read(full_path))

@@ -19,7 +19,7 @@ class Value
   end
 
   def file_writable?
-    !Rails.configuration.hdm['read_only'] && @file_writable
+    !Rails.configuration.hdm.read_only && @file_writable
   end
 
   def key_present?

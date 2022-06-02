@@ -81,7 +81,7 @@ class HieraData
   private
 
   def config_dir
-    @config_dir ||= Rails.configuration.hdm["config_dir"]
+    @config_dir ||= Rails.configuration.hdm.config_dir
   end
 
   def config

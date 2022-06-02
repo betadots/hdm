@@ -47,7 +47,7 @@ class HieraData
     end
 
     def matching_git_location
-      Rails.configuration.hdm["git_data"]&.find do |git_data|
+      Rails.configuration.hdm.git_data&.find do |git_data|
         replaces_datadir = Interpolation
           .interpolate_facts(path: git_data[:datadir], facts: @facts)
         replaces_datadir << "/" unless replaces_datadir.last == "/"
