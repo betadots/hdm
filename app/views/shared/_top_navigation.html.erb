@@ -17,9 +17,11 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <% if current_user %>
-                <%= link_to edit_user_path(current_user), class: 'dropdown-item' do %>
-                  <%= icon "person" %>
-                  Edit Profile
+                <% if can? :update, current_user %>
+                  <%= link_to edit_user_path(current_user), class: 'dropdown-item' do %>
+                    <%= icon "person" %>
+                    Edit Profile
+                  <% end %>
                 <% end %>
                 <%= link_to logout_path, class: 'dropdown-item' do %>
                   <%= icon "box-arrow-right" %>
