@@ -6,8 +6,8 @@ defaults:
 hierarchy:
   - name: "Eyaml hierarchy"
     paths:
-      - "nodes/%{::fqdn}.yaml"
-      - "role/%{::role}-%{::env}.yaml"
-      - "role/%{::role}.yaml"
-      - "zone/%{::zone}.yaml"
+      - "nodes/%{::facts.fqdn}.yaml"
+      - "role/%{::facts.role}-%{::facts.env}.yaml"
+      - "role/%{::facts.role}.yaml"
+      - "zone/%{::facts.zone}.yaml"
       - "common.yaml"
