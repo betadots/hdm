@@ -9,5 +9,8 @@ AllCops:
   Include:
     - '**/*.rb'
   Exclude:
+    - bin/*
+    - config/application.rb
+    - config/environments/*
     - vendor/**/*
     - .vendor/**/*

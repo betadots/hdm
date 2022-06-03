@@ -1,5 +1,4 @@
-import { Controller } from "stimulus"
-const Turbolinks = require("turbolinks")
+import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["input", "keys"];

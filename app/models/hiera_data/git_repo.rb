@@ -24,8 +24,8 @@ class HieraData
     private
 
     def setup_repo
-      Dir.mkdir(BASE_PATH) unless File.exists?(BASE_PATH)
-      if File.exists?(local_path)
+      Dir.mkdir(BASE_PATH) unless File.exist?(BASE_PATH)
+      if File.exist?(local_path)
         Git.open(local_path)
       else
         Git.clone(@url.to_s, local_path)

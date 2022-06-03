@@ -10,18 +10,12 @@
 In case you are using an Apple M1 Chip you might run into trouble building
 Ruby. A work around for that is using the command
 
-    rvm install 2.5.9 --with-cflags="-Wno-error=implicit-function-declaration"
+    rvm install 3.1.2 --with-cflags="-Wno-error=implicit-function-declaration"
 
 On intel you can proceed with the following:
 
-    rvm install 2.5.9
-    rvm use 2.5.9
-    gem install bundler
-
-## **yarn/nodejs**
-
-    brew install node@14
-    npm install -g yarn
+    rvm install 3.1.2
+    rvm use 3.1.2
 
 ## **Main part**
 
@@ -30,7 +24,6 @@ On intel you can proceed with the following:
     bundle config set --local path 'vendor/bundle'
     bundle config set --local with 'development'
     bundle install
-    yarn install --check-files
 
 ## **Configure hdm**
 
@@ -38,7 +31,7 @@ On intel you can proceed with the following:
     # vim config/hdm.yml # adopt config
     bundle exec rails db:setup
     echo "secret" | EDITOR="vim" bundle exec rails credentials:edit
-    bundle exec rails server &
+    bin/dev
 
 For development there is per default a fake_puppet_db configured.
 It can be startet on a second shell:

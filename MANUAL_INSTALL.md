@@ -21,15 +21,8 @@ As root do:
 
     source /etc/profile.d/rvm.sh
 
-    rvm install 2.5.9
-    rvm use 2.5.9
-    gem install bundler
-
-### **yarn/nodejs**
-
-    curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-    curl --silent --location https://rpm.nodesource.com/setup_14.x | bash
-    yum install -y yarn
+    rvm install 3.1.2
+    rvm use 3.1.2
 
 ### **Main part**
 

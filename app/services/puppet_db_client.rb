@@ -38,7 +38,7 @@ module PuppetDbClient
     end
 
     def client
-      connection_hash = Rails.configuration.hdm["puppet_db"].with_indifferent_access
+      connection_hash = Rails.configuration.hdm.puppet_db
 
       PuppetDB::Client.new(connection_hash)
     end
