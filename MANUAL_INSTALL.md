@@ -33,7 +33,6 @@ As root do:
     bundle config set --local path 'vendor/bundle'
     bundle config set --local with 'development'
     bundle install
-    yarn install --check-files
 
 ### **Configure hdm**
 
