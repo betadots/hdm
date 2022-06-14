@@ -1,11 +1,3 @@
-FROM ruby:3.1.2-alpine as build
-
-ENV APP_HOME /hdm
-WORKDIR $APP_HOME
-
-COPY . $APP_HOME
-COPY config/hdm.yml.template $APP_HOME/config/hdm.yml
-
 FROM ruby:3.1.2-alpine
 
 RUN apk add --update --no-cache \
@@ -24,14 +16,18 @@ RUN apk add --update --no-cache \
       sqlite-dev \
       # not needed for gems, but for runtime
       git \
-      # yarn \ # works without this but produces a short error, that yarn is not found
       tzdata
 
-RUN gem install bundler -v 2.3.11
+# RUN gem install bundler -v 2.3.11
 
-COPY --from=build /hdm /hdm
-WORKDIR /hdm
+ENV APP_HOME /hdm
+WORKDIR $APP_HOME
 
-RUN bundle check || bundle install --without test
+COPY . $APP_HOME
+COPY config/hdm.yml.template $APP_HOME/config/hdm.yml
+
+RUN bundle check || (bundle config set --local without 'test' && bundle install)
+
+EXPOSE 3000
 
 CMD ["/hdm/bin/entry.sh"]
