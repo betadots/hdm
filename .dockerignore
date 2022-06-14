@@ -1,6 +1,7 @@
 .bundle/
 .dockerignore
 .git/
+.github/
 .gitignore
 .vagrant/
 db/*.sqlite3
@@ -8,4 +9,4 @@ docker-compose.yml
 Gemfile.lock
 node_modules/
 screenshots/
-vendor/
+vendor/bundle
