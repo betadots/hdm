@@ -76,3 +76,4 @@ gem 'gitable', require: "gitable/uri"
 
 # dependencies & sec fixes
 # gem "nokogiri", ">= 1.13.2" # needs ruby >= 2.6.0
+gem 'mini_racer' # minimal Google V8 JS engine for execjs
