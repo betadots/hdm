@@ -2,14 +2,14 @@
 
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <%= link_to "Local login", login_path, class: "nav-link active" %>
+    <%= link_to "Local login", login_path, class: "nav-link" %>
   </li>
   <li class="nav-item">
-    <%= link_to "LDAP login", new_ldap_session_path, class: "nav-link" %>
+    <%= link_to "LDAP login", new_ldap_session_path, class: "nav-link active" %>
   </li>
 </ul>
 
-<%= form_tag sessions_path do |form| %>
+<%= form_tag ldap_session_path do |form| %>
   <div class="form-group">
     <%= label_tag :email %>
     <%= text_field_tag :email, nil, class:"form-control", autofocus: true %>

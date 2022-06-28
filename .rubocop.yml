@@ -14,3 +14,5 @@ AllCops:
     - config/environments/*
     - vendor/**/*
     - .vendor/**/*
+Rails/I18nLocaleTexts:
+  Enabled: false
