@@ -6,14 +6,12 @@ class LdapSessionsController < ApplicationController
   def new
     add_breadcrumb "Login (LDAP)", :login_path
 
-    if session[:user_id]
-      redirect_to root_url, alert: "You have to logout first to login!"
-    end
+    redirect_to root_url, alert: "You have to logout first to login!" if session[:user_id]
   end
 
   def create
     ldap = Ldap.new
-    if entries = ldap.authenticate(params[:email], params[:password])
+    if (entries = ldap.authenticate(params[:email], params[:password]))
       user = find_or_create_user(entries.first)
       session[:user_id] = user.id
       if user.admin?

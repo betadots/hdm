@@ -11,7 +11,7 @@ class LdapSessionsControllerTest < ActionDispatch::IntegrationTest
     user = FactoryBot.create(:user)
     user_entry = Minitest::Mock.new
     stubbed_ldap(authenticate_result: [user_entry]) do
-      post ldap_session_path, params: {email: user.email, password: "secret"}
+      post ldap_session_path, params: { email: user.email, password: "secret" }
 
       assert_response :redirect
       assert_redirected_to root_path
@@ -21,7 +21,7 @@ class LdapSessionsControllerTest < ActionDispatch::IntegrationTest
   test "#create with incorrect credentials redisplays login page" do
     stubbed_ldap(authenticate_result: nil) do
       post ldap_session_path,
-        params: {email: "noboby@example.com", password: "secret"}
+           params: { email: "noboby@example.com", password: "secret" }
 
       assert_response :success
     end
@@ -29,11 +29,9 @@ class LdapSessionsControllerTest < ActionDispatch::IntegrationTest
 
   private
 
-  def stubbed_ldap(authenticate_result:)
+  def stubbed_ldap(authenticate_result:, &block)
     ldap = Minitest::Mock.new
     ldap.expect(:authenticate, authenticate_result, [String, String])
-    Ldap.stub(:new, ldap) do
-      yield
-    end
+    Ldap.stub(:new, ldap, &block)
   end
 end

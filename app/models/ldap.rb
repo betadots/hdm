@@ -16,16 +16,14 @@ class Ldap
   private
 
   def ldap
-    encryption = @ldaps ? {method: :simple_tls} : nil
+    encryption = @ldaps ? { method: :simple_tls } : nil
     ldap = Net::LDAP.new(
       host: @host,
       port: @port,
       base: @base_dn,
       encryption: encryption
     )
-    if @bind_dn
-      ldap.authenticate @bind_dn, @bind_dn_password
-    end
+    ldap.authenticate @bind_dn, @bind_dn_password if @bind_dn
     ldap
   end
 end
