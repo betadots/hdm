@@ -1,25 +1,25 @@
 # HDM - Hiera Data Manager
 
 Copyright 2022 betadots GmbH
-Copyright 2021 example42 GmbH
 
 This Rails application displays [Puppet](https://github.com/puppetlabs/puppet) Hiera data and offers a WebGUI to read/update/create that configuration.
 
 You can find screenshots in the [screenshots](screenshots) directory.
 
-## Usermanagement
-
-A fresh installation needs an admin which has to be created first with the WebGUI. That admin can not read the Puppet configuration. He/She can only create/delete new users. Normal users have the ability to read/change/delete the Puppet configuration.
-
 ## Manual installation
 
-At the moment manual install is only tested on macOS, CentOS 7 and 8 Streams. But we highly recommend to use the Docker image!
+At the moment manual installation is only tested on macOS, CentOS 7 and 8 Streams. But we highly recommend to use the Docker image!
 
 See [MANUAL_INSTALL.md](MANUAL_INSTALL.md)
 
-## Docker
+## Automated Installation
 
-See [DOCKER.md](DOCKER.md)
+Docker containers are made available. You can find more information in [DOCKER.md](DOCKER.md).
+For automated installations we recommend using Puppet code. A working profile example can be found in [PUPPET.md](PUPPET.md)
+
+## Usermanagement
+
+A fresh installation needs an admin which has to be created first with the WebGUI. That admin can not read the Puppet configuration. He/She can only create/delete new users. Normal users have the ability to read/change/delete the Puppet configuration data.
 
 ## Use git repositories instead of "live" yaml files
 
