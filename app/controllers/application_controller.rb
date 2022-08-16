@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   def authentication_required
     unless current_user
-      if User.none? && !(Rails.configuration.hdm.authentication_disabled)
+      if User.none? && !Rails.configuration.hdm.authentication_disabled
         redirect_to new_user_path, notice: 'Please create an admin user first.'
       else
         redirect_to login_path

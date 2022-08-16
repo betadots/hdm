@@ -1,8 +1,6 @@
 class DummyUser
   def initialize
-    unless Rails.configuration.hdm.authentication_disabled
-      raise "cannot be used unless authentication is disabled"
-    end
+    raise "cannot be used unless authentication is disabled" unless Rails.configuration.hdm.authentication_disabled
   end
 
   def id
