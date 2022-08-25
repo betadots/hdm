@@ -68,7 +68,7 @@ class KeyTest < ActiveSupport::TestCase
   test "#save_value uses underlying hiera_data object" do
     key = Key.new(@node, "hdm::integer")
     hiera_data = MiniTest::Mock.new
-    hiera_data.expect(:write_key, true, ["hierarchy", "/path", "hdm::integer", 23, Hash])
+    hiera_data.expect(:write_key, true, ["hierarchy", "/path", "hdm::integer", 23], facts: Hash)
     key.stub(:hiera_data, hiera_data) do
       key.save_value("hierarchy", "/path", "23")
     end
@@ -78,7 +78,7 @@ class KeyTest < ActiveSupport::TestCase
   test "#remove_value uses underlying hiera_data object" do
     key = Key.new(@node, "hdm::integer")
     hiera_data = MiniTest::Mock.new
-    hiera_data.expect(:remove_key, true, ["hierarchy", "/path", "hdm::integer", Hash])
+    hiera_data.expect(:remove_key, true, ["hierarchy", "/path", "hdm::integer"], facts: Hash)
     key.stub(:hiera_data, hiera_data) do
       key.remove_value("hierarchy", "/path")
     end
