@@ -1,7 +1,6 @@
-class Node
-  class NotFound < StandardError; end
-
-  attr_reader :hostname, :environment
+class Node < HieraModel
+  attribute :hostname, :string
+  attribute :environment
 
   def self.all_names(environment:)
     PuppetDbClient.nodes(environment: environment)
@@ -13,11 +12,6 @@ class Node
     end
   end
 
-  def initialize(hostname: , environment:)
-    @hostname = hostname
-    @environment = environment
-  end
-
   def ==(other)
     other.is_a?(Node) &&
       hostname == other.hostname &&
@@ -26,7 +20,7 @@ class Node
 
   def facts
     @facts ||=
-      PuppetDbClient.facts(certname: hostname, environment: @environment)
+      PuppetDbClient.facts(certname: hostname, environment: environment)
   end
 
   def to_param

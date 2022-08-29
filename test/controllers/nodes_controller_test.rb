@@ -2,7 +2,7 @@ require "test_helper"
 
 class NodesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @environment = Environment.new("development")
+    @environment = Environment.new(name: "development")
   end
 
   test "an admin cannot access the index page" do

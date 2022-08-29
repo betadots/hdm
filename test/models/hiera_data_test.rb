@@ -12,7 +12,6 @@ class HieraDataTest < ActiveSupport::TestCase
 
   test "#search_key returns key data for all given files" do
     hiera = HieraData.new('development')
-    datadir = hiera.hierarchies.first.datadir
     expected_result = {
       "nodes/testhost.yaml" => {file_present: true,  file_writable: true, replaced_from_git: false, key_present: true, value: "hostname: hostname\n"},
       "role/hdm_test-development.yaml" => {file_present: false,  file_writable: true, replaced_from_git: false, key_present: false, value: nil},
@@ -20,8 +19,9 @@ class HieraDataTest < ActiveSupport::TestCase
       "zone/internal.yaml" => {file_present: false, file_writable: false, replaced_from_git: false, key_present: false, value: nil },
       "common.yaml" => {file_present: true,  file_writable: true, replaced_from_git: false, key_present: true, value: "hostname: common::hostname\n"}
     }
+    facts = {"fqdn" => "testhost", "role" => "hdm_test", "env" => "development", "zone" => "internal"}
 
-    result = hiera.search_key(datadir, expected_result.keys, 'foobar::firstrun::linux_classes')
+    result = hiera.search_key(hiera.hierarchies.first.name, 'foobar::firstrun::linux_classes', facts: facts)
     assert_equal expected_result, result
   end
 

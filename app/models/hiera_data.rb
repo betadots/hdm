@@ -21,10 +21,38 @@ class HieraData
     keys.sort.uniq
   end
 
-  def search_key(datadir, files, key, facts: {})
+  def files_for(hierarchy_name, facts: {})
+    hierarchy = find_hierarchy(hierarchy_name)
+    hierarchy.resolved_paths(facts: facts)
+  end
+
+  def file_attributes(hierarchy_name, path, facts: nil)
+    hierarchy = find_hierarchy(hierarchy_name)
+    file = DataFile.new(path: hierarchy.datadir.join(path), facts: facts)
+    {
+      exist: file.exist?,
+      writable: file.writable?,
+      replaced_from_git: file.replaced_from_git?,
+    }
+  end
+
+  def keys_in_file(hierarchy_name, path)
+    hierarchy = find_hierarchy(hierarchy_name)
+    DataFile.new(path: hierarchy.datadir.join(path)).keys
+  end
+
+  def value_in_file(hierarchy_name, path, key, facts: {})
+    hierarchy = find_hierarchy(hierarchy_name)
+    file = DataFile.new(path: hierarchy.datadir.join(path), facts: facts)
+    file.content_for_key(key)
+  end
+
+  def search_key(hierarchy_name, key, facts:)
+    hierarchy = find_hierarchy(hierarchy_name)
+    files = hierarchy.resolved_paths(facts: facts)
     search_results = {}
     files.each do |path|
-      file = DataFile.new(path: datadir.join(path), facts: facts)
+      file = DataFile.new(path: hierarchy.datadir.join(path), facts: facts)
       search_results[path] = {
         file_present: file.exist?,
         file_writable: file.writable?,

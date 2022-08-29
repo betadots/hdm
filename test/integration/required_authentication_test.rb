@@ -15,20 +15,23 @@ class RequiredAuthenticationTest < ActionDispatch::IntegrationTest
         environment_node_keys_path("development", "testhost")
       authentication_required_for :get,
         environment_node_key_path("development", "testhost", "hdm::integer")
+    end
+
+    test "authentication requirements for values" do
       authentication_required_for :patch,
-        environment_node_key_path("development", "testhost", "hdm::integer")
+        environment_node_key_hierarchy_data_file_value_path("development", "testhost", "hdm::integer", "Eyaml hierarchy", "common.yaml")
       authentication_required_for :delete,
-        environment_node_key_path("development", "testhost", "hdm::integer")
+        environment_node_key_hierarchy_data_file_value_path("development", "testhost", "hdm::integer", "Eyaml hierarchy", "common.yaml")
     end
 
     test "authentication requirements for decrypted values" do
       authentication_required_for :post,
-        environment_node_decrypted_values_path("development", "testhost")
+        environment_hierarchy_decrypted_values_path("development", "Eyaml hierarchy")
     end
 
     test "authentication requirements for encrypted values" do
       authentication_required_for :post,
-        environment_node_encrypted_values_path("development", "testhost")
+        environment_hierarchy_encrypted_values_path("development", "Eyaml hierarchy")
     end
 
     test "authentication requirements for users" do

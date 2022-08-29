@@ -1,22 +1,20 @@
-class Environment
-  class NotFound < StandardError; end
-
-  attr_reader :name
+class Environment < HieraModel
+  attribute :name, :string
 
   def self.all_names
     PuppetDbClient.environments
   end
 
   def self.all
-    all_names.map { |e| new(e) }
+    all_names.map { |e| new(name: e) }
   end
 
   def self.find(name)
-    new(name)
+    new(name: name)
   end
 
-  def initialize(name)
-    @name = name
+  def hierarchies
+    Hierarchy.all(self)
   end
 
   def ==(other)

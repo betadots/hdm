@@ -1,48 +1,25 @@
-class Value
+class Value < HieraModel
   ENCRYPTED_PATTERN = /.*ENC\[.*\]/
 
-  attr_reader :path
+  attribute :data_file
+  attribute :key
+  attribute :value, :string
 
-  def initialize(hierarchy:, key:, path:, file_present:, file_writable:, key_present:, replaced_from_git:, value:)
-    @hierarchy = hierarchy
-    @key = key
-    @path = path
-    @file_present = file_present
-    @file_writable = file_writable
-    @key_present = key_present
-    @replaced_from_git = replaced_from_git
-    @value = value
-  end
-
-  def file_present?
-    @file_present
-  end
-
-  def file_writable?
-    !Rails.configuration.hdm.read_only && @file_writable
-  end
-
-  def key_present?
-    @key_present
-  end
+  delegate :hierarchy, to: :data_file
+  delegate :environment, to: :hierarchy
 
   def encrypted?
-    file_present? &&
-      key_present? &&
-      @value.is_a?(String) &&
-      @value.match(ENCRYPTED_PATTERN)
+    value&.match(ENCRYPTED_PATTERN)
   end
 
-  def replaced_from_git?
-    @replaced_from_git
+  def update(new_value, node: nil)
+    parsed_value = YAML.load(new_value)
+    facts = node ? node.facts : {}
+    hiera_data.write_key(data_file.hierarchy.name, data_file.path, key.name, parsed_value, facts: facts)
   end
 
-  def value(decrypt: false)
-    if decrypt && encrypted?
-      hiera_data = HieraData.new(@hierarchy.environment.name)
-      hiera_data.decrypt_value(@hierarchy.name, @path, @key.name)
-    else
-      @value
-    end
+  def destroy(node: nil)
+    facts = node ? node.facts : {}
+    hiera_data.remove_key(data_file.hierarchy.name, data_file.path, key.name, facts: facts)
   end
 end

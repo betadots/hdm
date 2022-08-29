@@ -1,13 +1,14 @@
-class Key
-  attr_reader :name, :environment, :node
+class Key < HieraModel
+  attribute :name, :string
+  attribute :environment
 
-  def self.all(node)
+  def self.all_for(node)
     facts = node.facts
     environment = node.environment
     keys = []
     HieraData.new(environment.name).all_keys(facts)
       .each do |name|
-      key = new(node, name)
+      key = new(environment: environment, name: name)
       if name == "lookup_options"
         keys.unshift(key)
       else
@@ -17,35 +18,15 @@ class Key
     keys
   end
 
-  def initialize(node, name)
-    @environment = node.environment
-    @node = node
-    @name = name
-  end
-
-  def hierarchies
-    @hierarchies ||= Hierarchy.all(@node)
-  end
-
-  def save_value(hierarchy_name, path, value)
-    value = YAML.load(value)
-    hiera_data.write_key(hierarchy_name, path, name, value, facts: @node.facts)
-  end
-
-  def remove_value(hierarchy_name, path)
-    hiera_data.remove_key(hierarchy_name, path, name, facts: @node.facts)
-  end
-
   def ==(other)
     other.is_a?(Key) && (
       name == other.name &&
-      environment == other.environment &&
-      node == other.node
+      environment == other.environment
     )
   end
 
-  def lookup_options
-    @lookup_options ||= load_lookup_options
+  def lookup_options(node)
+    @lookup_options ||= load_lookup_options(node)
   end
 
   def to_param
@@ -58,8 +39,8 @@ class Key
 
   private
 
-  def load_lookup_options
-    lookup_option_candidates = hiera_data.lookup_options(@node.facts)
+  def load_lookup_options(node)
+    lookup_option_candidates = hiera_data.lookup_options(node.facts)
     result = lookup_option_candidates.find do |key, options|
       key == name
     end
@@ -75,9 +56,5 @@ class Key
     else
       "first"
     end
-  end
-
-  def hiera_data
-    @hiera_data ||= HieraData.new(@environment.name)
   end
 end
