@@ -47,7 +47,7 @@ class DataFile < HieraModel
   end
 
   def value_for(key:)
-    raw_value = (hiera_data.value_in_file(hierarchy.name, path, key.name, facts: node&.facts) if has_key?(key))
+    raw_value = (hiera_data.value_in_file(hierarchy.name, path, key.name, facts: node&.facts) if has_key?(key)) # rubocop:disable Style/PreferredHashMethods
     Value.new(data_file: self, key: key, value: raw_value)
   end
 

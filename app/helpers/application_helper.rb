@@ -9,7 +9,7 @@ module ApplicationHelper
 
   def format_path(file, key)
     tag_name, classes =
-      if file.has_key?(key)
+      if file.has_key?(key) # rubocop:disable Style/PreferredHashMethods
         [:b, nil]
       elsif file.exist?
         [:span, "text-dark"]
