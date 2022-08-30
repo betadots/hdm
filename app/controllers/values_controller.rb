@@ -7,7 +7,7 @@ class ValuesController < ApplicationController
     @value.update(params[:value], node: @node)
 
     redirect_to environment_node_key_path(@environment, @node, @key),
-      notice: "Value was saved successfully"
+                notice: "Value was saved successfully"
   end
 
   def destroy
@@ -16,8 +16,8 @@ class ValuesController < ApplicationController
     @value.destroy(node: @node)
 
     redirect_to environment_node_key_path(@environment, @node, @key),
-      status: :see_other,
-      notice: "Value was removed successfully"
+                status: :see_other,
+                notice: "Value was removed successfully"
   end
 
   private

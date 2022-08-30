@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class HieraData
   class EnvironmentNotFound < StandardError; end
 
@@ -32,7 +33,7 @@ class HieraData
     {
       exist: file.exist?,
       writable: file.writable?,
-      replaced_from_git: file.replaced_from_git?,
+      replaced_from_git: file.replaced_from_git?
     }
   end
 
@@ -47,9 +48,9 @@ class HieraData
     file.content_for_key(key)
   end
 
-  def search_key(hierarchy_name, key, facts:)
+  def search_key(hierarchy_name, key, facts: nil)
     hierarchy = find_hierarchy(hierarchy_name)
-    files = hierarchy.resolved_paths(facts: facts)
+    files = facts ? hierarchy.resolved_paths(facts: facts) : hierarchy.candidate_files
     search_results = {}
     files.each do |path|
       file = DataFile.new(path: hierarchy.datadir.join(path), facts: facts)
@@ -62,6 +63,22 @@ class HieraData
       }
     end
     search_results
+  end
+
+  def files_including(key)
+    hierarchies.flat_map do |hierarchy|
+      search_results = search_key(hierarchy.name, key)
+      search_results.map do |path, search_result|
+        next unless search_result[:key_present]
+
+        {
+          path: path,
+          hierarchy_name: hierarchy.name,
+          hierarchy_backend: hierarchy.backend,
+          value: search_result[:value]
+        }
+      end
+    end.compact!
   end
 
   def write_key(hierarchy_name, path, key, value, facts: {})
@@ -120,3 +137,4 @@ class HieraData
     config.hierarchies.find { |h| h.name == name }
   end
 end
+# rubocop:enable Metrics/ClassLength

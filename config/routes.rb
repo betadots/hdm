@@ -1,9 +1,14 @@
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   resources :environments, only: :index do
     resources :hierarchies, only: [] do
       resources :decrypted_values, only: [:create]
 
       resources :encrypted_values, only: [:create]
+    end
+
+    resources :keys, only: [] do
+      resources :files, only: [:index]
     end
 
     resources :nodes, only: :index, constraints: {id: /.+/} do
@@ -33,3 +38,4 @@ Rails.application.routes.draw do
 
   root to: 'page#index'
 end
+# rubocop:enable Metrics/BlockLength

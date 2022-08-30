@@ -14,5 +14,9 @@ AllCops:
     - config/environments/*
     - vendor/**/*
     - .vendor/**/*
+Naming/PredicateName:
+  ForbiddenPrefixes:
+    - "is_"
+    - "have_"
 Rails/I18nLocaleTexts:
   Enabled: false

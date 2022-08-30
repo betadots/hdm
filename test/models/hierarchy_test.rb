@@ -39,7 +39,6 @@ class HierarchyTest < ActiveSupport::TestCase
 
   def create_hierarchy(backend: :eyaml, encryptable: true)
     environment = Environment.new(name: "eyaml")
-    node = Node.new(hostname: "testhost", environment: environment)
     Hierarchy.new(
       environment: environment,
       name: "Global data",

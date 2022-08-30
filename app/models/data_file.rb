@@ -8,6 +8,26 @@ class DataFile < HieraModel
 
   delegate :environment, to: :hierarchy
 
+  def self.search(environment, key)
+    hierarchies = {}
+    result = {}
+    HieraData.new(environment.name).files_including(key.name).each do |file|
+      hierarchies[file[:hierarchy_name]] ||= Hierarchy.new(
+        environment: environment,
+        name: file[:hierarchy_name],
+        backend: file[:hierarchy_backend]
+      )
+      data_file = new(
+        hierarchy: hierarchies[file[:hierarchy_name]],
+        path: file[:path]
+      )
+      value = Value.new(data_file: data_file, key: key, value: file[:value])
+      result[hierarchies[file[:hierarchy_name]]] ||= {}
+      result[hierarchies[file[:hierarchy_name]]][data_file] = value
+    end
+    result
+  end
+
   def initialize(attributes = {})
     super(attributes)
     file_attributes = hiera_data.file_attributes(hierarchy.name, path, facts: node&.facts)
@@ -27,9 +47,7 @@ class DataFile < HieraModel
   end
 
   def value_for(key:)
-    raw_value = if has_key?(key)
-      hiera_data.value_in_file(hierarchy.name, path, key.name, facts: node&.facts)
-    end
+    raw_value = (hiera_data.value_in_file(hierarchy.name, path, key.name, facts: node&.facts) if has_key?(key))
     Value.new(data_file: self, key: key, value: raw_value)
   end
 

@@ -30,4 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  files:
+    index:
+      file:
+        one: "%{count} file"
+        other: "%{count} files"
