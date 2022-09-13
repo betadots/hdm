@@ -31,11 +31,11 @@ jobs:
           import re
           from packaging.version import parse
           version = "${{ github.ref }}".replace("refs/tags/v", "")
-          print(version)
           image = "ghcr.io/${{ github.repository }}"
           tags = set()
           # full version
-          tags.add(f"{image}:{version}")
+          if not version == 'refs/heads/main':
+              tags.add(f"{image}:{version}")
           if version == 'refs/heads/main':
               tags.add(f"{image}:development")
           if not parse(version).is_prerelease:
