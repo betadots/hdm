@@ -41,7 +41,7 @@ jobs:
               # only final and post-releases should get the tags
               # used for automatic use of latest *stable* version
               # major_version
-              if not version == 'main'
+              if not version == 'main':
                   major_version = re.search(r'(\d+?)\.', version).group(1)
                   tags.add(f"{image}:{major_version}")
                   # major_version.minor_version
