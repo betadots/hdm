@@ -35,7 +35,7 @@ jobs:
           tags = set()
           # full version
           tags.add(f"{image}:{version}")
-          if version == 'main'
+          if version == 'main':
               tags.add(f"{image}:development")
           if not parse(version).is_prerelease:
               # only final and post-releases should get the tags
