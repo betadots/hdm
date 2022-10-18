@@ -1,4 +1,4 @@
-<%= render "nodes/select_node" %>
+<%= render "select_env_and_node" %>
 
 <div class="row mt-4">
   <div class="col-6">
@@ -7,10 +7,10 @@
   <div class="col-6">
     <div class="text-right pb-2">
         <b>Lookup options:</b>
-        <span class="badge badge-primary"><%= @key.lookup_options %></span>
+        <span class="badge badge-primary"><%= @key.lookup_options(@node) %></span>
     </div>
     <% index = 0 %>
-    <% @key.hierarchies.each do |hierarchy| %>
+    <% @environment.hierarchies.each do |hierarchy| %>
       <div class="accordion">
         <div class="card">
           <div class="card-body">
@@ -18,27 +18,28 @@
             <span class="badge badge-primary text-light"><%= hierarchy.backend %></span>
           </div>
         </div>
-        <% hierarchy.values_for(@key).each do |value| %>
+        <% hierarchy.files_for(node: @node).each do |file| %>
           <% index += 1 %>
+          <% value = file.value_for(key: @key) %>
           <div class="card">
             <div class="card-header" id="path-<%= index %>">
               <h2 class="mb-0">
                 <button class="btn btn-link btn-block text-left d-flex justify-content-between" type="button" data-toggle="collapse" data-target="#collapse-<%= index %>" aria-expanded="true" aria-controls="collapse-<%= index %>">
                   <span>
-                    <%= format_path(value) %>
-                    <% if value.encrypted? %>
+                    <%= format_path(file, @key) %>
+                    <% if value&.encrypted? %>
                       <span class="text-danger">
                         <%= icon("lock-fill") %>
                       </span>
                     <% end %>
                   </span>
                   <span class="text-muted">
-                    <% if value.replaced_from_git? %>
+                    <% if file.replaced_from_git? %>
                       <span title="This value is taken from a git repository and not from live production data. Changes will be made to the git repository.">
                         <%= icon("layers") %>
                       </span>
                     <% end %>
-                    <% if value.file_writable? %>
+                    <% if file.writable? %>
                       <span title="Value can be edited">
                         <%= icon("pencil") %>
                       </span>
@@ -54,7 +55,7 @@
 
             <div id="collapse-<%= index %>" class="collapse" aria-labelledby="path-<%= index %>">
               <div class="card-body">
-                <%= render "form", value: value, hierarchy: hierarchy %>
+                <%= render "form", file: file, value: value %>
               </div>
             </div>
           </div>

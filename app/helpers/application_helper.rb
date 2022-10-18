@@ -7,16 +7,16 @@ module ApplicationHelper
     end
   end
 
-  def format_path(value)
+  def format_path(file, key)
     tag_name, classes =
-      if value.key_present?
+      if file.has_key?(key) # rubocop:disable Style/PreferredHashMethods
         [:b, nil]
-      elsif value.file_present?
+      elsif file.exist?
         [:span, "text-dark"]
       else
         [:em, "text-muted"]
       end
-    tag.send(tag_name, value.path, class: classes)
+    tag.send(tag_name, file.path, class: classes)
   end
 
   def icon(name)

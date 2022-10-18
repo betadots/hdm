@@ -89,6 +89,23 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
     assert_equal "Yaml hierarchy", hierarchy.name
   end
 
+  test "#candidate_files returns files matching paths with variables replaced by globs" do
+    base_path = Rails.root.join("test/fixtures/files/puppet/environments/multiple_hierarchies")
+    hierarchy = HieraData::Hierarchy.new(
+      raw_hash: raw_hash.merge("datadir" => "data"),
+      base_path: base_path
+    )
+    expected_candidate_files = [
+      "nodes/3ay66ymd.betadots.training.yaml",
+      "nodes/sse8epsu.betadots.training.yaml",
+      "nodes/test.host.yaml",
+      "role/hdm_test.yaml",
+      "zone/internal.yaml",
+      "common.yaml"
+    ]
+    assert_equal expected_candidate_files, hierarchy.candidate_files
+  end
+
   def raw_hash
     {
       "name" => "Yaml hierarchy",

@@ -16,5 +16,9 @@ class HieraData
         value || variable_string
       end
     end
+
+    def replace_variables_with_globs(path)
+      path.gsub(VARIABLE_REGEXP, "*")
+    end
   end
 end

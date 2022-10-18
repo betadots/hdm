@@ -2,7 +2,7 @@ require "test_helper"
 
 class KeysControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @environment = Environment.new("development")
+    @environment = Environment.new(name: "development")
     @node = Node.new(hostname: "testhost", environment: @environment)
   end
 

@@ -1,17 +1,19 @@
-<% if !value.file_writable? %>
-  <pre><%= value.value %></pre>
+<% if !file.writable? %>
+  <pre><%= value&.value %></pre>
 <% else %>
-  <%= form_with url: environment_node_key_path(@environment, @node, @key),
+  <% hierarchy = file.hierarchy %>
+  <%# <%= form_with url: environment_node_key_path(@environment, @node, @key), %>
+  <%= form_with url: environment_node_key_hierarchy_data_file_value_path(@environment, @node, @key, hierarchy, file),
     method: :patch, local: true,
     data: ({
       controller: "encryption",
       action: "reset->encryption#reset",
-      encryption_decrypt_url_value: environment_node_decrypted_values_path(@environment, @node, @key, hierarchy: hierarchy.name),
-      encryption_encrypt_url_value: environment_node_encrypted_values_path(@environment, @node, @key, hierarchy: hierarchy.name)
+      encryption_decrypt_url_value: environment_hierarchy_decrypted_values_path(@environment, hierarchy),
+      encryption_encrypt_url_value: environment_hierarchy_encrypted_values_path(@environment, hierarchy)
     } if hierarchy.encryption_possible?) do |f| %>
     <%= hidden_field_tag :hierarchy, hierarchy.name %>
-    <%= hidden_field_tag :path, value.path %>
-    <%= text_area_tag :value, value.value, rows: 4, class: "form-control",
+    <%= hidden_field_tag :path, file.path %>
+    <%= text_area_tag :value, value&.value, rows: 4, class: "form-control",
       data: {
         encryption_target: "field",
         action: "select->encryption#updateEncryptionStatus"
@@ -36,8 +38,8 @@
           Encrypt
         <% end %>
       <% end %>
-      <% if value.key_present? %>
-        <%= link_to environment_node_key_path(@environment, @node, @key, path: value.path), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-sm btn-danger ml-2" do %>
+      <% if file.has_key?(@key) %>
+        <%= link_to environment_node_key_hierarchy_data_file_value_path(@environment, @node, @key, hierarchy, file), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-sm btn-danger ml-2" do %>
           <%= icon "trash" %>
           Delete
         <% end %>

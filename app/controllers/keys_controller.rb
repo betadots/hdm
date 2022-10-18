@@ -7,7 +7,7 @@ class KeysController < ApplicationController
 
   def index
     authorize! :show, Key
-    @keys = Key.all(@node)
+    @keys = Key.all_for(@node)
 
     add_breadcrumb @environment, environment_nodes_path(@environment)
     add_breadcrumb @node, environment_node_keys_path(@environment, @node)
@@ -15,8 +15,8 @@ class KeysController < ApplicationController
 
   def show
     authorize! :show, Key
-    @keys = Key.all(@node)
-    @key = Key.new(@node, params[:id])
+    @keys = Key.all_for(@node)
+    @key = Key.new(environment: @environment, name: params[:id])
 
     add_breadcrumb @environment, environment_nodes_path(@environment)
     add_breadcrumb @node, environment_node_keys_path(@environment, @node)

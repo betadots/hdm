@@ -1,46 +1,26 @@
-class Hierarchy
-  attr_reader :name, :environment, :node, :datadir, :backend, :files
+class Hierarchy < HieraModel
+  attribute :name, :string
+  attribute :environment
+  attribute :backend
+  attribute :encryptable, :boolean, default: false
 
-  def self.all(node)
-    facts = node.facts
-    environment = node.environment
+  def self.all(environment)
     HieraData.new(environment.name).hierarchies.map do |hierarchy|
-      new(node: node,
-          name: hierarchy.name,
-          datadir: hierarchy.datadir,
+      new(name: hierarchy.name,
+          environment: environment,
           backend: hierarchy.backend,
-          files: hierarchy.resolved_paths(facts: facts),
           encryptable: hierarchy.encryptable?)
     end
   end
 
-  def self.find(node, name)
-    all(node).find { |h| h.name == name }
+  def self.find(environment, name)
+    all(environment).find { |h| h.name == name }
   end
 
-  def initialize(node:, name:, datadir:, backend:, files:, encryptable: false)
-    @node = node
-    @environment = node.environment
-    @name = name
-    @datadir = datadir
-    @backend = backend
-    @files = files
-    @encryptable = encryptable
-  end
-
-  def values_for(key)
-    @values ||= {}
-    @values[key] ||=
-      hiera_data.search_key(@datadir, @files, key.name, facts: @node.facts).map do |path, path_data|
-        Value.new(hierarchy: self,
-                  key: key,
-                  path: path,
-                  file_present: path_data[:file_present],
-                  file_writable: path_data[:file_writable],
-                  key_present: path_data[:key_present],
-                  replaced_from_git: path_data[:replaced_from_git],
-                  value: path_data[:value])
-      end
+  def files_for(node:)
+    hiera_data.files_for(name, facts: node.facts).map do |data_file|
+      DataFile.new(hierarchy: self, path: data_file, node: node)
+    end
   end
 
   def encrypt_value(value)
@@ -58,12 +38,10 @@ class Hierarchy
   def encryption_possible?
     eyaml? &&
       Rails.configuration.hdm.allow_encryption &&
-      @encryptable
+      encryptable
   end
 
-  private
-
-  def hiera_data
-    @hiera_data ||= HieraData.new(environment.name)
+  def to_param
+    name
   end
 end

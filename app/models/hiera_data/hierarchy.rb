@@ -77,6 +77,13 @@ class HieraData
       end
     end
 
+    def candidate_files
+      paths.flat_map do |path|
+        globbed_path = Interpolation.replace_variables_with_globs(path)
+        Interpolation.interpolate_globs(path: globbed_path, datadir: datadir)
+      end
+    end
+
     private
 
     def setup_paths

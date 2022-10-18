@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-6">
+    <%= render "environments/select_environment" %>
+  </div>
+  <div class="col-6">
+    <%= render "search" %>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-12">
+    <h2>Search Results</h2>
+    <p class="lead">
+      <% if @files_and_values_by_hierarchy.any? %>
+        Found key
+        <code><%= @key.name %></code>
+        in
+        <b><%= t(".file", count: @files_and_values_by_hierarchy.values.map { |f| f.size }.sum) %></b>.
+      <% else %>
+        Could not find key
+        <code><%= @key.name %></code>
+        in any files.
+      <% end %>
+    </p>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-12">
+    <% hierarchy_index = 0 %>
+    <% file_index = 0 %>
+    <% @files_and_values_by_hierarchy.each do |hierarchy, files_and_values| %>
+      <% hierarchy_index += 1 %>
+      <div class="accordion mb-2">
+        <div class="card">
+          <div class="card-body" id="hierarchy-<%= hierarchy_index %>">
+            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#hierarchy-collapse-<%= hierarchy_index %>" aria-expanded="false" aria-controls="hierarchy-collapse-<%= hierarchy_index %>">
+              <b><%= hierarchy.name %></b>
+              <span class="badge badge-primary text-light"><%= hierarchy.backend %></span>
+              <em>- <%= t(".file", count: files_and_values.size) %></em>
+            </button>
+          </div>
+        </div>
+        <div class="collapse" id="hierarchy-collapse-<%= hierarchy_index %>" aria-labelledby="hierarchy-<%= hierarchy_index %>">
+          <% files_and_values.each do |file, value| %>
+            <% file_index += 1 %>
+            <div class="card">
+              <div class="card-header" id="path-<%= file_index %>">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left d-flex justify-content-between" type="button" data-toggle="collapse" data-target="#collapse-<%= file_index %>" aria-expanded="true" aria-controls="collapse-<%= file_index %>">
+                    <span>
+                      <b><%= file.path %></b>
+                      <% if value&.encrypted? %>
+                        <span class="text-danger">
+                          <%= icon("lock-fill") %>
+                        </span>
+                      <% end %>
+                    </span>
+                  </button>
+                </h2>
+              </div>
+              <div id="collapse-<%= file_index %>" class="collapse" aria-labelledby="path-<%= file_index %>">
+                <div class="card-body">
+                  <pre><%= value.value %></pre>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

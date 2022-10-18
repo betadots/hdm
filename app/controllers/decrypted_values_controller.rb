@@ -1,9 +1,9 @@
 class DecryptedValuesController < ApplicationController
-  include EnvironmentAndNodeConcern
+  before_action :load_environments
 
   def create
     authorize! :decrypt, Value
-    hierarchy = Hierarchy.find(@node, params[:hierarchy])
+    hierarchy = Hierarchy.find(@environment, params[:hierarchy_id])
     @decrypted_value = hierarchy.decrypt_value(params[:value].chomp)
 
     render plain: @decrypted_value

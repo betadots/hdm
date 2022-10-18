@@ -1,9 +1,9 @@
 class EncryptedValuesController < ApplicationController
-  include EnvironmentAndNodeConcern
+  before_action :load_environments
 
   def create
     authorize! :encrypt, Value
-    hierarchy = Hierarchy.find(@node, params[:hierarchy])
+    hierarchy = Hierarchy.find(@environment, params[:hierarchy_id])
     @encrypted_value = hierarchy.encrypt_value(params[:value])
 
     render plain: @encrypted_value

@@ -1,12 +1,27 @@
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   resources :environments, only: :index do
-    resources :nodes, only: :index, constraints: {id: /[^\/]+/} do
+    resources :hierarchies, only: [] do
+      resources :decrypted_values, only: [:create]
+
+      resources :encrypted_values, only: [:create]
+    end
+
+    resources :keys, only: [] do
+      resources :files, only: [:index]
+    end
+
+    resources :nodes, only: :index, constraints: {id: /.+/} do
       if Rails.configuration.hdm['read_only']
         resources :keys, only: [:index, :show]
       else
-        resources :decrypted_values, only: [:create]
-        resources :encrypted_values, only: [:create]
-        resources :keys, only: [:index, :show, :update, :destroy]
+        resources :keys, only: [:index, :show, :update, :destroy] do
+          resources :hierarchies, only: [] do
+            resources :data_files, only: [] do
+              resource :value, only: [:update, :destroy]
+            end
+          end
+        end
       end
     end
   end
@@ -23,3 +38,4 @@ Rails.application.routes.draw do
 
   root to: 'page#index'
 end
+# rubocop:enable Metrics/BlockLength
