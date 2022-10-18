@@ -78,7 +78,7 @@ class HieraData
           value: search_result[:value]
         }
       end
-    end.compact!
+    end.compact
   end
 
   def write_key(hierarchy_name, path, key, value, facts: {})
