@@ -1,4 +1,8 @@
 class Ldap
+  def self.configured?
+    Rails.configuration.hdm[:ldap].present?
+  end
+
   def initialize
     hdm_ldap_config = Rails.configuration.hdm[:ldap]
     @host = hdm_ldap_config[:host]
