@@ -99,4 +99,24 @@ class HieraDataTest < ActiveSupport::TestCase
 
     assert_equal expected_hash, hiera.lookup_options(node.facts)
   end
+
+  test "#files_including returns file information for a given key" do
+    hiera = HieraData.new("multiple_hierarchies")
+    expected_result = [
+      {
+        path: "nodes/test.host.yaml",
+        hierarchy_name: "Host specific",
+        hierarchy_backend: :yaml,
+        value: "CET"
+      },
+      {
+        path: "common.yaml",
+        hierarchy_name: "Global data",
+        hierarchy_backend: :yaml,
+        value: "UTC"
+      }
+    ]
+
+    assert_equal expected_result, hiera.files_including("foobar::timezone")
+  end
 end

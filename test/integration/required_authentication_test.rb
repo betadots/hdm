@@ -17,6 +17,11 @@ class RequiredAuthenticationTest < ActionDispatch::IntegrationTest
         environment_node_key_path("development", "testhost", "hdm::integer")
     end
 
+    test "authentication requirements for files" do
+      authentication_required_for :get,
+        environment_key_files_path("multiple_hierarchies", "foobar::timezone")
+    end
+
     test "authentication requirements for values" do
       authentication_required_for :patch,
         environment_node_key_hierarchy_data_file_value_path("development", "testhost", "hdm::integer", "Eyaml hierarchy", "common.yaml")
