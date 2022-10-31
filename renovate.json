@@ -1,0 +1,4 @@
+{
+    "extends": [
+        "github>-kuchosauronad0/renovate-config"
+}
