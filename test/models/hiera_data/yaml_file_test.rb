@@ -32,6 +32,12 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
     assert_equal expected_keys, file.keys
   end
 
+  test "#content returns empty hash when file is empty" do
+    file = HieraData::YamlFile.new(path: config_dir.join("nodes/empty.yaml"))
+
+    assert_equal({}, file.content)
+  end
+
   test "#content_for_key returns nil for unknown file and key" do
     file = HieraData::YamlFile.new(path: config_dir.join("role/hdm_test-development.yaml"))
     assert_nil file.content_for_key('noop_mode')

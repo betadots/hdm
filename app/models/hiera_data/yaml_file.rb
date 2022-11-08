@@ -25,7 +25,7 @@ class HieraData
 
     def content
       return nil unless exist?
-      @content ||= YAML.load(File.read(path))
+      @content ||= (YAML.load(File.read(path)) || {})
     end
 
     def [](key)
