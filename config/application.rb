@@ -22,6 +22,8 @@ module Hdm
     config.generators.assets = nil
     config.generators.helper = nil
 
+    config.active_record.sqlite3_production_warning=false
+
     config.hdm = config_for(:hdm)
   end
 end

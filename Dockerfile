@@ -18,15 +18,20 @@ RUN apk add --update --no-cache \
       git \
       tzdata
 
-# RUN gem install bundler -v 2.3.11
-
 ENV APP_HOME /hdm
+ENV RAILS_ENV production
+ENV RAILS_SERVE_STATIC_FILES true
+ENV RAILS_LOG_TO_STDOUT true
+
 WORKDIR $APP_HOME
 
 COPY . $APP_HOME
 COPY config/hdm.yml.template $APP_HOME/config/hdm.yml
 
-RUN bundle check || (bundle config set --local without 'test' && bundle install)
+RUN bundle check || (bundle config set --local without 'development test linter' && bundle install)
+# RUN bundle exec rake assets:precompile # does not work on alpine
+RUN bundle exec rake db:create
+RUN bundle exec rake db:migrate
 
 EXPOSE 3000
 
