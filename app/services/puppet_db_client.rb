@@ -32,7 +32,8 @@ module PuppetDbClient
         nil,
         {}
       )
-      response.data.map { |x| x["name"] }
+      # response.data.map { |x| x["name"] }
+      response.data.pluck('name')
     rescue => e
       raise Hdm::Error, e
     end
