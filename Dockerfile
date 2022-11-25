@@ -30,8 +30,6 @@ COPY config/hdm.yml.template $APP_HOME/config/hdm.yml
 
 RUN bundle check || (bundle config set --local without 'development test linter' && bundle install)
 # RUN bundle exec rake assets:precompile # does not work on alpine
-RUN bundle exec rake db:create
-RUN bundle exec rake db:migrate
 
 EXPOSE 3000
 
