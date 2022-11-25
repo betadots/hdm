@@ -27,10 +27,10 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   def with_temp_file(path, &block)
     begin
-      File.unlink(path) if File.exist?(path)
+      FileUtils.rm_f(path)
       yield
     ensure
-      File.unlink(path) if File.exist?(path)
+      FileUtils.rm_f(path)
     end
   end
 

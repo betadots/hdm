@@ -24,7 +24,7 @@ class HieraData
     private
 
     def setup_repo
-      Dir.mkdir(BASE_PATH) unless File.exist?(BASE_PATH)
+      FileUtils.mkdir_p(BASE_PATH)
       if File.exist?(local_path)
         Git.open(local_path)
       else
