@@ -6,8 +6,6 @@ class ApplicationRecord < ActiveRecord::Base
   private
 
   def ensure_destruction_possible
-    if respond_to?(:destroyable?)
-      throw :abort unless destroyable?
-    end
+    throw :abort if respond_to?(:destroyable?) && !destroyable?
   end
 end

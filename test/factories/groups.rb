@@ -1,9 +1,17 @@
 FactoryBot.define do
   factory :group do
-    name { "MyString" }
-    default { false }
-    environment_pattern { "MyString" }
-    node_pattern { "MyString" }
-    key_pattern { "MyString" }
+    sequence(:name) { |n| "Group#{n}" }
+
+    trait :environment do
+      restrict { "environment" }
+    end
+
+    trait :node do
+      restrict { "node" }
+    end
+
+    trait :key do
+      restrict { "key" }
+    end
   end
 end

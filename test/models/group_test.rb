@@ -4,34 +4,24 @@ class GroupTest < ActiveSupport::TestCase
   class ValidationsTest < ActiveSupport::TestCase
     setup do
       @group = Group.new
+      @group.rules = [/a/]
     end
 
     test "name needs to be present" do
-      refute @group.valid?
+      @group.restrict = "environment"
+      assert_not @group.valid?
       @group.name = "test"
       assert @group.valid?
     end
 
-    test "allows only one default group" do
-      Group.create!(name: "default", default: true)
-      @group.name = "other default"
-      @group.default = true
-
-      refute @group.valid?
-    end
-
-    [:environment_pattern, :node_pattern, :key_pattern].each do |pattern|
-      test "#{pattern} needs to be a valid regexp" do
+    %w[environment node key].each do |restrictable|
+      test "#{restrictable} rules need to be valid regexps" do
         @group.name = "regexp test"
+        @group.restrict = restrictable
         assert @group.valid?
-        @group.send(:"#{pattern}=", "*")
-        refute @group.valid?
+        @group.rules = ["*"]
+        assert_not @group.valid?
       end
     end
-  end
-
-  test "::default returns the default group" do
-    default_group = Group.create!(name: "default", default: true)
-    assert_equal default_group, Group.default
   end
 end

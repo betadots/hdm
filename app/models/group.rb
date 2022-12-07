@@ -1,5 +1,5 @@
 class Group < ApplicationRecord
-  RESTRICTABLES = %w(environment node key).freeze
+  RESTRICTABLES = %w[environment node key].freeze
 
   serialize :rules, Array
 
@@ -8,7 +8,7 @@ class Group < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :restrict, inclusion: RESTRICTABLES
-  validates :rules, regexp: true, length: {minimum: 1}
+  validates :rules, regexp: true, length: { minimum: 1 }
 
   def destroyable?
     group_memberships.none?
@@ -17,6 +17,7 @@ class Group < ApplicationRecord
   def may_access?(record)
     record_class = record.class.name.downcase
     raise "Cannot check #{record_class}" unless record_class == restrict
+
     compiled_rules.any? { |r| r.match(record.name) }
   end
 

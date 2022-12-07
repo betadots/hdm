@@ -12,10 +12,13 @@ module HasGroups
 
   def may_access?(record)
     return true if groups.none?
+
     restrictable = record.class.name.downcase
     raise "Unknown entity #{record.class}" unless restrictable.in? Group::RESTRICTABLES
+
     applicable_groups = groups.where(restrict: restrictable)
     return true if applicable_groups.none?
+
     applicable_groups.any? { |g| g.may_access?(record) }
   end
 end

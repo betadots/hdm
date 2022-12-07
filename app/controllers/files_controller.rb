@@ -6,7 +6,12 @@ class FilesController < ApplicationController
   add_breadcrumb "Environments", :environments_path
 
   def index
-    @files_and_values_by_hierarchy = DataFile.search(@environment, @key)
+    @files_and_values_by_hierarchy =
+      if can? :show, @key
+        DataFile.search(@environment, @key)
+      else
+        {}
+      end
 
     add_breadcrumb @environment, environment_nodes_path(@environment)
     add_breadcrumb @key, environment_key_files_path(@environment, @key)
