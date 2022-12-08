@@ -1,67 +1,73 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+<html class="h-100">
+  <head>
+    <title>HDM Not Found - 404</title>
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+    <style>
+      *, ::before, ::after { box-sizing: border-box; }
+      html { line-height: 1.15; }
+      body { margin: 0; font-family: "Open Sans","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"; font-size: 1rem; font-weight: 400; line-height: 1.5; color: #212529; text-align: left; background-color: #fff; }
+      a { color: #0c71c3; text-decoration: none; background-color: transparent; }
+      article, aside, figcaption, figure, footer, header, hgroup, main, nav, section { display: block; }
+      h1, .h1 { font-size: 2.5rem; }
+      p { margin-top: 0; margin-bottom: 1rem; }
+      img { vertical-align: middle; border-style: none; }
+      svg { overflow: hidden; vertical-align: middle; }
+      .h-100 { height: 100% !important; }
+      .d-flex { display: flex !important; }
+      .flex-column { flex-direction: column !important; }
+      .navbar { position: relative; display: flex; align-items: center; padding: .5rem 1rem; }
+      .bg-light { background-color: #f8f9fa !important; }
+      .navbar .container { display: flex; align-items: center; justify-content: space-between; }
+      .container { width: 100%; padding-right: 15px; padding-left: 15px; margin-right: auto; margin-left: auto; }
+      .navbar-brand { display: inline-block; padding-top: .3125rem; padding-bottom: .3125rem; margin-right: 1rem; font-size: 1.25rem; line-height: inherit; white-space: nowrap; }
+      .font-weight-bold { font-weight: 700 !important; }
+      .navbar-light .navbar-brand { color: #af0c26; }
+      .flex-shrink-0 { flex-shrink: 0 !important; }
+      .mb-4, .my-4 { margin-bottom: 1.5rem !important; }
+      .btn { display: inline-block; font-weight: 400; text-align: center; vertical-align: middle; user-select: none; padding: .375rem .75rem; font-size: 1rem; line-height: 1.5; border-radius: .25rem; transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out; }
+      .btn-primary { color: #fff; background-color: #0c71c3; border-color: #0c71c3; }
+      .mt-auto, .my-auto { margin-top: auto !important; }
+      .pb-4, .py-4 { padding-bottom: 1.5rem !important; }
+      .pt-4, .py-4 { padding-top: 1.5rem !important; }
+      .text-center { text-align: center !important; }
+      .text-danger { color: #af0c26 !important; }
+      .bi { width: 1em; height: 1em; }
+      .status-code { font-weight: bold; font-size: 15em; color: #eee; float: right; line-height: 0.8; }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+      @media (min-width: 992px) { .container { max-width: 960px; } }
+    </style>
+  </head>
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+  <body class="d-flex flex-column h-100">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand font-weight-bold" href="/">HDM</a>
+      </div>
+    </nav>
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-  </style>
-</head>
+    <main class="flex-shrink-0 mb-4">
+      <div class="container">
+        <span class="status-code">404</span>
+        <h1>Not Found</h1>
+        <p>Please check the URL for any mistakes.</p>
+        <a class="btn btn-primary" href="/">
+          <svg class="bi" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+  <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+</svg>
+          To Home Page
+        </a>
+      </div>
+    </main>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <div>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
-    </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
-</body>
+    <footer class="footer bg-light mt-auto py-4">
+      <div class="container text-center">
+        &copy; 2022
+        <a href="https://betadots.de/" class="text-danger">
+          <img alt="betadots logo" width="32" height="32" src="data:image/png;base64,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" />
+          betadots GmbH
+        </a>
+      </div>
+    </footer>
+  </body>
 </html>
