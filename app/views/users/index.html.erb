@@ -41,7 +41,7 @@
               <% end %>
             <% end %>
             <% if can? :delete, user %>
-              <%= link_to user, method: :delete, data: { confirm: user_deletion_confirmation(user) }, class:"btn btn-sm btn-danger min-width-btn" do %>
+              <%= link_to user, data: {turbo_method: :delete, turbo_confirm: user_deletion_confirmation(user) }, class:"btn btn-sm btn-danger min-width-btn" do %>
                 <%= icon "trash" %>
                 Delete
               <% end %>
