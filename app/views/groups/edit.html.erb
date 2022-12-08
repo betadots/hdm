@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <h1>Editing Group</h1>
+    <%= render 'form', group: @group %>
+    <br>
+    <%= link_to @group, class:"btn btn-light min-width-btn" do %>
+      <%= icon "eye" %>
+      Show
+    <% end %>
+    <%= link_to groups_path, class:"btn btn-light min-width-btn" do %>
+      <%= icon "arrow-left-short" %>
+      Back
+    <% end %>
+</div>

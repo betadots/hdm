@@ -1,0 +1,14 @@
+<div class="row mb-2" data-controller="remove">
+  <div class="col-6">
+    <%= text_field_tag "group[rules][]", rule, class:"form-control", readonly: local_assigns[:read_only] %>
+  </div>
+  <div class="col-4">
+  </div>
+  <div class="col-2">
+    <% unless local_assigns[:read_only] %>
+      <%= button_tag type: "button", class: "btn btn-danger", data: {action: "remove#remove"} do %>
+        <%= icon "dash-circle" %> Remove Rule
+      <% end %>
+    <% end %>
+  </div>
+</div>

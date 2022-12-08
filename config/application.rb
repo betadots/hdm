@@ -22,6 +22,10 @@ module Hdm
     config.generators.assets = nil
     config.generators.helper = nil
 
+    # Allow serialization of Regexp as Group access rules
+    # are defined using regular expressions.
+    config.active_record.yaml_column_permitted_classes = [Regexp]
+
     config.hdm = config_for(:hdm)
   end
 end

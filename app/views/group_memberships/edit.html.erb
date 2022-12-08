@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <h1>Editing Members of Group "<%= @group.name %>"</h1>
+
+  <%= form_with model: @group, url: group_group_memberships_path(@group), remote: false do |form| %>
+    <div class="row">
+      <% User.regular.order(:email).in_groups(3) do |users| %>
+        <div class="col-4">
+          <ul class="list-unstyled">
+            <%= form.collection_check_boxes :user_ids, users.compact, :id, :full_name_with_email do |b| %>
+              <li>
+                <%= b.check_box %>
+                <%= b.label %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="actions">
+      <%= form.button type: :submit, class:"btn btn-success min-width-btn" do %>
+        <%= icon "save" %>
+        Save
+      <% end %>
+    </div>
+  <% end %>
+  <%= link_to @group, class:"btn btn-light min-width-btn" do %>
+    <%= icon "arrow-left-short" %>
+    Back
+  <% end %>
+</div>

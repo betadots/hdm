@@ -1,6 +1,7 @@
 class Node < HieraModel
   attribute :hostname, :string
   attribute :environment
+  alias name hostname
 
   def self.all_names(environment:)
     PuppetDbClient.nodes(environment: environment)

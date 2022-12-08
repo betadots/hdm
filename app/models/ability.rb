@@ -3,6 +3,7 @@
 class Ability
   include CanCan::Ability
 
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     #
@@ -44,16 +45,24 @@ class Ability
         end
         can :manage, User, id: User.where.not(id: user.id).ids
         can :create, User, id: nil
+        can :manage, Group
       end
 
       if user.user?
         can :read, User, id: user.id
         can :update, User, id: user.id
-        can :manage, Environment
-        can :manage, Node
-        can :manage, Key
+        can :manage, Environment do |environment|
+          user.may_access?(environment)
+        end
+        can :manage, Node do |node|
+          user.may_access?(node)
+        end
+        can :manage, Key do |key|
+          user.may_access?(key)
+        end
         can :manage, Value
       end
     end
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 end
