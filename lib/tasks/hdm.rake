@@ -10,4 +10,15 @@ namespace :hdm do
       puts "Done."
     end
   end
+
+  desc "Reset admin password"
+  task :reset_admin, [:email] => :environment do |task, args|
+    raise "Email argument missing" unless args.email
+    admin = User.admins.where(email: args.email).first
+    raise "Could not find admin #{args.email}" if admin.nil?
+    new_password = SecureRandom.base36
+    admin.update!(password: new_password)
+    puts "The new password is:"
+    puts new_password
+  end
 end

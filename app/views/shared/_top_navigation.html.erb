@@ -45,6 +45,12 @@
                     Create a new User
                   <% end %>
                 <% end %>
+                <% if can? :show, Group %>
+                  <%= link_to groups_path, class: "dropdown-item" do %>
+                    <%= icon "person-badge" %>
+                    List Groups
+                  <% end %>
+                <% end %>
               <% end %>
             </div>
           </li>

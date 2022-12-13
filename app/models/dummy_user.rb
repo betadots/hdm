@@ -18,4 +18,8 @@ class DummyUser
   def user?
     true
   end
+
+  def may_access?(_record)
+    true
+  end
 end
