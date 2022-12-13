@@ -18,6 +18,12 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
+  def edit
+    add_breadcrumb "Groups", :groups_path
+    add_breadcrumb @group.name, group_path(@group)
+    add_breadcrumb "Edit", edit_group_path(@group)
+  end
+
   def create
     @group = Group.new(group_params)
 
@@ -26,12 +32,6 @@ class GroupsController < ApplicationController
     else
       render action: "new"
     end
-  end
-
-  def edit
-    add_breadcrumb "Groups", :groups_path
-    add_breadcrumb @group.name, group_path(@group)
-    add_breadcrumb "Edit", edit_group_path(@group)
   end
 
   def update
