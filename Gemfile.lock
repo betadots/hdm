@@ -353,7 +353,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  bcrypt (~> 3.1)
+  bcrypt (~> 3.1.7)
   bootstrap (~> 4.6.0)
   bootstrap-icons-helper
   breadcrumbs_on_rails
@@ -363,7 +363,7 @@ DEPENDENCIES
   dartsass-rails
   factory_bot_rails
   faker
-  friendly_id (~> 5.5)
+  friendly_id (~> 5.5.0)
   git
   gitable
   hiera-eyaml
