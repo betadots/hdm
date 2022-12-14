@@ -28,7 +28,6 @@ COPY . $APP_HOME
 COPY config/hdm.yml.template $APP_HOME/config/hdm.yml
 
 RUN bundle check || (bundle config set --local without 'development test' && bundle install)
-RUN bundle exec rake hdm:assets
 
 EXPOSE 3000
 
