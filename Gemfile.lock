@@ -227,7 +227,7 @@ GEM
     puppetdb-ruby (1.2.0)
       httparty
     racc (1.6.1)
-    rack (2.2.4)
+    rack (2.2.6.2)
     rack-test (2.0.2)
       rack (>= 1.3)
     rails (7.0.3.1)
