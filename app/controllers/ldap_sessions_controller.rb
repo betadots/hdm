@@ -21,7 +21,7 @@ class LdapSessionsController < ApplicationController
       end
     else
       flash.now[:alert] = "Email or password is invalid"
-      render "new"
+      render "new", status: :unprocessable_entity
     end
   end
 

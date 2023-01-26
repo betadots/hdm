@@ -14,7 +14,7 @@ class Ldap
   end
 
   def authenticate(email, password)
-    ldap.bind_as(filter: "(mail=#{email})", password: password)
+    ldap.bind_as(filter: "(mail=#{email})", password: password) if email.present? && password.present?
   end
 
   private
