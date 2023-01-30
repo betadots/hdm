@@ -8,6 +8,11 @@ These should not affect the functionality of the module.
 
 [Full Changelog](https://github.com/betadots/hdm/compare/v0.0.4...1.0.0)
 
+**Breaking changes:**
+
+- Running Rails in production mode [\#82](https://github.com/betadots/hdm/issues/82)
+- Update and make production ready [\#106](https://github.com/betadots/hdm/pull/106) ([rwaffen](https://github.com/rwaffen))
+
 **Implemented enhancements:**
 
 - Switch Docker image to ruby-slim [\#118](https://github.com/betadots/hdm/issues/118)
@@ -18,7 +23,6 @@ These should not affect the functionality of the module.
 - LDAP login not working if local user with same name exists [\#117](https://github.com/betadots/hdm/issues/117)
 - Requirements for v1.0.0 [\#116](https://github.com/betadots/hdm/issues/116)
 - Adopt color scheme [\#115](https://github.com/betadots/hdm/issues/115)
-- Running Rails in production mode [\#82](https://github.com/betadots/hdm/issues/82)
 - License [\#70](https://github.com/betadots/hdm/issues/70)
 
 **Merged pull requests:**
@@ -35,7 +39,6 @@ These should not affect the functionality of the module.
 - add release.yaml for automated release notes on new releases [\#121](https://github.com/betadots/hdm/pull/121) ([rwaffen](https://github.com/rwaffen))
 - Bump rails-html-sanitizer from 1.4.3 to 1.4.4 [\#120](https://github.com/betadots/hdm/pull/120) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump loofah from 2.18.0 to 2.19.1 [\#119](https://github.com/betadots/hdm/pull/119) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Update and make production ready [\#106](https://github.com/betadots/hdm/pull/106) ([rwaffen](https://github.com/rwaffen))
 
 ## [v0.0.4](https://github.com/betadots/hdm/tree/v0.0.4) (2022-12-12)
 
