@@ -21,4 +21,11 @@ namespace :hdm do
     puts "The new password is:"
     puts new_password
   end
+
+  desc "A task to clean and compile all assets"
+  task :assets do
+    Rake::Task['assets:clean'].invoke
+    Rake::Task['assets:clobber'].invoke
+    Rake::Task['assets:precompile'].invoke
+  end
 end

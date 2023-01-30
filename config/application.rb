@@ -22,6 +22,10 @@ module Hdm
     config.generators.assets = nil
     config.generators.helper = nil
 
+    # Alow the use of sqlite in production mode without warning.
+    # We only use sqlite for usermanagment.
+    config.active_record.sqlite3_production_warning = false
+
     # Allow serialization of Regexp as Group access rules
     # are defined using regular expressions.
     config.active_record.yaml_column_permitted_classes = [Regexp]

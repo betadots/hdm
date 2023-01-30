@@ -1,9 +1,9 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-bundle exec rails db:create
-bundle exec rails db:migrate
+bundle exec rake db:setup
+bundle exec rake hdm:assets
 
-if [ "${DEVELOP}" -eq 1 ]; then
+if [[ "${DEVELOP}" -eq 1 ]]; then
 bundle exec rails db:seed
 ./bin/fake_puppet_db &
 fi

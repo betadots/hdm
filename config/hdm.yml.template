@@ -18,18 +18,11 @@ test:
     port: 389
 
 production:
-  read_only: false
-  allow_encryption: true
+  read_only: true
+  allow_encryption: false
   puppet_db:
-    # When using https make sure the server name matches
-    # the one in the certificate
-    server: "https://localhost:8081"
-    pem:
-      key: "/path/to/keyfile"
-      cert: "/path/to/certfile"
-      ca_file: "/path/to/cafile"
-  config_dir: "/etc/puppetlabs/code"
-  #hiera_config_file: "hiera_hdm.yaml"
+    server: "http://localhost:8083"
+  config_dir: <%= Rails.root.join('test','fixtures','files','puppet') %>
 
 # Example for PE token authentication
 # production:
@@ -53,11 +46,11 @@ production:
 #   allow_encryption: true
 #   puppet_db:
 #     server: "http://localhost:8081"
-#   config_dir: "/etc/puppetlabs/code" 
+#   config_dir: "/etc/puppetlabs/code"
 #   git_data:
 #     - datadir: /etc/puppetlabs/code/myenv/data
 #       git_url: git@githost.example.com:puppet/hiera_data.git
-#       path_in_repo: environments/myenv/data 
+#       path_in_repo: environments/myenv/data
 
 # Example for ldap authentication
 # production:
