@@ -1,6 +1,8 @@
 # HDM - Hiera Data Manager
 
-Copyright 2022 betadots GmbH
+![Hiera Data Manager logo](/app/assets/images/logo_full.png)
+
+Copyright 2023 betadots GmbH
 
 This Rails application displays [Puppet](https://github.com/puppetlabs/puppet) Hiera data and offers a WebGUI to read/update/create that configuration.
 
