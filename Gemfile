@@ -62,6 +62,10 @@ group :linter do
   gem 'rubocop-rake'
 end
 
+group :release do
+  gem 'github_changelog_generator', '>= 1.16.1', :require => false
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
