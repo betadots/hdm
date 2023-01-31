@@ -4,9 +4,19 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [1.0.0](https://github.com/betadots/hdm/tree/1.0.0) (2023-01-30)
+## [1.0.1](https://github.com/betadots/hdm/tree/1.0.1) (2023-01-31)
 
-[Full Changelog](https://github.com/betadots/hdm/compare/v0.0.4...1.0.0)
+[Full Changelog](https://github.com/betadots/hdm/compare/v1.0.0...1.0.1)
+
+**Merged pull requests:**
+
+- add upgrade infos [\#137](https://github.com/betadots/hdm/pull/137) ([rwaffen](https://github.com/rwaffen))
+- add faraday middeware [\#136](https://github.com/betadots/hdm/pull/136) ([rwaffen](https://github.com/rwaffen))
+- Bump ludeeus/action-shellcheck from 1.1.0 to 2.0.0 [\#135](https://github.com/betadots/hdm/pull/135) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.0.0](https://github.com/betadots/hdm/tree/v1.0.0) (2023-01-30)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v0.0.4...v1.0.0)
 
 **Breaking changes:**
 
@@ -27,7 +37,6 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Add logo and incorporate its colors \#115 / \#131 [\#133](https://github.com/betadots/hdm/pull/133) ([oneiros](https://github.com/oneiros))
 - Fix loading of stimulus controllers. [\#130](https://github.com/betadots/hdm/pull/130) ([oneiros](https://github.com/oneiros))
 - Improve error handling of ldap login \#117 [\#129](https://github.com/betadots/hdm/pull/129) ([oneiros](https://github.com/oneiros))
 - Add license information to footer \#70 [\#128](https://github.com/betadots/hdm/pull/128) ([oneiros](https://github.com/oneiros))
@@ -39,6 +48,8 @@ These should not affect the functionality of the module.
 - add release.yaml for automated release notes on new releases [\#121](https://github.com/betadots/hdm/pull/121) ([rwaffen](https://github.com/rwaffen))
 - Bump rails-html-sanitizer from 1.4.3 to 1.4.4 [\#120](https://github.com/betadots/hdm/pull/120) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump loofah from 2.18.0 to 2.19.1 [\#119](https://github.com/betadots/hdm/pull/119) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Add Changelog for 1.0.0 [\#134](https://github.com/betadots/hdm/pull/134) ([rwaffen](https://github.com/rwaffen))
+- Add logo and incorporate its colors \#115 / \#131 [\#133](https://github.com/betadots/hdm/pull/133) ([oneiros](https://github.com/oneiros))
 
 ## [v0.0.4](https://github.com/betadots/hdm/tree/v0.0.4) (2022-12-12)
 
