@@ -66,3 +66,32 @@ Any changes made to files from a git repository will be commited and pushed back
 to the origin repository. Please note that HDM will not pull updates from the
 origin repository and is **not** able to resolve possible conflicts, so you might
 want to make sure that your repository is only edited by HDM.
+
+## :warning: Update to >= 1.0.0
+
+### Set rails secret
+
+Don't forget to set SECRET_KEY_BASE env var in docker run, docker-compose, systemd or hieradata.
+
+```
+openssl rand -hex 16
+9dea7603c008dec285e4b231602a00b2
+
+SECRET_KEY_BASE="9dea7603c008dec285e4b231602a00b2"
+
+
+docker run -it --rm -p 3000:3000 -e DEVELOP=1 -e SECRET_KEY_BASE=9dea7603c008dec285e4b231602a00b2 ghcr.io/betadots/hdm:development
+```
+
+See [`docker-compose.yaml`](docker-compose.yaml).
+
+
+### Update db file
+
+Move existing db/development.sqlite3 to db/production.sqlite3
+
+```bash
+docker exec -it <container_id> bash
+mv db/development.sqlite3 db/production.sqlite3
+bin/rails db:environment:set RAILS_ENV=production
+```
