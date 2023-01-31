@@ -6,6 +6,7 @@ services:
     container_name: hdm
     environment:
       - TZ=Europe/Berlin
+      - SECRET_KEY_BASE="a_l0ng_c0mpl3x_strinG" # f.e.: openssl rand -hex 16
       # whether to enable dev mode with fake puppetdb or not
       # - DEVELOP=1
     # volumes:
