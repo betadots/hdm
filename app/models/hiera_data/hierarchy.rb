@@ -1,6 +1,6 @@
 class HieraData
   class Hierarchy
-    LOOKUP_FUNCTIONS = %w(data_hash lookup_key data_dig hiera3_backend).freeze
+    LOOKUP_FUNCTIONS = %w(lookup_key data_hash data_dig hiera3_backend).freeze
     attr_reader :raw_hash
 
     def initialize(raw_hash:, base_path:)

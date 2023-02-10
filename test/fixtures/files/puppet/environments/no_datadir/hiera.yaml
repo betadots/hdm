@@ -1,0 +1,5 @@
+---
+version: 5
+
+defaults:
+  lookup_key: eyaml_lookup_key

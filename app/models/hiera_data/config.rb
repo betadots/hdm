@@ -22,7 +22,7 @@ class HieraData
                else
                  {}
                end
-      defaults.merge(config)
+      defaults.deep_merge(config)
     rescue => error
       raise Hdm::Error, error
     end

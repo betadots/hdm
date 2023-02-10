@@ -10,6 +10,7 @@ class EnvironmentTest < ActiveSupport::TestCase
       minimal
       multiple_hierarchies
       no_config
+      no_datadir
       test
       v3
     )
