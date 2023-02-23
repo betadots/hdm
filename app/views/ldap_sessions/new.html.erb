@@ -1,13 +1,6 @@
 <h1>Login</h1>
 
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <%= link_to "Local login", login_path, class: "nav-link" %>
-  </li>
-  <li class="nav-item">
-    <%= link_to "LDAP login", new_ldap_session_path, class: "nav-link active" %>
-  </li>
-</ul>
+<%= render "shared/auth_navigation", active: :ldap %>
 
 <%= form_tag ldap_session_path do |form| %>
   <div class="form-group">

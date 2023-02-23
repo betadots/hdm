@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   resources :users
 
   resource :ldap_session, only: [:new, :create]
+  resource :saml_session, only: [:new, :create]
 
   get 'page/index'
 

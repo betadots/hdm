@@ -17,6 +17,12 @@ server_thread = Thread.new do
 end
 server_thread.join(1)
 
+SAML_TEST_CONFIG = {
+  sp_entity_id: "hdm-test",
+  idp_sso_service_url: "https://testsso",
+  idp_cert_fingerprint: "test"
+}.freeze
+
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors) unless ENV["COVERAGE"]

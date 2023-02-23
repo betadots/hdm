@@ -1,0 +1,20 @@
+<% if Ldap.configured? || Saml.configured? %>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <%= link_to "Local login", login_path, class: "nav-link #{"active" if local_assigns[:active] == :local}" %>
+    </li>
+    <% if Ldap.configured? %>
+      <li class="nav-item">
+        <%= link_to "LDAP login", new_ldap_session_path, class: "nav-link #{"active" if local_assigns[:active] == :ldap}" %>
+      </li>
+    <% end %>
+    <% if Saml.configured? %>
+      <li class="nav-item">
+        <%= link_to new_saml_session_path, class: "nav-link" do %>
+          <%= icon("box-arrow-up-right") %>
+          SAML SSO login
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
