@@ -13,8 +13,16 @@ class EnvironmentTest < ActiveSupport::TestCase
       no_datadir
       test
       v3
+      old_unused
     )
-    assert_equal expected_environments, Environment.all_names
+    assert_equal expected_environments, Environment.all.map(&:name)
+  end
+
+  test "::find correctly sets the `in_use` flag" do
+    development = Environment.find("development")
+    assert development.in_use?
+    old_unused = Environment.find("old_unused")
+    refute old_unused.in_use?
   end
 
   test "create development environment" do

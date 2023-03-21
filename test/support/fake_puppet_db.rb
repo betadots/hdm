@@ -23,9 +23,12 @@ class FakePuppetDB
 
   private
 
+  # Grab environment names from directories in config path,
+  # but ignore those with the suffix `_unused`.
   def environments
-    environments_full_path = Dir.glob(Pathname.new(@config_dir).join("environments", "*"))
+    environments_full_path = Dir.glob(Pathname.new(@config_dir).join("environments", "*/"))
     environments = environments_full_path.map { |x| File.basename(x) }.sort
+      .reject { |e| e.match(/_unused$/) }
       .map { |e| {"name" => e} }
     respond_with(environments)
   end
