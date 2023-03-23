@@ -1,0 +1,5 @@
+---
+fqdn: 'ez243lch.betadots.training'
+role: 'hdm_test'
+environment: 'test'
+zone: 'internal'

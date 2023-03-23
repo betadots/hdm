@@ -22,7 +22,7 @@ class EnvironmentTest < ActiveSupport::TestCase
     development = Environment.find("development")
     assert development.in_use?
     old_unused = Environment.find("old_unused")
-    refute old_unused.in_use?
+    assert_not old_unused.in_use?
   end
 
   test "create development environment" do

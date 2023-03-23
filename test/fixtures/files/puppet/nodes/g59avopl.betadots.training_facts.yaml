@@ -1,0 +1,5 @@
+---
+fqdn: 'g59avopl.betadots.training'
+role: 'hdm_test'
+environment: 'eyaml'
+zone: 'internal'

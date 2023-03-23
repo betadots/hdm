@@ -1,5 +1,0 @@
----
-fqdn: 'ndioaov6.betadots.training'
-role: 'hdm_test'
-env: 'demo'
-zone: 'internal'

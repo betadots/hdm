@@ -1,0 +1,5 @@
+---
+fqdn: '4eexoda7.betadots.training'
+role: 'hdm_test'
+environment: 'development'
+zone: 'internal'

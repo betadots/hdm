@@ -1,0 +1,5 @@
+---
+fqdn: '85759gxe.betadots.training'
+role: 'hdm_test'
+environment: 'multiple_hierarchies'
+zone: 'internal'

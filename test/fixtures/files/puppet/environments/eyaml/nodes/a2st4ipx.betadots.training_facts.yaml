@@ -1,5 +1,0 @@
----
-fqdn: 'a2st4ipx.betadots.training'
-role: 'hdm_test'
-env: 'demo'
-zone: 'internal'

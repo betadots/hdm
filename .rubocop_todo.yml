@@ -41,7 +41,6 @@ Layout/EmptyLineAfterGuardClause:
     - 'app/models/hiera_data/config.rb'
     - 'app/models/hiera_data/hierarchy.rb'
     - 'app/models/hiera_data/yaml_file.rb'
-    - 'test/support/fake_puppet_db.rb'
 
 # Offense count: 2
 # This cop supports safe auto-correction (--auto-correct).
@@ -65,14 +64,6 @@ Layout/EmptyLinesAroundAccessModifier:
   Exclude:
     - 'app/controllers/users_controller.rb'
     - 'test/models/hiera_data/yaml_file_test.rb'
-
-# Offense count: 1
-# This cop supports safe auto-correction (--auto-correct).
-# Configuration parameters: AllowAliasSyntax, AllowedMethods.
-# AllowedMethods: alias_method, public, protected, private
-Layout/EmptyLinesAroundAttributeAccessor:
-  Exclude:
-    - 'app/models/hiera_data.rb'
 
 # Offense count: 2
 # This cop supports safe auto-correction (--auto-correct).
@@ -116,7 +107,6 @@ Layout/HashAlignment:
   Exclude:
     - 'app/models/user.rb'
     - 'test/models/key_test.rb'
-    - 'test/models/node_test.rb'
 
 # Offense count: 1
 # This cop supports safe auto-correction (--auto-correct).
@@ -158,13 +148,6 @@ Layout/MultilineMethodCallIndentation:
     - 'app/models/hiera_data/data_file.rb'
     - 'app/models/hiera_data/hierarchy.rb'
     - 'app/models/key.rb'
-    - 'test/support/fake_puppet_db.rb'
-
-# Offense count: 1
-# This cop supports safe auto-correction (--auto-correct).
-Layout/SpaceAfterComma:
-  Exclude:
-    - 'test/support/fake_puppet_db.rb'
 
 # Offense count: 13
 # This cop supports safe auto-correction (--auto-correct).
@@ -176,7 +159,6 @@ Layout/SpaceAroundOperators:
     - 'test/models/hiera_data/data_file_test.rb'
     - 'test/models/hiera_data/yaml_file_test.rb'
     - 'test/models/hiera_data_test.rb'
-    - 'test/models/node_test.rb'
 
 # Offense count: 1
 # This cop supports safe auto-correction (--auto-correct).
@@ -198,8 +180,6 @@ Layout/SpaceInsideHashLiteralBraces:
     - 'test/models/hiera_data/yaml_file_test.rb'
     - 'test/models/hiera_data_test.rb'
     - 'test/models/key_test.rb'
-    - 'test/models/node_test.rb'
-    - 'test/support/fake_puppet_db.rb'
 
 # Offense count: 1
 # This cop supports safe auto-correction (--auto-correct).
@@ -232,7 +212,6 @@ Lint/EmptyFile:
 Lint/ScriptPermission:
   Exclude:
     - 'test/fixtures/files/puppet/environments/eyaml/generate_eyaml_entries.rb'
-    - 'test/fixtures/files/puppet/generate_nodes.rb'
 
 # Offense count: 2
 # This cop supports safe auto-correction (--auto-correct).
@@ -345,7 +324,6 @@ Security/YAMLLoad:
     - 'test/models/hiera_data/data_file_test.rb'
     - 'test/models/hiera_data/yaml_file_test.rb'
     - 'test/models/hiera_data_test.rb'
-    - 'test/support/fake_puppet_db.rb'
 
 # Offense count: 2
 # This cop supports safe auto-correction (--auto-correct).
@@ -357,7 +335,6 @@ Security/YAMLLoad:
 Style/BlockDelimiters:
   Exclude:
     - 'test/fixtures/files/puppet/environments/eyaml/generate_eyaml_entries.rb'
-    - 'test/fixtures/files/puppet/generate_nodes.rb'
 
 # Offense count: 16
 # This cop supports safe auto-correction (--auto-correct).
@@ -388,12 +365,6 @@ Style/Documentation:
   Enabled: false
 
 # Offense count: 1
-# This cop supports safe auto-correction (--auto-correct).
-Style/FileWrite:
-  Exclude:
-    - 'test/fixtures/files/puppet/generate_nodes.rb'
-
-# Offense count: 1
 # Configuration parameters: MaxUnannotatedPlaceholdersAllowed, IgnoredMethods.
 # SupportedStyles: annotated, template, unannotated
 Style/FormatStringToken:
@@ -415,13 +386,6 @@ Style/GuardClause:
     - 'app/controllers/sessions_controller.rb'
     - 'app/models/hiera_data/data_file.rb'
     - 'app/models/hiera_data/hierarchy.rb'
-
-# Offense count: 1
-# This cop supports safe auto-correction (--auto-correct).
-# Configuration parameters: AllowSplatArgument.
-Style/HashConversion:
-  Exclude:
-    - 'test/support/fake_puppet_db.rb'
 
 # Offense count: 1
 # Configuration parameters: MinBranchesCount.
@@ -499,7 +463,6 @@ Style/PreferredHashMethods:
 # SupportedStyles: compact, exploded
 Style/RaiseArgs:
   Exclude:
-    - 'app/models/hiera_data.rb'
     - 'app/models/hiera_data/git_repo.rb'
 
 # Offense count: 1
@@ -593,7 +556,6 @@ Style/WordArray:
 Style/ZeroLengthPredicate:
   Exclude:
     - 'test/fixtures/files/puppet/environments/eyaml/generate_eyaml_entries.rb'
-    - 'test/fixtures/files/puppet/generate_nodes.rb'
 
 # Offense count: 23
 # This cop supports safe auto-correction (--auto-correct).

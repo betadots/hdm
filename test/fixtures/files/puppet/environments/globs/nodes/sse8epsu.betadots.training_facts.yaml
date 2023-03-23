@@ -1,5 +1,0 @@
----
-fqdn: 'sse8epsu.betadots.training'
-role: 'hdm_test'
-env: 'demo'
-zone: 'internal'

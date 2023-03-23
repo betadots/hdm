@@ -1,0 +1,5 @@
+---
+fqdn: 'cgaplboi.betadots.training'
+role: 'hdm_test'
+environment: 'eyaml'
+zone: 'internal'

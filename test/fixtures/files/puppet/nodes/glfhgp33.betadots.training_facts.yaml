@@ -1,0 +1,5 @@
+---
+fqdn: 'glfhgp33.betadots.training'
+role: 'hdm_test'
+environment: 'globs'
+zone: 'internal'

@@ -1,0 +1,5 @@
+---
+fqdn: 'gkxa25er.betadots.training'
+role: 'hdm_test'
+environment: 'test'
+zone: 'internal'

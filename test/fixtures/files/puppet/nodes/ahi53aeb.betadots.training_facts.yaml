@@ -1,0 +1,5 @@
+---
+fqdn: 'ahi53aeb.betadots.training'
+role: 'hdm_test'
+environment: 'no_config'
+zone: 'internal'

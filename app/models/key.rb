@@ -2,9 +2,8 @@ class Key < HieraModel
   attribute :name, :string
   attribute :environment
 
-  def self.all_for(node)
+  def self.all_for(node, environment: node.environment)
     facts = node.facts
-    environment = node.environment
     keys = []
     HieraData.new(environment.name).all_keys(facts)
       .each do |name|

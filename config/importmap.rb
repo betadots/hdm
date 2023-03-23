@@ -7,4 +7,4 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin "jquery", to: "jquery.js"
 pin "bootstrap", to: "bootstrap.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
-pin "slim-select" # @1.27.1
+pin "slim-select"

@@ -1,11 +1,23 @@
 <%= form_tag "" do |form| %>
-  <div class="form-group">
+  <div class="form-group" data-controller="slim-select">
     <%= label_tag :node, "Select node" %>
-    <select name="node" data-controller="slim-select select-navigation" data-action="change->select-navigation#navigate">
-      <option value="" <% "selected" if @node.nil? %> data-url="<%= environment_nodes_path(@environment) %>"></option>
-      <% @nodes.each do |node| %>
-        <option data-url="<%= environment_node_keys_path(@environment, node) %>" <%= "selected" if node == @node %>><%= node.hostname %></option>
-      <% end %>
-    </select>
+    <div class="row">
+      <div class="col-7">
+        <select name="node" data-controller="select-navigation" data-action="change->select-navigation#navigate" data-slim-select-target="dropdown">
+          <option value="" <% "selected" if @node.nil? %> data-url="<%= environment_nodes_path(@environment) %>"></option>
+          <% @nodes.each do |node| %>
+            <option data-url="<%= environment_node_keys_path(@environment, node) %>" <%= "selected" if node == @node %> <%= "data-hidable=\"true\"" if node.environment != @environment %>>
+              <%= node.hostname %> (<%= node.environment %>)
+            </option>
+          <% end %>
+        </select>
+      </div>
+      <div class="col-5">
+        <div class="custom-control custom-switch">
+          <input type="checkbox" checked class="custom-control-input" id="node-filter" data-action="change->slim-select#toggleFilter">
+          <label class="custom-control-label" for="node-filter">Only from selected environment</label>
+        </div>
+      </div>
+    </div>
   </div>
 <% end %>

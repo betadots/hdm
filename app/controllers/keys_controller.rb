@@ -7,7 +7,7 @@ class KeysController < ApplicationController
 
   def index
     authorize! :show, Key
-    @keys = Key.all_for(@node)
+    @keys = Key.all_for(@node, environment: @environment)
     @keys.select! { |k| current_user.may_access?(k) }
 
     add_breadcrumb @environment, environment_nodes_path(@environment)
@@ -15,7 +15,7 @@ class KeysController < ApplicationController
   end
 
   def show
-    @keys = Key.all_for(@node)
+    @keys = Key.all_for(@node, environment: @environment)
     @keys.select! { |k| current_user.may_access?(k) }
     @key = Key.new(environment: @environment, name: params[:id])
     authorize! :show, @key
@@ -46,9 +46,9 @@ class KeysController < ApplicationController
   private
 
   def load_nodes
-    @nodes = Node.all(environment: @environment)
+    @nodes = Node.all
     @nodes.select! { |n| current_user.may_access?(n) }
-    @node = Node.new(hostname: params[:node_id], environment: @environment)
+    @node = Node.find(params[:node_id])
     authorize! :show, @node
   end
 end

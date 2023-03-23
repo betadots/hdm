@@ -1,9 +1,0 @@
----
-fqdn: 'testhost2'
-role: 'hdm_test2'
-env: 'development'
-zone: 'internal'
-os:
-  family: 'Debian'
-  lsbdistcodename: 'Jessi'
-organization: 'internal'

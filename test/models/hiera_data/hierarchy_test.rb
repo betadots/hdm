@@ -96,8 +96,8 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
       base_path: base_path
     )
     expected_candidate_files = [
-      "nodes/3ay66ymd.betadots.training.yaml",
-      "nodes/sse8epsu.betadots.training.yaml",
+      "nodes/4msusyei.betadots.training.yaml",
+      "nodes/60wxmaw5.betadots.training.yaml",
       "nodes/test.host.yaml",
       "role/hdm_test.yaml",
       "zone/internal.yaml",

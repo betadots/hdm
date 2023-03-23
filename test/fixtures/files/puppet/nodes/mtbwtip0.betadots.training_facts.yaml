@@ -1,0 +1,5 @@
+---
+fqdn: 'mtbwtip0.betadots.training'
+role: 'hdm_test'
+environment: 'development'
+zone: 'internal'
