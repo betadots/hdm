@@ -1,0 +1,5 @@
+---
+fqdn: 'otibr6d1.betadots.training'
+role: 'hdm_test'
+environment: 'no_config'
+zone: 'internal'

@@ -1,0 +1,5 @@
+---
+fqdn: 'ttns843o.betadots.training'
+role: 'hdm_test'
+environment: 'no_config'
+zone: 'internal'

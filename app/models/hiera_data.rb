@@ -3,12 +3,24 @@ class HieraData
   class EnvironmentNotFound < StandardError; end
 
   attr_reader :environment
+
   delegate :hierarchies, to: :config
+
+  def self.environments
+    Pathname.new(config_dir)
+            .join("environments")
+            .glob("*/")
+            .map { |p| p.basename.to_s }
+  end
+
+  def self.config_dir
+    @config_dir ||= Rails.configuration.hdm.config_dir
+  end
 
   def initialize(environment)
     @environment = environment
 
-    raise EnvironmentNotFound.new("Environment '#{environment}' does not exist") unless PuppetDbClient.environments.include?(environment)
+    raise EnvironmentNotFound, "Environment '#{environment}' does not exist" unless self.class.environments.include?(environment)
   end
 
   def all_keys(facts)
@@ -125,12 +137,9 @@ class HieraData
 
   private
 
-  def config_dir
-    @config_dir ||= Rails.configuration.hdm.config_dir
-  end
-
   def config
-    @config ||= Config.new(Pathname.new(config_dir).join("environments", environment))
+    @config ||= Config.new(Pathname.new(self.class.config_dir)
+      .join("environments", environment))
   end
 
   def find_hierarchy(name)

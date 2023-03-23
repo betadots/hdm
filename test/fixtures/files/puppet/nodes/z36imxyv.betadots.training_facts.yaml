@@ -1,0 +1,5 @@
+---
+fqdn: 'z36imxyv.betadots.training'
+role: 'hdm_test'
+environment: 'test'
+zone: 'internal'

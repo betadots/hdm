@@ -6,7 +6,7 @@ class NodesController < ApplicationController
 
   def index
     authorize! :index, Node
-    @nodes = Node.all(environment: @environment)
+    @nodes = Node.all
     @nodes.select! { |n| current_user.may_access?(n) }
 
     add_breadcrumb @environment, environment_nodes_path(@environment)

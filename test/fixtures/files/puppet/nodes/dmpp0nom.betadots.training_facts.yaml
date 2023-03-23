@@ -1,0 +1,5 @@
+---
+fqdn: 'dmpp0nom.betadots.training'
+role: 'hdm_test'
+environment: 'development'
+zone: 'internal'

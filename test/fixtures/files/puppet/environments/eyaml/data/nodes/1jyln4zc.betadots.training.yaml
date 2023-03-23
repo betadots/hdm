@@ -1,0 +1,12 @@
+---
+noop_mode: true
+foobar::enable_firstrun: true
+foobar::firstrun::linux_classes:
+  hostname: hostname
+foobar::time::servers:
+- debian.pool.ntp.org
+foobar::timezone: CET
+foobar::postfix::tp::resources_hash:
+  tp::conf:
+    postfix:
+      template: foobar/postfix/main.cf.epp

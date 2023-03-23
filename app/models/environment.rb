@@ -1,20 +1,25 @@
 class Environment < HieraModel
   attribute :name, :string
-
-  def self.all_names
-    PuppetDbClient.environments
-  end
+  attribute :in_use, :boolean, default: false
 
   def self.all
-    all_names.map { |e| new(name: e) }
+    environments_in_use = PuppetDbClient.environments
+    available_environments = HieraData.environments
+    unused_environments = available_environments - environments_in_use
+    environments_in_use.sort.map { |e| new(name: e, in_use: true) } +
+      unused_environments.sort.map { |e| new(name: e) }
   end
 
   def self.find(name)
-    new(name: name)
+    all.find { |e| e.name == name }
   end
 
   def hierarchies
     Hierarchy.all(self)
+  end
+
+  def in_use?
+    in_use
   end
 
   def ==(other)

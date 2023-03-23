@@ -87,7 +87,7 @@ class HieraDataTest < ActiveSupport::TestCase
 
   test "#lookup_options returns the merged lookup options for the selected environment and facts" do
     hiera = HieraData.new("multiple_hierarchies")
-    node = Node.new(hostname: "sse8epsu.betadots.training", environment: "multiple_hierarchies")
+    node = Node.new(hostname: "60wxmaw5.betadots.training", environment: "multiple_hierarchies")
     expected_hash = {
       'profile::auth::sudo_configs' => {
         "merge" => "deep"

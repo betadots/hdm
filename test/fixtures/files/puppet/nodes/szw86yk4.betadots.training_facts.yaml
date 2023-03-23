@@ -1,0 +1,5 @@
+---
+fqdn: 'szw86yk4.betadots.training'
+role: 'hdm_test'
+environment: 'no_config'
+zone: 'internal'

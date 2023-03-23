@@ -1,0 +1,5 @@
+---
+fqdn: 'xda8efsx.betadots.training'
+role: 'hdm_test'
+environment: 'development'
+zone: 'internal'

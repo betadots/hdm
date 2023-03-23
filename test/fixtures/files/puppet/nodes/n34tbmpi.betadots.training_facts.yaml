@@ -1,0 +1,5 @@
+---
+fqdn: 'n34tbmpi.betadots.training'
+role: 'hdm_test'
+environment: 'test'
+zone: 'internal'

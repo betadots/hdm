@@ -1,0 +1,8 @@
+---
+fqdn: 'testhost'
+role: 'hdm_test'
+environment: 'development'
+zone: 'internal'
+os:
+  family: 'RedHat'
+organization: 'internal'

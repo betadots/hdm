@@ -1,23 +1,17 @@
 module PuppetDbClient
   module ClassMethods
-    def nodes(environment:)
-      response = client.request(
-        'inventory',
-        [:'=', 'environment', environment],
-        {}
-      )
-      response.data.map { |x| x.dig("certname") }
+    def nodes(environment: nil)
+      query = environment ? [:'=', 'environment', environment] : nil
+      response = client.request('inventory', query, {})
+      response.data
     rescue
       []
     end
 
-    def facts(certname:, environment:)
+    def facts(certname:)
       response = client.request(
         'facts',
-        [:and,
-          [:'=', 'certname', certname],
-          [:'=', 'environment', environment]
-        ],
+        [:'=', 'certname', certname],
         {}
       )
 

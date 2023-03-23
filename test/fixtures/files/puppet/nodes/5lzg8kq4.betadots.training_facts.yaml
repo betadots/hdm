@@ -1,0 +1,5 @@
+---
+fqdn: '5lzg8kq4.betadots.training'
+role: 'hdm_test'
+environment: 'globs'
+zone: 'internal'

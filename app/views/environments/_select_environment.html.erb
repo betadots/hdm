@@ -1,10 +1,12 @@
 <%= form_tag "" do |form| %>
-  <div class="form-group">
+  <div class="form-group" data-controller="slim-select">
     <%= label_tag :environment, "Select environment" %>
-    <select name="environment" data-controller="slim-select select-navigation" data-action="change->select-navigation#navigate">
+    <select name="environment" data-controller="select-navigation" data-action="change->select-navigation#navigate" data-slim-select-target="dropdown">
       <option value="" <%= "selected" if @environment.nil? %> data-url="<%= environments_path %>"></option>
       <% @environments.each do |environment| %>
-        <option data-url="<%= environment_nodes_path(environment) %>" <%= "selected" if environment == @environment %>><%= environment.name %></option>
+        <option data-url="<%= environment_nodes_path(environment) %>" <%= "selected" if environment == @environment %>>
+          <%= environment.name %><%= " (unused)" unless environment.in_use? %>
+        </option>
       <% end %>
     </select>
   </div>

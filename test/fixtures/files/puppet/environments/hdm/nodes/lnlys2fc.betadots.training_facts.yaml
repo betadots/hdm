@@ -1,5 +1,0 @@
----
-fqdn: 'lnlys2fc.betadots.training'
-role: 'hdm_test'
-env: 'demo'
-zone: 'internal'
