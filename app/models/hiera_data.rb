@@ -6,19 +6,15 @@ class HieraData
 
   delegate :hierarchies, to: :config
 
-  class << self
-    def environments
-      Pathname.new(config_dir)
-              .join("environments")
-              .glob("*/")
-              .map { |p| p.basename.to_s }
-    end
+  def self.environments
+    Pathname.new(config_dir)
+            .join("environments")
+            .glob("*/")
+            .map { |p| p.basename.to_s }
+  end
 
-    private
-
-    def config_dir
-      @config_dir ||= Rails.configuration.hdm.config_dir
-    end
+  def self.config_dir
+    @config_dir ||= Rails.configuration.hdm.config_dir
   end
 
   def initialize(environment)
