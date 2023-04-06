@@ -10,12 +10,12 @@
 In case you are using an Apple M1 Chip you might run into trouble building
 Ruby. A work around for that is using the command
 
-    rvm install 3.1.2 --with-cflags="-Wno-error=implicit-function-declaration"
+    rvm install 3.2.2 --with-cflags="-Wno-error=implicit-function-declaration"
 
 On intel you can proceed with the following:
 
-    rvm install 3.1.2
-    rvm use 3.1.2
+    rvm install 3.2.2
+    rvm use 3.2.2
 
 ## **Main part**
 

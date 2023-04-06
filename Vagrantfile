@@ -6,7 +6,7 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure("2") do |config|
-  config.vm.box = "betadots/centos8p6"
+  config.vm.box = "betadots/centos8p7"
   config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "127.0.0.1"
 
   config.vm.synced_folder "../hdm_env", "/hdm_env"
