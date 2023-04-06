@@ -76,7 +76,7 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
 
     with_temp_file(path) do
       expected_hash = {"test_key"=>"true"}
-      file = HieraData::YamlFile.new(path: path)
+      file = HieraData::YamlFile.new(path:)
       file.write_key('test_key', 'true')
       assert_equal expected_hash, YAML.load(File.read(path))
     end
@@ -87,7 +87,7 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
 
     with_temp_file(path) do
       expected_hash = {}
-      file = HieraData::YamlFile.new(path: path)
+      file = HieraData::YamlFile.new(path:)
       file.remove_key('test_key')
       assert_equal expected_hash, YAML.load(File.read(path))
     end
@@ -95,14 +95,14 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
 
   test "#writable? returns true if file exists and is writable" do
     path = Rails.root.join('test', 'fixtures', 'files', 'puppet', 'environments', 'development', 'data', 'nodes', 'writehost.yaml')
-    file = HieraData::YamlFile.new(path: path)
+    file = HieraData::YamlFile.new(path:)
 
     assert file.writable?
   end
 
   test "#writable? returns true if file does not exist but directory is writable" do
     path = Rails.root.join('test', 'fixtures', 'files', 'puppet', 'environments', 'development', 'data', 'nodes', 'does_not_exist.yaml')
-    file = HieraData::YamlFile.new(path: path)
+    file = HieraData::YamlFile.new(path:)
 
     assert file.writable?
   end
@@ -112,7 +112,7 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
       path = File.join(tmpdir, "test.yaml")
       File.write(path, {"test" => 23}.to_yaml)
       File.chmod(0400, path)
-      file = HieraData::YamlFile.new(path: path)
+      file = HieraData::YamlFile.new(path:)
 
       refute file.writable?
     end

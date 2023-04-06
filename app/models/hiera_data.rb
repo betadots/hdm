@@ -26,8 +26,8 @@ class HieraData
   def all_keys(facts)
     keys = []
     config.hierarchies.each do |hierarchy|
-      hierarchy.resolved_paths(facts: facts).each do |path|
-        file = DataFile.new(path: hierarchy.datadir.join(path), facts: facts)
+      hierarchy.resolved_paths(facts:).each do |path|
+        file = DataFile.new(path: hierarchy.datadir.join(path), facts:)
         keys.concat(file.keys)
       end
     end
@@ -36,12 +36,12 @@ class HieraData
 
   def files_for(hierarchy_name, facts: {})
     hierarchy = find_hierarchy(hierarchy_name)
-    hierarchy.resolved_paths(facts: facts)
+    hierarchy.resolved_paths(facts:)
   end
 
   def file_attributes(hierarchy_name, path, facts: nil)
     hierarchy = find_hierarchy(hierarchy_name)
-    file = DataFile.new(path: hierarchy.datadir.join(path), facts: facts)
+    file = DataFile.new(path: hierarchy.datadir.join(path), facts:)
     {
       exist: file.exist?,
       writable: file.writable?,
@@ -56,16 +56,16 @@ class HieraData
 
   def value_in_file(hierarchy_name, path, key, facts: {})
     hierarchy = find_hierarchy(hierarchy_name)
-    file = DataFile.new(path: hierarchy.datadir.join(path), facts: facts)
+    file = DataFile.new(path: hierarchy.datadir.join(path), facts:)
     file.content_for_key(key)
   end
 
   def search_key(hierarchy_name, key, facts: nil)
     hierarchy = find_hierarchy(hierarchy_name)
-    files = facts ? hierarchy.resolved_paths(facts: facts) : hierarchy.candidate_files
+    files = facts ? hierarchy.resolved_paths(facts:) : hierarchy.candidate_files
     search_results = {}
     files.each do |path|
-      file = DataFile.new(path: hierarchy.datadir.join(path), facts: facts)
+      file = DataFile.new(path: hierarchy.datadir.join(path), facts:)
       search_results[path] = {
         file_present: file.exist?,
         file_writable: file.writable?,
@@ -84,7 +84,7 @@ class HieraData
         next unless search_result[:key_present]
 
         {
-          path: path,
+          path:,
           hierarchy_name: hierarchy.name,
           hierarchy_backend: hierarchy.backend,
           value: search_result[:value]
@@ -95,13 +95,13 @@ class HieraData
 
   def write_key(hierarchy_name, path, key, value, facts: {})
     hierarchy = find_hierarchy(hierarchy_name)
-    read_file = DataFile.new(path: hierarchy.datadir.join(path), facts: facts)
+    read_file = DataFile.new(path: hierarchy.datadir.join(path), facts:)
     read_file.write_key(key, value)
   end
 
   def remove_key(hierarchy_name, path, key, facts: {})
     hierarchy = find_hierarchy(hierarchy_name)
-    read_file = DataFile.new(path: hierarchy.datadir.join(path), facts: facts)
+    read_file = DataFile.new(path: hierarchy.datadir.join(path), facts:)
     read_file.remove_key(key)
   end
 
@@ -127,7 +127,7 @@ class HieraData
   def lookup_options(facts)
     result = {}
     config.hierarchies.each do |hierarchy|
-      hierarchy.resolved_paths(facts: facts).each do |path|
+      hierarchy.resolved_paths(facts:).each do |path|
         file = DataFile.new(path: hierarchy.datadir.join(path))
         result = (file["lookup_options"] || {}).merge(result)
       end

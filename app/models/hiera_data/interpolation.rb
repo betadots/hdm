@@ -1,6 +1,6 @@
 class HieraData
   module Interpolation
-    VARIABLE_REGEXP = /%{(::)?(facts|trusted)\.([^}]+)}/.freeze
+    VARIABLE_REGEXP = /%{(::)?(facts|trusted)\.([^}]+)}/
 
     module_function
 

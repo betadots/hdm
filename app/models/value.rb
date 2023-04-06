@@ -15,11 +15,11 @@ class Value < HieraModel
   def update(new_value, node: nil)
     parsed_value = YAML.safe_load(new_value)
     facts = node ? node.facts : {}
-    hiera_data.write_key(data_file.hierarchy.name, data_file.path, key.name, parsed_value, facts: facts)
+    hiera_data.write_key(data_file.hierarchy.name, data_file.path, key.name, parsed_value, facts:)
   end
 
   def destroy(node: nil)
     facts = node ? node.facts : {}
-    hiera_data.remove_key(data_file.hierarchy.name, data_file.path, key.name, facts: facts)
+    hiera_data.remove_key(data_file.hierarchy.name, data_file.path, key.name, facts:)
   end
 end

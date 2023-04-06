@@ -31,7 +31,7 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
-  def with_temp_file(path, &block)
+  def with_temp_file(path, &)
     begin
       FileUtils.rm_f(path)
       yield

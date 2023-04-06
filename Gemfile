@@ -64,6 +64,7 @@ group :linter do
   gem 'rubocop'
   gem 'rubocop-rails'
   gem 'rubocop-rake'
+  gem 'rubocop-capybara'
 end
 
 group :release do

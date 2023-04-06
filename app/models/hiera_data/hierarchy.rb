@@ -68,10 +68,10 @@ class HieraData
 
     def resolved_paths(facts:)
       paths.flat_map do |path|
-        resolved_path = Interpolation.interpolate_facts(path: path, facts: facts)
+        resolved_path = Interpolation.interpolate_facts(path:, facts:)
         if uses_globs?
           resolved_path = Interpolation
-            .interpolate_globs(path: resolved_path, datadir: datadir)
+            .interpolate_globs(path: resolved_path, datadir:)
         end
         resolved_path
       end
@@ -80,7 +80,7 @@ class HieraData
     def candidate_files
       paths.flat_map do |path|
         globbed_path = Interpolation.replace_variables_with_globs(path)
-        Interpolation.interpolate_globs(path: globbed_path, datadir: datadir)
+        Interpolation.interpolate_globs(path: globbed_path, datadir:)
       end
     end
 

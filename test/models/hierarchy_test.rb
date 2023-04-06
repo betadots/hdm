@@ -40,10 +40,10 @@ class HierarchyTest < ActiveSupport::TestCase
   def create_hierarchy(backend: :eyaml, encryptable: true)
     environment = Environment.new(name: "eyaml")
     Hierarchy.new(
-      environment: environment,
+      environment:,
       name: "Global data",
-      backend: backend,
-      encryptable: encryptable
+      backend:,
+      encryptable:
     )
   end
 end

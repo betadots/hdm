@@ -9,7 +9,7 @@ class HieraData::InterpolationTest < ActiveSupport::TestCase
       "common/hdm.yaml"
     ]
 
-    assert_equal expected_result, HieraData::Interpolation.interpolate_globs(path: path, datadir: datadir)
+    assert_equal expected_result, HieraData::Interpolation.interpolate_globs(path:, datadir:)
   end
 
   test "::interpolate_facts replaces facts with leading colons" do
@@ -17,7 +17,7 @@ class HieraData::InterpolationTest < ActiveSupport::TestCase
     facts = {"test_fact" => "replaced"}
     expected_result = "/test/replaced/file"
 
-    assert_equal expected_result, HieraData::Interpolation.interpolate_facts(path: path, facts: facts)
+    assert_equal expected_result, HieraData::Interpolation.interpolate_facts(path:, facts:)
   end
 
   test "::interpolate_facts replaces facts without leading colons" do
@@ -25,7 +25,7 @@ class HieraData::InterpolationTest < ActiveSupport::TestCase
     facts = {"test_fact" => "replaced"}
     expected_result = "/test/replaced/file"
 
-    assert_equal expected_result, HieraData::Interpolation.interpolate_facts(path: path, facts: facts)
+    assert_equal expected_result, HieraData::Interpolation.interpolate_facts(path:, facts:)
   end
 
   test "::interpolate_facts replaces facts with `trusted.` scope with leading colons" do
@@ -33,7 +33,7 @@ class HieraData::InterpolationTest < ActiveSupport::TestCase
     facts = {"trusted" => {"test_fact" => "replaced"}}
     expected_result = "/test/replaced/file"
 
-    assert_equal expected_result, HieraData::Interpolation.interpolate_facts(path: path, facts: facts)
+    assert_equal expected_result, HieraData::Interpolation.interpolate_facts(path:, facts:)
   end
 
   test "::interpolate_facts replaces facts with `trusted.` scope without leading colons" do
@@ -41,7 +41,7 @@ class HieraData::InterpolationTest < ActiveSupport::TestCase
     facts = {"trusted" => {"test_fact" => "replaced"}}
     expected_result = "/test/replaced/file"
 
-    assert_equal expected_result, HieraData::Interpolation.interpolate_facts(path: path, facts: facts)
+    assert_equal expected_result, HieraData::Interpolation.interpolate_facts(path:, facts:)
   end
 
   test "::interpolate_facts replaces nested facts" do
@@ -49,20 +49,20 @@ class HieraData::InterpolationTest < ActiveSupport::TestCase
     facts = {"nested" => {"fact" => "deep"}}
     expected_result = "/test/deep/file"
 
-    assert_equal expected_result, HieraData::Interpolation.interpolate_facts(path: path, facts: facts)
+    assert_equal expected_result, HieraData::Interpolation.interpolate_facts(path:, facts:)
   end
 
   test "::interpolate_facts will not replace arbitrary variables with leading colons" do
     path = "/test/%{::test_fact}/file"
     facts = {"test_fact" => "replaced"}
 
-    assert_equal path, HieraData::Interpolation.interpolate_facts(path: path, facts: facts)
+    assert_equal path, HieraData::Interpolation.interpolate_facts(path:, facts:)
   end
 
   test "::interpolate_facts will not replace arbitrary variables without leading colons" do
     path = "/test/%{test_fact}/file"
     facts = {"test_fact" => "replaced"}
 
-    assert_equal path, HieraData::Interpolation.interpolate_facts(path: path, facts: facts)
+    assert_equal path, HieraData::Interpolation.interpolate_facts(path:, facts:)
   end
 end
