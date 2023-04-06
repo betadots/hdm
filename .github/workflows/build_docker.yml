@@ -2,6 +2,8 @@ name: publish 🐳 Docker image
 
 on:
   push:
+    paths-ignore:
+      - '.github/**'
     branches:
       - 'main'
     tags:
