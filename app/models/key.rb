@@ -7,7 +7,7 @@ class Key < HieraModel
     keys = []
     HieraData.new(environment.name).all_keys(facts)
       .each do |name|
-      key = new(environment: environment, name: name)
+      key = new(environment:, name:)
       if name == "lookup_options"
         keys.unshift(key)
       else

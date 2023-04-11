@@ -62,7 +62,7 @@ class FakePuppetDB
             else
               [query]
             end
-    terms.map { |e| e[1, 2] }.to_h
+    terms.to_h { |e| e[1, 2] }
   end
 
   # Grab environment names from directories in config path,

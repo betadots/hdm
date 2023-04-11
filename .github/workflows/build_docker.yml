@@ -31,18 +31,25 @@ jobs:
         shell: python
         run: |
           import re
+          import os
           from packaging.version import parse
-          version = "${{ github.ref }}".replace("refs/tags/v", "")
-          image = "ghcr.io/${{ github.repository }}"
-          tags = set()
-          if version == 'refs/heads/main':
-              tags.add(f"{image}:development")
-          else:
-              tags.add(f"{image}:{version}")
-              if not parse(version).is_prerelease:
-                  tags.add(f"{image}:latest")
+
+          image   = "ghcr.io/${{ github.repository }}"
+          tags    = set()
+          version = "${{ github.ref_name }}"
+
+          if version.startswith('v'):
+            version = "${{ github.ref_name }}".replace("v", "")
+            tags.add(f"{image}:latest")
+
+          if version == 'main':
+            version = "development"
+
+          tags.add(f"{image}:{version}")
           tags = ",".join(sorted(list(tags)))
-          print(f"::set-output name=tags::{tags}")
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+            print(f'tags={tags}', file=fh)
         id: tags
 
       - name: Build and push

@@ -7,7 +7,7 @@ class Hierarchy < HieraModel
   def self.all(environment)
     HieraData.new(environment.name).hierarchies.map do |hierarchy|
       new(name: hierarchy.name,
-          environment: environment,
+          environment:,
           backend: hierarchy.backend,
           encryptable: hierarchy.encryptable?)
     end
@@ -19,7 +19,7 @@ class Hierarchy < HieraModel
 
   def files_for(node:)
     hiera_data.files_for(name, facts: node.facts).map do |data_file|
-      DataFile.new(hierarchy: self, path: data_file, node: node)
+      DataFile.new(hierarchy: self, path: data_file, node:)
     end
   end
 

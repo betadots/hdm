@@ -14,7 +14,7 @@ class Ldap
   end
 
   def authenticate(email, password)
-    ldap.bind_as(filter: "(mail=#{email})", password: password) if email.present? && password.present?
+    ldap.bind_as(filter: "(mail=#{email})", password:) if email.present? && password.present?
   end
 
   private
@@ -25,7 +25,7 @@ class Ldap
       host: @host,
       port: @port,
       base: @base_dn,
-      encryption: encryption
+      encryption:
     )
     ldap.authenticate @bind_dn, @bind_dn_password if @bind_dn
     ldap

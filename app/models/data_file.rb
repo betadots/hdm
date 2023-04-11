@@ -13,7 +13,7 @@ class DataFile < HieraModel
     result = {}
     HieraData.new(environment.name).files_including(key.name).each do |file|
       hierarchies[file[:hierarchy_name]] ||= Hierarchy.new(
-        environment: environment,
+        environment:,
         name: file[:hierarchy_name],
         backend: file[:hierarchy_backend]
       )
@@ -21,7 +21,7 @@ class DataFile < HieraModel
         hierarchy: hierarchies[file[:hierarchy_name]],
         path: file[:path]
       )
-      value = Value.new(data_file: data_file, key: key, value: file[:value])
+      value = Value.new(data_file:, key:, value: file[:value])
       result[hierarchies[file[:hierarchy_name]]] ||= {}
       result[hierarchies[file[:hierarchy_name]]][data_file] = value
     end
@@ -38,7 +38,7 @@ class DataFile < HieraModel
 
   def keys
     @keys ||= hiera_data.keys_in_file(hierarchy.name, path).map do |key_name|
-      Key.new(environment: environment, name: key_name)
+      Key.new(environment:, name: key_name)
     end
   end
 
@@ -48,7 +48,7 @@ class DataFile < HieraModel
 
   def value_for(key:)
     raw_value = (hiera_data.value_in_file(hierarchy.name, path, key.name, facts: node&.facts) if has_key?(key)) # rubocop:disable Style/PreferredHashMethods
-    Value.new(data_file: self, key: key, value: raw_value)
+    Value.new(data_file: self, key:, value: raw_value)
   end
 
   def writable?

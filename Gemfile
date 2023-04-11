@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.3'
+ruby '3.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.0.0'
@@ -64,6 +64,7 @@ group :linter do
   gem 'rubocop'
   gem 'rubocop-rails'
   gem 'rubocop-rake'
+  gem 'rubocop-capybara'
 end
 
 group :release do

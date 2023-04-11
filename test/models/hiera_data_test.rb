@@ -21,7 +21,7 @@ class HieraDataTest < ActiveSupport::TestCase
     }
     facts = {"fqdn" => "testhost", "role" => "hdm_test", "env" => "development", "zone" => "internal"}
 
-    result = hiera.search_key(hiera.hierarchies.first.name, 'foobar::firstrun::linux_classes', facts: facts)
+    result = hiera.search_key(hiera.hierarchies.first.name, 'foobar::firstrun::linux_classes', facts:)
     assert_equal expected_result, result
   end
 

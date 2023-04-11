@@ -21,8 +21,8 @@ As root do:
 
     source /etc/profile.d/rvm.sh
 
-    rvm install 3.1.2
-    rvm use 3.1.2
+    rvm install 3.2.2
+    rvm use 3.2.2
 
 ### **Main part**
 

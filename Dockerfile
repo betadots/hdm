@@ -1,4 +1,4 @@
-FROM ruby:3.1.3-slim-bullseye
+FROM ruby:3.2.2-slim-bullseye
 
 RUN apt update && apt install -y \
       g++ \
