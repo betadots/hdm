@@ -4,9 +4,39 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [1.0.1](https://github.com/betadots/hdm/tree/1.0.1) (2023-01-31)
+## [1.1.0](https://github.com/betadots/hdm/tree/1.1.0) (2023-04-17)
 
-[Full Changelog](https://github.com/betadots/hdm/compare/v1.0.0...1.0.1)
+[Full Changelog](https://github.com/betadots/hdm/compare/v1.0.1...1.1.0)
+
+**Implemented enhancements:**
+
+- Update to ruby 3.2.x [\#148](https://github.com/betadots/hdm/issues/148)
+- show unused environments [\#140](https://github.com/betadots/hdm/issues/140)
+- Add SSL offloading information [\#107](https://github.com/betadots/hdm/issues/107)
+- Bump nokogiri from 1.14.2 to 1.14.3 [\#150](https://github.com/betadots/hdm/pull/150) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rack from 2.2.6.3 to 2.2.6.4 [\#145](https://github.com/betadots/hdm/pull/145) ([dependabot[bot]](https://github.com/apps/dependabot))
+- update rails gems [\#144](https://github.com/betadots/hdm/pull/144) ([rwaffen](https://github.com/rwaffen))
+- Bump rack from 2.2.6.2 to 2.2.6.3 [\#143](https://github.com/betadots/hdm/pull/143) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Initial support for SAML SSO \#95 [\#142](https://github.com/betadots/hdm/pull/142) ([oneiros](https://github.com/oneiros))
+
+**Fixed bugs:**
+
+- Error if datadir is not set in hiera.yaml [\#108](https://github.com/betadots/hdm/issues/108)
+- Deep merge hiera defaults \#108 [\#141](https://github.com/betadots/hdm/pull/141) ([oneiros](https://github.com/oneiros))
+
+**Closed issues:**
+
+- Cleanup existing rubocop violations [\#29](https://github.com/betadots/hdm/issues/29)
+
+**Merged pull requests:**
+
+- Update to Ruby 3.2.2 [\#149](https://github.com/betadots/hdm/pull/149) ([rwaffen](https://github.com/rwaffen))
+- Show unused environments and allow matching nodes to other environments [\#146](https://github.com/betadots/hdm/pull/146) ([oneiros](https://github.com/oneiros))
+- Bump docker/build-push-action from 3 to 4 [\#139](https://github.com/betadots/hdm/pull/139) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.0.1](https://github.com/betadots/hdm/tree/v1.0.1) (2023-01-31)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v1.0.0...v1.0.1)
 
 **Merged pull requests:**
 
