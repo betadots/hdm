@@ -24,7 +24,7 @@ begin
     config.exclude_labels = %w{duplicate question invalid wontfix wont-fix modulesync skip-changelog}
     config.user = 'betadots'
     config.project = 'hdm'
-    config.future_release = '1.0.1'
+    config.future_release = '1.1.0'
   end
 
   # Workaround for https://github.com/github-changelog-generator/github-changelog-generator/issues/715
