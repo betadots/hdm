@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   include HasGroups
 
+  ROLES = %w[admin regular api]
+
   has_secure_password validations: false
 
   before_validation :downcase_email, on: [:create, :update]
@@ -10,12 +12,22 @@ class User < ApplicationRecord
   validates :password, length: { minimum: PASSWORD_MIN_LENGTH },
     confirmation: true,
     allow_nil: true
+  validates :role, inclusion: ROLES
 
-  scope :admins, -> { where(admin: true) }
-  scope :regular, -> { where(admin: false) }
+  scope :admins, -> { where(role: "admin") }
+  scope :regular, -> { where(role: "regular") }
+  scope :api, -> { where(role: "api") }
+
+  def admin?
+    role == "admin"
+  end
 
   def user?
-    !admin?
+    role == "regular"
+  end
+
+  def api
+    role == "api"
   end
 
   def full_name

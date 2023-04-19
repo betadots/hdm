@@ -28,9 +28,9 @@
 
   <% if current_user.try(:admin?) %>
     <% if current_page?(action: 'new') || current_user != user || User.admins.count > 1 %>
-      <div class="form-check">
-        <%= form.check_box :admin, class:"form-check-input" %>
-        <%= form.label :admin, class: "form-check-label" %>
+      <div class="form-group">
+        <%= form.label :role %>
+        <%= form.select :role, User::ROLES, {}, class:"form-control" %>
       </div>
     <% end %>
   <% end %>

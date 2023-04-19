@@ -13,9 +13,9 @@
       <%= form.label :email %>
       <%= form.text_field :email ,class:"form-control", readonly:true%>
     </div>
-    <div class="form-check">
-      <%= form.check_box :admin, class:"form-check-input", disabled: true, readonly:true%>
-      <%= form.label :admin, class: "form-check-label" %>
+    <div class="form-group">
+      <%= form.label :role %>
+      <%= form.select :role, User::ROLES, {}, class:"form-control", readonly: true %>
     </div>
   <% end %>
   <%= link_to edit_user_path(@user),class:"btn btn-primary min-width-btn" do %>
