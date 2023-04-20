@@ -1,0 +1,1309 @@
+---
+openapi: 3.0.3
+info:
+  title: HDM API v1
+  version: 1.0.0
+  summary: API to query hiera data from HDM
+servers: []
+paths:
+  "/api/v1/environments/{environment_id}/nodes/{node_id}/keys":
+    get:
+      summary: index
+      tags:
+      - Api::V1::Key
+      parameters:
+      - name: environment_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: development
+      - name: node_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: test.host
+      responses:
+        '200':
+          description: GET /index returns a list of applicable keys
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                  required:
+                  - name
+              example:
+              - name: foobar::enable_firstrun
+              - name: foobar::firstrun::linux_classes
+              - name: foobar::postfix::tp::resources_hash
+              - name: foobar::time::servers
+              - name: foobar::timezone
+              - name: hdm::float
+              - name: hdm::integer
+  "/api/v1/environments/{environment_id}/nodes/{node_id}/keys/{id}":
+    get:
+      summary: show
+      tags:
+      - Api::V1::Key
+      parameters:
+      - name: environment_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: development
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: foobar::enable_firstrun
+      - name: node_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: test.host
+      responses:
+        '200':
+          description: GET /show returns per-hierarchy and per-file values
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    hierarchy_name:
+                      type: string
+                    files:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          path:
+                            type: string
+                          value:
+                            nullable: true
+                        required:
+                        - path
+                        - value
+                  required:
+                  - hierarchy_name
+                  - files
+              example:
+              - hierarchy_name: Eyaml hierarchy
+                files:
+                - path: nodes/test.host.yaml
+                  value: 
+                - path: role/hdm_test-%{::facts.env}.yaml
+                  value: 
+                - path: role/hdm_test.yaml
+                  value: 
+                - path: zone/internal.yaml
+                  value: 
+                - path: common.yaml
+                  value: 'false'
+  "/api/v1/environments":
+    get:
+      summary: index
+      tags:
+      - Api::V1::Environment
+      responses:
+        '200':
+          description: GET /index returns a list of available environments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    in_use:
+                      type: boolean
+                  required:
+                  - name
+                  - in_use
+              example:
+              - name: development
+                in_use: true
+              - name: eyaml
+                in_use: true
+              - name: globs
+                in_use: true
+              - name: hdm
+                in_use: true
+              - name: minimal
+                in_use: true
+              - name: multiple_hierarchies
+                in_use: true
+              - name: no_config
+                in_use: true
+              - name: no_datadir
+                in_use: true
+              - name: test
+                in_use: true
+              - name: v3
+                in_use: true
+              - name: old_unused
+                in_use: false
+  "/api/v1/nodes":
+    get:
+      summary: index
+      tags:
+      - Api::V1::Node
+      responses:
+        '200':
+          description: GET /index returns a list of available nodes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    hostname:
+                      type: string
+                    environment:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        in_use:
+                          type: boolean
+                      required:
+                      - name
+                      - in_use
+                  required:
+                  - hostname
+                  - environment
+              example:
+              - hostname: 1a9c576a.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: 1h46n83n.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: 1jyln4zc.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: 1k4kahf9.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: 1m73otky.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 1tge1wo3.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 2288jh8e.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 29hjakkw.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: 2bvp6vcc.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: 2l8ol0i5.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: 2r0bw6xn.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: 2u0d1fei.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: 33amc5da.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 3ay66ymd.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 3bx5fygw.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 3i8rrqjx.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 3io2n5uh.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 3p2fr29k.betadots.training
+                environment:
+                  name: minimal
+                  in_use: true
+              - hostname: 3q8ync63.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 40sbev55.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 45kzd3l5.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: 482krqn7.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: 4eexoda7.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 4jjfyx1h.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 4msusyei.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: 535ffe1u.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: 56w57wwr.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: 5f6zzx25.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: 5gfpx2k7.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 5gv8l8n3.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 5lzg8kq4.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: 5npv7v50.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 5qud69fw.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: 5ruwuuad.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 60wxmaw5.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: 6iijj7sn.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: 6mlkoauf.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 6mwwmsgg.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: 6xnchxhs.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: 724pbcao.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 74h24eg9.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: 7c6k7ouc.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: 7jb746rk.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 7jfq1drl.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: 7jufapzq.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: 7lglxdpg.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: 7uc8566.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: 7wdm4xss.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 80fao3k3.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: 8119nqs7.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: 85759gxe.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: 8byzjpzz.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 8drk73w4.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 8pripw5v.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: 8yfl7kiv.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 90f923dr.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: 922r0yzv.betadots.training
+                environment:
+                  name: minimal
+                  in_use: true
+              - hostname: 98qhkysp.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: 9cvpd0wq.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: 9n11tuzg.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: 9t8nhoux.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: a2st4ipx.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: aej86kp6.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: ahi53aeb.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: ajpe03ov.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: arbpv4us.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: arcnlzkm.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: ax8ornqr.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: b3pcqavv.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: b4739ubj.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: b548zrva.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: b8sp7obs.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: bixzjm53.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: brskudb1.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: bvgbu2fl.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: bzuvus9e.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: c93qezs8.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: cgaplboi.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: cn32iom0.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: crffyobe.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: cuar01ep.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: cwgel3zg.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: czhn2a3x.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: d3r3tytg.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: d4gq3103.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: d4y2k0qq.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: d9fpj14l.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: dbrn3h2r.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: dhplrtv.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: dmk15880.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: dmpp0nom.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: dtwhf73e.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: dui861cn.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: e5ujans9.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: eerukb8k.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: exs6mbyb.betadots.training
+                environment:
+                  name: minimal
+                  in_use: true
+              - hostname: ez243lch.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: eztmlf24.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: f2f7nbka.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: f6obrt1u.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: fcqtpjn7.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: fefo79a7.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: fh9nsgeh.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: fj2yfmw.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: fnp4tnay.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: fpehst39.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: fqyn3gv9.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: g227pkf7.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: g39gaasx.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: g59avopl.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: g9yi8tjz.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: gac3g36a.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: gki2r2ip.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: gkxa25er.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: glfhgp33.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: gtlhhexp.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: guku7s0a.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: guxndq10.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: gvy8hvhk.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: gw1ulcb7.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: gwcu2v40.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: h2vjgbw.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: h3l1v58e.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: h3s4iuga.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: h9nn849h.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: hmpbc41u.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: hnp1da30.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: hol8la5o.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: hs5wnjha.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: i6y0olsy.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: i82jmcn4.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: iithv1y6.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: j0dg6jl7.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: j114trpy.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: j6kant58.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: j6p3emfi.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: jb07smoq.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: jl4rhfpm.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: jlua9syg.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: jo9ilwl3.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: jxicx59k.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: k0e042a8.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: k81f2z6y.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: kgx0whxs.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: khlktohq.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: km2gee9p.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: knbenvbp.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: l8y7q7tv.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: lj12xrpa.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: lj8k5ad6.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: lnlys2fc.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: loi6f5y5.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: lqytqz41.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: lxb5xqrm.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: m431sdv6.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: m4fnq58u.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: m5rba5bj.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: md55vdpb.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: mlctzqgu.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: mlr2pox0.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: mrp77rad.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: msttkvy6.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: mtbwtip0.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: n34tbmpi.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: nb8bm3cs.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: nb9ljs79.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: ncamizgh.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: ndic5wz7.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: ndioaov6.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: nk2gezhe.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: nrl8n1e1.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: ns8gwxg3.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: o2orlwe5.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: o3tzui7b.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: o4gphsam.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: oa2j8g47.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: on7fexx2.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: otibr6d1.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: oxnhoxvy.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: oz2xshky.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: p5ufmvb0.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: pc42z1mh.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: pf3p6pcl.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: pf96l73p.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: pfztw7li.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: pgysn5ry.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: q1q937xe.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: q8o2i1tz.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: qcmidm7d.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: qeg3uvik.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: qf3mu190.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: qlc3fm46.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: qo10agon.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: qonipr0e.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: r48j23ne.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: r6yzgkef.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: r7khozne.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: rs2bxbd0.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: s3hhgc1r.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: se3wo5kb.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: siu7z4w7.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: skwdot22.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: slwbfc40.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: spqyk4jo.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: ss4twzpr.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: sse8epsu.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: sszlxacw.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: stujkvcj.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: sw15xa6y.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: szssayw3.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: szw86yk4.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: t4k08lp.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: t7lfr3lc.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: tae1yz1.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: tbgmw5we.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: tdh4p6ix.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: test.host
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: testhost2
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: testhost3
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: testhost
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: tgsy3idb.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: tkytukvc.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: tpebg47f.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: ttns843o.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: u2lxgwcw.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: u2s1rcqu.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: u4u2iilk.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: uai7e89l.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: umx7463y.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: upjxmekx.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: uswpm0lf.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: uyiwu2st.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: v4c13rht.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: vbz66ux7.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: vim0dogq.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: vo0zsyto.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: vvo59e81.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: vxkc5b8p.betadots.training
+                environment:
+                  name: minimal
+                  in_use: true
+              - hostname: vzv0jhk2.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: w12bh6f8.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: wbwz457d.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: wh2fvmnb.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: wjvze5r5.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: won7vzfm.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: wpo98zhp.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: wqo2j9yj.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: x403skx4.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: x4llfki8.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: x5z92y7t.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: x6y6atn4.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: xct89zsu.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: xcz4msin.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: xda8efsx.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: xjh5gpa8.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: xkpgjql8.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: xq9xpbvv.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: xt15cr0s.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+              - hostname: xugb63du.betadots.training
+                environment:
+                  name: no_config
+                  in_use: true
+              - hostname: xwjwyd98.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: y7tifexf.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: y86sacnv.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: yawsxbez.betadots.training
+                environment:
+                  name: eyaml
+                  in_use: true
+              - hostname: ycrxjn7a.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: yfkxxouy.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: yg9kk39i.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: yh4kcbnz.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: yjxyvzc1.betadots.training
+                environment:
+                  name: hdm
+                  in_use: true
+              - hostname: yrlqzaph.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: yy4dijk2.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: yzeqs4p0.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: z0f2kl43.betadots.training
+                environment:
+                  name: minimal
+                  in_use: true
+              - hostname: z36imxyv.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: z36n2b2w.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: z8ybtb4h.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: ze729k57.betadots.training
+                environment:
+                  name: test
+                  in_use: true
+              - hostname: zf2l0dws.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: zm3qv3cm.betadots.training
+                environment:
+                  name: globs
+                  in_use: true
+              - hostname: zp0zr62m.betadots.training
+                environment:
+                  name: development
+                  in_use: true
+              - hostname: zu149i5d.betadots.training
+                environment:
+                  name: multiple_hierarchies
+                  in_use: true
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   include HasGroups
 
-  ROLES = %w[admin regular api]
+  ROLES = %w[admin regular api].freeze
 
   has_secure_password validations: false
 
@@ -10,8 +10,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }
   validates :first_name, :last_name, presence: true
   validates :password, length: { minimum: PASSWORD_MIN_LENGTH },
-    confirmation: true,
-    allow_nil: true
+                       confirmation: true,
+                       allow_nil: true
   validates :role, inclusion: ROLES
 
   scope :admins, -> { where(role: "admin") }
@@ -26,7 +26,7 @@ class User < ApplicationRecord
     role == "regular"
   end
 
-  def api
+  def api?
     role == "api"
   end
 
@@ -41,6 +41,6 @@ class User < ApplicationRecord
   private
 
   def downcase_email
-    self.email = self.email.downcase
+    self.email = email.downcase
   end
 end

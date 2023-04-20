@@ -19,6 +19,10 @@ class DummyUser
     true
   end
 
+  def api?
+    true
+  end
+
   def may_access?(_record)
     true
   end
