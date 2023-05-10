@@ -4,7 +4,7 @@
     <select name="environment" data-controller="select-navigation" data-action="change->select-navigation#navigate" data-slim-select-target="dropdown">
       <option value="" <%= "selected" if @environment.nil? %> data-url="<%= environments_path %>"></option>
       <% @environments.each do |environment| %>
-        <option data-url="<%= environment_nodes_path(environment) %>" <%= "selected" if environment == @environment %>>
+        <option data-url="<%= environment_nodes_path(environment) %>" <%= "selected" if environment == @environment %> <%= "disabled" unless environment.available? %>>
           <%= environment.name %><%= " (unused)" unless environment.in_use? %>
         </option>
       <% end %>

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class EnvironmentTest < ActiveSupport::TestCase
-  test "list the environments" do
+  test "::all lists the environments" do
     expected_environments = %w(
       development
       eyaml
@@ -16,6 +16,14 @@ class EnvironmentTest < ActiveSupport::TestCase
       old_unused
     )
     assert_equal expected_environments, Environment.all.map(&:name)
+  end
+
+  test "::all correctly marks unavailable environments" do
+    PuppetDbClient.stub :environments, ["unavailable"] do
+      environments = Environment.all
+      unavailable_environment = environments.find { |e| e.name == "unavailable" }
+      assert_not unavailable_environment.available?
+    end
   end
 
   test "::find correctly sets the `in_use` flag" do
