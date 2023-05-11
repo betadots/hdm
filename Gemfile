@@ -34,6 +34,7 @@ gem 'net-ldap', require: "net/ldap"
 gem 'breadcrumbs_on_rails'
 gem 'cancancan'
 gem 'ruby-saml'
+gem 'diffy'
 
 # To use retry middleware with Faraday v2.0+
 gem 'faraday-retry'
