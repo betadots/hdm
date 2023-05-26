@@ -37,10 +37,14 @@ module Api
       end
 
       def load_environment_and_node
-        @environment = Environment.find(params[:environment_id])
-        authorize! :show, @environment
         @node = Node.find(params[:node_id])
         authorize! :show, @node
+        @environment = if params[:environment_id].present?
+                         Environment.find(params[:environment_id])
+                       else
+                         @node.environment
+                       end
+        authorize! :show, @environment
       end
     end
   end

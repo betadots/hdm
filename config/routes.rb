@@ -3,11 +3,13 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :environments, only: :index do
-        resources :nodes, only: :index, constraints: { id: /.+/ } do
+        resources :nodes, only: [], constraints: { id: /.+/ } do
           resources :keys, only: [:index, :show]
         end
       end
-      resources :nodes, only: :index
+      resources :nodes, only: :index, constraints: { id: /.+/ } do
+        resources :keys, only: [:index, :show]
+      end
     end
   end
 

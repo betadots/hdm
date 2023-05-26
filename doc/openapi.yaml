@@ -9,6 +9,10 @@ paths:
   "/api/v1/environments/{environment_id}/nodes/{node_id}/keys":
     get:
       summary: index
+      description: This variant allows specifying an environment in the URL and will
+        return data from that environment, even if the given node is not in that environment.
+        This can be used to determine what would if happen _if_ the node was placed
+        in that environment.
       tags:
       - Api::V1::Key
       parameters:
@@ -26,7 +30,7 @@ paths:
         example: test.host
       responses:
         '200':
-          description: GET /index returns a list of applicable keys
+          description: it returns a list of applicable keys from the given environment
           content:
             application/json:
               schema:
@@ -49,6 +53,10 @@ paths:
   "/api/v1/environments/{environment_id}/nodes/{node_id}/keys/{id}":
     get:
       summary: show
+      description: This variant allows specifying an environment in the URL and will
+        return data from that environment, even if the given node is not in that environment.
+        This can be used to determine what would if happen _if_ the node was placed
+        in that environment.
       tags:
       - Api::V1::Key
       parameters:
@@ -72,7 +80,8 @@ paths:
         example: test.host
       responses:
         '200':
-          description: GET /show returns per-hierarchy and per-file values
+          description: it returns per-hierarchy and per-file values from the given
+            environment
           content:
             application/json:
               schema:
@@ -1302,6 +1311,98 @@ paths:
                 environment:
                   name: multiple_hierarchies
                   in_use: true
+  "/api/v1/nodes/{node_id}/keys":
+    get:
+      summary: index
+      tags:
+      - Api::V1::Key
+      parameters:
+      - name: node_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: test.host
+      responses:
+        '200':
+          description: it returns a list of applicable keys
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                  required:
+                  - name
+              example:
+              - name: foobar::enable_firstrun
+              - name: foobar::firstrun::linux_classes
+              - name: foobar::postfix::tp::resources_hash
+              - name: foobar::time::servers
+              - name: foobar::timezone
+              - name: hdm::float
+              - name: hdm::integer
+  "/api/v1/nodes/{node_id}/keys/{id}":
+    get:
+      summary: show
+      tags:
+      - Api::V1::Key
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: foobar::enable_firstrun
+      - name: node_id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: test.host
+      responses:
+        '200':
+          description: it returns per-hierarchy and per-file values
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    hierarchy_name:
+                      type: string
+                    files:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          path:
+                            type: string
+                          value:
+                            nullable: true
+                        required:
+                        - path
+                        - value
+                  required:
+                  - hierarchy_name
+                  - files
+              example:
+              - hierarchy_name: Eyaml hierarchy
+                files:
+                - path: nodes/test.host.yaml
+                  value: 
+                - path: role/hdm_test-%{::facts.env}.yaml
+                  value: 
+                - path: role/hdm_test.yaml
+                  value: 
+                - path: zone/internal.yaml
+                  value: 
+                - path: common.yaml
+                  value: 'false'
 components:
   securitySchemes:
     BasicAuth:

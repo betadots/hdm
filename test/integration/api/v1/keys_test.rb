@@ -5,14 +5,32 @@ module Api
     class KeysTest < ActionDispatch::IntegrationTest
       openapi! if respond_to?(:openapi!)
 
-      test "GET /index returns a list of applicable keys" do
-        get "/api/v1/environments/development/nodes/test.host/keys", headers: basic_auth_header, as: :json
-        assert_response :success
+      class NestedInEnvironmentTest < ActionDispatch::IntegrationTest
+        openapi! if respond_to?(:openapi!)
+
+        test "it returns a list of applicable keys from the given environment" do
+          get "/api/v1/environments/development/nodes/test.host/keys", headers: basic_auth_header, as: :json
+          assert_response :success
+        end
+
+        test "it returns per-hierarchy and per-file values from the given environment" do
+          get "/api/v1/environments/development/nodes/test.host/keys/foobar::enable_firstrun", headers: basic_auth_header, as: :json
+          assert_response :success
+        end
       end
 
-      test "GET /show returns per-hierarchy and per-file values" do
-        get "/api/v1/environments/development/nodes/test.host/keys/foobar::enable_firstrun", headers: basic_auth_header, as: :json
-        assert_response :success
+      class WithoutEnvironmentTest < ActionDispatch::IntegrationTest
+        openapi! if respond_to?(:openapi!)
+
+        test "it returns a list of applicable keys" do
+          get "/api/v1/nodes/test.host/keys", headers: basic_auth_header, as: :json
+          assert_response :success
+        end
+
+        test "it returns per-hierarchy and per-file values" do
+          get "/api/v1/nodes/test.host/keys/foobar::enable_firstrun", headers: basic_auth_header, as: :json
+          assert_response :success
+        end
       end
     end
   end
