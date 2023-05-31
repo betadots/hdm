@@ -1,3 +1,5 @@
 ---
 foobar::firstrun::linux_classes:
   hostname: hostname-role
+hdm::integer: 1
+hdm::float: 4.5
