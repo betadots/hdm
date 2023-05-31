@@ -74,25 +74,25 @@ class DataFile < HieraModel
   def has_differing_value_in_original_environment?(key)
     return false unless environment && node.environment
     return false if environment == node.environment
+
     candidate_files = node.environment.hierarchies.map do |h|
-      self.class.new(hierarchy: h, path: path, node: node)
+      self.class.new(hierarchy: h, path:, node:)
     end
-    other_file = candidate_files.find { |f| f.exist? }
+    other_file = candidate_files.find(&:exist?)
     return false unless other_file
+
     other_key = Key.new(environment: node.environment, name: key.name)
-    return false if value_for(key: key).value == other_file.value_for(key: other_key).value
+    return false if value_for(key:).value == other_file.value_for(key: other_key).value
+
     true
   end
 
   def value_from_original_environment(key:)
     candidate_files = (node&.environment&.hierarchies || []).map do |h|
-      self.class.new(hierarchy: h, path: path, node: node)
+      self.class.new(hierarchy: h, path:, node:)
     end
-    other_file = candidate_files.find { |f| f.exist? }
+    other_file = candidate_files.find(&:exist?)
     other_key = Key.new(environment: node.environment, name: key.name)
     other_file.value_for(key: other_key)
   end
-
-  private
-
 end
