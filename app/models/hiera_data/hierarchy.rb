@@ -30,9 +30,12 @@ class HieraData
         end
     end
 
-    def datadir
+    def datadir(facts: nil)
       return @datadir if @datadir
-      path = Pathname.new(raw_hash["datadir"])
+
+      raw_datadir = raw_hash["datadir"]
+      raw_datadir = Interpolation.interpolate_facts(path: raw_datadir, facts:) if facts
+      path = Pathname.new(raw_datadir)
       if path.absolute?
         path
       else
@@ -71,7 +74,7 @@ class HieraData
         resolved_path = Interpolation.interpolate_facts(path:, facts:)
         if uses_globs?
           resolved_path = Interpolation
-            .interpolate_globs(path: resolved_path, datadir:)
+                          .interpolate_globs(path: resolved_path, datadir:)
         end
         resolved_path
       end

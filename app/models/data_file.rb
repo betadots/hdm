@@ -37,7 +37,7 @@ class DataFile < HieraModel
   end
 
   def keys
-    @keys ||= hiera_data.keys_in_file(hierarchy.name, path).map do |key_name|
+    @keys ||= hiera_data.keys_in_file(hierarchy.name, path, facts: node&.facts).map do |key_name|
       Key.new(environment:, name: key_name)
     end
   end

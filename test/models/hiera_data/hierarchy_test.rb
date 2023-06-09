@@ -3,21 +3,21 @@ require 'test_helper'
 class HieraData::HierarchyTest < ActiveSupport::TestCase
   test "#uses_globs? returns true if `glob` key present" do
     glob = "/*/singular/glob"
-    raw_hash = {"name" => "Singular path", "glob" => glob}
+    raw_hash = { "name" => "Singular path", "glob" => glob }
     hierarchy = HieraData::Hierarchy.new(raw_hash:, base_path: ".")
     assert hierarchy.uses_globs?
   end
 
   test "#uses_globs? returns true if `globs` key present" do
     globs = ["/*/array/globs", "/test/**/globs"]
-    raw_hash = {"name" => "Singular path", "globs" => globs}
+    raw_hash = { "name" => "Singular path", "globs" => globs }
     hierarchy = HieraData::Hierarchy.new(raw_hash:, base_path: ".")
     assert hierarchy.uses_globs?
   end
 
   test "#paths supports the singular `path` setting" do
     path = "/test/singular/path"
-    raw_hash = {"name" => "Singular path", "path" => path}
+    raw_hash = { "name" => "Singular path", "path" => path }
     hierarchy = HieraData::Hierarchy.new(raw_hash:, base_path: ".")
     assert_equal [path], hierarchy.paths
   end
@@ -41,14 +41,14 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
 
   test "#paths supports the singular `glob` setting" do
     glob = "/*/singular/glob"
-    raw_hash = {"name" => "Singular path", "glob" => glob}
+    raw_hash = { "name" => "Singular path", "glob" => glob }
     hierarchy = HieraData::Hierarchy.new(raw_hash:, base_path: ".")
     assert_equal [glob], hierarchy.paths
   end
 
   test "#paths supports the `globs` array setting" do
     globs = ["/*/array/globs", "/test/**/globs"]
-    raw_hash = {"name" => "Singular path", "globs" => globs}
+    raw_hash = { "name" => "Singular path", "globs" => globs }
     hierarchy = HieraData::Hierarchy.new(raw_hash:, base_path: ".")
     assert_equal globs, hierarchy.paths
   end
@@ -74,9 +74,9 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
   test "#resolved_paths resolves globs" do
     base_path = Rails.root.join("test/fixtures/files/puppet/environments/globs")
     globs = ["common/*.yaml"]
-    raw_hash = {"name" => "Common", "datadir" => "data", "globs" => globs}
+    raw_hash = { "name" => "Common", "datadir" => "data", "globs" => globs }
     hierarchy = HieraData::Hierarchy.new(raw_hash:, base_path:)
-    facts = {"fqdn" => "testhost"}
+    facts = { "fqdn" => "testhost" }
     expected_resolved_paths = [
       "common/foobar.yaml",
       "common/hdm.yaml"
@@ -104,6 +104,18 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
       "common.yaml"
     ]
     assert_equal expected_candidate_files, hierarchy.candidate_files
+  end
+
+  test "#datadir uses facts to resolve datadir" do
+    raw_hash = {
+      "name" => "dynamic datadir",
+      "datadir" => "%{facts.datadir}"
+    }
+    facts = { "datadir" => "data1" }
+    base_path = Rails.root.join("test/fixtures/files/puppet/environments/dynamic_datadir")
+    hierarchy = HieraData::Hierarchy.new(raw_hash:, base_path:)
+
+    assert_equal base_path.join("data1"), hierarchy.datadir(facts:)
   end
 
   def raw_hash
@@ -146,7 +158,6 @@ class HieraData::HierarchyTest < ActiveSupport::TestCase
       }
     end
   end
-
 
   class HieraData::HierarchyForEyamlDataTest < ActiveSupport::TestCase
     setup do

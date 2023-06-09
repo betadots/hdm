@@ -1,0 +1,4 @@
+---
+hdm::float: 0.1
+hdm::integer: 1
+foobar::enable_firstrun: false

@@ -1,0 +1,10 @@
+version: 5
+defaults:
+  data_hash: yaml_data
+
+hierarchy:
+  - name: "dynamic hierarchy"
+    datadir: "%{facts.custom.datadir}"
+    paths:
+      - "nodes/%{::facts.fqdn}.yaml"
+      - "common.yaml"

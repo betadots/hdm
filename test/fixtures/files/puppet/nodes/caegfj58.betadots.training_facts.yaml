@@ -1,0 +1,7 @@
+---
+fqdn: 'caegfj58.betadots.training'
+role: 'hdm_test'
+environment: 'dynamic_datadir'
+zone: 'internal'
+custom:
+  datadir: 'data1'
