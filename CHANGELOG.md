@@ -4,9 +4,33 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [1.1.0](https://github.com/betadots/hdm/tree/1.1.0) (2023-04-17)
+## [1.2.0](https://github.com/betadots/hdm/tree/1.2.0) (2023-06-15)
 
-[Full Changelog](https://github.com/betadots/hdm/compare/v1.0.1...1.1.0)
+[Full Changelog](https://github.com/betadots/hdm/compare/v1.1.0...1.2.0)
+
+**Implemented enhancements:**
+
+- Show current used values when selecting nodes from different environment [\#151](https://github.com/betadots/hdm/issues/151)
+- Edge case: PuppetDB still has an information regarding an environment, but the environment does no longer exist on file system [\#147](https://github.com/betadots/hdm/issues/147)
+
+**Fixed bugs:**
+
+- Hiera data dir can not be set to a fact [\#157](https://github.com/betadots/hdm/issues/157)
+
+**Closed issues:**
+
+- Define a CI/CD strategy [\#3](https://github.com/betadots/hdm/issues/3)
+
+**Merged pull requests:**
+
+- Interpolate facts in datadir setting \#157 [\#160](https://github.com/betadots/hdm/pull/160) ([oneiros](https://github.com/oneiros))
+- Bump docker/login-action from 2.1.0 to 2.2.0 [\#159](https://github.com/betadots/hdm/pull/159) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Display value differences to actual environment [\#158](https://github.com/betadots/hdm/pull/158) ([oneiros](https://github.com/oneiros))
+- Disable environments not available in fs \#147 [\#156](https://github.com/betadots/hdm/pull/156) ([oneiros](https://github.com/oneiros))
+
+## [v1.1.0](https://github.com/betadots/hdm/tree/v1.1.0) (2023-04-17)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v1.0.1...v1.1.0)
 
 **Implemented enhancements:**
 
