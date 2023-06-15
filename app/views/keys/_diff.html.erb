@@ -1,0 +1,15 @@
+<% split_diff = Diffy::SplitDiff.new(file.value_from_original_environment(key: @key).value, value.value, format: :html) %>
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= @node.environment.name %></th>
+      <th><%= @environment.name %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= raw(split_diff.left) %></td>
+      <td><%= raw(split_diff.right) %></td>
+    </tr>
+  </tbody>
+</table>
