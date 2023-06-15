@@ -39,7 +39,6 @@ Layout/CaseIndentation:
 Layout/EmptyLineAfterGuardClause:
   Exclude:
     - 'app/models/hiera_data/config.rb'
-    - 'app/models/hiera_data/hierarchy.rb'
     - 'app/models/hiera_data/yaml_file.rb'
 
 # Offense count: 2
@@ -48,13 +47,6 @@ Layout/EmptyLineAfterGuardClause:
 Layout/EmptyLineBetweenDefs:
   Exclude:
     - 'test/models/hiera_data/config_test.rb'
-    - 'test/models/hiera_data/hierarchy_test.rb'
-
-# Offense count: 1
-# This cop supports safe auto-correction (--auto-correct).
-Layout/EmptyLines:
-  Exclude:
-    - 'test/models/hiera_data/hierarchy_test.rb'
 
 # Offense count: 2
 # This cop supports safe auto-correction (--auto-correct).
@@ -146,7 +138,6 @@ Layout/MultilineArrayBraceLayout:
 Layout/MultilineMethodCallIndentation:
   Exclude:
     - 'app/models/hiera_data/data_file.rb'
-    - 'app/models/hiera_data/hierarchy.rb'
     - 'app/models/key.rb'
 
 # Offense count: 13
@@ -175,7 +166,6 @@ Layout/SpaceInsideHashLiteralBraces:
   Exclude:
     - 'config/routes.rb'
     - 'test/models/hiera_data/data_file_test.rb'
-    - 'test/models/hiera_data/hierarchy_test.rb'
     - 'test/models/hiera_data/interpolation_test.rb'
     - 'test/models/hiera_data/yaml_file_test.rb'
     - 'test/models/hiera_data_test.rb'

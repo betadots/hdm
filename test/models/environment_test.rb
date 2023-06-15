@@ -4,6 +4,7 @@ class EnvironmentTest < ActiveSupport::TestCase
   test "::all lists the environments" do
     expected_environments = %w(
       development
+      dynamic_datadir
       eyaml
       globs
       hdm

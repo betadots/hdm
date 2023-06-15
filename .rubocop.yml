@@ -23,3 +23,7 @@ Naming/PredicateName:
     - "have_"
 Rails/I18nLocaleTexts:
   Enabled: false
+
+Metrics/ClassLength:
+  Exclude:
+    - "test/**/*.rb"
