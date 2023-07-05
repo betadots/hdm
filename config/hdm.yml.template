@@ -79,3 +79,12 @@ production:
 #     idp_cert_fingerprint: "aaa"
 #     idp_cert: "cert" # use either fingerprint _or_ cert but not both
 
+# Example for a custom lookup function, called `my_custom_function`,
+# mapped to an existing backend, `eyaml`
+# production:
+#   read_only: false
+#   allow_encryption: true
+#   puppet_db:
+#     server: "https://localhost:8081"
+#   custom_lookup_function_mapping:
+#     my_custom_function: eyaml

@@ -1,6 +1,16 @@
 class HieraData
   class Hierarchy
-    LOOKUP_FUNCTIONS = %w(lookup_key data_hash data_dig hiera3_backend).freeze
+    LOOKUP_FUNCTIONS = %w[lookup_key data_hash data_dig hiera3_backend].freeze
+    BACKENDS = {
+      "data_hash" => {
+        "json_data" => :json,
+        "yaml_data" => :yaml
+      },
+      "lookup_key" => {
+        "eyaml_lookup_key" => :eyaml
+      }
+    }.freeze
+
     attr_reader :raw_hash
 
     def initialize(raw_hash:, base_path:)
@@ -17,17 +27,7 @@ class HieraData
     end
 
     def backend
-      @backend ||=
-        case [lookup_function, raw_hash[lookup_function]]
-        when ["data_hash", "yaml_data"]
-          :yaml
-        when ["data_hash", "json_data"]
-          :json
-        when ["lookup_key", "eyaml_lookup_key"]
-          :eyaml
-        else
-          raise HDM::Error, "unknown backend #{raw_hash[lookup_function]}"
-        end
+      @backend ||= determine_backend
     end
 
     def datadir(facts: nil)
@@ -44,15 +44,15 @@ class HieraData
     end
 
     def private_key
-      if backend == :eyaml
-        @base_path.join(raw_hash.dig("options", "pkcs7_private_key"))
-      end
+      return unless backend == :eyaml
+
+      @base_path.join(raw_hash.dig("options", "pkcs7_private_key"))
     end
 
     def public_key
-      if backend == :eyaml
-        @base_path.join(raw_hash.dig("options", "pkcs7_public_key"))
-      end
+      return unless backend == :eyaml
+
+      @base_path.join(raw_hash.dig("options", "pkcs7_public_key"))
     end
 
     def encryptable?
@@ -62,7 +62,7 @@ class HieraData
     end
 
     def uses_globs?
-      raw_hash.has_key?("glob") || raw_hash.has_key?("globs")
+      raw_hash.key?("glob") || raw_hash.key?("globs")
     end
 
     def paths
@@ -92,6 +92,17 @@ class HieraData
     def setup_paths
       base_key = uses_globs? ? "glob" : "path"
       Array(raw_hash[base_key] || raw_hash.fetch("#{base_key}s", []))
+    end
+
+    def determine_backend
+      key = lookup_function
+      value = raw_hash[lookup_function]
+      backends = BACKENDS
+      custom_mappings = Rails.configuration.hdm[:custom_lookup_function_mapping]
+      backends = backends.deep_merge({ "lookup_key" => custom_mappings }) if custom_mappings.present?
+      backends.fetch(key).fetch(value).to_sym
+    rescue KeyError
+      raise Hdm::Error, "unknown backend #{value}"
     end
   end
 end
