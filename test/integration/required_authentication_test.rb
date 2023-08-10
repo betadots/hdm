@@ -40,7 +40,7 @@ class RequiredAuthenticationTest < ActionDispatch::IntegrationTest
     end
 
     test "authentication requirements for users" do
-      user = FactoryBot.create(:user, admin: true)
+      user = FactoryBot.create(:user, :admin)
 
       authentication_required_for :get, users_path
       authentication_required_for :get, user_path(user)

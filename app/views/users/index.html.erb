@@ -6,7 +6,7 @@
         <th>First name</th>
         <th>Last name</th>
         <th>Email</th>
-        <th>Admin?</th>
+        <th>Role</th>
         <th></th>
       </tr>
     </thead>
@@ -23,9 +23,9 @@
             <%= user.email %>
           </td>      
           <td>
-            <% if user.admin? %>
-              <%= icon "check" %>
-            <% end %>
+            <span class="badge <%= role_badge_color(user.role) %>">
+              <%= user.role %>
+            </span>
           </td>      
           <td>
             <% if can? :show, user %>

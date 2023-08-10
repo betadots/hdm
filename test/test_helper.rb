@@ -9,6 +9,7 @@ require_relative '../config/environment'
 require 'rails/test_help'
 require 'minitest/mock'
 require_relative "support/fake_puppet_db"
+require_relative "support/openapi"
 require_relative "support/sign_in_helper"
 
 # Start FakePuppetDB-Server
@@ -23,28 +24,30 @@ SAML_TEST_CONFIG = {
   idp_cert_fingerprint: "test"
 }.freeze
 
-class ActiveSupport::TestCase
-  # Run tests in parallel with specified workers
-  parallelize(workers: :number_of_processors) unless ENV["COVERAGE"]
+module ActiveSupport
+  class TestCase
+    # Run tests in parallel with specified workers
+    parallelize(workers: :number_of_processors) unless ENV["COVERAGE"] || ENV["OPENAPI"]
 
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
+    # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+    fixtures :all
 
-  # Add more helper methods to be used by all tests here...
-  def with_temp_file(path, &)
-    begin
+    # Add more helper methods to be used by all tests here...
+    def with_temp_file(path, &)
       FileUtils.rm_f(path)
       yield
     ensure
       FileUtils.rm_f(path)
     end
-  end
 
-  def json
-    JSON.parse(response.body)
+    def json
+      JSON.parse(response.body)
+    end
   end
 end
 
-class ActionDispatch::IntegrationTest
-  include SignInHelper
+module ActionDispatch
+  class IntegrationTest
+    include SignInHelper
+  end
 end

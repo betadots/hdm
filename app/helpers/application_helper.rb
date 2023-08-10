@@ -1,10 +1,17 @@
 module ApplicationHelper
+  FLASH_CLASSES = {
+    "notice" => "alert alert-success",
+    "error" => "alert alert-danger",
+    "alert" => "alert alert-warning"
+  }.freeze
+  ROLE_BADGE_COLORS = {
+    "admin" => "badge-danger",
+    "regular" => "badge-success",
+    "api" => "badge-info"
+  }.freeze
+
   def flash_class(level)
-    case level
-      when 'notice' then "alert alert-success"
-      when 'error' then "alert alert-danger"
-      when 'alert' then "alert alert-warning"
-    end
+    FLASH_CLASSES[level]
   end
 
   def format_path(file, key)
@@ -29,5 +36,9 @@ module ApplicationHelper
     else
       'Are you sure?'
     end
+  end
+
+  def role_badge_color(role)
+    ROLE_BADGE_COLORS[role]
   end
 end

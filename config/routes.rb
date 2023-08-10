@@ -1,5 +1,18 @@
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      resources :environments, only: :index do
+        resources :nodes, only: [], constraints: { id: /.+/ } do
+          resources :keys, only: [:index, :show]
+        end
+      end
+      resources :nodes, only: :index, constraints: { id: /.+/ } do
+        resources :keys, only: [:index, :show]
+      end
+    end
+  end
+
   resources :groups do
     resource :group_memberships, only: [:edit, :update]
   end
@@ -15,7 +28,7 @@ Rails.application.routes.draw do
       resources :files, only: [:index]
     end
 
-    resources :nodes, only: :index, constraints: {id: /.+/} do
+    resources :nodes, only: :index, constraints: { id: /.+/ } do
       if Rails.configuration.hdm['read_only']
         resources :keys, only: [:index, :show]
       else

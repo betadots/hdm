@@ -97,7 +97,6 @@ Layout/FirstArrayElementIndentation:
 # SupportedLastArgumentHashStyles: always_inspect, always_ignore, ignore_implicit, ignore_explicit
 Layout/HashAlignment:
   Exclude:
-    - 'app/models/user.rb'
     - 'test/models/key_test.rb'
 
 # Offense count: 1
@@ -164,7 +163,6 @@ Layout/SpaceBeforeComma:
 # SupportedStylesForEmptyBraces: space, no_space
 Layout/SpaceInsideHashLiteralBraces:
   Exclude:
-    - 'config/routes.rb'
     - 'test/models/hiera_data/data_file_test.rb'
     - 'test/models/hiera_data/interpolation_test.rb'
     - 'test/models/hiera_data/yaml_file_test.rb'
@@ -210,13 +208,6 @@ Lint/UnusedBlockArgument:
   Exclude:
     - 'app/models/key.rb'
 
-# Offense count: 1
-# This cop supports safe auto-correction (--auto-correct).
-# Configuration parameters: AllowUnusedKeywordArguments, IgnoreEmptyMethods, IgnoreNotImplementedMethods.
-Lint/UnusedMethodArgument:
-  Exclude:
-    - 'test/test_helper.rb'
-
 # Offense count: 4
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
@@ -258,13 +249,6 @@ Naming/PredicateName:
 Naming/RescuedExceptionsVariableName:
   Exclude:
     - 'app/models/hiera_data/config.rb'
-
-# Offense count: 1
-# This cop supports safe auto-correction (--auto-correct).
-# Configuration parameters: NilOrEmpty, NotPresent, UnlessPresent.
-Rails/Blank:
-  Exclude:
-    - 'app/models/ability.rb'
 
 # Offense count: 1
 # This cop supports unsafe auto-correction (--auto-correct-all).
@@ -337,7 +321,6 @@ Style/ClassAndModuleChildren:
     - 'test/models/hiera_data/git_repo_test.rb'
     - 'test/models/hiera_data/interpolation_test.rb'
     - 'test/models/hiera_data/yaml_file_test.rb'
-    - 'test/test_helper.rb'
 
 # Offense count: 1
 # This cop supports safe auto-correction (--auto-correct).
@@ -449,12 +432,6 @@ Style/RaiseArgs:
 
 # Offense count: 1
 # This cop supports safe auto-correction (--auto-correct).
-Style/RedundantBegin:
-  Exclude:
-    - 'test/test_helper.rb'
-
-# Offense count: 1
-# This cop supports safe auto-correction (--auto-correct).
 Style/RedundantCondition:
   Exclude:
     - 'app/models/hiera_data/yaml_file.rb'
@@ -465,20 +442,6 @@ Style/RedundantCondition:
 Style/RedundantFetchBlock:
   Exclude:
     - 'config/puma.rb'
-
-# Offense count: 1
-# This cop supports safe auto-correction (--auto-correct).
-Style/RedundantSelf:
-  Exclude:
-    - 'app/models/user.rb'
-
-# Offense count: 1
-# This cop supports safe auto-correction (--auto-correct).
-# Configuration parameters: EnforcedStyle, AllowInnerSlashes.
-# SupportedStyles: slashes, percent_r, mixed
-Style/RegexpLiteral:
-  Exclude:
-    - 'config/routes.rb'
 
 # Offense count: 3
 # This cop supports safe auto-correction (--auto-correct).
