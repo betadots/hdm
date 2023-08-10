@@ -61,7 +61,7 @@ class HieraData
       when :yaml
         YamlFile.new(path: @path)
       else
-        raise HDM::Error, "unsupported data file type #{type}"
+        raise Hdm::Error, "unsupported data file type #{type}"
       end
     end
   end
