@@ -255,7 +255,7 @@ GEM
       protocol-hpack (~> 1.4)
       protocol-http (~> 0.18)
     public_suffix (5.0.1)
-    puma (6.3.0)
+    puma (6.3.1)
       nio4r (~> 2.0)
     puppet (7.23.0)
       concurrent-ruby (~> 1.0, < 1.2.0)
@@ -461,7 +461,7 @@ DEPENDENCIES
   listen (~> 3.2)
   mini_racer
   net-ldap
-  puma (~> 6.0)
+  puma (~> 6.3)
   puppet
   puppetdb-ruby
   rails (~> 7.0.0)
