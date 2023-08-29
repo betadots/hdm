@@ -62,6 +62,7 @@ jobs:
         with:
           context: .
           tags: 'ci/hdm:${{ github.sha }}'
+          platforms: linux/amd64,linux/arm64
           push: false
 
       - name: Run Trivy vulnerability scanner
