@@ -175,6 +175,7 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     google-protobuf (3.24.3-arm64-darwin)
+    google-protobuf (3.24.3-x86_64-darwin)
     google-protobuf (3.24.3-x86_64-linux)
     hiera-eyaml (3.4.0)
       highline
@@ -197,6 +198,7 @@ GEM
     json (2.6.3)
     language_server-protocol (3.17.0.3)
     libv8-node (18.16.0.0-arm64-darwin)
+    libv8-node (18.16.0.0-x86_64-darwin)
     libv8-node (18.16.0.0-x86_64-linux)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -231,6 +233,8 @@ GEM
       net-protocol
     nio4r (2.5.9)
     nokogiri (1.15.4-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.15.4-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
@@ -358,6 +362,8 @@ GEM
     rubyzip (2.3.2)
     sass-embedded (1.66.1-arm64-darwin)
       google-protobuf (~> 3.23)
+    sass-embedded (1.66.1-x86_64-darwin)
+      google-protobuf (~> 3.23)
     sass-embedded (1.66.1-x86_64-linux-gnu)
       google-protobuf (~> 3.23)
     sassc (2.4.0)
@@ -391,6 +397,7 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.6.4-arm64-darwin)
+    sqlite3 (1.6.4-x86_64-darwin)
     sqlite3 (1.6.4-x86_64-linux)
     stimulus-rails (1.2.2)
       railties (>= 6.0.0)
@@ -427,6 +434,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  x86_64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
