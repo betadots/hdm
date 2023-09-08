@@ -48,3 +48,9 @@ It can be startet on a second shell:
 # Integration environment (TBD)
 
 #TODO: Setup a environment with VMs to have a real puppetserver and puppetdb for testing.
+
+# Update gemset
+
+```bash
+bundle lock --add-platform ruby x86_64-linux x86_64-darwin-22 arm64-darwin
+```

@@ -174,6 +174,7 @@ GEM
       rake (>= 10.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    google-protobuf (3.24.3)
     google-protobuf (3.24.3-arm64-darwin)
     google-protobuf (3.24.3-x86_64-darwin)
     google-protobuf (3.24.3-x86_64-linux)
@@ -197,6 +198,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (2.6.3)
     language_server-protocol (3.17.0.3)
+    libv8-node (18.16.0.0)
     libv8-node (18.16.0.0-arm64-darwin)
     libv8-node (18.16.0.0-x86_64-darwin)
     libv8-node (18.16.0.0-x86_64-linux)
@@ -216,6 +218,7 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.4)
     mini_racer (0.8.0)
       libv8-node (~> 18.16.0.0)
     minitest (5.20.0)
@@ -232,6 +235,9 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
+    nokogiri (1.15.4)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
     nokogiri (1.15.4-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.4-x86_64-darwin)
@@ -360,6 +366,9 @@ GEM
       rexml
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
+    sass-embedded (1.66.1)
+      google-protobuf (~> 3.23)
+      rake (>= 13.0.0)
     sass-embedded (1.66.1-arm64-darwin)
       google-protobuf (~> 3.23)
     sass-embedded (1.66.1-x86_64-darwin)
@@ -396,6 +405,8 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.6.4)
+      mini_portile2 (~> 2.8.0)
     sqlite3 (1.6.4-arm64-darwin)
     sqlite3 (1.6.4-x86_64-darwin)
     sqlite3 (1.6.4-x86_64-linux)
@@ -434,6 +445,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  ruby
   x86_64-darwin-22
   x86_64-linux
 
