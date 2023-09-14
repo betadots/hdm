@@ -38,6 +38,7 @@ export default class extends Controller {
   }
 
   updateEncryptionStatus() {
+    if (!this.hasEncryptButtonTarget) return;
     if (this.fieldTarget.selectionStart < this.fieldTarget.selectionEnd) {
       this.encryptButtonTarget.classList.remove("disabled");
     } else {
