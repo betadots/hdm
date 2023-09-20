@@ -1,34 +1,33 @@
-<% if !file.writable? %>
-  <pre><%= value&.value %></pre>
-<% else %>
-  <% hierarchy = file.hierarchy %>
-  <%# <%= form_with url: environment_node_key_path(@environment, @node, @key), %>
-  <%= form_with url: environment_node_key_hierarchy_data_file_value_path(@environment, @node, @key, hierarchy, file),
-    method: :patch, local: true,
-    data: ({
-      controller: "encryption",
-      action: "reset->encryption#reset",
-      encryption_decrypt_url_value: environment_hierarchy_decrypted_values_path(@environment, hierarchy),
-      encryption_encrypt_url_value: environment_hierarchy_encrypted_values_path(@environment, hierarchy)
-    } if hierarchy.encryption_possible?) do |f| %>
-    <%= hidden_field_tag :hierarchy, hierarchy.name %>
-    <%= hidden_field_tag :path, file.path %>
-    <%= text_area_tag :value, value&.value, rows: 4, class: "form-control",
-      data: {
-        encryption_target: "field",
-        action: "select->encryption#updateEncryptionStatus"
-      }
-    %>
-    <div class="d-flex justify-content-end mt-2">
-      <% if hierarchy.encryption_possible? %>
-        <%= link_to "#", class: "btn btn-sm btn-primary text-white ml-2",
-          data: {
-            encryption_target: "decryptButton",
-            action: "click->encryption#decrypt"
-          } do %>
-          <%= icon "unlock-fill" %>
-          Decrypt
-        <% end %>
+<% hierarchy = file.hierarchy %>
+<%= form_with url: (file.writable? ? environment_node_key_hierarchy_data_file_value_path(@environment, @node, @key, hierarchy, file) : nil),
+  method: :patch, local: true,
+  data: ({
+    controller: "encryption",
+    action: "reset->encryption#reset",
+    encryption_decrypt_url_value: environment_hierarchy_decrypted_values_path(@environment, hierarchy),
+    encryption_encrypt_url_value: environment_hierarchy_encrypted_values_path(@environment, hierarchy)
+  } if hierarchy.encryption_possible?) do |f| %>
+  <%= hidden_field_tag :hierarchy, hierarchy.name %>
+  <%= hidden_field_tag :path, file.path %>
+  <%= text_area_tag :value, value&.value,
+    rows: 4, class: "form-control",
+    readonly: !file.writable?,
+    data: {
+      encryption_target: "field",
+      action: "select->encryption#updateEncryptionStatus"
+    }
+  %>
+  <div class="d-flex justify-content-end mt-2">
+    <% if hierarchy.encryption_possible? %>
+      <%= link_to "#", class: "btn btn-sm btn-primary text-white ml-2",
+        data: {
+          encryption_target: "decryptButton",
+          action: "click->encryption#decrypt"
+        } do %>
+        <%= icon "unlock-fill" %>
+        Decrypt
+      <% end %>
+      <% if file.writable? %>
         <%= link_to "#", class: "btn btn-sm btn-primary text-white ml-2",
           data: {
             encryption_target: "encryptButton",
@@ -38,6 +37,8 @@
           Encrypt
         <% end %>
       <% end %>
+    <% end %>
+    <% if file.writable? %>
       <% if file.has_key?(@key) %>
         <%= link_to environment_node_key_hierarchy_data_file_value_path(@environment, @node, @key, hierarchy, file), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-sm btn-danger ml-2" do %>
           <%= icon "trash" %>
@@ -52,6 +53,6 @@
         <%= icon "save" %>
         Save
       <% end %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 <% end %>
