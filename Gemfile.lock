@@ -479,10 +479,10 @@ DEPENDENCIES
   rails (~> 7.0.0)
   redis (~> 5.0)
   rspec-openapi
-  rubocop
-  rubocop-capybara
-  rubocop-rails
-  rubocop-rake
+  rubocop (~> 1.56.3)
+  rubocop-capybara (~> 2.19.0)
+  rubocop-rails (~> 2.21.1)
+  rubocop-rake (~> 0.6.0)
   ruby-saml
   selenium-webdriver
   simplecov
