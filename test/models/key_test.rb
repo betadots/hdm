@@ -7,7 +7,7 @@ class KeyTest < ActiveSupport::TestCase
   end
 
   test ":all_for puts `lookup_options` first if present" do
-    hiera_data = MiniTest::Mock.new
+    hiera_data = Minitest::Mock.new
     hiera_data.expect(:all_keys, %w(one lookup_options two), [Hash])
     HieraData.stub(:new, hiera_data) do
       keys = Key.all_for(@node)
@@ -51,7 +51,7 @@ class KeyTest < ActiveSupport::TestCase
 
   test "#lookup_options favors literal match over regexp" do
     key = Key.new(name: "hdm::integer", environment: @environment)
-    hiera_data = MiniTest::Mock.new
+    hiera_data = Minitest::Mock.new
     lookup_options = {
       "hdm.*"        => {"merge" => "unique"},
       "hdm::integer" => {"merge" => "deep"},
@@ -66,7 +66,7 @@ class KeyTest < ActiveSupport::TestCase
 
   test "#lookup_options uses first regexp match if no literal match possible" do
     key = Key.new(name: "hdm::integer", environment: @environment)
-    hiera_data = MiniTest::Mock.new
+    hiera_data = Minitest::Mock.new
     lookup_options = {
       "hdm.*"        => {"merge" => "unique"},
       "otherkey"     => {"merge" => "deep"},
@@ -81,7 +81,7 @@ class KeyTest < ActiveSupport::TestCase
 
   test "#lookup_options defaults to `first`" do
     key = Key.new(name: "hdm::integer", environment: @environment)
-    hiera_data = MiniTest::Mock.new
+    hiera_data = Minitest::Mock.new
     hiera_data.expect(:lookup_options, {}, [Hash])
     key.stub(:hiera_data, hiera_data) do
       assert_equal "first", key.lookup_options(@node)

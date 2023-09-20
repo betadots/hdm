@@ -20,7 +20,7 @@ class HieraData::DataFileTest < ActiveSupport::TestCase
     end
 
     test "#write_key triggers git commit" do
-      git_repo = MiniTest::Mock.new
+      git_repo = Minitest::Mock.new
       git_repo.expect(:local_path, DATADIR)
       git_repo.expect(:commit!, true, [:add, PATH])
       HieraData::GitRepo.stub(:new, git_repo) do
@@ -28,14 +28,14 @@ class HieraData::DataFileTest < ActiveSupport::TestCase
           expected_hash = {"test_key"=>"true"}
           file = HieraData::DataFile.new(path: PATH)
           file.write_key('test_key', 'true')
-          assert_equal expected_hash, YAML.load(File.read(PATH))
+          assert_equal expected_hash, YAML.load_file(PATH)
         end
       end
       git_repo.verify
     end
 
     test "#remove_key triggers git commit" do
-      git_repo = MiniTest::Mock.new
+      git_repo = Minitest::Mock.new
       git_repo.expect(:local_path, DATADIR)
       git_repo.expect(:commit!, true, [:remove, PATH])
       HieraData::GitRepo.stub(:new, git_repo) do
@@ -44,7 +44,7 @@ class HieraData::DataFileTest < ActiveSupport::TestCase
           expected_hash = {}
           file = HieraData::DataFile.new(path: PATH)
           file.remove_key('test_key')
-          assert_equal expected_hash, YAML.load(File.read(PATH))
+          assert_equal expected_hash, YAML.load_file(PATH)
         end
       end
       git_repo.verify

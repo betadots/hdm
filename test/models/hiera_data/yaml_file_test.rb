@@ -78,7 +78,7 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
       expected_hash = {"test_key"=>"true"}
       file = HieraData::YamlFile.new(path:)
       file.write_key('test_key', 'true')
-      assert_equal expected_hash, YAML.load(File.read(path))
+      assert_equal expected_hash, YAML.load_file(path)
     end
   end
 
@@ -89,7 +89,7 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
       expected_hash = {}
       file = HieraData::YamlFile.new(path:)
       file.remove_key('test_key')
-      assert_equal expected_hash, YAML.load(File.read(path))
+      assert_equal expected_hash, YAML.load_file(path)
     end
   end
 
