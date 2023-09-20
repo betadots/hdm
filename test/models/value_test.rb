@@ -10,7 +10,7 @@ class ValueTest < ActiveSupport::TestCase
   end
 
   test "#update uses underlying hiera_data object" do
-    hiera_data = MiniTest::Mock.new
+    hiera_data = Minitest::Mock.new
     hiera_data.expect(:write_key, true, ["Eyaml hierarchy", "common.yaml", "test::dummy", 23], facts: {})
     @value.stub(:hiera_data, hiera_data) do
       @value.update("23")
@@ -19,7 +19,7 @@ class ValueTest < ActiveSupport::TestCase
   end
 
   test "#destroy uses underlying hiera_data object" do
-    hiera_data = MiniTest::Mock.new
+    hiera_data = Minitest::Mock.new
     hiera_data.expect(:remove_key, true, ["Eyaml hierarchy", "common.yaml", "test::dummy"], facts: {})
     @value.stub(:hiera_data, hiera_data) do
       @value.destroy

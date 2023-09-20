@@ -48,3 +48,17 @@ It can be startet on a second shell:
 # Integration environment (TBD)
 
 #TODO: Setup a environment with VMs to have a real puppetserver and puppetdb for testing.
+
+# Regnerate gemset
+
+If you happen to delete the Gemfile.lock and regenerate it, do not forget about the supported platforms
+
+```bash
+bundle lock --add-platform ruby x86_64-linux x86_64-darwin-22 arm64-darwin
+```
+
+# Update gemset
+
+```bash
+bundle update
+```
