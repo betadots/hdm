@@ -69,7 +69,7 @@ class HieraData
       search_results[path] = {
         file_present: file.exist?,
         file_writable: file.writable?,
-        key_present: file.keys.include?(key),
+        key_present: file.keys.include?(key), # rubocop:disable Performance/InefficientHashSearch
         replaced_from_git: file.replaced_from_git?,
         value: file.content_for_key(key)
       }

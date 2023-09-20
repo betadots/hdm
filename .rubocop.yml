@@ -4,6 +4,7 @@ inherit_from: .rubocop_todo.yml
 require:
   - rubocop-rails
   - rubocop-capybara
+  - rubocop-performance
 
 AllCops:
   TargetRubyVersion: 3.2
