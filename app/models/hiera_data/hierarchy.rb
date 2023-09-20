@@ -23,7 +23,7 @@ class HieraData
     end
 
     def lookup_function
-      @lookup_function ||= LOOKUP_FUNCTIONS.find { |f| raw_hash.keys.include?(f) }
+      @lookup_function ||= LOOKUP_FUNCTIONS.find { |f| raw_hash.keys.include?(f) } # rubocop:disable Performance/InefficientHashSearch
     end
 
     def backend
