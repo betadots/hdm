@@ -80,3 +80,12 @@ jobs:
       #   uses: github/codeql-action/upload-sarif@v2
       #   with:
       #     sarif_file: 'trivy-results.sarif'
+  tests:
+    needs:
+      - shellcheck
+      - rubocop
+      - unit_tests
+    runs-on: ubuntu-latest
+    name: Test suite
+    steps:
+      - run: echo Test suite completed
