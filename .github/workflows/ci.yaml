@@ -57,34 +57,31 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
       - name: Build Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
-          # tags: 'ci/hdm:${{ github.sha }}'
-          platforms: linux/amd64
+          tags: 'ci/hdm:${{ github.sha }}'
           push: false
 
-      # - name: Run Trivy vulnerability scanner
-      #   uses: aquasecurity/trivy-action@master
-      #   with:
-      #     image-ref: 'ci/hdm:${{ github.sha }}'
-      #     format: 'sarif'
-      #     output: 'trivy-results.sarif'
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'ci/hdm:${{ github.sha }}'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
 
-      # - name: Upload Trivy scan results to GitHub Security tab
-      #   uses: github/codeql-action/upload-sarif@v2
-      #   with:
-      #     sarif_file: 'trivy-results.sarif'
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+
   tests:
     needs:
       - shellcheck
       - rubocop
       - unit_tests
+      - build_docker_image
     runs-on: ubuntu-latest
     name: Test suite
     steps:
