@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if User.none?
-      @user.admin = true
+      @user.role = "admin"
     end
 
     if @user.save
