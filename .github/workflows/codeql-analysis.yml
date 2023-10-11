@@ -13,8 +13,12 @@ name: "CodeQL"
 
 on:
   push:
+    paths-ignore:
+      - '.github/**'
     branches: [ main ]
   pull_request:
+    paths-ignore:
+      - '.github/**'
     # The branches below must be a subset of the branches above
     branches: [ main ]
   schedule:
