@@ -16,7 +16,7 @@ gem 'importmap-rails'
 gem 'dartsass-rails'
 gem 'turbo-rails'
 gem 'stimulus-rails'
-gem 'bootstrap', '~> 4.6.0'
+gem 'bootstrap', '~> 5.3.1'
 gem 'bootstrap-icons-helper'
 gem 'jquery-rails'
 
