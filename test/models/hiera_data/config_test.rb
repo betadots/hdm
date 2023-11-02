@@ -56,4 +56,16 @@ class HieraData::ConfigTest < ActiveSupport::TestCase
       Pathname.new(Rails.configuration.hdm["config_dir"]).join("environments", "multiple_hierarchies")
     end
   end
+
+  class HieraData::ConfigWithEmptyDefaultsTest < ActiveSupport::TestCase
+    test "empty defaults get replaced" do
+      config = HieraData::Config.new(base_path)
+      assert_not_nil config.content["defaults"]
+      assert_equal Puppet::Pops::Lookup::HieraConfigV5::DEFAULT_CONFIG_HASH["defaults"], config.content["defaults"]
+    end
+
+    def base_path
+      Pathname.new(Rails.configuration.hdm["config_dir"]).join("environments", "empty_defaults")
+    end
+  end
 end

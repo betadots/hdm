@@ -1,0 +1,7 @@
+---
+version: 5
+defaults:
+hierarchy:
+  - name: "common settings"
+    paths:
+      - "common.yaml"
