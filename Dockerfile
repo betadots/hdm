@@ -19,8 +19,6 @@ RUN apt update && apt install -y \
 
 ENV APP_HOME /hdm
 ENV RAILS_ENV production
-ENV RAILS_SERVE_STATIC_FILES true
-ENV RAILS_LOG_TO_STDOUT true
 
 WORKDIR $APP_HOME
 
