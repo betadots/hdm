@@ -5,6 +5,7 @@ class EnvironmentTest < ActiveSupport::TestCase
     expected_environments = %w(
       development
       dynamic_datadir
+      empty_defaults
       eyaml
       globs
       hdm
