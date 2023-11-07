@@ -2,11 +2,5 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-import "jquery"
+import * as Popper from "@popperjs/core"
 import "bootstrap"
-
-// Bootstrap JS Initialization
-document.addEventListener("turbo:load", () => {
-  $('[data-toggle="tooltip"]').tooltip()
-  $('[data-toggle="popover"]').popover()
-})

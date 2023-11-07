@@ -19,7 +19,7 @@
   %>
   <div class="d-flex justify-content-end mt-2">
     <% if hierarchy.encryption_possible? %>
-      <%= link_to "#", class: "btn btn-sm btn-primary text-white ml-2",
+      <%= link_to "#", class: "btn btn-sm btn-primary text-white ms-2",
         data: {
           encryption_target: "decryptButton",
           action: "click->encryption#decrypt"
@@ -28,7 +28,7 @@
         Decrypt
       <% end %>
       <% if file.writable? %>
-        <%= link_to "#", class: "btn btn-sm btn-primary text-white ml-2",
+        <%= link_to "#", class: "btn btn-sm btn-primary text-white ms-2",
           data: {
             encryption_target: "encryptButton",
             action: "click->encryption#encrypt"
@@ -40,16 +40,16 @@
     <% end %>
     <% if file.writable? %>
       <% if file.has_key?(@key) %>
-        <%= link_to environment_node_key_hierarchy_data_file_value_path(@environment, @node, @key, hierarchy, file), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-sm btn-danger ml-2" do %>
+        <%= link_to environment_node_key_hierarchy_data_file_value_path(@environment, @node, @key, hierarchy, file), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-sm btn-danger ms-2" do %>
           <%= icon "trash" %>
           Delete
         <% end %>
       <% end %>
-      <%= f.button type: :reset, class: "btn btn-sm btn-secondary ml-2" do %>
+      <%= f.button type: :reset, class: "btn btn-sm btn-secondary ms-2" do %>
         <%= icon "arrow-counterclockwise" %>
         Reset
       <% end %>
-      <%= f.button type: :submit, class: "btn btn-sm btn-success text-white ml-2" do %>
+      <%= f.button type: :submit, class: "btn btn-sm btn-success text-white ms-2" do %>
         <%= icon "save" %>
         Save
       <% end %>

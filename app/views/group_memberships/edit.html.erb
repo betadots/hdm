@@ -7,7 +7,7 @@
         <div class="col-4">
           <ul class="list-unstyled">
             <%= form.collection_check_boxes :user_ids, users.compact, :id, :full_name_with_email do |b| %>
-              <li>
+              <li class="m-2">
                 <%= b.check_box %>
                 <%= b.label %>
               </li>

@@ -9,26 +9,26 @@
       </ul>
     </div>
   <% end %>
-  <div class="form-group">
+  <div class="mb-4">
     <%= form.label :first_name  %>
     <%= form.text_field :first_name, class:"form-control", autofocus: true, autocomplete: "given-name" %>
   </div>
-  <div class="form-group">
+  <div class="mb-4">
     <%= form.label :last_name %>
     <%= form.text_field :last_name, class:"form-control", autocomplete: "family-name" %>
   </div>
-  <div class="form-group">
+  <div class="mb-4">
     <%= form.label :email %>
     <%= form.text_field :email, class:"form-control", autocomplete: "email" %>
   </div>
-  <div class="form-group">
+  <div class="mb-4">
     <%= form.label :password %>
     <%= form.password_field :password, class:"form-control" %>
   </div>
 
   <% if current_user.try(:admin?) %>
     <% if current_page?(action: 'new') || current_user != user || User.admins.count > 1 %>
-      <div class="form-group">
+      <div class="mb-4">
         <%= form.label :role %>
         <%= form.select :role, User::ROLES, {}, class:"form-control" %>
       </div>

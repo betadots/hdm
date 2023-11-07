@@ -31,6 +31,14 @@ $container-max-widths: (
 
 @import "bootstrap";
 
+a {
+  text-decoration: none;
+}
+
+.btn-primary {
+  --bs-btn-color: #fff;
+}
+
 ol.breadcrumb li:first-child {
   padding-left: 0;
 }
