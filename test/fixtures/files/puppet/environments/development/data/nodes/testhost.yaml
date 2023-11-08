@@ -1,5 +1,6 @@
 ---
 noop_mode: true
+classes: []
 foobar::enable_firstrun: true
 foobar::firstrun::linux_classes:
   hostname: hostname

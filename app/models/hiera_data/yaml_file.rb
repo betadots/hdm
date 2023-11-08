@@ -47,8 +47,7 @@ class HieraData
       return value if [String, Integer, Float].include?(value.class)
 
       value_string = value.to_yaml
-      value_string.gsub!("---\n", '').gsub!(/^$\n/, '')
-      value_string
+      value_string.sub(/\A---(\n| )/, '').gsub(/^$\n/, '')
     end
 
     def write_key(key, value)
