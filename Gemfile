@@ -26,7 +26,7 @@ gem 'redis', '~> 5.0'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'faker'
-gem 'friendly_id', '~> 5.5.0'
+gem 'friendly_id', '~> 5.5.1'
 gem 'puppet'
 gem 'puppetdb-ruby', require: 'puppetdb'
 gem 'hiera-eyaml'
