@@ -102,7 +102,7 @@ GEM
     autoprefixer-rails (10.4.15.0)
       execjs (~> 2)
     base64 (0.2.0)
-    bcrypt (3.1.19)
+    bcrypt (3.1.20)
     bigdecimal (3.1.4)
     bindex (0.8.1)
     bootstrap (4.6.2)
@@ -477,7 +477,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  bcrypt (~> 3.1.7)
+  bcrypt (~> 3.1.20)
   bootstrap (~> 4.6.0)
   bootstrap-icons-helper
   breadcrumbs_on_rails
