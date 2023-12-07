@@ -14,6 +14,7 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
   test "#keys returns the top level keys for the file" do
     expected_keys = [
       "noop_mode",
+      "classes",
       "foobar::enable_firstrun",
       "foobar::firstrun::linux_classes",
       "foobar::time::servers",
@@ -69,6 +70,11 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
   test "#content_for_key returns float as float" do
     file = HieraData::YamlFile.new(path: config_dir.join("common.yaml"))
     assert_equal 0.1, file.content_for_key('hdm::float')
+  end
+
+  test "#content_for_key returns empty array as array" do
+    file = HieraData::YamlFile.new(path: config_dir.join("nodes/testhost.yaml"))
+    assert_equal "[]\n", file.content_for_key('classes')
   end
 
   test "#write_key goes fine" do
