@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.1.1'
+gem 'rails', '~> 7.1.2'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.6'
 # Use Puma as the app server
@@ -23,10 +23,10 @@ gem 'jquery-rails'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 5.0'
 # Use Active Model has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.20'
 
 gem 'faker'
-gem 'friendly_id', '~> 5.5.0'
+gem 'friendly_id', '~> 5.5.1'
 gem 'puppet'
 gem 'puppetdb-ruby', require: 'puppetdb'
 gem 'hiera-eyaml'
@@ -62,7 +62,7 @@ end
 
 group :linter do
   gem 'rubocop', '~> 1.57.1'
-  gem 'rubocop-rails', '~> 2.22.1'
+  gem 'rubocop-rails', '~> 2.22.2'
   gem 'rubocop-rake', '~> 0.6.0'
   gem 'rubocop-capybara', '~> 2.19.0'
   gem 'rubocop-performance', '~> 1.19.0'

@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+HDM_PORT=$1
+HDM_HOST=$2
+
 bundle exec rake db:setup
 bundle exec rake hdm:assets
 
@@ -8,4 +11,4 @@ bundle exec rails db:seed
 ./bin/fake_puppet_db &
 fi
 
-bundle exec rails server -b 0.0.0.0
+bundle exec rails server -b "${HDM_HOST}" -p "${HDM_PORT}"
