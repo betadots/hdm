@@ -2,11 +2,9 @@
   <div class="list-group">
     <div class="list-group-item p-0">
       <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">
-            <%= icon "search" %>
-          </span>
-        </div>
+        <span class="input-group-text">
+          <%= icon "search" %>
+        </span>
         <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search", data: {key_filter_target: "input", action: "keyup->key-filter#filter"} %>
       </div>
     </div>

@@ -14,11 +14,11 @@ gem 'puma', '~> 6.4'
 gem 'sprockets-rails'
 gem 'importmap-rails'
 gem 'dartsass-rails'
+gem 'dartsass-sprockets'
 gem 'turbo-rails'
 gem 'stimulus-rails'
-gem 'bootstrap', '~> 4.6.0'
+gem 'bootstrap', '~> 5.3.0'
 gem 'bootstrap-icons-helper'
-gem 'jquery-rails'
 
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 5.0'

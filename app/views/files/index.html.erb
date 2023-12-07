@@ -31,41 +31,43 @@
     <% file_index = 0 %>
     <% @files_and_values_by_hierarchy.each do |hierarchy, files_and_values| %>
       <% hierarchy_index += 1 %>
-      <div class="accordion mb-2">
-        <div class="card">
-          <div class="card-body" id="hierarchy-<%= hierarchy_index %>">
-            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#hierarchy-collapse-<%= hierarchy_index %>" aria-expanded="false" aria-controls="hierarchy-collapse-<%= hierarchy_index %>">
+      <div id="accordion-<%= hierarchy_index %>" class="accordion mb-2">
+        <div class="accordion-item">
+          <div class="accordion-header" id="hierarchy-<%= hierarchy_index %>">
+            <button class="accordion-button text-start" type="button" data-bs-toggle="collapse" data-bs-target="#hierarchy-collapse-<%= hierarchy_index %>" aria-expanded="false" aria-controls="hierarchy-collapse-<%= hierarchy_index %>">
               <b><%= hierarchy.name %></b>
-              <span class="badge badge-primary text-light"><%= hierarchy.backend %></span>
-              <em>- <%= t(".file", count: files_and_values.size) %></em>
+              <span class="badge bg-primary text-light ms-2"><%= hierarchy.backend %></span>
+              <em class="ms-2">- <%= t(".file", count: files_and_values.size) %></em>
             </button>
           </div>
         </div>
-        <div class="collapse" id="hierarchy-collapse-<%= hierarchy_index %>" aria-labelledby="hierarchy-<%= hierarchy_index %>">
-          <% files_and_values.each do |file, value| %>
-            <% file_index += 1 %>
-            <div class="card">
-              <div class="card-header" id="path-<%= file_index %>">
-                <h2 class="mb-0">
-                  <button class="btn btn-link btn-block text-left d-flex justify-content-between" type="button" data-toggle="collapse" data-target="#collapse-<%= file_index %>" aria-expanded="true" aria-controls="collapse-<%= file_index %>">
-                    <span>
-                      <b><%= file.path %></b>
-                      <% if value&.encrypted? %>
-                        <span class="text-danger">
-                          <%= icon("lock-fill") %>
-                        </span>
-                      <% end %>
-                    </span>
-                  </button>
-                </h2>
-              </div>
-              <div id="collapse-<%= file_index %>" class="collapse" aria-labelledby="path-<%= file_index %>">
-                <div class="card-body">
-                  <pre><%= value.value %></pre>
+        <div class="accordion-collapse collapse" id="hierarchy-collapse-<%= hierarchy_index %>" data-bs-parent="accordion-<%= hierarchy_index %>" aria-labelledby="hierarchy-<%= hierarchy_index %>">
+          <%# <div class="accordion-body"> %>
+            <% files_and_values.each do |file, value| %>
+              <% file_index += 1 %>
+              <div id="file-accordion-<%= file_index %>" class="accordion accordion-flush">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="path-<%= file_index %>">
+                    <button class="accordion-button bg-light text-start d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= file_index %>" aria-expanded="false" aria-controls="collapse-<%= file_index %>">
+                      <span>
+                        <b><%= file.path %></b>
+                        <% if value&.encrypted? %>
+                          <span class="text-danger">
+                            <%= icon("lock-fill") %>
+                          </span>
+                        <% end %>
+                      </span>
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapse-<%= file_index %>" class="accordion-collapse collapse" data-bs-parent="file-accordion-<%= file_index %>" aria-labelledby="path-<%= file_index %>">
+                  <div class="accordion-body">
+                    <pre><%= value.value %></pre>
+                  </div>
                 </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
+          <%# </div> %>
         </div>
       </div>
     <% end %>

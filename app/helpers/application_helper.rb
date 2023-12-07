@@ -1,13 +1,13 @@
 module ApplicationHelper
   FLASH_CLASSES = {
-    "notice" => "alert alert-success",
-    "error" => "alert alert-danger",
-    "alert" => "alert alert-warning"
+    "notice" => "alert-success",
+    "error" => "alert-danger",
+    "alert" => "alert-warning"
   }.freeze
   ROLE_BADGE_COLORS = {
-    "admin" => "badge-danger",
-    "regular" => "badge-success",
-    "api" => "badge-info"
+    "admin" => "bg-danger",
+    "regular" => "bg-success",
+    "api" => "bg-info"
   }.freeze
 
   def flash_class(level)
@@ -17,7 +17,7 @@ module ApplicationHelper
   def format_path(file, key)
     tag_name, classes =
       if file.has_key?(key) # rubocop:disable Style/PreferredHashMethods
-        [:b, nil]
+        [:b, "text-primary"]
       elsif file.exist?
         [:span, "text-dark"]
       else
