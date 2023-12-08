@@ -4,9 +4,71 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [1.2.0](https://github.com/betadots/hdm/tree/1.2.0) (2023-06-15)
+## [1.3.0](https://github.com/betadots/hdm/tree/1.3.0) (2023-12-08)
 
-[Full Changelog](https://github.com/betadots/hdm/compare/v1.1.0...1.2.0)
+[Full Changelog](https://github.com/betadots/hdm/compare/v1.2.0...1.3.0)
+
+**Implemented enhancements:**
+
+- Allow API usage [\#87](https://github.com/betadots/hdm/issues/87)
+
+**Fixed bugs:**
+
+- Setting a key to an empty array produces an error [\#215](https://github.com/betadots/hdm/issues/215)
+- hiera.yaml without datadir explicitly set causes an error upon selecting a node [\#204](https://github.com/betadots/hdm/issues/204)
+- admin user cannot be created [\#187](https://github.com/betadots/hdm/issues/187)
+- No custom lookup function allowed [\#162](https://github.com/betadots/hdm/issues/162)
+
+**Closed issues:**
+
+- Re-enable container scanning [\#176](https://github.com/betadots/hdm/issues/176)
+- Read-only \(setting|file\) and encrypted eyaml values [\#163](https://github.com/betadots/hdm/issues/163)
+
+**Merged pull requests:**
+
+- Bump selenium-webdriver from 4.15.0 to 4.16.0 [\#231](https://github.com/betadots/hdm/pull/231) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Allow selection of hdm container port [\#229](https://github.com/betadots/hdm/pull/229) ([tuxmea](https://github.com/tuxmea))
+- Bump sqlite3 from 1.6.8 to 1.6.9 [\#228](https://github.com/betadots/hdm/pull/228) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump factory\_bot\_rails from 6.2.0 to 6.4.2 [\#227](https://github.com/betadots/hdm/pull/227) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump bootstrap-icons-helper from 2.0.1 to 2.0.2 [\#226](https://github.com/betadots/hdm/pull/226) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop-rails from 2.22.1 to 2.22.2 [\#224](https://github.com/betadots/hdm/pull/224) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump bcrypt from 3.1.19 to 3.1.20 [\#223](https://github.com/betadots/hdm/pull/223) ([dependabot[bot]](https://github.com/apps/dependabot))
+- add a readme as index to render screenshots page on github [\#221](https://github.com/betadots/hdm/pull/221) ([rwaffen](https://github.com/rwaffen))
+- Bump friendly\_id from 5.5.0 to 5.5.1 [\#220](https://github.com/betadots/hdm/pull/220) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.1.1 to 7.1.2 [\#219](https://github.com/betadots/hdm/pull/219) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puppet from 8.2.0 to 8.3.1 [\#218](https://github.com/betadots/hdm/pull/218) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Support empty yaml array [\#217](https://github.com/betadots/hdm/pull/217) ([oneiros](https://github.com/oneiros))
+- Migration to Bootstrap 5 [\#216](https://github.com/betadots/hdm/pull/216) ([oneiros](https://github.com/oneiros))
+- Bump faker from 3.2.1 to 3.2.2 [\#214](https://github.com/betadots/hdm/pull/214) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Upgrade to rails 7.1 [\#213](https://github.com/betadots/hdm/pull/213) ([oneiros](https://github.com/oneiros))
+- Fix for emtpy `defaults` section \#204 [\#212](https://github.com/betadots/hdm/pull/212) ([oneiros](https://github.com/oneiros))
+- Bump rubocop-rails from 2.21.2 to 2.22.1 [\#211](https://github.com/betadots/hdm/pull/211) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump redis from 5.0.7 to 5.0.8 [\#206](https://github.com/betadots/hdm/pull/206) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop from 1.56.4 to 1.57.1 [\#203](https://github.com/betadots/hdm/pull/203) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump sqlite3 from 1.6.6 to 1.6.7 [\#199](https://github.com/betadots/hdm/pull/199) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-openapi from 0.8.1 to 0.9.0 [\#196](https://github.com/betadots/hdm/pull/196) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.13.1 to 4.14.0 [\#195](https://github.com/betadots/hdm/pull/195) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ruby-saml from 1.15.0 to 1.16.0 [\#194](https://github.com/betadots/hdm/pull/194) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump voxpupuli/gha-build-and-publish-a-container from 1 to 2 [\#193](https://github.com/betadots/hdm/pull/193) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop-rails from 2.21.1 to 2.21.2 [\#191](https://github.com/betadots/hdm/pull/191) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop from 1.56.3 to 1.56.4 [\#190](https://github.com/betadots/hdm/pull/190) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump selenium-webdriver from 4.12.0 to 4.13.1 [\#189](https://github.com/betadots/hdm/pull/189) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Set role correctly. [\#188](https://github.com/betadots/hdm/pull/188) ([oneiros](https://github.com/oneiros))
+- Bump puma from 6.3.1 to 6.4.0 [\#186](https://github.com/betadots/hdm/pull/186) ([dependabot[bot]](https://github.com/apps/dependabot))
+- rubocop: introduce rubocop-performance [\#182](https://github.com/betadots/hdm/pull/182) ([bastelfreak](https://github.com/bastelfreak))
+- Bump selenium-webdriver and webdrivers [\#181](https://github.com/betadots/hdm/pull/181) ([dependabot[bot]](https://github.com/apps/dependabot))
+- rubocop: pin to specific versions to avoid broken main branch [\#175](https://github.com/betadots/hdm/pull/175) ([bastelfreak](https://github.com/bastelfreak))
+- Unify display of values \#163 [\#174](https://github.com/betadots/hdm/pull/174) ([oneiros](https://github.com/oneiros))
+- update gemset [\#171](https://github.com/betadots/hdm/pull/171) ([rwaffen](https://github.com/rwaffen))
+- Bump puma from 6.3.0 to 6.3.1 [\#167](https://github.com/betadots/hdm/pull/167) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump protocol-http1 from 0.15.0 to 0.15.1 [\#166](https://github.com/betadots/hdm/pull/166) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Allow custom lookup functions [\#165](https://github.com/betadots/hdm/pull/165) ([oneiros](https://github.com/oneiros))
+- Upgrade dependencies. [\#164](https://github.com/betadots/hdm/pull/164) ([oneiros](https://github.com/oneiros))
+- HDM API [\#153](https://github.com/betadots/hdm/pull/153) ([oneiros](https://github.com/oneiros))
+
+## [v1.2.0](https://github.com/betadots/hdm/tree/v1.2.0) (2023-06-15)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v1.1.0...v1.2.0)
 
 **Implemented enhancements:**
 
