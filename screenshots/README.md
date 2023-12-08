@@ -24,7 +24,7 @@
 
 ![](HDM-07-select_env.png)
 
-![](HDM-07-select_env_2.png)
+![](HDM-08-select_env_2.png)
 
 ## Select a node
 
