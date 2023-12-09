@@ -37,3 +37,15 @@
 ![](HDM-11-node_data_details.png)
 
 ![](HDM-12-node_data_details_2.png)
+
+## Search a key
+
+![](HDM-13-search_key.png)
+
+## Search key result
+
+![](HDM-14-search_key_result.png)
+
+## Search key result details
+
+![](HDM-15-search_key_result_details.png)
