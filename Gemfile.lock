@@ -366,7 +366,7 @@ GEM
     rexml (3.2.6)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
-    rspec-openapi (0.9.0)
+    rspec-openapi (0.10.0)
       actionpack (>= 5.2.0)
       rspec-core
     rspec-support (3.12.1)
