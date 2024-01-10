@@ -11,4 +11,4 @@ bundle exec rails db:seed
 ./bin/fake_puppet_db &
 fi
 
-bundle exec rails server -b "${HDM_HOST}" -p "${HDM_PORT}"
+bundle exec rails server -b $HDM_HOST -p $HDM_PORT
