@@ -4,9 +4,32 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [1.3.0](https://github.com/betadots/hdm/tree/1.3.0) (2023-12-08)
+## [1.4.0](https://github.com/betadots/hdm/tree/1.4.0) (2024-01-10)
 
-[Full Changelog](https://github.com/betadots/hdm/compare/v1.2.0...1.3.0)
+[Full Changelog](https://github.com/betadots/hdm/compare/v1.3.0...1.4.0)
+
+**Fixed bugs:**
+
+- fix setting hostname and port [\#257](https://github.com/betadots/hdm/pull/257) ([tuxmea](https://github.com/tuxmea))
+
+**Closed issues:**
+
+- Update Screenshots [\#222](https://github.com/betadots/hdm/issues/222)
+
+**Merged pull requests:**
+
+- Correct the CMD syntax [\#256](https://github.com/betadots/hdm/pull/256) ([tuxmea](https://github.com/tuxmea))
+- Bump rubocop-rails from 2.22.2 to 2.23.0 [\#240](https://github.com/betadots/hdm/pull/240) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop-performance from 1.19.1 to 1.20.0 [\#239](https://github.com/betadots/hdm/pull/239) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump github/codeql-action from 2 to 3 [\#238](https://github.com/betadots/hdm/pull/238) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-openapi from 0.9.0 to 0.10.0 [\#237](https://github.com/betadots/hdm/pull/237) ([dependabot[bot]](https://github.com/apps/dependabot))
+- add search screenshots [\#236](https://github.com/betadots/hdm/pull/236) ([tuxmea](https://github.com/tuxmea))
+- Screenshots [\#235](https://github.com/betadots/hdm/pull/235) ([tuxmea](https://github.com/tuxmea))
+- how to release documentation [\#233](https://github.com/betadots/hdm/pull/233) ([tuxmea](https://github.com/tuxmea))
+
+## [v1.3.0](https://github.com/betadots/hdm/tree/v1.3.0) (2023-12-08)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v1.2.0...v1.3.0)
 
 **Implemented enhancements:**
 
