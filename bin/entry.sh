@@ -10,5 +10,5 @@ if [[ "${DEVELOP}" -eq 1 ]]; then
 bundle exec rails db:seed
 ./bin/fake_puppet_db &
 fi
-
+# shellcheck disable=SC2086
 bundle exec rails server -b $HDM_HOST -p $HDM_PORT
