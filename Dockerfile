@@ -31,4 +31,4 @@ COPY config/hdm.yml.template $APP_HOME/config/hdm.yml
 
 RUN bundle check || (bundle config set --local without 'development test' && bundle install)
 
-CMD ["/hdm/bin/entry.sh", "${HDM_PORT}", "${HDM_HOST}"]
+CMD ["sh", "-c", "/hdm/bin/entry.sh ${HDM_PORT} ${HDM_HOST}"]
