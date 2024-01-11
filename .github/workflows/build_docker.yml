@@ -2,8 +2,6 @@ name: Build and publish a 🛢️ container
 
 on:
   push:
-    paths-ignore:
-      - '.github/**'
     branches:
       - 'main'
     tags:
