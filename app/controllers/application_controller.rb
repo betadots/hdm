@@ -25,8 +25,8 @@ class ApplicationController < ActionController::Base
 
   def authentication_required
     unless current_user
-      if User.none? && !Rails.configuration.hdm.authentication_disabled
-        redirect_to new_user_path, notice: 'Please create an admin user first.'
+      if admin_user_missing?
+        redirect_to initial_setup_path, notice: 'Please create an admin user first.'
       else
         redirect_to login_path
       end
@@ -47,5 +47,9 @@ class ApplicationController < ActionController::Base
 
   def access_denied
     render file: Rails.public_path.join('403.html'), status: :forbidden, layout: false
+  end
+
+  def admin_user_missing?
+    User.none? && !Rails.configuration.hdm.authentication_disabled
   end
 end

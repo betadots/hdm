@@ -48,11 +48,11 @@ Rails.application.routes.draw do
   resource :ldap_session, only: [:new, :create]
   resource :saml_session, only: [:new, :create]
 
-  get 'page/index'
+  get '/signup', to: 'users#new', as: 'signup'
+  get '/login', to: 'sessions#new', as: 'login'
+  get '/logout', to: 'sessions#destroy', as: 'logout'
 
-  get 'signup', to: 'users#new', as: 'signup'
-  get 'login', to: 'sessions#new', as: 'login'
-  get 'logout', to: 'sessions#destroy', as: 'logout'
+  get '/initial_setup', to: 'page#initial_setup', as: :initial_setup
 
   root to: 'page#index'
 end

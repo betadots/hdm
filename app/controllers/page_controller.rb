@@ -4,8 +4,11 @@ class PageController < ApplicationController
   add_breadcrumb "Home", :root_path
 
   def index
-    if User.none?
-      redirect_to new_user_path, notice: 'Please create an admin user first.'
+    if admin_user_missing?
+      redirect_to initial_setup_path
     end
+  end
+
+  def initial_setup
   end
 end

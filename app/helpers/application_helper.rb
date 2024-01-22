@@ -41,4 +41,8 @@ module ApplicationHelper
   def role_badge_color(role)
     ROLE_BADGE_COLORS[role]
   end
+
+  def external_auth_configured?
+    Ldap.configured? || Saml.configured?
+  end
 end
