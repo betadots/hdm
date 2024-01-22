@@ -9,6 +9,5 @@ class PageController < ApplicationController
     end
   end
 
-  def initial_setup
-  end
+  def initial_setup; end
 end
