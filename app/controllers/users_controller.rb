@@ -81,7 +81,7 @@ class UsersController < ApplicationController
         params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
       else
         if current_user.try(:admin?)
-          params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :admin)
+          params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role)
         else
           params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
         end
