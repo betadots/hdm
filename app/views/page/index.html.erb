@@ -1,25 +1,43 @@
-<%= image_tag "logo_full.png", alt: "Hiera Data Manager logo", width: "50%" %>
-<p>HDM is a webfrontend for visualizing and managing Hiera data.</p>
-<% unless current_user %>
-  <%= render template: "sessions/new" %>
-<% else %>
-  <% if User.count == 1 && current_user.admin? %>
-    <h2>First Step: Create a User</h2>
-    <p>Your account (<%= current_user.email %>) has admin priviliges which allow to manage users but which do not
-    allow to manage the puppet configuration.</p>
-    <p><strong>=> <%= link_to "Create a new user", new_user_path %></strong> who is not an admin to
-    get access to the puppet configuration.</p>
-  <% end %>
-  <% if can? :index, Environment %>
-    <%= link_to environments_path, class: "btn btn-primary" do %>
-      <%= icon "list" %>
-      Show Environments
+<div class="row">
+  <div class="col-md-6">
+    <% unless current_user %>
+      <%= render template: "sessions/new" %>
+    <% else %>
+      <% if User.count == 1 && current_user.admin? %>
+        <% if external_auth_configured? %>
+          <h2>Welcome</h2>
+          <p>You can now create additional admin users or setup groups for finer grained access control.</p>
+          <p>Or sign out to now to login as a regular user authenticated via your external authentication source (LDAP/AD/SSO).</p>
+          <%= link_to logout_path, class: "btn btn-primary" do %>
+            <%= icon "box-arrow-right" %>
+            Sign out now
+          <% end %>
+          <p></p>
+        <% else %>
+          <h2>First Step: Create a User</h2>
+          <p>Your account (<%= current_user.email %>) has admin priviliges which allow to manage users but which do not
+          allow to manage the puppet configuration.</p>
+          <p><strong>=> <%= link_to "Create a new user", new_user_path %></strong> who is not an admin to
+          get access to the puppet configuration.</p>
+        <% end %>
+      <% end %>
+      <% if can? :index, Environment %>
+        <%= link_to environments_path, class: "btn btn-primary" do %>
+          <%= icon "list" %>
+          Show Environments
+        <% end %>
+      <% end %>
+      <% if can? :create, User %>
+        <%= link_to users_path, class: "btn btn-primary" do %>
+          <%= icon "people" %>
+          Manage Users
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
-  <% if can? :create, User %>
-    <%= link_to users_path, class: "btn btn-primary" do %>
-      <%= icon "people" %>
-      Manage Users
-    <% end %>
-  <% end %>
-<% end %>
+  </div>
+  <div class="col-md-6 text-end">
+    <%= image_tag "logo_full.png", alt: "Hiera Data Manager logo", width: "80%" %>
+    <p>HDM is a webfrontend for visualizing and managing Hiera data.</p>
+  </div>
+</div>
+

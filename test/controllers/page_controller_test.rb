@@ -1,15 +1,22 @@
 require 'test_helper'
 
 class PageControllerTest < ActionDispatch::IntegrationTest
-  test "system without an existing user shouldn't get index but new user form" do
+  test "system without an existing user shouldn't get index but initial setup page" do
     User.destroy_all
-    get page_index_url
-    assert_redirected_to new_user_path
+    get root_url
+    assert_redirected_to initial_setup_path
   end
 
   test "system with existing user should get index" do
     FactoryBot.create(:user)
-    get page_index_url
+    get root_url
     assert_response :success
+  end
+
+  test "system with authentication disabled should get index" do
+    Rails.configuration.hdm["authentication_disabled"] = true
+    get root_url
+    assert_response :success
+    Rails.configuration.hdm["authentication_disabled"] = nil
   end
 end

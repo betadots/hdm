@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-6">
+    <h2>Welcome to HDM</h2>
+
+    <p>
+      To get started, you need to create an admin user. Admin user credentials
+      are kept in a local database. Admin users can create new regular users
+      and manage access rules. Admin users cannot access Hiera data.
+    </p>
+
+    <p>
+      <%= link_to "Create admin user", new_user_path, class: "btn btn-primary" %>
+    </p>
+
+    <% if external_auth_configured? %>
+      <p>
+        You have already configured external authentication resources, so once
+        an admin user is created setup is complete.
+      </p>
+    <% else %>
+      <p>
+        Regular users, stored in the local database, can be managed by an
+        admin user. Alternatively you can configure LDAP/AD or SAML (SSO) as
+        a source of authentication for regular users.
+      </p>
+
+      <p>
+        LDAP/AD or SAML can be configured in <code>config/hdm.yml</code>.
+        Have a look at
+        <%= link_to "examples here", "https://github.com/betadots/hdm/blob/92219b98f48e29d9c2c9b64d8b8f0996e58d88c5/config/hdm.yml.template#L55-L80" %>.
+        Remember to restart HDM when making changes to <code>config/hdm.yml</code>.
+      </p>
+    <% end %>
+  </div>
+  <div class="col-md-6 text-end">
+    <%= image_tag "logo_full.png", alt: "Hiera Data Manager logo", width: "80%" %>
+    <p>HDM is a webfrontend for visualizing and managing Hiera data.</p>
+  </div>
+</div>
+
