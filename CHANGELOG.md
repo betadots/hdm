@@ -4,9 +4,47 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [1.4.0](https://github.com/betadots/hdm/tree/1.4.0) (2024-01-10)
+## [1.4.1](https://github.com/betadots/hdm/tree/1.4.1) (2024-01-24)
 
-[Full Changelog](https://github.com/betadots/hdm/compare/v1.3.0...1.4.0)
+[Full Changelog](https://github.com/betadots/hdm/compare/v1.4.0...1.4.1)
+
+**Implemented enhancements:**
+
+- Initial start up page [\#234](https://github.com/betadots/hdm/issues/234)
+- HDM container should be able to make use of a different port. [\#205](https://github.com/betadots/hdm/issues/205)
+- Verify new config - Add option to make use of SSO [\#95](https://github.com/betadots/hdm/issues/95)
+- Check possibility for hdm to run locally without authentication [\#54](https://github.com/betadots/hdm/issues/54)
+
+**Fixed bugs:**
+
+- HDM does not initialize database [\#275](https://github.com/betadots/hdm/issues/275)
+- Unable to set a user to have API role [\#272](https://github.com/betadots/hdm/issues/272)
+
+**Merged pull requests:**
+
+- Permit role parameter \#272 [\#273](https://github.com/betadots/hdm/pull/273) ([oneiros](https://github.com/oneiros))
+- Improve first access flow \#234 [\#271](https://github.com/betadots/hdm/pull/271) ([oneiros](https://github.com/oneiros))
+- Bump puppet from 8.3.1 to 8.4.0 [\#270](https://github.com/betadots/hdm/pull/270) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump stimulus-rails from 1.3.0 to 1.3.3 [\#269](https://github.com/betadots/hdm/pull/269) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-openapi from 0.10.0 to 0.11.0 [\#268](https://github.com/betadots/hdm/pull/268) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump net-ldap from 0.18.0 to 0.19.0 [\#267](https://github.com/betadots/hdm/pull/267) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.1.2 to 7.1.3 [\#266](https://github.com/betadots/hdm/pull/266) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump faker from 3.2.2 to 3.2.3 [\#265](https://github.com/betadots/hdm/pull/265) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump git from 1.18.0 to 1.19.1 [\#262](https://github.com/betadots/hdm/pull/262) ([dependabot[bot]](https://github.com/apps/dependabot))
+- do not ignore github action changes anymore [\#261](https://github.com/betadots/hdm/pull/261) ([rwaffen](https://github.com/rwaffen))
+- also push to dockerhub [\#260](https://github.com/betadots/hdm/pull/260) ([rwaffen](https://github.com/rwaffen))
+- Bump rubocop-performance from 1.20.0 to 1.20.2 [\#255](https://github.com/betadots/hdm/pull/255) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 6.4.0 to 6.4.2 [\#254](https://github.com/betadots/hdm/pull/254) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump importmap-rails from 1.2.3 to 2.0.1 [\#253](https://github.com/betadots/hdm/pull/253) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop-capybara from 2.19.0 to 2.20.0 [\#251](https://github.com/betadots/hdm/pull/251) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump factory\_bot\_rails from 6.4.2 to 6.4.3 [\#250](https://github.com/betadots/hdm/pull/250) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump dartsass-sprockets from 3.0.0 to 3.1.0 [\#249](https://github.com/betadots/hdm/pull/249) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump sqlite3 from 1.6.9 to 1.7.0 [\#247](https://github.com/betadots/hdm/pull/247) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop-rails from 2.23.0 to 2.23.1 [\#245](https://github.com/betadots/hdm/pull/245) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.4.0](https://github.com/betadots/hdm/tree/v1.4.0) (2024-01-10)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v1.3.0...v1.4.0)
 
 **Fixed bugs:**
 
@@ -247,10 +285,6 @@ These should not affect the functionality of the module.
 ## [v0.0.2](https://github.com/betadots/hdm/tree/v0.0.2) (2022-09-13)
 
 [Full Changelog](https://github.com/betadots/hdm/compare/v0.0.1...v0.0.2)
-
-**Implemented enhancements:**
-
-- Check possibility for hdm to run locally without authentication [\#54](https://github.com/betadots/hdm/issues/54)
 
 **Fixed bugs:**
 
