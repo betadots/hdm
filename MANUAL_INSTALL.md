@@ -21,6 +21,12 @@ As root do:
 
     source /etc/profile.d/rvm.sh
 
+On Alma 8 you must install libyaml-devel:
+
+    dnf install -y libyaml-devel
+
+Now you can install the required ruby version:
+
     rvm install 3.2.2
     rvm use 3.2.2
 
@@ -40,6 +46,7 @@ As root do:
     # vim /opt/hdm/config/hdm.yml # adopt config
     bundle exec rails db:setup
     echo "secret" | EDITOR="vim" bundle exec rails credentials:edit
+    export RAILS_DEVELOPMENT_HOSTS=$(hostname -f)
     bundle exec rails server -b 0.0.0.0 & # or use systemd unit from `config` folder.
 
 ### **systemd**
