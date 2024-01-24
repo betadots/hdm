@@ -18,4 +18,15 @@ class UsersTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to login_path
   end
+
+  test "admin can change a user's role" do
+    admin = FactoryBot.create(:user, :admin)
+    regular_user = FactoryBot.create(:user)
+
+    sign_in_as admin
+
+    patch user_path(regular_user), params: { user: { role: "admin" } }
+
+    assert regular_user.reload.admin?
+  end
 end
