@@ -14,12 +14,63 @@ At the moment manual installation is only tested on macOS, CentOS 7 and 8 Stream
 
 See [MANUAL_INSTALL.md](MANUAL_INSTALL.md)
 
-## Automated Installation
+## Automated installation
 
 Docker containers are made available. You can find more information in [DOCKER.md](DOCKER.md).
 For automated installations we recommend using Puppet code. A working profile example can be found in [PUPPET.md](PUPPET.md)
 
+## Configuration Options
+
+HDM needs a configuration file (hdm.yml). Location depends on installation method:
+
+- Manual installation: within the HDM git clone in `config/hdm.yml`
+- Docker installation: on the docker host in `/etc/hdm/hdm.yml`
+
+Configurations are provided as a Hash. The main hash key describes the Rails environment HDM is running in:
+
+- Manual installation: depending on RAILS ENVIRONMENT env var - defaults to `development`
+- Docker installation: set to `production`
+
+The following configuration options are possible:
+
+```yaml
+# hdm.yml
+production:
+  authentication_disabled: false    # disable user auth and management
+
+  read_only: true                   # read/write mode?
+
+  allow_encryption: false           # encypting eyaml
+
+  puppet_db:                        # PuppetDB access - plain text (default)
+    server: http://localhost:8080
+  puppet_db:                        # PuppetDB access-  PE token auth
+    server: 'https://localhost:8081'
+    token: '/etc/hdm/puppetdb.token'
+    cacert: '<path to cacert>'
+  puppet_db:                        # PuppetDB access - SSL Cert auth
+    server: 'https://localhost:8081'
+    pem:
+      key: <path to key>
+      cert: <path to cert>
+      ca_file: <path to ca_file>
+
+  hiera_config_file: "hiera.yaml"   # hiera config file name
+
+  config_dir: /etc/puppetlabs/code  # puppet code directory
+
+  ldap:                             # LDAP User auth
+    host: 'localhost'
+    port: 389
+    base_dn: 'ou=hdm,dc=nodomain'
+    bind_dn: 'cn=admin,dc=nodomain'
+    bind_dn_password: 'openldap'
+    ldaps: false
+```
+
 ## Usermanagement
+
+Usermanagement can be disabled in HDM config file by specifying the `authentication_disabled` option.
 
 A fresh installation needs an admin which has to be created first with the WebGUI. That admin can not read the Puppet configuration. He/She can only create/delete new users. Normal users have the ability to read/change/delete the Puppet configuration data.
 
