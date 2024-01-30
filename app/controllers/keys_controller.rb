@@ -42,13 +42,4 @@ class KeysController < ApplicationController
     redirect_to environment_node_key_path(@environment, @node, @key),
       notice: "Value was removed successfully"
   end
-
-  private
-
-  def load_nodes
-    @nodes = Node.all
-    @nodes.select! { |n| current_user.may_access?(n) }
-    @node = Node.find(params[:node_id])
-    authorize! :show, @node
-  end
 end

@@ -30,7 +30,9 @@ Rails.application.routes.draw do
 
     resources :nodes, only: :index, constraints: { id: /.+/ } do
       if Rails.configuration.hdm['read_only']
-        resources :keys, only: [:index, :show]
+        resources :keys, only: [:index, :show] do
+          resource :lookup, only: [:show]
+        end
       else
         resources :keys, only: [:index, :show, :update, :destroy] do
           resources :hierarchies, only: [] do
@@ -38,6 +40,8 @@ Rails.application.routes.draw do
               resource :value, only: [:update, :destroy]
             end
           end
+
+          resource :lookup, only: [:show]
         end
       end
     end

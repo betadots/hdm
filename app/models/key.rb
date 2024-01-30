@@ -28,6 +28,10 @@ class Key < HieraModel
     @lookup_options ||= load_lookup_options(node)
   end
 
+  def lookup(node)
+    hiera_data.lookup(name, facts: node.facts)
+  end
+
   def to_param
     name
   end
