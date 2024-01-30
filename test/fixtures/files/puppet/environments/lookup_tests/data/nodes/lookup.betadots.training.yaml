@@ -1,0 +1,16 @@
+---
+hdm_integer: 23
+hdm_unique_array:
+  - node
+hdm_duplicates_in_array:
+  - node
+hdm_nested_array:
+  - duplicate 
+  - nested_hash:
+      node_integer: 2
+hdm_simple_hash:
+  origin: node
+hdm_nested_hash:
+  origin: node
+  nested_hash:
+    integer: 5

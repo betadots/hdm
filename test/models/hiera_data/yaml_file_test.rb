@@ -1,6 +1,7 @@
 require 'test_helper'
 
-class HieraData::YamlFileTest < ActiveSupport::TestCase
+class HieraData
+  class YamlFileTest < ActiveSupport::TestCase
   test "#exist? return false for non existing file" do
     file = HieraData::YamlFile.new(path: config_dir.join("role/hdm_test-development.yaml"))
     refute file.exist?
@@ -124,7 +125,7 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
     end
   end
 
-  private
+    private
     def config_dir
       Pathname.new(Rails.configuration.hdm["config_dir"]).join('environments', 'development', 'data')
     end
@@ -136,4 +137,5 @@ class HieraData::YamlFileTest < ActiveSupport::TestCase
           template: foobar/postfix/main.cf.epp
       HEREDOC
     end
+  end
 end

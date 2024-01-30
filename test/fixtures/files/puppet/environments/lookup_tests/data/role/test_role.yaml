@@ -1,0 +1,18 @@
+---
+hdm_integer: 42
+hdm_string: "role"
+hdm_unique_array:
+  - role
+hdm_duplicates_in_array:
+  - node
+  - role
+hdm_nested_array:
+  - from_role
+  - nested_hash:
+      role_integer: 2
+hdm_simple_hash:
+  origin: role
+  added_by_role: role
+hdm_nested_hash:
+  nested_hash:
+    added_by_role: role

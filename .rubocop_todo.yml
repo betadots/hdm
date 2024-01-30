@@ -256,11 +256,6 @@ Style/BlockDelimiters:
 Style/ClassAndModuleChildren:
   Exclude:
     - 'test/channels/application_cable/connection_test.rb'
-    - 'test/models/hiera_data/config_test.rb'
-    - 'test/models/hiera_data/data_file_test.rb'
-    - 'test/models/hiera_data/git_repo_test.rb'
-    - 'test/models/hiera_data/interpolation_test.rb'
-    - 'test/models/hiera_data/yaml_file_test.rb'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).

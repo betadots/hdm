@@ -1,0 +1,29 @@
+---
+hdm_integer: 93
+hdm_unique_array:
+  - common
+hdm_duplicates_in_array:
+  - node
+  - zone
+  - common
+hdm_nested_array:
+  - from_common
+  - - nested
+    - list
+hdm_simple_hash:
+  origin: common
+  added_by_common: common
+hdm_nested_hash:
+  origin: common
+  nested_hash:
+    integer: 32
+    added_by_common: common
+lookup_options:
+  '^hdm_duplicates':
+    merge: hash
+  hdm_duplicates_in_array:
+    merge: unique
+  hash_syntax:
+    merge:
+      strategy: deep
+

@@ -1,0 +1,5 @@
+---
+fqdn: 'lookup.betadots.training'
+role: 'test_role'
+environment: 'lookup_tests'
+zone: 'test_zone'

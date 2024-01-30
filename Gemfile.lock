@@ -479,6 +479,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   dartsass-rails
   dartsass-sprockets
+  deep_merge
   diffy
   factory_bot_rails
   faker

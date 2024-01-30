@@ -85,21 +85,6 @@ class HieraDataTest < ActiveSupport::TestCase
     assert_no_match /top secret/, ciphertext
   end
 
-  test "#lookup_options returns the merged lookup options for the selected environment and facts" do
-    hiera = HieraData.new("multiple_hierarchies")
-    node = Node.new(hostname: "60wxmaw5.betadots.training", environment: "multiple_hierarchies")
-    expected_hash = {
-      'profile::auth::sudo_configs' => {
-        "merge" => "deep"
-      },
-      'profile::auth::sshd_config_allowgroups' => {
-        "merge" => "first"
-      }
-    }
-
-    assert_equal expected_hash, hiera.lookup_options(node.facts)
-  end
-
   test "#files_including returns file information for a given key" do
     hiera = HieraData.new("multiple_hierarchies")
     expected_result = [
@@ -118,5 +103,37 @@ class HieraDataTest < ActiveSupport::TestCase
     ]
 
     assert_equal expected_result, hiera.files_including("foobar::timezone")
+  end
+
+  test "#lookup returns the correct result for the given environment and facts" do
+    hiera = HieraData.new("lookup_tests")
+    node = Node.new(hostname: "lookup.betadots.training", environment: "lookup_tests")
+    expected = %w[node role zone common]
+
+    assert_equal expected, hiera.lookup("hdm_duplicates_in_array", facts: node.facts)
+  end
+
+  test "#lookup_options_for can use hash syntax" do
+    hiera = HieraData.new("lookup_tests")
+
+    assert_equal "deep", hiera.lookup_options_for("hash_syntax")
+  end
+
+  test "#lookup_options_for favors literal match over regexp" do
+    hiera = HieraData.new("lookup_tests")
+
+    assert_equal "unique", hiera.lookup_options_for("hdm_duplicates_in_array")
+  end
+
+  test "#lookup_options_for uses first regexp match if no literal match possible" do
+    hiera = HieraData.new("lookup_tests")
+
+    assert_equal "hash", hiera.lookup_options_for("hdm_duplicates_hash")
+  end
+
+  test "#lookup_options_for defaults to first" do
+    hiera = HieraData.new("lookup_tests")
+
+    assert_equal "first", hiera.lookup_options_for("hdm_integer")
   end
 end

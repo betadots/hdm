@@ -124,15 +124,23 @@ class HieraData
     token.to_encrypted format: :string
   end
 
-  def lookup_options(facts)
-    result = {}
-    config.hierarchies.each do |hierarchy|
-      hierarchy.resolved_paths(facts:).each do |path|
-        file = DataFile.new(path: hierarchy.datadir(facts:).join(path))
-        result = (file["lookup_options"] || {}).merge(result)
-      end
+  def lookup_options_for(key, facts: {})
+    candidates = lookup_for(facts)
+                 .lookup("lookup_options", merge_strategy: :hash)
+    merge = extract_merge_value(key, candidates)
+    case merge
+    when String
+      merge
+    when Hash
+      merge["strategy"]
+    else
+      "first"
     end
-    result
+  end
+
+  def lookup(key, facts: {})
+    merge_strategy = lookup_options_for(key, facts:).to_sym
+    lookup_for(facts).lookup(key, merge_strategy:)
   end
 
   private
@@ -144,6 +152,27 @@ class HieraData
 
   def find_hierarchy(name)
     config.hierarchies.find { |h| h.name == name }
+  end
+
+  def lookup_for(facts)
+    @cached_lookups ||= {}
+    @cached_lookups[facts] ||= begin
+      hashes = config.hierarchies.flat_map do |hierarchy|
+        hierarchy.resolved_paths(facts:).map do |path|
+          DataFile.new(path: hierarchy.datadir(facts:).join(path))
+                  .content
+        end
+      end
+      Lookup.new(hashes.compact)
+    end
+  end
+
+  def extract_merge_value(key, candidates)
+    result = candidates&.dig(key)
+    result ||= candidates&.select { |k, _v| k[0] == "^" }
+                         &.find { |k, _v| key.match(Regexp.new(k)) }
+                         &.last
+    result&.dig("merge")
   end
 end
 # rubocop:enable Metrics/ClassLength

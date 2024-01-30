@@ -1,0 +1,16 @@
+version: 5
+defaults:
+  datadir: data
+  data_hash: yaml_data
+
+hierarchy:
+  - name: "Host specific"
+    path: "nodes/%{::facts.fqdn}.yaml"
+
+  - name: "Role / zone specific" # Uses custom facts.
+    paths:
+      - "role/%{::facts.role}.yaml"
+      - "zone/%{::facts.zone}.yaml"
+
+  - name: "Global data"
+    path: "common.yaml"
