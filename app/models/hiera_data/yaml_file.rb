@@ -25,7 +25,7 @@ class HieraData
 
     def content
       return nil unless exist?
-      @content ||= (YAML.load_file(path) || {})
+      @content ||= YAML.load_file(path) || {}
     end
 
     def [](key)
@@ -51,7 +51,7 @@ class HieraData
     end
 
     def write_key(key, value)
-      new_content = (content || {})
+      new_content = content || {}
       new_content[key] = value
 
       File.open(path, File::RDWR|File::CREAT, 0644) do |f|
