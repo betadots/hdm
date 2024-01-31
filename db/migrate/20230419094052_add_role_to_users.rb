@@ -8,7 +8,7 @@ class AddRoleToUsers < ActiveRecord::Migration[7.0]
   end
 
   def down
-    add_column :users, :admin, :boolean, default: false  # rubocop:disable Rails/ThreeStateBooleanColumn
+    add_column :users, :admin, :boolean, default: false # rubocop:disable Rails/ThreeStateBooleanColumn
     execute "UPDATE users SET admin = '1' WHERE role = 'admin'"
     change_column :users, :admin, :boolean, default: false, null: false
     remove_column :users, :role
