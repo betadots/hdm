@@ -13,11 +13,11 @@ class HieraDataTest < ActiveSupport::TestCase
   test "#search_key returns key data for all given files" do
     hiera = HieraData.new('development')
     expected_result = {
-      "nodes/testhost.yaml" => {file_present: true,  file_writable: true, replaced_from_git: false, key_present: true, value: "hostname: hostname\n"},
+      "nodes/testhost.yaml" => {file_present: true,  file_writable: true, replaced_from_git: false, key_present: true, value: "hostname: hostname"},
       "role/hdm_test-development.yaml" => {file_present: false,  file_writable: true, replaced_from_git: false, key_present: false, value: nil},
-      "role/hdm_test.yaml" => {file_present: true, file_writable: true, replaced_from_git: false, key_present: true, value: "hostname: hostname-role\n"},
+      "role/hdm_test.yaml" => {file_present: true, file_writable: true, replaced_from_git: false, key_present: true, value: "hostname: hostname-role"},
       "zone/internal.yaml" => {file_present: false, file_writable: false, replaced_from_git: false, key_present: false, value: nil },
-      "common.yaml" => {file_present: true,  file_writable: true, replaced_from_git: false, key_present: true, value: "hostname: common::hostname\n"}
+      "common.yaml" => {file_present: true,  file_writable: true, replaced_from_git: false, key_present: true, value: "hostname: common::hostname"}
     }
     facts = {"fqdn" => "testhost", "role" => "hdm_test", "env" => "development", "zone" => "internal"}
 

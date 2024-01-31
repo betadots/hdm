@@ -55,6 +55,13 @@ class HieraData
       @base_path.join(raw_hash.dig("options", "pkcs7_public_key"))
     end
 
+    def file_options
+      {
+        public_key: public_key,
+        private_key: private_key
+      }.compact
+    end
+
     def encryptable?
       backend == :eyaml &&
         File.readable?(private_key) &&

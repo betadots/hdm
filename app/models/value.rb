@@ -1,6 +1,4 @@
 class Value < HieraModel
-  ENCRYPTED_PATTERN = /.*ENC\[.*\]/
-
   attribute :data_file
   attribute :key
   attribute :value, :string
@@ -9,7 +7,7 @@ class Value < HieraModel
   delegate :environment, to: :hierarchy
 
   def encrypted?
-    value&.match(ENCRYPTED_PATTERN)
+    HieraData::EYamlFile.encrypted?(value)
   end
 
   def update(new_value, node: nil)

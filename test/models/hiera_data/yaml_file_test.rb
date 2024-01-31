@@ -75,7 +75,7 @@ class HieraData
 
   test "#content_for_key returns empty array as array" do
     file = HieraData::YamlFile.new(path: config_dir.join("nodes/testhost.yaml"))
-    assert_equal "[]\n", file.content_for_key('classes')
+    assert_equal "[]", file.content_for_key('classes')
   end
 
   test "#write_key goes fine" do
@@ -131,7 +131,7 @@ class HieraData
     end
 
     def key_as_string
-      <<~HEREDOC
+      <<~HEREDOC.chomp
       tp::conf:
         postfix:
           template: foobar/postfix/main.cf.epp

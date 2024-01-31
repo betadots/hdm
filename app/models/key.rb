@@ -29,7 +29,9 @@ class Key < HieraModel
   end
 
   def lookup(node)
-    hiera_data.lookup(name, facts: node.facts)
+    hiera_data.lookup(name,
+                      facts: node.facts,
+                      decrypt: Rails.configuration.hdm.allow_encryption)
   end
 
   def to_param

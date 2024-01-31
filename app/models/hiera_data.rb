@@ -107,25 +107,20 @@ class HieraData
 
   def decrypt_value(hierarchy_name, value)
     hierarchy = find_hierarchy(hierarchy_name)
-    Hiera::Backend::Eyaml::Options["pkcs7_private_key"] = hierarchy.private_key
-    Hiera::Backend::Eyaml::Options["pkcs7_public_key"] = hierarchy.public_key
-    parser = Hiera::Backend::Eyaml::Parser::Parser.new([Hiera::Backend::Eyaml::Parser::EncHieraTokenType.new, Hiera::Backend::Eyaml::Parser::EncBlockTokenType.new])
-    tokens = parser.parse(value)
-    tokens.map(&:to_plain_text).join
+    public_key = hierarchy.public_key
+    private_key = hierarchy.private_key
+    EYamlFile.decrypt_value(value, public_key:, private_key:)
   end
 
   def encrypt_value(hierarchy_name, value)
     hierarchy = find_hierarchy(hierarchy_name)
-    Hiera::Backend::Eyaml::Options["pkcs7_private_key"] = hierarchy.private_key
-    Hiera::Backend::Eyaml::Options["pkcs7_public_key"] = hierarchy.public_key
-    encryptor = Hiera::Backend::Eyaml::Encryptor.find
-    ciphertext = encryptor.encode(encryptor.encrypt(value))
-    token = Hiera::Backend::Eyaml::Parser::EncToken.new(:block, value, encryptor, ciphertext, nil, '  ')
-    token.to_encrypted format: :string
+    public_key = hierarchy.public_key
+    private_key = hierarchy.private_key
+    EYamlFile.encrypt_value(value, public_key:, private_key:)
   end
 
-  def lookup_options_for(key, facts: {})
-    candidates = lookup_for(facts)
+  def lookup_options_for(key, facts: {}, decrypt: false)
+    candidates = lookup_for(facts, decrypt:)
                  .lookup("lookup_options", merge_strategy: :hash)
     merge = extract_merge_value(key, candidates)
     case merge
@@ -138,8 +133,8 @@ class HieraData
     end
   end
 
-  def lookup(key, facts: {})
-    merge_strategy = lookup_options_for(key, facts:).to_sym
+  def lookup(key, facts: {}, decrypt: false)
+    merge_strategy = lookup_options_for(key, facts:, decrypt:).to_sym
     lookup_for(facts).lookup(key, merge_strategy:)
   end
 
@@ -154,13 +149,16 @@ class HieraData
     config.hierarchies.find { |h| h.name == name }
   end
 
-  def lookup_for(facts)
+  def lookup_for(facts, decrypt: false)
     @cached_lookups ||= {}
     @cached_lookups[facts] ||= begin
       hashes = config.hierarchies.flat_map do |hierarchy|
         hierarchy.resolved_paths(facts:).map do |path|
-          DataFile.new(path: hierarchy.datadir(facts:).join(path))
-                  .content
+          DataFile.new(
+            path: hierarchy.datadir(facts:).join(path),
+            type: hierarchy.backend,
+            options: hierarchy.file_options.merge({decrypt: decrypt})
+          ).content
         end
       end
       Lookup.new(hashes.compact)

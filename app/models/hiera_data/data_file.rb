@@ -6,9 +6,10 @@ class HieraData
       :content_for_key, :[],
       to: :file
 
-    def initialize(path:, facts: {}, type: :yaml)
+    def initialize(path:, facts: {}, options: {}, type: :yaml)
       @path = path
       @facts = facts
+      @options = options
       @replaced_from_git = false
       setup_git_location
       @file = create_file(type)
@@ -59,6 +60,8 @@ class HieraData
 
     def create_file(type)
       case type
+      when :eyaml
+        EYamlFile.new(path: @path, options: @options)
       when :yaml
         YamlFile.new(path: @path)
       else
