@@ -44,7 +44,7 @@ class HieraData
           "role_integer" => 2
         } },
         "from_common",
-        ["nested", "list"]
+        %w[nested list]
       ]
       assert_equal expected, result
     end
@@ -53,7 +53,7 @@ class HieraData
       result = perform_lookup("hdm_nested_array", merge_strategy: :deep)
       expected = [
         "from_common",
-        ["nested", "list"],
+        %w[nested list],
         "duplicate",
         "from_role",
         { "nested_hash" => {
