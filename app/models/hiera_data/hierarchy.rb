@@ -57,8 +57,8 @@ class HieraData
 
     def file_options
       {
-        public_key: public_key,
-        private_key: private_key
+        public_key:,
+        private_key:
       }.compact
     end
 

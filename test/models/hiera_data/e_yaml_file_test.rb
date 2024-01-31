@@ -15,15 +15,15 @@ class HieraData
     test "::encrypt_value can encrypt values" do
       encrypted_value = EYamlFile.encrypt_value("top secret", public_key:, private_key:)
 
-      assert_match /\AENC\[.+\]\z/, encrypted_value
-      assert_no_match /top secret/, encrypted_value
+      assert_match(/\AENC\[.+\]\z/, encrypted_value)
+      assert_no_match(/top secret/, encrypted_value)
     end
 
     test "#content can decrypt top level encrypted values" do
       file = EYamlFile.new(
         path: config_dir.join("common.yaml"),
         options: {
-          public_key:, private_key: , decrypt: true
+          public_key:, private_key:, decrypt: true
         }
       )
 

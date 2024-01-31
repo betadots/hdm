@@ -157,7 +157,7 @@ class HieraData
           DataFile.new(
             path: hierarchy.datadir(facts:).join(path),
             type: hierarchy.backend,
-            options: hierarchy.file_options.merge({decrypt: decrypt})
+            options: hierarchy.file_options.merge({ decrypt: })
           ).content
         end
       end
