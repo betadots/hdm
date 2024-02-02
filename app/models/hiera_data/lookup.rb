@@ -51,7 +51,6 @@ class HieraData
     def deep_merge(values)
       values.inject do |memo, value|
         memo ||= {}
-        raise Hdm::Error, "Merge strategy `deep` can only be used with hashes and arrays." unless value.is_a?(Hash) || value.is_a?(Array)
 
         DeepMerge.deep_merge!(memo, value, merge_hash_arrays: true)
       end

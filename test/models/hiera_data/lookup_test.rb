@@ -118,6 +118,18 @@ class HieraData
       assert_equal expected, result
     end
 
+    test "looking up a mixed value key where a hash is on the highest layer with merge strategy `deep`" do
+      result = perform_lookup("hdm_mixed_types", merge_strategy: :deep)
+
+      assert_equal({ "from_node" => 23 }, result)
+    end
+
+    test "looking up a mixed value key where a hash is on the lowest layer with merge strategy `deep`" do
+      result = perform_lookup("hdm_mixed_types2", merge_strategy: :deep)
+
+      assert_equal 23, result
+    end
+
     private
 
     def perform_lookup(key, merge_strategy:)

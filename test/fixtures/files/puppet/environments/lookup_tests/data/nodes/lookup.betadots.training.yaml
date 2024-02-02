@@ -16,3 +16,4 @@ hdm_nested_hash:
     integer: 5
 hdm_mixed_types:
   from_node: 23
+hdm_mixed_types2: 23

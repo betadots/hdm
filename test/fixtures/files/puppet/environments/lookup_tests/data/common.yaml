@@ -19,6 +19,8 @@ hdm_nested_hash:
     integer: 32
     added_by_common: common
 hdm_mixed_types: 42
+hdm_mixed_types2:
+  from_common: 42
 lookup_options:
   '^hdm_duplicates':
     merge: hash
