@@ -5,6 +5,10 @@ class LookupsController < ApplicationController
 
   def show
     @result = @key.lookup(@node)
+  rescue Hdm::Error => error
+    @error = error
+
+    render action: "error"
   end
 
   private

@@ -18,6 +18,7 @@ hdm_nested_hash:
   nested_hash:
     integer: 32
     added_by_common: common
+hdm_mixed_types: 42
 lookup_options:
   '^hdm_duplicates':
     merge: hash
@@ -26,4 +27,6 @@ lookup_options:
   hash_syntax:
     merge:
       strategy: deep
+  hdm_mixed_types:
+    merge: deep
 
