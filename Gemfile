@@ -21,7 +21,7 @@ gem 'bootstrap', '~> 5.3.0'
 gem 'bootstrap-icons-helper'
 
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 5.0'
+gem 'redis', '~> 5.1'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.20'
 
