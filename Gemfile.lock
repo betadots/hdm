@@ -211,7 +211,7 @@ GEM
       railties (>= 6.0.0)
     io-console (0.7.2)
     io-event (1.3.3)
-    irb (1.11.1)
+    irb (1.11.2)
       rdoc
       reline (>= 0.4.2)
     json (2.7.1)
@@ -238,7 +238,7 @@ GEM
     mini_portile2 (2.8.5)
     mini_racer (0.8.0)
       libv8-node (~> 18.16.0.0)
-    minitest (5.21.2)
+    minitest (5.22.2)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     mutex_m (0.2.0)
@@ -309,7 +309,7 @@ GEM
     puppetdb-ruby (1.2.0)
       httparty
     racc (1.7.3)
-    rack (3.0.8)
+    rack (3.0.9)
     rack-session (2.0.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
@@ -442,7 +442,7 @@ GEM
     timeout (0.4.1)
     timers (4.3.5)
     traces (0.11.1)
-    turbo-rails (1.5.0)
+    turbo-rails (2.0.2)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
@@ -461,7 +461,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.12)
+    zeitwerk (2.6.13)
 
 PLATFORMS
   arm64-darwin-22
