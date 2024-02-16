@@ -31,8 +31,7 @@ class HieraData
     end
 
     def unique_array_merge(values)
-      values.inject do |memo, value|
-        memo ||= []
+      values.inject([]) do |memo, value|
         raise Hdm::Error, "Merge strategy `unique` is not applicable to a hash." if value.is_a?(Hash)
 
         memo + Array(value)
@@ -40,8 +39,7 @@ class HieraData
     end
 
     def flat_hash_merge(values)
-      values.inject do |memo, value|
-        memo ||= {}
+      values.inject({}) do |memo, value|
         raise Hdm::Error, "Merge strategy `hash` can only be used with hashes." unless value.is_a?(Hash)
 
         value.merge(memo)

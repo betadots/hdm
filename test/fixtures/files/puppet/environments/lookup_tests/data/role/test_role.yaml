@@ -16,3 +16,4 @@ hdm_simple_hash:
 hdm_nested_hash:
   nested_hash:
     added_by_role: role
+hdm_integer_with_duplicates: 99

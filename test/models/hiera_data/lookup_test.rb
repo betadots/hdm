@@ -49,6 +49,12 @@ class HieraData
       assert_equal expected, result
     end
 
+    test "looking up integers with merge strategy `unique`" do
+      result = perform_lookup("hdm_integer_with_duplicates", merge_strategy: :unique)
+
+      assert_equal [99, 2], result
+    end
+
     test "looking up a complex nested array with merge strategy `deep`" do
       result = perform_lookup("hdm_nested_array", merge_strategy: :deep)
       expected = [
