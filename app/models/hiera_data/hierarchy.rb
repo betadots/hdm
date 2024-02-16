@@ -99,7 +99,7 @@ class HieraData
       value = raw_hash[lookup_function]
       backends = BACKENDS
       custom_mappings = Rails.configuration.hdm[:custom_lookup_function_mapping]
-      backends = backends.deep_merge({ "lookup_key" => custom_mappings }) if custom_mappings.present?
+      backends = backends.deep_merge({ "lookup_key" => custom_mappings.stringify_keys }) if custom_mappings.present?
       backends.fetch(key).fetch(value).to_sym
     rescue KeyError
       raise Hdm::Error, "unknown backend #{value}"
