@@ -1,7 +1,7 @@
 version: 5
 defaults:
   datadir: data
-  lookup_key: custom_eyaml_function 
+  lookup_key: eyaml_lookup_key
   options:
       pkcs7_private_key: keys/private_key.pkcs7.pem
       pkcs7_public_key:  keys/public_key.pkcs7.pem
