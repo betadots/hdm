@@ -10,12 +10,12 @@
 In case you are using an Apple M1 Chip you might run into trouble building
 Ruby. A work around for that is using the command
 
-    rvm install 3.2.2 --with-cflags="-Wno-error=implicit-function-declaration"
+    rvm reinstall 3.3.0 --with-openssl-dir=$(brew --prefix openssl) --with-readline-dir=$(brew --prefix readline) --with-libyaml-dir=$(brew --prefix libyaml) --disable-dtrace --disable-docs
 
 On intel you can proceed with the following:
 
-    rvm install 3.2.2
-    rvm use 3.2.2
+    rvm install 3.3.0
+    rvm use 3.3.0
 
 ## **Main part**
 
@@ -39,26 +39,23 @@ It can be startet on a second shell:
     ./bin/fake_puppet_db &
 
 ## **General things**
+
 - HDM binds per default to port `3000`. fake_puppet_db binds to `8083`.
 - In case of layout errors you can run `bundle exec rails tmp:clear`.
 - To reset your database run at anytime `bundle exec rails db:reset`.
 - The example development puppet configuration can be found in the directory
 `test/fixtures/files/puppet`.
 
-# Integration environment (TBD)
+## Integration environment (TBD)
 
-#TODO: Setup a environment with VMs to have a real puppetserver and puppetdb for testing.
+TODO: Setup a environment with VMs to have a real puppetserver and puppetdb for testing.
 
-# Regnerate gemset
+## Regnerate gemset
 
 If you happen to delete the Gemfile.lock and regenerate it, do not forget about the supported platforms
 
-```bash
-bundle lock --add-platform ruby x86_64-linux x86_64-darwin-22 arm64-darwin
-```
+    bundle lock --add-platform ruby x86_64-linux x86_64-darwin-22 arm64-darwin
 
-# Update gemset
+## Update gemset
 
-```bash
-bundle update
-```
+    bundle update
