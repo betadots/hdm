@@ -4,7 +4,7 @@ RUN apt update && apt install -y \
       g++ \
       gcc \
       make \
-      libstdc++-10-dev \
+      libstdc++-12-dev \
       libffi-dev \
       libc-dev \
       libxml2-dev \
