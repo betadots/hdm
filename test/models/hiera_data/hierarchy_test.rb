@@ -234,7 +234,7 @@ class HieraData
 
       test "custom lookup function mapped to eyaml" do
         Rails.configuration.hdm[:custom_lookup_function_mapping] = {
-          "custom_eyaml_function" => "eyaml"
+          custom_eyaml_function: "eyaml"
         }
         hierarchy = HieraData::Hierarchy.new(raw_hash:, base_path: ".")
         assert_equal :eyaml, hierarchy.backend
