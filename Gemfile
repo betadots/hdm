@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.2'
+ruby '3.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.1.3'
@@ -11,28 +11,28 @@ gem 'sqlite3', '~> 1.7'
 gem 'puma', '~> 6.4'
 
 # Asset handling
-gem 'sprockets-rails'
-gem 'importmap-rails'
-gem 'dartsass-rails'
-gem 'dartsass-sprockets'
-gem 'turbo-rails'
-gem 'stimulus-rails'
 gem 'bootstrap', '~> 5.3.0'
 gem 'bootstrap-icons-helper'
+gem 'dartsass-rails'
+gem 'dartsass-sprockets'
+gem 'importmap-rails'
+gem 'sprockets-rails'
+gem 'stimulus-rails'
+gem 'turbo-rails'
 
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.20'
 
-gem 'faker'
-gem 'friendly_id', '~> 5.5.1'
-gem 'puppet'
-gem 'puppetdb-ruby', require: 'puppetdb'
-gem 'hiera-eyaml'
-gem 'net-ldap', require: "net/ldap"
 gem 'breadcrumbs_on_rails'
 gem 'cancancan'
-gem 'ruby-saml'
 gem 'diffy'
+gem 'faker'
+gem 'friendly_id', '~> 5.5.1'
+gem 'hiera-eyaml'
+gem 'net-ldap', require: "net/ldap"
+gem 'puppet'
+gem 'puppetdb-ruby', require: 'puppetdb'
+gem 'ruby-saml'
 
 # To use retry middleware with Faraday v2.0+
 gem 'faraday-retry'
@@ -54,20 +54,20 @@ gem 'listen', '~> 3.2' # need for rake to precompile assets
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
   gem 'rspec-openapi'
+  gem 'selenium-webdriver'
 end
 
 group :linter do
   gem 'rubocop', '~> 1.60.2'
-  gem 'rubocop-rails', '~> 2.23.1'
-  gem 'rubocop-rake', '~> 0.6.0'
   gem 'rubocop-capybara', '~> 2.20.0'
   gem 'rubocop-performance', '~> 1.20.2'
+  gem 'rubocop-rails', '~> 2.23.1'
+  gem 'rubocop-rake', '~> 0.6.0'
 end
 
 group :release do
-  gem 'github_changelog_generator', '>= 1.16.1', :require => false
+  gem 'github_changelog_generator', '>= 1.16.1', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

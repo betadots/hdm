@@ -1,10 +1,10 @@
-FROM ruby:3.2.2-slim-bullseye
+FROM ruby:3.3.0-slim-bookworm
 
 RUN apt update && apt install -y \
       g++ \
       gcc \
       make \
-      libstdc++-10-dev \
+      libstdc++-12-dev \
       libffi-dev \
       libc-dev \
       libxml2-dev \
