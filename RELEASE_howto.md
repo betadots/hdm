@@ -15,36 +15,34 @@ bundle install
 
 ## Create Release PR
 
+Please follow these instructions carefully. Ensure that you name the branch precisely as `release-vX.Y.Z` since this nomenclature is crucial for obtaining the future_version in the changelog. Your attention to this specific branch naming convention is essential for accurate version tracking in the changelog.
+
 ```shell
-export CHANGELOG_GITHUB_TOKEN="github_TOKEN"
-git switch -c release/X.Y.Z
-```
-
-edit `Rakefile`, search replace `future_release`
-
-```text
-    config.future_release = 'X.Y.Z'
+git switch -c release-vX.Y.Z
 ```
 
 Create Changelog
 
 ```shell
+export CHANGELOG_GITHUB_TOKEN="github_TOKEN"
 bundle exec rake changelog
 ```
 
-check generated changlog
+Check generated `CHANGELOG.md`
 
-Create release pull request
+Add and push changes to create a release PR
 
 ```shell
 git add -A
 git commit -m 'Release vX.Y.Z'
-git push
+git push origin release-vX.Y.Z
 ```
 
-Open pull request on GitHub, add `skip-changelog` label and merge
+Open pull request on GitHub, add `skip-changelog` label, discuss and merge
 
-## Set release tag
+## Create release tag
+
+After the release PR is merged
 
 ```shell
 git switch main
