@@ -21,23 +21,24 @@ begin
   require 'github_changelog_generator/task'
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|
     config.header = "# Changelog\n\nAll notable changes to this project will be documented in this file.\nEach new release typically also includes the latest modulesync defaults.\nThese should not affect the functionality of the module."
-    config.exclude_labels = %w{duplicate question invalid wontfix wont-fix modulesync skip-changelog}
+    config.exclude_labels = %w[duplicate question invalid wontfix wont-fix modulesync skip-changelog]
     config.user = 'betadots'
     config.project = 'hdm'
-    config.future_release = '1.4.1'
+    # get branch name from git and strip off any prefixes (e.g. 'release-')
+    config.future_release = `git rev-parse --abbrev-ref HEAD`.strip.split('-', 2).last
   end
 
   # Workaround for https://github.com/github-changelog-generator/github-changelog-generator/issues/715
   require 'rbconfig'
-  if RbConfig::CONFIG['host_os'] =~ /linux/
-    task :changelog do
+  if RbConfig::CONFIG['host_os'].include?('linux')
+    task changelog: :environment do
       puts 'Fixing line endings...'
       changelog_file = File.join(__dir__, 'CHANGELOG.md')
       changelog_txt = File.read(changelog_file)
-      new_contents = changelog_txt.gsub(%r{\r\n}, "\n")
-      File.open(changelog_file, "w") {|file| file.puts new_contents }
+      new_contents = changelog_txt.gsub("\r\n", "\n")
+      File.open(changelog_file, "w") { |file| file.puts new_contents }
     end
   end
-
 rescue LoadError
+  # github_changelog_generator isn't available, so we won't define a rake task with it
 end
