@@ -4,9 +4,56 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [1.4.1](https://github.com/betadots/hdm/tree/1.4.1) (2024-01-24)
+## [v2.0.0](https://github.com/betadots/hdm/tree/v2.0.0) (2024-03-01)
 
-[Full Changelog](https://github.com/betadots/hdm/compare/v1.4.0...1.4.1)
+[Full Changelog](https://github.com/betadots/hdm/compare/v1.4.1...v2.0.0)
+
+**Implemented enhancements:**
+
+- Allow facts in datadir [\#284](https://github.com/betadots/hdm/issues/284)
+- Update to Ruby 3.3.0 [\#307](https://github.com/betadots/hdm/pull/307) ([rwaffen](https://github.com/rwaffen))
+- Convert hash keys to strings \#293 [\#302](https://github.com/betadots/hdm/pull/302) ([oneiros](https://github.com/oneiros))
+- Remove unused dependency `redis` [\#300](https://github.com/betadots/hdm/pull/300) ([oneiros](https://github.com/oneiros))
+- Allow doing lookups [\#283](https://github.com/betadots/hdm/pull/283) ([oneiros](https://github.com/oneiros))
+
+**Fixed bugs:**
+
+- CI Bug with google-protobuf-3.25.2-x86\_64-linux  [\#313](https://github.com/betadots/hdm/issues/313)
+- Custom function mapping not working [\#293](https://github.com/betadots/hdm/issues/293)
+- using main in development mode raises exception "link\_tree argument must be a directory" [\#287](https://github.com/betadots/hdm/issues/287)
+
+**Closed issues:**
+
+- Update to Ruby 3.3.0? [\#305](https://github.com/betadots/hdm/issues/305)
+- add git parsing to Rakefile to determine future\_version [\#259](https://github.com/betadots/hdm/issues/259)
+- Foreman HDM integration [\#132](https://github.com/betadots/hdm/issues/132)
+- Documentation on disabing authentication [\#79](https://github.com/betadots/hdm/issues/79)
+- Documentation [\#69](https://github.com/betadots/hdm/issues/69)
+- documentation how to use ldaps [\#68](https://github.com/betadots/hdm/issues/68)
+
+**Merged pull requests:**
+
+- Bump puppet from 8.4.0 to 8.5.0 [\#312](https://github.com/betadots/hdm/pull/312) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump listen from 3.8.0 to 3.9.0 [\#311](https://github.com/betadots/hdm/pull/311) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump turbo-rails from 2.0.3 to 2.0.4 [\#310](https://github.com/betadots/hdm/pull/310) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.1.3 to 7.1.3.2 [\#309](https://github.com/betadots/hdm/pull/309) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update Release Howto [\#308](https://github.com/betadots/hdm/pull/308) ([rwaffen](https://github.com/rwaffen))
+- Bump selenium-webdriver from 4.17.0 to 4.18.1 [\#306](https://github.com/betadots/hdm/pull/306) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump turbo-rails from 1.5.0 to 2.0.3 [\#304](https://github.com/betadots/hdm/pull/304) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-openapi from 0.11.0 to 0.12.0 [\#303](https://github.com/betadots/hdm/pull/303) ([dependabot[bot]](https://github.com/apps/dependabot))
+- move trivy to own pipeline [\#290](https://github.com/betadots/hdm/pull/290) ([rwaffen](https://github.com/rwaffen))
+- Bump nokogiri from 1.16.0 to 1.16.2 [\#289](https://github.com/betadots/hdm/pull/289) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump sqlite3 from 1.7.1 to 1.7.2 [\#286](https://github.com/betadots/hdm/pull/286) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update rubocop to 1.60.2 [\#285](https://github.com/betadots/hdm/pull/285) ([rwaffen](https://github.com/rwaffen))
+- Bump capybara from 3.39.2 to 3.40.0 [\#282](https://github.com/betadots/hdm/pull/282) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump sqlite3 from 1.7.0 to 1.7.1 [\#280](https://github.com/betadots/hdm/pull/280) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump peter-evans/dockerhub-description from 3 to 4 [\#279](https://github.com/betadots/hdm/pull/279) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Updates to documentation [\#277](https://github.com/betadots/hdm/pull/277) ([tuxmea](https://github.com/tuxmea))
+- Bump selenium-webdriver from 4.16.0 to 4.17.0 [\#274](https://github.com/betadots/hdm/pull/274) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v1.4.1](https://github.com/betadots/hdm/tree/v1.4.1) (2024-01-24)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v1.4.0...v1.4.1)
 
 **Implemented enhancements:**
 
