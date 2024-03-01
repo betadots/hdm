@@ -1,0 +1,15 @@
+---
+hdm_unique_array:
+  - zone
+hdm_duplicates_in_array:
+  - node
+  - zone
+hdm_nested_array:
+  - duplicate 
+hdm_simple_hash:
+  added_by_zone: zone
+hdm_nested_hash:
+  origin: zone
+  nested_hash:
+    integer: 44
+    added_by_zone: zone

@@ -9,6 +9,7 @@ class EnvironmentTest < ActiveSupport::TestCase
       eyaml
       globs
       hdm
+      lookup_tests
       minimal
       multiple_hierarchies
       no_config

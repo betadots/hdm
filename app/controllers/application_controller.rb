@@ -40,6 +40,13 @@ class ApplicationController < ActionController::Base
     authorize! :show, @environment
   end
 
+  def load_nodes
+    @nodes = Node.all
+    @nodes.select! { |n| current_user.may_access?(n) }
+    @node = Node.find(params[:node_id])
+    authorize! :show, @node
+  end
+
   def display_error_page(error)
     @error = error
     render template: "page/error", status: :internal_server_error

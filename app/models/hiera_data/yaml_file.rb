@@ -2,8 +2,9 @@ class HieraData
   class YamlFile
     attr_reader :path
 
-    def initialize(path:)
+    def initialize(path:, options: {})
       @path = path
+      @options = options
     end
 
     def exist?
@@ -46,8 +47,7 @@ class HieraData
       return "false" if value == false
       return value if [String, Integer, Float].include?(value.class)
 
-      value_string = value.to_yaml
-      value_string.sub(/\A---(\n| )/, '').gsub(/^$\n/, '')
+      Util.yaml_format(value)
     end
 
     def write_key(key, value)

@@ -28,6 +28,12 @@ class Key < HieraModel
     @lookup_options ||= load_lookup_options(node)
   end
 
+  def lookup(node)
+    hiera_data.lookup(name,
+                      facts: node.facts,
+                      decrypt: Rails.configuration.hdm.allow_encryption)
+  end
+
   def to_param
     name
   end
@@ -39,21 +45,6 @@ class Key < HieraModel
   private
 
   def load_lookup_options(node)
-    lookup_option_candidates = hiera_data.lookup_options(node.facts)
-    result = lookup_option_candidates.find do |key, options|
-      key == name
-    end
-    result ||= lookup_option_candidates.find do |key, options|
-      name.match(Regexp.new("\\A#{key}\\z"))
-    end
-    merge = result&.last&.dig("merge")
-    case merge
-    when String
-      merge
-    when Hash
-      merge["stategy"]
-    else
-      "first"
-    end
+    hiera_data.lookup_options_for(name, facts: node.facts)
   end
 end

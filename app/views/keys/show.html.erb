@@ -8,6 +8,10 @@
     <div class="text-end pb-2">
         <b>Lookup options:</b>
         <span class="badge bg-primary"><%= @key.lookup_options(@node) %></span>
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#lookup-result">
+          <%= icon "search" %>
+          Show lookup result
+        </button>
     </div>
     <% index = 0 %>
     <% @environment.hierarchies.each do |hierarchy| %>
@@ -62,5 +66,28 @@
         <% end %>
       </div>
     <% end %>
+  </div>
+</div>
+
+<div class="modal fade" id="lookup-result" tabindex="-1" aria-labelledby="lookup-result-label" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="lookup-result-label">Lookup result for <code><%= @key.name %></code></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= turbo_frame_tag "lookup-result-frame", src: environment_node_key_lookup_path(@environment, @node, @key), loading: "lazy" do %>
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>
