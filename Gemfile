@@ -50,7 +50,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
 end
 
-gem 'listen', '~> 3.2' # need for rake to precompile assets
+gem 'listen', '~> 3.9' # need for rake to precompile assets
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
