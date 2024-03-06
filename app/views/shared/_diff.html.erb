@@ -1,4 +1,4 @@
-<% split_diff = Diffy::SplitDiff.new(file.value_from_original_environment(key: @key).value, value.value, format: :html) %>
+<% split_diff = Diffy::SplitDiff.new(original_value, current_value, format: :html) %>
 <table class="table">
   <thead>
     <tr>

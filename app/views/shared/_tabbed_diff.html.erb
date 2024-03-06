@@ -1,0 +1,18 @@
+<ul class="nav nav-tabs mb-2" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button id="<%= "tab-value-#{dom_id}" %>" class="nav-link active" data-bs-target="<%= "#value-#{dom_id}" %>" data-bs-toggle="tab" type="button" role="tab" aria-controls="<%= "value-#{dom_id}" %>" aria-selected="true">Value</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button id="<%= "tab-diff-#{dom_id}" %>" class="nav-link" data-bs-target="<%= "#diff-#{dom_id}" %>" data-bs-toggle="tab" type="button" role="tab" aria-controls="<%= "diff-#{dom_id}" %>" aria-selected="false">Diff</button>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div id="<%= "value-#{dom_id}" %>" class="tab-pane fade show active" role="tabpanel" aria-labelledby="<%= "tab-value-#{dom_id}" %>">
+    <%= yield %>
+  </div>
+
+  <div id="<%= "diff-#{dom_id}" %>" class="tab-pane fade" role="tabpanel" aria-labelledby="<%= "tab-diff-#{dom_id}" %>">
+    <%= render "shared/diff", current_value:, original_value: %>
+  </div>
+</div>

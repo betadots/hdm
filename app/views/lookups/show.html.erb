@@ -1,3 +1,11 @@
 <%= turbo_frame_tag "lookup-result-frame" do %>
-  <code><pre><%= HieraData::Util.yaml_format(@result) %></pre></code>
+  <% if @original_result && @original_result != @result %>
+    <%= render "shared/tabbed_diff", dom_id: "lookup-#{dom_id(@key)}", original_value: @original_result, current_value: @result do %>
+      <div class="p-2">
+        <code><pre><%= HieraData::Util.yaml_format(@result) %></pre></code>
+      </div>
+    <% end %>
+  <% else %>
+    <code><pre><%= HieraData::Util.yaml_format(@result) %></pre></code>
+  <% end %>
 <% end %>
