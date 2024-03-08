@@ -202,7 +202,7 @@ GEM
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    i18n (1.14.1)
+    i18n (1.14.4)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
       actionpack (>= 6.0.0)
@@ -359,7 +359,7 @@ GEM
     rexml (3.2.6)
     rspec-core (3.13.0)
       rspec-support (~> 3.13.0)
-    rspec-openapi (0.13.0)
+    rspec-openapi (0.14.0)
       actionpack (>= 5.2.0)
       rspec-core
     rspec-support (3.13.1)
