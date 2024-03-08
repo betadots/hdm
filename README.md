@@ -6,7 +6,7 @@ Copyright 2023 betadots GmbH
 
 This Rails application displays [Puppet](https://github.com/puppetlabs/puppet) Hiera data and offers a WebGUI to read/update/create that configuration.
 
-You can find screenshots in the [screenshots](screenshots) directory.
+You can find screenshots in the [screenshots](SCREENSHOTS.md).
 
 ## Manual installation
 
@@ -124,7 +124,7 @@ want to make sure that your repository is only edited by HDM.
 
 Don't forget to set SECRET_KEY_BASE env var in docker run, docker-compose, systemd or hieradata.
 
-```
+```shell
 openssl rand -hex 16
 9dea7603c008dec285e4b231602a00b2
 
@@ -136,7 +136,6 @@ docker run -it --rm -p 3000:3000 -e DEVELOP=1 -e SECRET_KEY_BASE=9dea7603c008dec
 
 See [`docker-compose.yaml`](docker-compose.yaml).
 
-
 ### Update db file
 
 Move existing db/development.sqlite3 to db/production.sqlite3
@@ -146,3 +145,7 @@ docker exec -it <container_id> bash
 mv db/development.sqlite3 db/production.sqlite3
 bin/rails db:environment:set RAILS_ENV=production
 ```
+
+## How to contribute?
+
+see [CONTRIBUTING.md](CONTRIBUTING.md)
