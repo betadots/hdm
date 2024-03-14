@@ -85,6 +85,18 @@ class HieraData
       assert_equal expected_resolved_paths, hierarchy.resolved_paths(facts:)
     end
 
+    test "#resolved_paths resolves globs when given a dynamic datadir" do
+      base_path = Rails.root.join("test/fixtures/files/puppet/environments/dynamic_datadir")
+      globs = ["c*.yaml"]
+      raw_hash = { "name" => "Common", "datadir" => "%{facts.custom.datadir}", "globs" => globs }
+      hierarchy = HieraData::Hierarchy.new(raw_hash:, base_path:)
+      facts = { "custom" => { "datadir" => "data1" }  }
+      expected_resolved_paths = [
+        "common.yaml"
+      ]
+      assert_equal expected_resolved_paths, hierarchy.resolved_paths(facts:)
+    end
+
     test "#name returns the existing name" do
       hierarchy = HieraData::Hierarchy.new(raw_hash:, base_path: ".")
       assert_equal "Yaml hierarchy", hierarchy.name
