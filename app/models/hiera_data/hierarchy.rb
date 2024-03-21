@@ -81,7 +81,7 @@ class HieraData
         resolved_path = Interpolation.interpolate_facts(path:, facts:)
         if uses_globs?
           resolved_path = Interpolation
-                          .interpolate_globs(path: resolved_path, datadir:)
+                          .interpolate_globs(path: resolved_path, datadir: datadir(facts:))
         end
         resolved_path
       end
