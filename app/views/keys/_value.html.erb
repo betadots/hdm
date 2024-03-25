@@ -1,22 +1,7 @@
 <% if file.has_differing_value_in_original_environment?(@key) %>
-  <ul class="nav nav-tabs mb-2" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button id="<%= "tab-value-#{dom_id(file)}" %>" class="nav-link active" data-bs-target="<%= "#value-#{dom_id(file)}" %>" data-bs-toggle="tab" type="button" role="tab" aria-controls="<%= "value-#{dom_id(file)}" %>" aria-selected="true">Value</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button id="<%= "tab-diff-#{dom_id(file)}" %>" class="nav-link" data-bs-target="<%= "#diff-#{dom_id(file)}" %>" data-bs-toggle="tab" type="button" role="tab" aria-controls="<%= "diff-#{dom_id(file)}" %>" aria-selected="false">Diff</button>
-    </li>
-  </ul>
-
-  <div class="tab-content">
-    <div id="<%= "value-#{dom_id(file)}" %>" class="tab-pane fade show active" role="tabpanel" aria-labelledby="<%= "tab-value-#{dom_id(file)}" %>">
-      <%= render "form", file: file, value: value %>
-    </div>
-
-    <div id="<%= "diff-#{dom_id(file)}" %>" class="tab-pane fade" role="tabpanel" aria-labelledby="<%= "tab-diff-#{dom_id(file)}" %>">
-      <%= render "diff", file: file, value: value %>
-    </div>
-  </div>
+  <%= render "shared/tabbed_diff", dom_id: dom_id(file), original_value:file.value_from_original_environment(key: @key).value, current_value: value.value do %>
+    <%= render "form", file: file, value: value %>
+  <% end %>
 <% else %>
   <%= render "form", file: file, value: value %>
 <% end %>
