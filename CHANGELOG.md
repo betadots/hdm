@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v2.1.0](https://github.com/betadots/hdm/tree/v2.1.0) (2024-03-21)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v2.0.0...v2.1.0)
+
+**Implemented enhancements:**
+
+- Add favicon [\#322](https://github.com/betadots/hdm/pull/322) ([oneiros](https://github.com/oneiros))
+
+**Fixed bugs:**
+
+- globs do not show data on v2.0.0 [\#329](https://github.com/betadots/hdm/issues/329)
+- Interpolate variables in datadir used for globs \#329 [\#333](https://github.com/betadots/hdm/pull/333) ([oneiros](https://github.com/oneiros))
+
+**Merged pull requests:**
+
+- Bump sqlite3 from 1.7.2 to 1.7.3 [\#334](https://github.com/betadots/hdm/pull/334) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump turbo-rails from 2.0.4 to 2.0.5 [\#328](https://github.com/betadots/hdm/pull/328) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop from 1.62.0 to 1.62.1 [\#327](https://github.com/betadots/hdm/pull/327) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-openapi from 0.13.0 to 0.14.0 [\#326](https://github.com/betadots/hdm/pull/326) ([dependabot[bot]](https://github.com/apps/dependabot))
+- add CONTRIBUTING.md [\#325](https://github.com/betadots/hdm/pull/325) ([rwaffen](https://github.com/rwaffen))
+- Update rubocop to 1.62.0 [\#324](https://github.com/betadots/hdm/pull/324) ([rwaffen](https://github.com/rwaffen))
+- Bump puppet from 8.5.0 to 8.5.1 [\#321](https://github.com/betadots/hdm/pull/321) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-openapi from 0.12.0 to 0.13.0 [\#318](https://github.com/betadots/hdm/pull/318) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop-rails from 2.23.1 to 2.24.0 [\#317](https://github.com/betadots/hdm/pull/317) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v2.0.0](https://github.com/betadots/hdm/tree/v2.0.0) (2024-03-01)
 
 [Full Changelog](https://github.com/betadots/hdm/compare/v1.4.1...v2.0.0)
