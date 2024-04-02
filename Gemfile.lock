@@ -359,8 +359,9 @@ GEM
     rexml (3.2.6)
     rspec-core (3.13.0)
       rspec-support (~> 3.13.0)
-    rspec-openapi (0.16.0)
+    rspec-openapi (0.16.1)
       actionpack (>= 5.2.0)
+      rails-dom-testing
       rspec-core
     rspec-support (3.13.1)
     rubocop (1.62.1)
@@ -378,9 +379,9 @@ GEM
       parser (>= 3.3.0.4)
     rubocop-capybara (2.20.0)
       rubocop (~> 1.41)
-    rubocop-performance (1.20.2)
+    rubocop-performance (1.21.0)
       rubocop (>= 1.48.1, < 2.0)
-      rubocop-ast (>= 1.30.0, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-rails (2.24.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
@@ -499,7 +500,7 @@ DEPENDENCIES
   rspec-openapi
   rubocop (~> 1.62.1)
   rubocop-capybara (~> 2.20.0)
-  rubocop-performance (~> 1.20.2)
+  rubocop-performance (~> 1.21.0)
   rubocop-rails (~> 2.24.1)
   rubocop-rake (~> 0.6.0)
   ruby-saml
