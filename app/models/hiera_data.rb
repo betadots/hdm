@@ -1,6 +1,4 @@
 class HieraData
-  class EnvironmentNotFound < StandardError; end
-
   attr_reader :environment, :layers
 
   def self.environments(config_dir:)
