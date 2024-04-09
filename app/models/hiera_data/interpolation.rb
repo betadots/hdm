@@ -4,7 +4,7 @@ class HieraData
 
     module_function
 
-    def interpolate_globs(path:, datadir:)
+    def interpolate_globs(path:, datadir: nil)
       Dir.glob(path, base: datadir).sort
     end
 

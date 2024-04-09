@@ -3,21 +3,18 @@ class Value < HieraModel
   attribute :key
   attribute :value, :string
 
-  delegate :hierarchy, to: :data_file
-  delegate :environment, to: :hierarchy
+  delegate :hiera_file, to: :data_file
 
   def encrypted?
     HieraData::EYamlFile.encrypted?(value)
   end
 
-  def update(new_value, node: nil)
+  def update(new_value)
     parsed_value = YAML.safe_load(new_value)
-    facts = node ? node.facts : {}
-    hiera_data.write_key(data_file.hierarchy.name, data_file.path, key.name, parsed_value, facts:)
+    hiera_file.write_key(key.name, parsed_value)
   end
 
-  def destroy(node: nil)
-    facts = node ? node.facts : {}
-    hiera_data.remove_key(data_file.hierarchy.name, data_file.path, key.name, facts:)
+  def destroy
+    hiera_file.remove_key(data_file.path, key.name)
   end
 end

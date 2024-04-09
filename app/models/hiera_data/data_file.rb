@@ -3,8 +3,8 @@ class HieraData
     attr_reader :path, :file
 
     delegate :content, :exist?, :writable?, :keys,
-      :content_for_key, :[],
-      to: :file
+             :content_for_key, :[],
+             to: :file
 
     def initialize(path:, facts: {}, options: {}, type: :yaml)
       @path = path
@@ -33,25 +33,25 @@ class HieraData
     private
 
     def setup_git_location
-      if git_data = matching_git_location
-        @git_repo = GitRepo.new(git_data[:git_url])
-        interpolated_path_in_repo = Interpolation
-          .interpolate_facts(path: git_data[:path_in_repo], facts: @facts)
-          .delete_prefix("/")
-        path_in_repo = @git_repo.local_path.join(interpolated_path_in_repo).to_s
-        path_in_repo << "/" unless path_in_repo.last == "/"
-        @path = Pathname.new(
-          @path.to_s.sub(git_data[:replaces_datadir_interpolated],
-                         path_in_repo.to_s)
-        )
-        @replaced_from_git = true
-      end
+      return unless (git_data = matching_git_location)
+
+      @git_repo = GitRepo.new(git_data[:git_url])
+      interpolated_path_in_repo = Interpolation
+                                  .interpolate_facts(path: git_data[:path_in_repo], facts: @facts)
+                                  .delete_prefix("/")
+      path_in_repo = @git_repo.local_path.join(interpolated_path_in_repo).to_s
+      path_in_repo << "/" unless path_in_repo.last == "/"
+      @path = Pathname.new(
+        @path.to_s.sub(git_data[:replaces_datadir_interpolated],
+                       path_in_repo.to_s)
+      )
+      @replaced_from_git = true
     end
 
     def matching_git_location
       Rails.configuration.hdm.git_data&.find do |git_data|
         replaces_datadir = Interpolation
-          .interpolate_facts(path: git_data[:datadir], facts: @facts)
+                           .interpolate_facts(path: git_data[:datadir], facts: @facts)
         replaces_datadir << "/" unless replaces_datadir.last == "/"
         git_data[:replaces_datadir_interpolated] = replaces_datadir
         @path.to_s.start_with?(replaces_datadir)

@@ -1,13 +1,11 @@
 class Key < HieraModel
   attribute :name, :string
-  attribute :environment
 
   def self.all_for(node, environment: node.environment)
     facts = node.facts
     keys = []
-    HieraData.new(environment.name).all_keys(facts)
-      .each do |name|
-      key = new(environment:, name:)
+    environment.hiera_data.all_keys(facts:).each do |name|
+      key = new(name:, hiera_data: environment.hiera_data)
       if name == "lookup_options"
         keys.unshift(key)
       else
@@ -18,10 +16,21 @@ class Key < HieraModel
   end
 
   def ==(other)
-    other.is_a?(Key) && (
-      name == other.name &&
-      environment == other.environment
-    )
+    other.is_a?(Key) && other.name == name
+  end
+
+  def search(environment:)
+    result = {}
+    environment.layers.each do |layer|
+      result[layer] = {}
+      layer.hierarchies.each do |hierarchy|
+        result[layer][hierarchy] = {}
+        hierarchy.values_for(key: self).each do |value|
+          result[layer][hierarchy][value.data_file] = value
+        end
+      end
+    end
+    result
   end
 
   def lookup_options(node)
@@ -29,7 +38,7 @@ class Key < HieraModel
   end
 
   def lookup(node)
-    hiera_data.lookup(name,
+    hiera_data.lookup(key: name,
                       facts: node.facts,
                       decrypt: Rails.configuration.hdm.allow_encryption)
   end
@@ -45,6 +54,6 @@ class Key < HieraModel
   private
 
   def load_lookup_options(node)
-    hiera_data.lookup_options_for(name, facts: node.facts)
+    hiera_data.lookup_options_for(key: name, facts: node.facts)
   end
 end

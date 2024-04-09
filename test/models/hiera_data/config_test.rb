@@ -5,7 +5,7 @@ class HieraData
     class ConfigV3 < ActiveSupport::TestCase
       test "does not support v3 config style" do
         assert_raise Hdm::Error do
-          HieraData::Config.new(base_path)
+          HieraData::Config.new(base_path.join("hiera.yaml"))
         end
       end
 
@@ -16,7 +16,7 @@ class HieraData
 
     class ConfigNoYamlFilePresent < ActiveSupport::TestCase
       test "uses defaults from puppet" do
-        config = HieraData::Config.new(base_path)
+        config = HieraData::Config.new(base_path.join("hiera.yaml"))
         assert_equal 1, config.hierarchies.size
       end
 
@@ -27,7 +27,7 @@ class HieraData
 
     class ConfigMinimalIncompleteYamlFile < ActiveSupport::TestCase
       test "merges with defaults from puppet" do
-        config = HieraData::Config.new(base_path)
+        config = HieraData::Config.new(base_path.join("hiera.yaml"))
         assert_equal 1, config.hierarchies.size
       end
 
@@ -38,7 +38,7 @@ class HieraData
 
     class ConfigNoDatadirInYamlFile < ActiveSupport::TestCase
       test "uses default datadir from puppet" do
-        config = HieraData::Config.new(base_path)
+        config = HieraData::Config.new(base_path.join("hiera.yaml"))
         assert_not_nil config.content["defaults"]
         assert_equal Puppet::Pops::Lookup::HieraConfigV5::DEFAULT_CONFIG_HASH["defaults"]["datadir"], config.content["defaults"]["datadir"]
       end
@@ -50,7 +50,7 @@ class HieraData
 
     class ConfigWithSomeHierarchiesTest < ActiveSupport::TestCase
       test "when only defaults, return the yaml paths" do
-        config = HieraData::Config.new(base_path)
+        config = HieraData::Config.new(base_path.join("hiera.yaml"))
         assert_equal 3, config.hierarchies.size
       end
 
@@ -61,7 +61,7 @@ class HieraData
 
     class ConfigWithEmptyDefaultsTest < ActiveSupport::TestCase
       test "empty defaults get replaced" do
-        config = HieraData::Config.new(base_path)
+        config = HieraData::Config.new(base_path.join("hiera.yaml"))
         assert_not_nil config.content["defaults"]
         assert_equal Puppet::Pops::Lookup::HieraConfigV5::DEFAULT_CONFIG_HASH["defaults"], config.content["defaults"]
       end

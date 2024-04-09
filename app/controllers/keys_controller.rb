@@ -17,29 +17,11 @@ class KeysController < ApplicationController
   def show
     @keys = Key.all_for(@node, environment: @environment)
     @keys.select! { |k| current_user.may_access?(k) }
-    @key = Key.new(environment: @environment, name: params[:id])
+    @key = Key.new(name: params[:id], hiera_data: @environment.hiera_data)
     authorize! :show, @key
 
     add_breadcrumb @environment, environment_nodes_path(@environment)
     add_breadcrumb @node, environment_node_keys_path(@environment, @node)
     add_breadcrumb params[:id], environment_node_key_path(@environment, @node, params[:id])
-  end
-
-  def update
-    @key = Key.new(@node, params[:id])
-    authorize! :update, @key
-    @key.save_value(params[:hierarchy], params[:path], params[:value])
-
-    redirect_to environment_node_key_path(@environment, @node, @key),
-      notice: "Value was saved successfully"
-  end
-
-  def destroy
-    @key = Key.new(@node, params[:id])
-    authorize! :destroy, @key
-    @key.remove_value(params[:hierarchy], params[:path])
-
-    redirect_to environment_node_key_path(@environment, @node, @key),
-      notice: "Value was removed successfully"
   end
 end

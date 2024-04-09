@@ -20,19 +20,19 @@ class HierarchyTest < ActiveSupport::TestCase
     Rails.configuration.hdm["allow_encryption"] = false
     hierarchy = create_hierarchy
 
-    refute hierarchy.encryption_possible?
+    assert_not hierarchy.encryption_possible?
   end
 
   test "#encryption_possible? is false for non-eyaml hierarchies" do
     hierarchy = create_hierarchy(backend: :yaml)
 
-    refute hierarchy.encryption_possible?
+    assert_not hierarchy.encryption_possible?
   end
 
   test "#encryption_possible? is false if hierarchy is not encryptable" do
     hierarchy = create_hierarchy(encryptable: false)
 
-    refute hierarchy.encryption_possible?
+    assert_not hierarchy.encryption_possible?
   end
 
   private
@@ -40,7 +40,7 @@ class HierarchyTest < ActiveSupport::TestCase
   def create_hierarchy(backend: :eyaml, encryptable: true)
     environment = Environment.new(name: "eyaml")
     Hierarchy.new(
-      environment:,
+      layer: environment.environment_layer,
       name: "Global data",
       backend:,
       encryptable:

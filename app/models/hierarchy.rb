@@ -1,34 +1,53 @@
 class Hierarchy < HieraModel
   attribute :name, :string
-  attribute :environment
+  attribute :layer
   attribute :backend
   attribute :encryptable, :boolean, default: false
+  attribute :hiera_hierarchy
 
-  def self.all(environment)
-    HieraData.new(environment.name).hierarchies.map do |hierarchy|
+  delegate :environment, to: :layer
+
+  def self.all(layer:)
+    layer.hiera_layer.hierarchies.map do |hierarchy|
       new(name: hierarchy.name,
-          environment:,
+          layer:,
           backend: hierarchy.backend,
-          encryptable: hierarchy.encryptable?)
+          encryptable: hierarchy.encryptable?,
+          hiera_hierarchy: hierarchy)
     end
   end
 
-  def self.find(environment, name)
-    all(environment).find { |h| h.name == name }
+  def self.find(layer:, name:)
+    all(layer:).find { |h| h.name == name }
+  end
+
+  def file(path:, node:)
+    hiera_file = hiera_hierarchy.file(path:, facts: node.facts)
+    DataFile.new(hierarchy: self, path:, hiera_file:)
   end
 
   def files_for(node:)
-    hiera_data.files_for(name, facts: node.facts).map do |data_file|
-      DataFile.new(hierarchy: self, path: data_file, node:)
+    hiera_hierarchy.resolved_paths(facts: node.facts).map do |path|
+      file(path:, node:)
+    end
+  end
+
+  def values_for(key:)
+    hiera_hierarchy.files_and_values_for(key: key.name).map do |file, value|
+      Value.new(
+        key:,
+        value:,
+        data_file: DataFile.new(path: file.path, hierarchy: self, hiera_file: file)
+      )
     end
   end
 
   def encrypt_value(value)
-    hiera_data.encrypt_value(name, value)
+    hiera_hierarchy.encrypt_value(value:)
   end
 
   def decrypt_value(value)
-    hiera_data.decrypt_value(name, value)
+    hiera_hierarchy.decrypt_value(value:)
   end
 
   def eyaml?

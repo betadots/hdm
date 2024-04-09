@@ -17,7 +17,7 @@ class LookupsController < ApplicationController
   def load_keys
     @keys = Key.all_for(@node, environment: @environment)
     @keys.select! { |k| current_user.may_access?(k) }
-    @key = Key.new(environment: @environment, name: params[:key_id])
+    @key = Key.new(name: params[:key_id], hiera_data: @environment.hiera_data)
     authorize! :show, @key
   end
 
