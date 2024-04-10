@@ -33,7 +33,7 @@ class HieraData
 
     class Global < Base
       def base_path
-        Pathname.new("/etc/puppetlabs/puppet")
+        hiera_yaml.dirname
       end
 
       def name
@@ -42,6 +42,14 @@ class HieraData
 
       def to_param
         name
+      end
+
+      private
+
+      def hiera_yaml
+        Pathname.new(
+          Rails.configuration.hdm.global_hiera_yaml || "/etc/puppetlabs/puppet/hiera.yaml"
+        )
       end
     end
 

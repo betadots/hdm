@@ -47,4 +47,24 @@ class HieraDataTest < ActiveSupport::TestCase
 
     assert_equal "first", hiera.lookup_options_for(key: "hdm_integer")
   end
+
+  class LookupWithMultipleLayersTest < ActiveSupport::TestCase
+    def setup
+      @config = Rails.configuration.hdm
+      @original_global_hiera_yaml = @config[:global_hiera_yaml]
+      @config[:global_hiera_yaml] = Rails.root.join("test/fixtures/files/puppet/global/hiera.yaml").to_s
+    end
+
+    def teardown
+      @config[:global_hiera_yaml] = @original_global_hiera_yaml
+    end
+
+    test "#lookup chooses value from global layer when available" do
+      hiera = HieraData.new(environment: "development")
+      node = Node.new(hostname: "test.host", environment: "development")
+
+      assert_equal 99, hiera.lookup(key: "hdm::integer", facts: node.facts)
+
+    end
+  end
 end
