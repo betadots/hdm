@@ -17,7 +17,7 @@ test:
   ldap:
     host: localhost
     port: 389
-  #global_hiera_yaml: <%= Rails.root.join('test','fixtures','files','puppet','global','hiera.yml') %>
+  #global_hiera_yaml: <%= Rails.root.join('test','fixtures','files','puppet','global','hiera.yaml') %>
 
 production:
   read_only: true
