@@ -64,7 +64,6 @@ class HieraDataTest < ActiveSupport::TestCase
       node = Node.new(hostname: "test.host", environment: "development")
 
       assert_equal 99, hiera.lookup(key: "hdm::integer", facts: node.facts)
-
     end
   end
 end
