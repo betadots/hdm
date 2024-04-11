@@ -34,22 +34,29 @@
     </main>
 
     <footer class="footer bg-light mt-auto py-4">
-      <div class="container text-center">
-        © <%= Date.today.year %>
-        <a href="https://betadots.de/" class="text-dark">
-          <%= image_tag "betadots.png", alt: "betadots logo", width: "32", height: "32" %>
-          betadots GmbH
-        </a>
-        -
-        Licensed under 
-        <a href="https://github.com/betadots/hdm/blob/main/LICENSE">
-          GNU Affero General Public License v3.0
-        </a>
-        -
-        <a href="https://github.com/betadots/hdm">
-          <%= icon("github") %>
-          Source code
-        </a>
+      <div class="container">
+        <div class="row">
+          <div class="col text-end">
+            <span class="font-monospace"><%= Hdm::VERSION %></span>
+            <br>
+            © <%= Date.today.year %>
+            <a href="https://betadots.de/" class="text-dark">
+              <%= image_tag "betadots.png", alt: "betadots logo", width: "32", height: "32" %>
+              betadots GmbH
+            </a>
+          </div>
+          <div class="col">
+            Licensed under 
+            <a href="https://github.com/betadots/hdm/blob/main/LICENSE">
+              GNU Affero General Public License v3.0
+            </a>
+            <br>
+            <a href="https://github.com/betadots/hdm">
+              <%= icon("github") %>
+              Source code
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
     <%= yield :modals %>
