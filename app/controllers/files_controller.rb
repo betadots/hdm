@@ -6,9 +6,9 @@ class FilesController < ApplicationController
   add_breadcrumb "Environments", :environments_path
 
   def index
-    @files_and_values_by_hierarchy =
+    @files_and_values =
       if can? :show, @key
-        DataFile.search(@environment, @key)
+        @key.search(environment: @environment)
       else
         {}
       end
@@ -20,6 +20,6 @@ class FilesController < ApplicationController
   private
 
   def load_key
-    @key = Key.new(environment: @environment, name: params[:key_id].squish)
+    @key = Key.new(name: params[:key_id].squish)
   end
 end

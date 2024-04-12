@@ -2,8 +2,9 @@ class HieraData
   class Config
     attr_reader :content, :hierarchies
 
-    def initialize(base_path)
-      @base_path = base_path
+    def initialize(hiera_yaml)
+      @hiera_yaml = hiera_yaml
+      @base_path = File.dirname(hiera_yaml)
       @content = load_content
       initialize_hierarchies
     end
@@ -11,10 +12,9 @@ class HieraData
     private
 
     def load_content
-      full_path = @base_path.join(Rails.configuration.hdm.hiera_config_file || "hiera.yaml")
       defaults = Puppet::Pops::Lookup::HieraConfigV5::DEFAULT_CONFIG_HASH
-      config = if File.exist?(full_path)
-                 parsed_file = YAML.load_file(full_path)
+      config = if File.exist?(@hiera_yaml)
+                 parsed_file = YAML.load_file(@hiera_yaml)
                  unless parsed_file["version"] == 5
                    raise Hdm::Error, "hdm needs your hiera.yaml configuration to be in the version 5 format. Please convert your config file(s) before using hdm."
                  end

@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class HieraData
   class Hierarchy
     LOOKUP_FUNCTIONS = %w[lookup_key data_hash data_dig hiera3_backend].freeze
@@ -31,8 +32,6 @@ class HieraData
     end
 
     def datadir(facts: nil)
-      return @datadir if @datadir
-
       raw_datadir = raw_hash["datadir"]
       raw_datadir = Interpolation.interpolate_facts(path: raw_datadir, facts:) if facts
       path = Pathname.new(raw_datadir)
@@ -89,8 +88,40 @@ class HieraData
 
     def candidate_files
       paths.flat_map do |path|
+        path = File.join(datadir, path)
         globbed_path = Interpolation.replace_variables_with_globs(path)
-        Interpolation.interpolate_globs(path: globbed_path, datadir:)
+        Interpolation.interpolate_globs(path: globbed_path)
+      end
+    end
+
+    def all_keys(facts:)
+      resolved_paths(facts:).flat_map do |path|
+        file(path:, facts:).keys
+      end.sort.uniq
+    end
+
+    def file(path:, facts:, options: {})
+      DataFile.new(path: datadir(facts:).join(path), facts:, options:)
+    end
+
+    def files_and_values_for(key:)
+      candidate_files.map { |p| DataFile.new(path: p) }
+                     .select { |f| f.keys.include?(key) } # rubocop:disable Performance/InefficientHashSearch
+                     .map { |f| [f, f.content_for_key(key)] }
+    end
+
+    def decrypt_value(value:)
+      EYamlFile.decrypt_value(value, public_key:, private_key:)
+    end
+
+    def encrypt_value(value:)
+      EYamlFile.encrypt_value(value, public_key:, private_key:)
+    end
+
+    def file_contents(facts:, decrypt: false)
+      resolved_paths(facts:).map do |path|
+        file(path:, facts:, options: file_options.merge({ decrypt: }))
+          .content
       end
     end
 
@@ -113,3 +144,4 @@ class HieraData
     end
   end
 end
+# rubocop:enable Metrics/ClassLength

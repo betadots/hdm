@@ -1,5 +1,5 @@
 <% hierarchy = file.hierarchy %>
-<%= form_with url: (file.writable? ? environment_node_key_hierarchy_data_file_value_path(@environment, @node, @key, hierarchy, file) : nil),
+<%= form_with url: (file.writable? ? environment_node_key_layer_hierarchy_data_file_value_path(@environment, @node, @key, hierarchy.layer, hierarchy, file) : nil),
   method: :patch, local: true,
   data: ({
     controller: "encryption",
@@ -39,8 +39,8 @@
       <% end %>
     <% end %>
     <% if file.writable? %>
-      <% if file.has_key?(@key) %>
-        <%= link_to environment_node_key_hierarchy_data_file_value_path(@environment, @node, @key, hierarchy, file), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-sm btn-danger ms-2" do %>
+      <% if file.has_key?(key: @key) %>
+        <%= link_to environment_node_key_layer_hierarchy_data_file_value_path(@environment, @node, @key, hierarchy.layer, hierarchy, file), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-sm btn-danger ms-2" do %>
           <%= icon "trash" %>
           Delete
         <% end %>

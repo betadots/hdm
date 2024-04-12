@@ -34,10 +34,12 @@ Rails.application.routes.draw do
           resource :lookup, only: [:show]
         end
       else
-        resources :keys, only: [:index, :show, :update, :destroy] do
-          resources :hierarchies, only: [] do
-            resources :data_files, only: [] do
-              resource :value, only: [:update, :destroy]
+        resources :keys, only: [:index, :show] do
+          resources :layers, only: [] do
+            resources :hierarchies, only: [] do
+              resources :data_files, only: [] do
+                resource :value, only: [:update, :destroy]
+              end
             end
           end
 

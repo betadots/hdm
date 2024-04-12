@@ -115,7 +115,7 @@ class HieraData
         "role/hdm_test.yaml",
         "zone/internal.yaml",
         "common.yaml"
-      ]
+      ].map { |f| File.join(base_path, "data", f) }
       assert_equal expected_candidate_files, hierarchy.candidate_files
     end
 
@@ -131,6 +131,23 @@ class HieraData
       assert_equal base_path.join("data1"), hierarchy.datadir(facts:)
     end
 
+    test "#decrypt_value can decrypt values" do
+      base_path = Rails.root.join("test/fixtures/files/puppet/environments/eyaml")
+      hierarchy = HieraData::Hierarchy.new(raw_hash: eyaml_raw_hash, base_path:)
+      ciphertext = "ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAe2qPOZxi519fmMyaH47BN1oEnDcluk5ec0jlugSzyInd3v2qirncMYVcAvjg2ckjhWX4h458ZJJuDpT5+ediNG+OQ/BAO+QgjHu7eAR8imjBmeFbjN+dl90y4Lh0S4b/ihpcJ8N9qASWvCePmKafjwFaKNjc6Dws05OQ+G/oBIiXGkXJsE6kbT1qX9DrovHEO6Ve2dANUYmiw1oC8cyqSPi8aBeDdBmZJCQyDrx37QTXf8+b0aVAMG4KPEI1vdoO10ElAsof8Mwx60HkUCCSXRZ2fACp5ODf+hgg9B7Z4eFRxIf4VuqPI+b4pcvPRS/PExI2E99YXIyJz86DD7KPFjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBAgGnfhv3yX43m4aHwqBAB9gBAHgnAZ17HQe3wMCQ2pPuh8]"
+
+      assert_equal "top secret", hierarchy.decrypt_value(value: ciphertext)
+    end
+
+    test "#encrypt_value can encrypt values" do
+      base_path = Rails.root.join("test/fixtures/files/puppet/environments/eyaml")
+      hierarchy = HieraData::Hierarchy.new(raw_hash: eyaml_raw_hash, base_path:)
+      ciphertext = hierarchy.encrypt_value(value: "top secret")
+
+      assert_match(/\AENC\[.+\]\z/, ciphertext)
+      assert_no_match(/top secret/, ciphertext)
+    end
+
     def raw_hash
       {
         "name" => "Yaml hierarchy",
@@ -141,6 +158,16 @@ class HieraData
           "zone/%{::facts.zone}.yaml",
           "common.yaml"
         ]
+      }
+    end
+
+    def eyaml_raw_hash
+      {
+        "lookup_key" => "eyaml_lookup_key",
+        "options" => {
+          "pkcs7_private_key" => "keys/private_key.pkcs7.pem",
+          "pkcs7_public_key" => "keys/public_key.pkcs7.pem"
+        }
       }
     end
 

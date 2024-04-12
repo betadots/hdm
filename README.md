@@ -59,6 +59,8 @@ production:
 
   config_dir: /etc/puppetlabs/code  # puppet code directory
 
+  global_hiera_yaml: /etc/puppetlabs/puppet/hiera.yaml
+
   ldap:                             # LDAP User auth
     host: 'localhost'
     port: 389

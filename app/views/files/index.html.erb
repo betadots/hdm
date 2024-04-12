@@ -11,11 +11,11 @@
   <div class="col-12">
     <h2>Search Results</h2>
     <p class="lead">
-      <% if @files_and_values_by_hierarchy.any? %>
+      <% if @files_and_values.any? %>
         Found key
         <code><%= @key.name %></code>
         in
-        <b><%= t(".file", count: @files_and_values_by_hierarchy.values.map { |f| f.size }.sum) %></b>.
+        <b><%= t(".file", count: @files_and_values.values.flat_map { |f| f.values }.flat_map { |f| f.values.size }.sum) %></b>.
       <% else %>
         Could not find key
         <code><%= @key.name %></code>
@@ -29,45 +29,50 @@
   <div class="col-12">
     <% hierarchy_index = 0 %>
     <% file_index = 0 %>
-    <% @files_and_values_by_hierarchy.each do |hierarchy, files_and_values| %>
-      <% hierarchy_index += 1 %>
-      <div id="accordion-<%= hierarchy_index %>" class="accordion mb-2">
-        <div class="accordion-item">
-          <div class="accordion-header" id="hierarchy-<%= hierarchy_index %>">
-            <button class="accordion-button text-start" type="button" data-bs-toggle="collapse" data-bs-target="#hierarchy-collapse-<%= hierarchy_index %>" aria-expanded="false" aria-controls="hierarchy-collapse-<%= hierarchy_index %>">
-              <b><%= hierarchy.name %></b>
-              <span class="badge bg-primary text-light ms-2"><%= hierarchy.backend %></span>
-              <em class="ms-2">- <%= t(".file", count: files_and_values.size) %></em>
-            </button>
-          </div>
-        </div>
-        <div class="accordion-collapse collapse" id="hierarchy-collapse-<%= hierarchy_index %>" data-bs-parent="accordion-<%= hierarchy_index %>" aria-labelledby="hierarchy-<%= hierarchy_index %>">
-          <%# <div class="accordion-body"> %>
-            <% files_and_values.each do |file, value| %>
-              <% file_index += 1 %>
-              <div id="file-accordion-<%= file_index %>" class="accordion accordion-flush">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="path-<%= file_index %>">
-                    <button class="accordion-button bg-light text-start d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= file_index %>" aria-expanded="false" aria-controls="collapse-<%= file_index %>">
-                      <span>
-                        <b><%= file.path %></b>
-                        <% if value&.encrypted? %>
-                          <span class="text-danger">
-                            <%= icon("lock-fill") %>
-                          </span>
-                        <% end %>
-                      </span>
-                    </button>
-                  </h2>
-                </div>
-                <div id="collapse-<%= file_index %>" class="accordion-collapse collapse" data-bs-parent="file-accordion-<%= file_index %>" aria-labelledby="path-<%= file_index %>">
-                  <div class="accordion-body">
-                    <pre><%= value.value %></pre>
-                  </div>
+    <% @files_and_values.each do |layer, hierarchies| %>
+      <div class="card mb-2">
+        <div class="card-header">Layer: <%= layer.name %></div>
+        <div class="card-body">
+          <% hierarchies.each do |hierarchy, files_and_values| %>
+            <% hierarchy_index += 1 %>
+            <div id="accordion-<%= hierarchy_index %>" class="accordion mb-2">
+              <div class="accordion-item">
+                <div class="accordion-header" id="hierarchy-<%= hierarchy_index %>">
+                  <button class="accordion-button text-start" type="button" data-bs-toggle="collapse" data-bs-target="#hierarchy-collapse-<%= hierarchy_index %>" aria-expanded="false" aria-controls="hierarchy-collapse-<%= hierarchy_index %>">
+                    <b><%= hierarchy.name %></b>
+                    <span class="badge bg-primary text-light ms-2"><%= hierarchy.backend %></span>
+                    <em class="ms-2">- <%= t(".file", count: files_and_values.size) %></em>
+                  </button>
                 </div>
               </div>
-            <% end %>
-          <%# </div> %>
+              <div class="accordion-collapse collapse" id="hierarchy-collapse-<%= hierarchy_index %>" data-bs-parent="accordion-<%= hierarchy_index %>" aria-labelledby="hierarchy-<%= hierarchy_index %>">
+                <% files_and_values.each do |file, value| %>
+                  <% file_index += 1 %>
+                  <div id="file-accordion-<%= file_index %>" class="accordion accordion-flush">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="path-<%= file_index %>">
+                        <button class="accordion-button bg-light text-start d-flex justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= file_index %>" aria-expanded="false" aria-controls="collapse-<%= file_index %>">
+                          <span>
+                            <b><%= file.path %></b>
+                            <% if value&.encrypted? %>
+                              <span class="text-danger">
+                                <%= icon("lock-fill") %>
+                              </span>
+                            <% end %>
+                          </span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div id="collapse-<%= file_index %>" class="accordion-collapse collapse" data-bs-parent="file-accordion-<%= file_index %>" aria-labelledby="path-<%= file_index %>">
+                      <div class="accordion-body">
+                        <pre><%= value.value %></pre>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>

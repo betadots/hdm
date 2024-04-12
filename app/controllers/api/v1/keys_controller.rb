@@ -9,13 +9,13 @@ module Api
 
         respond_to do |format|
           format.json do
-            render json: @keys.to_json(except: :environment)
+            render json: @keys.to_json
           end
         end
       end
 
       def show
-        @key = Key.new(environment: @environment, name: params[:id])
+        @key = Key.new(name: params[:id])
         authorize! :show, @key
 
         respond_to do |format|
@@ -28,7 +28,7 @@ module Api
       private
 
       def values_per_hierarchy_and_file
-        @environment.hierarchies.map do |hierarchy|
+        @environment.environment_layer.hierarchies.map do |hierarchy|
           files = hierarchy.files_for(node: @node).map do |file|
             { path: file.path, value: file.value_for(key: @key).value }
           end

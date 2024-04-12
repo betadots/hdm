@@ -5,7 +5,9 @@ class Environment < HieraModel
 
   def self.all
     environments_in_use = PuppetDbClient.environments
-    available_environments = HieraData.environments
+    available_environments = HieraData.environments(
+      config_dir: Rails.configuration.hdm.config_dir
+    )
     all_environments = {}
     environments_in_use.sort.each do |e|
       all_environments[e] = { name: e, in_use: true }
@@ -21,8 +23,16 @@ class Environment < HieraModel
     all.find { |e| e.name == name }
   end
 
-  def hierarchies
-    Hierarchy.all(self)
+  def layers
+    Layer.all(environment: self)
+  end
+
+  def find_layer(name:)
+    layers.find { |l| l.name == name }
+  end
+
+  def environment_layer
+    @environment_layer ||= find_layer(name: "environment")
   end
 
   def in_use?
@@ -43,5 +53,9 @@ class Environment < HieraModel
 
   def to_s
     name
+  end
+
+  def hiera_data
+    @hiera_data ||= HieraData.new(environment: name)
   end
 end

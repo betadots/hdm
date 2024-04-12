@@ -12,8 +12,6 @@
 # SupportedStyles: with_first_argument, with_fixed_indentation
 Layout/ArgumentAlignment:
   Exclude:
-    - 'app/controllers/keys_controller.rb'
-    - 'app/models/hiera_data/data_file.rb'
     - 'test/controllers/keys_controller_test.rb'
     - 'test/integration/required_authentication_test.rb'
 
@@ -49,21 +47,6 @@ Layout/EmptyLinesAroundClassBody:
   Exclude:
     - 'test/controllers/sessions_controller_test.rb'
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowForAlignment, AllowBeforeTrailingComments, ForceEqualSignAlignment.
-Layout/ExtraSpacing:
-  Exclude:
-    - 'test/models/hiera_data_test.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: special_inside_parentheses, consistent, align_brackets
-Layout/FirstArrayElementIndentation:
-  Exclude:
-    - 'test/models/hiera_data_test.rb'
-
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 Layout/HeredocIndentation:
@@ -87,15 +70,6 @@ Layout/IndentationWidth:
     - 'app/controllers/users_controller.rb'
     - 'test/models/hiera_data/yaml_file_test.rb'
 
-# Offense count: 4
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: aligned, indented, indented_relative_to_receiver
-Layout/MultilineMethodCallIndentation:
-  Exclude:
-    - 'app/models/hiera_data/data_file.rb'
-    - 'app/models/key.rb'
-
 # Offense count: 6
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowForAlignment, EnforcedStyleForExponentOperator, EnforcedStyleForRationalLiterals.
@@ -106,7 +80,6 @@ Layout/SpaceAroundOperators:
     - 'app/models/hiera_data/yaml_file.rb'
     - 'test/models/hiera_data/data_file_test.rb'
     - 'test/models/hiera_data/yaml_file_test.rb'
-    - 'test/models/hiera_data_test.rb'
 
 # Offense count: 43
 # This cop supports safe autocorrection (--autocorrect).
@@ -118,7 +91,6 @@ Layout/SpaceInsideHashLiteralBraces:
     - 'test/models/hiera_data/data_file_test.rb'
     - 'test/models/hiera_data/interpolation_test.rb'
     - 'test/models/hiera_data/yaml_file_test.rb'
-    - 'test/models/hiera_data_test.rb'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -128,17 +100,10 @@ Layout/TrailingWhitespace:
     - 'config/initializers/friendly_id.rb'
 
 # Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-Lint/AmbiguousRegexpLiteral:
-  Exclude:
-    - 'test/models/hiera_data_test.rb'
-
-# Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowSafeAssignment.
 Lint/AssignmentInCondition:
   Exclude:
-    - 'app/models/hiera_data/data_file.rb'
     - 'app/models/hiera_data/git_repo.rb'
 
 # Offense count: 1
@@ -193,7 +158,6 @@ Rails/FilePath:
   Exclude:
     - 'test/models/hiera_data/data_file_test.rb'
     - 'test/models/hiera_data/yaml_file_test.rb'
-    - 'test/models/hiera_data_test.rb'
 
 # Offense count: 7
 # This cop supports safe autocorrection (--autocorrect).
@@ -203,7 +167,6 @@ Rails/FilePath:
 Rails/RefuteMethods:
   Exclude:
     - 'test/models/hiera_data/yaml_file_test.rb'
-    - 'test/models/hierarchy_test.rb'
     - 'test/models/user_test.rb'
 
 # Offense count: 5
@@ -279,7 +242,6 @@ Style/GuardClause:
     - 'app/controllers/application_controller.rb'
     - 'app/controllers/page_controller.rb'
     - 'app/controllers/sessions_controller.rb'
-    - 'app/models/hiera_data/data_file.rb'
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -314,7 +276,6 @@ Style/PercentLiteralDelimiters:
   Exclude:
     - 'config/initializers/friendly_id.rb'
     - 'test/models/environment_test.rb'
-    - 'test/models/key_test.rb'
 
 # Offense count: 3
 # This cop supports unsafe autocorrection (--autocorrect-all).

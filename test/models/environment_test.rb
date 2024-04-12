@@ -61,12 +61,4 @@ class EnvironmentTest < ActiveSupport::TestCase
     development = Environment.new(name: "development")
     assert_equal "development", development.to_s
   end
-
-  test "#hierarchies loads all hierarchies" do
-    environment = Environment.new(name: "development")
-    hierarchies = [Hierarchy.new(environment:, name: "test", backend: :yaml)]
-    Hierarchy.stub(:all, hierarchies) do
-      assert_equal hierarchies, environment.hierarchies
-    end
-  end
 end

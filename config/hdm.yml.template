@@ -5,6 +5,7 @@ development:
     server: "http://localhost:8083"
   config_dir: <%= Rails.root.join('test','fixtures','files','puppet') %>
   hiera_config_file: "hiera_hdm.yaml" # if not set, the default value 'hiera.yaml' is used
+  global_hiera_yaml: "/etc/puppetlabs/puppet/hiera.yaml" # Location of the global layer's hiera.yaml
 
 test:
   read_only: false
@@ -16,6 +17,7 @@ test:
   ldap:
     host: localhost
     port: 389
+  #global_hiera_yaml: <%= Rails.root.join('test','fixtures','files','puppet','global','hiera.yaml') %>
 
 production:
   read_only: true

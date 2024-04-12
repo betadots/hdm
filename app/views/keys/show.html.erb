@@ -14,57 +14,64 @@
         </button>
     </div>
     <% index = 0 %>
-    <% @environment.hierarchies.each do |hierarchy| %>
-      <div id="<%= hierarchy.name.parameterize %>" class="accordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header px-3 py-2">
-            <span class="fs-6">
-              <b><%= hierarchy.name %></b>
-              <span class="badge bg-primary text-light"><%= hierarchy.backend %></span>
-            </span>
-          </h2>
-        </div>
-        <% hierarchy.files_for(node: @node).each do |file| %>
-          <% index += 1 %>
-          <% value = file.value_for(key: @key) %>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="path-<%= index %>">
-              <button class="accordion-button bg-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= index %>" aria-expanded="false" aria-controls="collapse-<%= index %>">
-                <span>
-                  <%= format_path(file, @key) %>
-                  <% if value&.encrypted? %>
-                    <span class="ms-2 text-danger">
-                      <%= icon("lock-fill") %>
-                    </span>
-                  <% end %>
-                </span>
-                <span class="text-muted ms-2">
-                  <% if file.replaced_from_git? %>
-                    <span title="This value is taken from a git repository and not from live production data. Changes will be made to the git repository.">
-                      <%= icon("layers") %>
-                    </span>
-                  <% end %>
-                  <% if file.writable? %>
-                    <span title="Value can be edited">
-                      <%= icon("pencil") %>
-                    </span>
-                  <% else %>
-                    <span title="Value is read-only">
-                      <%= icon("eye") %>
-                    </span>
-                  <% end %>
-                </span>
-              </button>
-            </h2>
-
-            <div id="collapse-<%= index %>" class="accordion-collapse collapse" aria-labelledby="path-<%= index %>" data-bs-parent="<%= hierarchy.name.parameterize %>">
-              <div class="accordion-body">
-                <%= render "value", file: file, value: value %>
+    <% @environment.layers.each do |layer| %>
+      <div class="card mb-2">
+        <div class="card-header">Layer: <%= layer.name %></div>
+        <div class="card-body">
+          <% layer.hierarchies.each do |hierarchy| %>
+            <div id="<%= hierarchy.name.parameterize %>" class="accordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header px-3 py-2">
+                  <span class="fs-6">
+                    <b><%= hierarchy.name %></b>
+                    <span class="badge bg-primary text-light"><%= hierarchy.backend %></span>
+                  </span>
+                </h2>
               </div>
+              <% hierarchy.files_for(node: @node).each do |file| %>
+                <% index += 1 %>
+                <% value = file.value_for(key: @key) %>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="path-<%= index %>">
+                    <button class="accordion-button bg-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= index %>" aria-expanded="false" aria-controls="collapse-<%= index %>">
+                      <span>
+                        <%= format_path(file, @key) %>
+                        <% if value&.encrypted? %>
+                          <span class="ms-2 text-danger">
+                            <%= icon("lock-fill") %>
+                          </span>
+                        <% end %>
+                      </span>
+                      <span class="text-muted ms-2">
+                        <% if file.replaced_from_git? %>
+                          <span title="This value is taken from a git repository and not from live production data. Changes will be made to the git repository.">
+                            <%= icon("layers") %>
+                          </span>
+                        <% end %>
+                        <% if file.writable? %>
+                          <span title="Value can be edited">
+                            <%= icon("pencil") %>
+                          </span>
+                        <% else %>
+                          <span title="Value is read-only">
+                            <%= icon("eye") %>
+                          </span>
+                        <% end %>
+                      </span>
+                    </button>
+                  </h2>
+
+                  <div id="collapse-<%= index %>" class="accordion-collapse collapse" aria-labelledby="path-<%= index %>" data-bs-parent="<%= hierarchy.name.parameterize %>">
+                    <div class="accordion-body">
+                      <%= render "value", file: file, value: value %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
             </div>
-          </div>
-        <% end %>
-      </div>
+          <% end %>
+        </div>
+      </div> 
     <% end %>
   </div>
 </div>
