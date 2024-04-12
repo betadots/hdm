@@ -6,6 +6,7 @@ changelog:
   exclude:
     labels:
       - ignore-for-release
+      - skip-changelog
   categories:
     - title: Breaking Changes 🛠
       labels:

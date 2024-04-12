@@ -1,0 +1,55 @@
+---
+on:
+  push:
+    tags:
+      - '*'
+
+name: Release 🚀
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # - name: Set up Ruby
+      #   uses: ruby/setup-ruby@v1
+      #   with:
+      #     bundler-cache: true
+
+      # - name: Prep Environment
+      #   run: |
+      #     bundle config set --local with 'release'
+      #     bundle install
+      #     mkdir -p build
+
+      # - name: Get previous Tag
+      #   id: get-previous-tag
+      #   run: |
+      #     EXCLUDES=$(git describe --abbrev=0 --tags)
+      #     PTAG=$(git describe --abbrev=0 --tags --exclude="${EXCLUDES}")
+      #     echo "previous_tag=${PTAG}" >> "$GITHUB_OUTPUT"
+
+      # - name: Generate Changelog
+      #   env:
+      #     CHANGELOG_GITHUB_TOKEN: ${{ github.token }}
+      #   run: |
+      #     bundle exec github_changelog_generator \
+      #     --user ${{ github.repository_owner }} \
+      #     --project "hdm" \
+      #     --since-tag ${{ steps.get-previous-tag.outputs.previous_tag }} \
+      #     --future-release ${{ github.ref_name }} \
+      #     --output build/changelog.md
+
+      # - name: Create Release
+      #   env:
+      #     GH_TOKEN: ${{ github.token }}
+      #   run: gh release create ${{ github.ref_name }} --notes-file build/changelog.md --title "Release ${{ github.ref_name }}"
+
+      - name: Create Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create ${{ github.ref_name }} --generate-notes
