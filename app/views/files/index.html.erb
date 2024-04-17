@@ -31,7 +31,7 @@
     <% file_index = 0 %>
     <% @files_and_values.each do |layer, hierarchies| %>
       <div class="card mb-2">
-        <div class="card-header">Layer: <%= layer.name %></div>
+        <div class="card-header"><%= layer.name_and_description %></div>
         <div class="card-body">
           <% hierarchies.each do |hierarchy, files_and_values| %>
             <% hierarchy_index += 1 %>

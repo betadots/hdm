@@ -21,7 +21,7 @@ class Key < HieraModel
 
   def search(environment:)
     result = {}
-    environment.layers.each do |layer|
+    environment.layers(key: self).each do |layer|
       result[layer] = {}
       layer.hierarchies.each do |hierarchy|
         result[layer][hierarchy] = {}

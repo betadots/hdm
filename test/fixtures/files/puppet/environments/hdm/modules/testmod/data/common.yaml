@@ -1,0 +1,4 @@
+---
+a: value a (from testmod, should be ignored)
+testmod::float: 9.74
+testmod::integer: 29

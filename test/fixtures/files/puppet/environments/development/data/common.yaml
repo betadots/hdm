@@ -11,3 +11,4 @@ foobar::postfix::tp::resources_hash:
   tp::conf:
     postfix:
       template: foobar/postfix/main.cf.erb
+testmod::integer: 7
