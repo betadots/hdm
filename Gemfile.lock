@@ -360,7 +360,7 @@ GEM
     rexml (3.2.6)
     rspec-core (3.13.0)
       rspec-support (~> 3.13.0)
-    rspec-openapi (0.17.0)
+    rspec-openapi (0.18.0)
       actionpack (>= 5.2.0)
       rails-dom-testing
       rspec-core
