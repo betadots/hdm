@@ -12,7 +12,9 @@ class HieraData
       end
 
       def file_contents(facts:, decrypt: false)
-        hierarchies.flat_map { |h| h.file_contents(facts:, decrypt:) }
+        hierarchies
+          .flat_map { |h| h.file_contents(facts:, decrypt:) }
+          .compact
       end
 
       def to_param
