@@ -61,6 +61,8 @@ production:
 
   global_hiera_yaml: /etc/puppetlabs/puppet/hiera.yaml
 
+  base_module_path: "/etc/puppetlabs/puppet/code:/opt/puppetlabs/puppet/modules" # optional, in case you overwrite `basemodulepath` in puppet.conf
+
   ldap:                             # LDAP User auth
     host: 'localhost'
     port: 389

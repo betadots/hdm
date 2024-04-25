@@ -8,3 +8,4 @@ mod_a::hash_b:
 lookup_options:
   mod_a::hash_b:
     merge: hash
+testmod::integer: 6

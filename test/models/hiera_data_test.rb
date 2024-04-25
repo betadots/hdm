@@ -8,7 +8,7 @@ class HieraDataTest < ActiveSupport::TestCase
   test "#all_keys return all keys" do
     hiera = HieraData.new(environment: 'development')
     expected_result = [
-      "classes", "foobar::enable_firstrun", "foobar::firstrun::linux_classes", "foobar::postfix::tp::resources_hash", "foobar::time::servers", "foobar::timezone", "hdm::float", "hdm::integer", "noop_mode"
+      "classes", "foobar::enable_firstrun", "foobar::firstrun::linux_classes", "foobar::postfix::tp::resources_hash", "foobar::time::servers", "foobar::timezone", "hdm::float", "hdm::integer", "noop_mode", "testmod::integer"
     ]
 
     node = Node.new(hostname: "testhost", environment: "development")

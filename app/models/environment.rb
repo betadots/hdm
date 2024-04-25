@@ -23,8 +23,8 @@ class Environment < HieraModel
     all.find { |e| e.name == name }
   end
 
-  def layers
-    Layer.all(environment: self)
+  def layers(key: nil)
+    Layer.all(environment: self, key:)
   end
 
   def find_layer(name:)

@@ -6,6 +6,7 @@ development:
   config_dir: <%= Rails.root.join('test','fixtures','files','puppet') %>
   hiera_config_file: "hiera_hdm.yaml" # if not set, the default value 'hiera.yaml' is used
   global_hiera_yaml: "/etc/puppetlabs/puppet/hiera.yaml" # Location of the global layer's hiera.yaml
+  #base_module_path: "/etc/puppetlabs/puppet/code:/opt/puppetlabs/puppet/modules" # optional, in case you overwrite `basemodulepath` in puppet.conf
 
 test:
   read_only: false

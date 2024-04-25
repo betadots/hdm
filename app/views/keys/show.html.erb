@@ -14,9 +14,9 @@
         </button>
     </div>
     <% index = 0 %>
-    <% @environment.layers.each do |layer| %>
+    <% @environment.layers(key: @key).each do |layer| %>
       <div class="card mb-2">
-        <div class="card-header">Layer: <%= layer.name %></div>
+        <div class="card-header"><%= layer.name_and_description %></div>
         <div class="card-body">
           <% layer.hierarchies.each do |hierarchy| %>
             <div id="<%= hierarchy.name.parameterize %>" class="accordion">
