@@ -195,9 +195,9 @@ GEM
     google-protobuf (3.25.3-arm64-darwin)
     google-protobuf (3.25.3-x86_64-darwin)
     google-protobuf (3.25.3-x86_64-linux)
-    hiera-eyaml (3.4.0)
-      highline
-      optimist
+    hiera-eyaml (4.1.0)
+      highline (~> 2.1)
+      optimist (~> 3.1)
     highline (2.1.0)
     hocon (1.4.0)
     httparty (0.21.0)
