@@ -1,4 +1,4 @@
-FROM ruby:3.3.1-slim-bookworm
+FROM ruby:3.3.2-slim-bookworm
 
 RUN apt update && apt install -y \
       g++ \
