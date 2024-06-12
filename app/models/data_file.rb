@@ -9,7 +9,7 @@ class DataFile < HieraModel
   delegate :environment, to: :hierarchy
 
   def initialize(attributes = {})
-    super(attributes)
+    super
     return unless hiera_file
 
     self.exist = hiera_file.exist?
