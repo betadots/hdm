@@ -8,6 +8,7 @@
 /.bundle
 /.vendor
 /vendor/bundle
+/vendor/ruby
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
