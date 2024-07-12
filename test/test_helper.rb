@@ -11,6 +11,7 @@ require 'minitest/mock'
 require_relative "support/fake_puppet_db"
 require_relative "support/openapi"
 require_relative "support/sign_in_helper"
+require 'rackup'
 
 # Start FakePuppetDB-Server
 server_thread = Thread.new do
