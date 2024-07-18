@@ -25,6 +25,7 @@ gem 'bcrypt', '~> 3.1.20'
 
 gem 'breadcrumbs_on_rails'
 gem 'cancancan'
+gem 'deep_merge', require: "deep_merge/core"
 gem 'diffy'
 gem 'faker'
 gem 'friendly_id', '~> 5.5.1'
@@ -33,7 +34,6 @@ gem 'net-ldap', require: "net/ldap"
 gem 'puppet'
 gem 'puppetdb-ruby', require: 'puppetdb'
 gem 'ruby-saml'
-gem 'deep_merge', require: "deep_merge/core"
 
 # To use retry middleware with Faraday v2.0+
 gem 'faraday-retry'
