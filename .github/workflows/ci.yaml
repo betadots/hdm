@@ -76,6 +76,8 @@ jobs:
       - run: echo Test suite completed
 
   dependabot:
+    permissions:
+      contents: write
     name: 'Dependabot auto-merge'
     needs:
       - tests
