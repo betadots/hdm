@@ -27,8 +27,9 @@ On Alma 8 you must install libyaml-devel:
 
 Now you can install the required ruby version:
 
-    rvm install 3.3.5
-    rvm use 3.3.5
+    cd hdm
+    rvm install $(cat .ruby-version)
+    rvm use $(cat .ruby-version)
 
 ### **Main part**
 
