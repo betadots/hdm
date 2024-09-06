@@ -10,12 +10,14 @@
 In case you are using an Apple M1 Chip you might run into trouble building
 Ruby. A work around for that is using the command
 
-    rvm reinstall 3.3.4 --with-openssl-dir=$(brew --prefix openssl) --with-readline-dir=$(brew --prefix readline) --with-libyaml-dir=$(brew --prefix libyaml) --disable-dtrace --disable-docs
+    cd hdm
+    rvm reinstall $(cat .ruby-version) --with-openssl-dir=$(brew --prefix openssl) --with-readline-dir=$(brew --prefix readline) --with-libyaml-dir=$(brew --prefix libyaml) --disable-dtrace --disable-docs
 
 On intel you can proceed with the following:
 
-    rvm install 3.3.4
-    rvm use 3.3.4
+    cd hdm
+    rvm install $(cat .ruby-version)
+    rvm use $(cat .ruby-version)
 
 ## **Main part**
 
