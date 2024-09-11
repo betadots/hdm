@@ -170,7 +170,7 @@ GEM
       net-http
     faraday-retry (2.2.1)
       faraday (~> 2.0)
-    fast_gettext (3.0.0)
+    fast_gettext (3.1.0)
       prime
     ffi (1.16.3)
     fiber-annotation (0.2.0)
@@ -305,7 +305,7 @@ GEM
     public_suffix (6.0.1)
     puma (6.4.2)
       nio4r (~> 2.0)
-    puppet (8.8.1)
+    puppet (8.9.0)
       concurrent-ruby (~> 1.0)
       deep_merge (~> 1.0)
       facter (>= 4.3.0, < 5)
@@ -316,7 +316,7 @@ GEM
       puppet-resource_api (~> 1.5)
       scanf (~> 1.0)
       semantic_puppet (~> 1.0)
-    puppet (8.8.1-universal-darwin)
+    puppet (8.9.0-universal-darwin)
       CFPropertyList (>= 3.0.6, < 4)
       concurrent-ruby (~> 1.0)
       deep_merge (~> 1.0)
@@ -414,7 +414,7 @@ GEM
     rubocop-rake (0.6.0)
       rubocop (~> 1.0)
     ruby-progressbar (1.13.0)
-    ruby-saml (1.16.0)
+    ruby-saml (1.17.0)
       nokogiri (>= 1.13.10)
       rexml
     rubyzip (2.3.2)
