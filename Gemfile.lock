@@ -303,7 +303,7 @@ GEM
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
-    puma (6.4.2)
+    puma (6.4.3)
       nio4r (~> 2.0)
     puppet (8.9.0)
       concurrent-ruby (~> 1.0)
@@ -467,7 +467,7 @@ GEM
     timeout (0.4.1)
     timers (4.3.5)
     traces (0.11.1)
-    turbo-rails (2.0.8)
+    turbo-rails (2.0.9)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
     tzinfo (2.0.6)
