@@ -1,19 +1,17 @@
 ---
-name: Trivy
+name: Security Scanning 🕵️
 
 on:
   push:
     branches:
       - main
   pull_request:
-    # The branches below must be a subset of the branches above
     branches:
       - main
 
-
 jobs:
-  analyze:
-    name: 'Analyze'
+  scan_ci_container:
+    name: 'Scan CI container'
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -23,21 +21,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build Docker image
+      - name: Build CI container
         uses: docker/build-push-action@v6
         with:
           context: .
           tags: 'ci/hdm:${{ github.sha }}'
           push: false
 
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
+      - name: Scan image with Anchore Grype
+        uses: anchore/scan-action@v4
+        id: scan
         with:
-          image-ref: 'ci/hdm:${{ github.sha }}'
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+          image: 'ci/hdm:${{ github.sha }}'
+          fail-build: false
 
-      - name: Upload Trivy scan results to GitHub Security tab
+      - name: Inspect action SARIF report
+        run: jq . ${{ steps.scan.outputs.sarif }}
+
+      - name: Upload Anchore scan SARIF report
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: ${{ steps.scan.outputs.sarif }}
