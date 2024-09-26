@@ -6,6 +6,7 @@ on:
       - 'main'
     tags:
       - '*'
+  workflow_dispatch:
 
 env:
   TAG: ${{ github.ref_name == 'main' && 'development' || github.ref_name }}
