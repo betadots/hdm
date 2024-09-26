@@ -21,7 +21,7 @@ begin
   require 'github_changelog_generator/task'
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|
     config.header = "# Changelog\n\nAll notable changes to this project will be documented in this file.\nEach new release typically also includes the latest modulesync defaults.\nThese should not affect the functionality of the module."
-    config.exclude_labels = %w[duplicate question invalid wontfix wont-fix modulesync skip-changelog]
+    config.exclude_labels = %w[duplicate question invalid wontfix wont-fix skip-changelog github_actions]
     config.user = 'betadots'
     config.project = 'hdm'
     # get branch name from git and strip off any prefixes (e.g. 'release-')
