@@ -4,6 +4,82 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v3.0.0](https://github.com/betadots/hdm/tree/v3.0.0) (2024-09-26)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v2.1.0...v3.0.0)
+
+**Implemented enhancements:**
+
+- Add basic system tests [\#367](https://github.com/betadots/hdm/issues/367)
+- Use YJIT in our Container [\#362](https://github.com/betadots/hdm/issues/362)
+- Add version to footer [\#340](https://github.com/betadots/hdm/issues/340)
+- Caching files [\#332](https://github.com/betadots/hdm/issues/332)
+- New feature: Show data in modules [\#331](https://github.com/betadots/hdm/issues/331)
+- HDM should be able to read global hiera data [\#330](https://github.com/betadots/hdm/issues/330)
+- New feature: comparing data for a node between environments [\#301](https://github.com/betadots/hdm/issues/301)
+- feat: update to ruby 3.3.5 [\#437](https://github.com/betadots/hdm/pull/437) ([rwaffen](https://github.com/rwaffen))
+- feat: update rubocop and implement suggestions [\#436](https://github.com/betadots/hdm/pull/436) ([rwaffen](https://github.com/rwaffen))
+- Enable YJIT [\#402](https://github.com/betadots/hdm/pull/402) ([rwaffen](https://github.com/rwaffen))
+- Add two very basic system tests [\#373](https://github.com/betadots/hdm/pull/373) ([oneiros](https://github.com/oneiros))
+- Allow to query the module layer [\#360](https://github.com/betadots/hdm/pull/360) ([oneiros](https://github.com/oneiros))
+- Show version number in footer \#340 [\#353](https://github.com/betadots/hdm/pull/353) ([oneiros](https://github.com/oneiros))
+- Take global layer into account [\#351](https://github.com/betadots/hdm/pull/351) ([oneiros](https://github.com/oneiros))
+- Add diff view to lookup results \#301 [\#320](https://github.com/betadots/hdm/pull/320) ([oneiros](https://github.com/oneiros))
+
+**Merged pull requests:**
+
+- build\(deps\): bump webrick from 1.8.1 to 1.8.2 [\#452](https://github.com/betadots/hdm/pull/452) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump sqlite3 from 1.7.3 to 2.1.0 [\#451](https://github.com/betadots/hdm/pull/451) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group with 3 updates [\#450](https://github.com/betadots/hdm/pull/450) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump google-protobuf from 4.27.3 to 4.27.5 [\#448](https://github.com/betadots/hdm/pull/448) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group with 2 updates [\#447](https://github.com/betadots/hdm/pull/447) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump turbo-rails from 2.0.7 to 2.0.8 in the ruby group [\#446](https://github.com/betadots/hdm/pull/446) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 2 updates [\#445](https://github.com/betadots/hdm/pull/445) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump puppet from 8.8.1 to 8.9.0 in the ruby group across 1 directory [\#442](https://github.com/betadots/hdm/pull/442) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump ruby-saml from 1.16.0 to 1.17.0 [\#440](https://github.com/betadots/hdm/pull/440) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump rubocop-rails from 2.26.0 to 2.26.1 in the ruby group [\#439](https://github.com/betadots/hdm/pull/439) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump the ruby group across 1 directory with 4 updates [\#438](https://github.com/betadots/hdm/pull/438) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rexml from 3.3.4 to 3.3.6 [\#427](https://github.com/betadots/hdm/pull/427) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump the ruby group across 1 directory with 2 updates [\#425](https://github.com/betadots/hdm/pull/425) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump mini\_racer from 0.13.0 to 0.14.0 in the ruby group [\#420](https://github.com/betadots/hdm/pull/420) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rexml from 3.3.2 to 3.3.3 [\#418](https://github.com/betadots/hdm/pull/418) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump the ruby group across 1 directory with 3 updates [\#417](https://github.com/betadots/hdm/pull/417) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump the ruby group across 1 directory with 2 updates [\#413](https://github.com/betadots/hdm/pull/413) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump the ruby group across 1 directory with 3 updates [\#411](https://github.com/betadots/hdm/pull/411) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Updates permissions for dependabot automerge, ordering of gemfile and simplify gemfile.lock platforms [\#410](https://github.com/betadots/hdm/pull/410) ([rwaffen](https://github.com/rwaffen))
+- Bump ruby from 3.3.3-slim-bookworm to 3.3.4-slim-bookworm [\#407](https://github.com/betadots/hdm/pull/407) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump the ruby group across 1 directory with 3 updates [\#406](https://github.com/betadots/hdm/pull/406) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump the ruby group across 1 directory with 2 updates [\#401](https://github.com/betadots/hdm/pull/401) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump ruby from 3.3.2-slim-bookworm to 3.3.3-slim-bookworm [\#399](https://github.com/betadots/hdm/pull/399) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump the ruby group across 1 directory with 6 updates [\#396](https://github.com/betadots/hdm/pull/396) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump actionpack from 7.1.3.3 to 7.1.3.4 [\#393](https://github.com/betadots/hdm/pull/393) ([dependabot[bot]](https://github.com/apps/dependabot))
+- .gitignore: add vendor/ruby [\#391](https://github.com/betadots/hdm/pull/391) ([bastelfreak](https://github.com/bastelfreak))
+- Bump ruby from 3.3.1-slim-bookworm to 3.3.2-slim-bookworm [\#388](https://github.com/betadots/hdm/pull/388) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rails from 7.1.3.2 to 7.1.3.3 [\#384](https://github.com/betadots/hdm/pull/384) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump the ruby group across 1 directory with 3 updates [\#382](https://github.com/betadots/hdm/pull/382) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rexml from 3.2.6 to 3.2.8 [\#379](https://github.com/betadots/hdm/pull/379) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump nokogiri from 1.16.4 to 1.16.5 [\#377](https://github.com/betadots/hdm/pull/377) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump git from 1.19.1 to 2.0.0 [\#376](https://github.com/betadots/hdm/pull/376) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump hiera-eyaml from 3.4.0 to 4.1.0 [\#375](https://github.com/betadots/hdm/pull/375) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop from 1.63.4 to 1.63.5 in the ruby group [\#374](https://github.com/betadots/hdm/pull/374) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-openapi from 0.18.2 to 0.18.3 in the ruby group [\#372](https://github.com/betadots/hdm/pull/372) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump the ruby group across 1 directory with 3 updates [\#371](https://github.com/betadots/hdm/pull/371) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update to Ruby 3.3.1 [\#369](https://github.com/betadots/hdm/pull/369) ([rwaffen](https://github.com/rwaffen))
+- Bump the ruby group across 1 directory with 3 updates [\#368](https://github.com/betadots/hdm/pull/368) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-openapi from 0.17.0 to 0.18.2 in the ruby group across 1 directory [\#361](https://github.com/betadots/hdm/pull/361) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop from 1.63.1 to 1.63.2 in the ruby group [\#358](https://github.com/betadots/hdm/pull/358) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump the ruby group with 2 updates [\#357](https://github.com/betadots/hdm/pull/357) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puppet from 8.5.1 to 8.6.0 in the ruby group [\#356](https://github.com/betadots/hdm/pull/356) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop from 1.63.0 to 1.63.1 in the ruby group [\#352](https://github.com/betadots/hdm/pull/352) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop from 1.62.1 to 1.63.0 in the ruby group [\#350](https://github.com/betadots/hdm/pull/350) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump the ruby group with 3 updates [\#349](https://github.com/betadots/hdm/pull/349) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump the ruby group with 2 updates [\#346](https://github.com/betadots/hdm/pull/346) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump faker from 3.2.3 to 3.3.0 [\#342](https://github.com/betadots/hdm/pull/342) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rdoc from 6.6.2 to 6.6.3.1 [\#341](https://github.com/betadots/hdm/pull/341) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rspec-openapi from 0.14.0 to 0.15.0 [\#339](https://github.com/betadots/hdm/pull/339) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump mini\_racer from 0.8.0 to 0.9.0 [\#338](https://github.com/betadots/hdm/pull/338) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump rubocop-rails from 2.24.0 to 2.24.1 [\#337](https://github.com/betadots/hdm/pull/337) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v2.1.0](https://github.com/betadots/hdm/tree/v2.1.0) (2024-03-21)
 
 [Full Changelog](https://github.com/betadots/hdm/compare/v2.0.0...v2.1.0)
@@ -66,13 +142,11 @@ These should not affect the functionality of the module.
 - Bump selenium-webdriver from 4.17.0 to 4.18.1 [\#306](https://github.com/betadots/hdm/pull/306) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump turbo-rails from 1.5.0 to 2.0.3 [\#304](https://github.com/betadots/hdm/pull/304) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rspec-openapi from 0.11.0 to 0.12.0 [\#303](https://github.com/betadots/hdm/pull/303) ([dependabot[bot]](https://github.com/apps/dependabot))
-- move trivy to own pipeline [\#290](https://github.com/betadots/hdm/pull/290) ([rwaffen](https://github.com/rwaffen))
 - Bump nokogiri from 1.16.0 to 1.16.2 [\#289](https://github.com/betadots/hdm/pull/289) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump sqlite3 from 1.7.1 to 1.7.2 [\#286](https://github.com/betadots/hdm/pull/286) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Update rubocop to 1.60.2 [\#285](https://github.com/betadots/hdm/pull/285) ([rwaffen](https://github.com/rwaffen))
 - Bump capybara from 3.39.2 to 3.40.0 [\#282](https://github.com/betadots/hdm/pull/282) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump sqlite3 from 1.7.0 to 1.7.1 [\#280](https://github.com/betadots/hdm/pull/280) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump peter-evans/dockerhub-description from 3 to 4 [\#279](https://github.com/betadots/hdm/pull/279) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Updates to documentation [\#277](https://github.com/betadots/hdm/pull/277) ([tuxmea](https://github.com/tuxmea))
 - Bump selenium-webdriver from 4.16.0 to 4.17.0 [\#274](https://github.com/betadots/hdm/pull/274) ([dependabot[bot]](https://github.com/apps/dependabot))
 
@@ -131,7 +205,6 @@ These should not affect the functionality of the module.
 - Correct the CMD syntax [\#256](https://github.com/betadots/hdm/pull/256) ([tuxmea](https://github.com/tuxmea))
 - Bump rubocop-rails from 2.22.2 to 2.23.0 [\#240](https://github.com/betadots/hdm/pull/240) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rubocop-performance from 1.19.1 to 1.20.0 [\#239](https://github.com/betadots/hdm/pull/239) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump github/codeql-action from 2 to 3 [\#238](https://github.com/betadots/hdm/pull/238) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rspec-openapi from 0.9.0 to 0.10.0 [\#237](https://github.com/betadots/hdm/pull/237) ([dependabot[bot]](https://github.com/apps/dependabot))
 - add search screenshots [\#236](https://github.com/betadots/hdm/pull/236) ([tuxmea](https://github.com/tuxmea))
 - Screenshots [\#235](https://github.com/betadots/hdm/pull/235) ([tuxmea](https://github.com/tuxmea))
@@ -182,7 +255,6 @@ These should not affect the functionality of the module.
 - Bump rspec-openapi from 0.8.1 to 0.9.0 [\#196](https://github.com/betadots/hdm/pull/196) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump selenium-webdriver from 4.13.1 to 4.14.0 [\#195](https://github.com/betadots/hdm/pull/195) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump ruby-saml from 1.15.0 to 1.16.0 [\#194](https://github.com/betadots/hdm/pull/194) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump voxpupuli/gha-build-and-publish-a-container from 1 to 2 [\#193](https://github.com/betadots/hdm/pull/193) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rubocop-rails from 2.21.1 to 2.21.2 [\#191](https://github.com/betadots/hdm/pull/191) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rubocop from 1.56.3 to 1.56.4 [\#190](https://github.com/betadots/hdm/pull/190) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump selenium-webdriver from 4.12.0 to 4.13.1 [\#189](https://github.com/betadots/hdm/pull/189) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -219,7 +291,6 @@ These should not affect the functionality of the module.
 **Merged pull requests:**
 
 - Interpolate facts in datadir setting \#157 [\#160](https://github.com/betadots/hdm/pull/160) ([oneiros](https://github.com/oneiros))
-- Bump docker/login-action from 2.1.0 to 2.2.0 [\#159](https://github.com/betadots/hdm/pull/159) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Display value differences to actual environment [\#158](https://github.com/betadots/hdm/pull/158) ([oneiros](https://github.com/oneiros))
 - Disable environments not available in fs \#147 [\#156](https://github.com/betadots/hdm/pull/156) ([oneiros](https://github.com/oneiros))
 
@@ -251,7 +322,6 @@ These should not affect the functionality of the module.
 
 - Update to Ruby 3.2.2 [\#149](https://github.com/betadots/hdm/pull/149) ([rwaffen](https://github.com/rwaffen))
 - Show unused environments and allow matching nodes to other environments [\#146](https://github.com/betadots/hdm/pull/146) ([oneiros](https://github.com/oneiros))
-- Bump docker/build-push-action from 3 to 4 [\#139](https://github.com/betadots/hdm/pull/139) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v1.0.1](https://github.com/betadots/hdm/tree/v1.0.1) (2023-01-31)
 
@@ -261,7 +331,6 @@ These should not affect the functionality of the module.
 
 - add upgrade infos [\#137](https://github.com/betadots/hdm/pull/137) ([rwaffen](https://github.com/rwaffen))
 - add faraday middeware [\#136](https://github.com/betadots/hdm/pull/136) ([rwaffen](https://github.com/rwaffen))
-- Bump ludeeus/action-shellcheck from 1.1.0 to 2.0.0 [\#135](https://github.com/betadots/hdm/pull/135) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v1.0.0](https://github.com/betadots/hdm/tree/v1.0.0) (2023-01-30)
 
@@ -350,8 +419,6 @@ These should not affect the functionality of the module.
 
 - Do not use bang method. [\#94](https://github.com/betadots/hdm/pull/94) ([oneiros](https://github.com/oneiros))
 - Hide LDAP login if not configured \#89 [\#91](https://github.com/betadots/hdm/pull/91) ([oneiros](https://github.com/oneiros))
-- Bump docker/login-action from 2.0.0 to 2.1.0 [\#90](https://github.com/betadots/hdm/pull/90) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump docker/build-push-action from 2 to 3 [\#86](https://github.com/betadots/hdm/pull/86) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Key search [\#83](https://github.com/betadots/hdm/pull/83) ([oneiros](https://github.com/oneiros))
 
 ## [v0.0.2](https://github.com/betadots/hdm/tree/v0.0.2) (2022-09-13)
@@ -364,7 +431,6 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Bump actions/checkout from 2 to 3 [\#85](https://github.com/betadots/hdm/pull/85) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Allow disabling of authentication [\#78](https://github.com/betadots/hdm/pull/78) ([oneiros](https://github.com/oneiros))
 - footer updates [\#77](https://github.com/betadots/hdm/pull/77) ([tuxmea](https://github.com/tuxmea))
 
@@ -392,18 +458,13 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
-- Bump docker/build-push-action from 3.1.0 to 3.1.1 [\#76](https://github.com/betadots/hdm/pull/76) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Update docuemntation [\#74](https://github.com/betadots/hdm/pull/74) ([tuxmea](https://github.com/tuxmea))
-- Bump docker/build-push-action from 3.0.0 to 3.1.0 [\#73](https://github.com/betadots/hdm/pull/73) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rails-html-sanitizer from 1.4.2 to 1.4.3 [\#72](https://github.com/betadots/hdm/pull/72) ([dependabot[bot]](https://github.com/apps/dependabot))
 - LDAP authentication. [\#67](https://github.com/betadots/hdm/pull/67) ([oneiros](https://github.com/oneiros))
 - 61 update documentation and docker build [\#66](https://github.com/betadots/hdm/pull/66) ([rwaffen](https://github.com/rwaffen))
 - Bump nokogiri from 1.13.4 to 1.13.6 [\#62](https://github.com/betadots/hdm/pull/62) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump rack from 2.2.3 to 2.2.3.1 [\#60](https://github.com/betadots/hdm/pull/60) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump eventsource from 1.1.0 to 1.1.1 [\#59](https://github.com/betadots/hdm/pull/59) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump docker/build-push-action from 2.10.0 to 3 [\#58](https://github.com/betadots/hdm/pull/58) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump docker/login-action from 1.14.1 to 2 [\#57](https://github.com/betadots/hdm/pull/57) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Bump docker/metadata-action from 3.7.0 to 4.0.1 [\#56](https://github.com/betadots/hdm/pull/56) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Upgrade to Ruby 3 / Rails 7 and remove node.js dependency [\#55](https://github.com/betadots/hdm/pull/55) ([oneiros](https://github.com/oneiros))
 - Interpolate facts with a `facts.` or `trusted.` scope \#17 [\#53](https://github.com/betadots/hdm/pull/53) ([oneiros](https://github.com/oneiros))
 - Add responsive breakpoints \#18 [\#52](https://github.com/betadots/hdm/pull/52) ([oneiros](https://github.com/oneiros))
