@@ -389,7 +389,7 @@ GEM
       rails-dom-testing
       rspec-core
     rspec-support (3.13.1)
-    rubocop (1.66.1)
+    rubocop (1.67.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -467,7 +467,7 @@ GEM
     timeout (0.4.1)
     timers (4.3.5)
     traces (0.11.1)
-    turbo-rails (2.0.10)
+    turbo-rails (2.0.11)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
     tzinfo (2.0.6)
@@ -486,7 +486,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.18)
+    zeitwerk (2.7.0)
 
 PLATFORMS
   arm64-darwin
@@ -523,7 +523,7 @@ DEPENDENCIES
   puppetdb-ruby
   rails (~> 7.1.4)
   rspec-openapi
-  rubocop (~> 1.66.1)
+  rubocop (~> 1.67.0)
   rubocop-capybara (~> 2.21.0)
   rubocop-performance (~> 1.22.1)
   rubocop-rails (~> 2.26.2)
