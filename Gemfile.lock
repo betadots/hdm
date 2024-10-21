@@ -160,7 +160,7 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
-    faker (3.4.2)
+    faker (3.5.1)
       i18n (>= 1.8.11, < 2)
     faraday (2.9.0)
       faraday-net_http (>= 2.0, < 3.2)
@@ -209,10 +209,11 @@ GEM
     google-protobuf (4.27.5-x86_64-linux)
       bigdecimal
       rake (>= 13)
-    hiera-eyaml (4.1.0)
-      highline (~> 2.1)
+    hiera-eyaml (4.2.0)
+      highline (>= 2.1, < 4)
       optimist (~> 3.1)
-    highline (2.1.0)
+    highline (3.1.1)
+      reline
     hocon (1.4.0)
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
