@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.3.1'
+ruby file: '.ruby-version'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.1.3'
+gem 'rails', '~> 7.2.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.7'
+gem 'sqlite3', '~> 2.1'
 # Use Puma as the app server
 gem 'puma', '~> 6.4'
 
@@ -25,6 +25,7 @@ gem 'bcrypt', '~> 3.1.20'
 
 gem 'breadcrumbs_on_rails'
 gem 'cancancan'
+gem 'deep_merge', require: "deep_merge/core"
 gem 'diffy'
 gem 'faker'
 gem 'friendly_id', '~> 5.5.1'
@@ -33,7 +34,6 @@ gem 'net-ldap', require: "net/ldap"
 gem 'puppet'
 gem 'puppetdb-ruby', require: 'puppetdb'
 gem 'ruby-saml'
-gem 'deep_merge', require: "deep_merge/core"
 
 # To use retry middleware with Faraday v2.0+
 gem 'faraday-retry'
@@ -60,10 +60,10 @@ group :test do
 end
 
 group :linter do
-  gem 'rubocop', '~> 1.63.5'
-  gem 'rubocop-capybara', '~> 2.20.0'
-  gem 'rubocop-performance', '~> 1.21.0'
-  gem 'rubocop-rails', '~> 2.24.1'
+  gem 'rubocop', '~> 1.67.0'
+  gem 'rubocop-capybara', '~> 2.21.0'
+  gem 'rubocop-performance', '~> 1.22.1'
+  gem 'rubocop-rails', '~> 2.26.2'
   gem 'rubocop-rake', '~> 0.6.0'
 end
 

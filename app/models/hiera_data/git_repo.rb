@@ -5,7 +5,7 @@ class HieraData
     def initialize(url)
       @url = Gitable::URI.parse(url)
       @repo = setup_repo
-    rescue TypeError, Git::GitExecuteError, Addressable::URI::InvalidURIError => e
+    rescue TypeError, Git::Error, Addressable::URI::InvalidURIError => e
       raise Hdm::Error.new(e)
     end
 
