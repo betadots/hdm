@@ -12,8 +12,8 @@ class FakePuppetDB
     case request.path
     when "/pdb/query/v4/environments"
       environments
-    when "/pdb/query/v4/inventory"
-      nodes(query)
+    when "/pdb/query/v4/nodes"
+      nodes
     when "/pdb/query/v4/facts"
       facts(query)
     else
@@ -29,11 +29,10 @@ class FakePuppetDB
     respond_with(environments)
   end
 
-  def nodes(query)
+  def nodes
     nodes = Dir.glob(Pathname.new(@config_dir).join("nodes", "*.yaml"))
                .map { |f| [File.basename(f, ".yaml").sub("_facts", ""), YAML.load_file(f)] }
-               .map { |n, facts| { "certname" => n, "environment" => facts["environment"] } }
-    nodes.select! { |n| n["environment"] == query["environment"] } if query["environment"]
+               .map { |n, facts| { "certname" => n, "catalog_environment" => facts["environment"] } }
     respond_with(nodes)
   end
 

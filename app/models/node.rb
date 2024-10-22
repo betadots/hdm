@@ -3,11 +3,11 @@ class Node < HieraModel
   attribute :environment
   alias name hostname
 
-  def self.all(environment: nil)
-    node_records = PuppetDbClient.nodes(environment: environment&.name)
-    environments = Environment.all.group_by(&:name) unless environment
+  def self.all
+    node_records = PuppetDbClient.nodes
+    environments = Environment.all.group_by(&:name)
     node_records.map do |node_record|
-      env = environment || environments[node_record["environment"]].first
+      env = environments[node_record["catalog_environment"]].first
       new(hostname: node_record["certname"], environment: env)
     end
   end
