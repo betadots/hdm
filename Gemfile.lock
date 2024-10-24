@@ -175,7 +175,7 @@ GEM
     friendly_id (5.5.1)
       activerecord (>= 4.0.0)
     getoptlong (0.2.1)
-    git (2.3.0)
+    git (2.3.1)
       activesupport (>= 5.0)
       addressable (~> 2.8)
       process_executer (~> 1.1)
@@ -288,7 +288,7 @@ GEM
     prime (0.1.2)
       forwardable
       singleton
-    process_executer (1.1.0)
+    process_executer (1.2.0)
     protocol-hpack (1.4.2)
     protocol-http (0.25.0)
     protocol-http1 (0.16.0)
