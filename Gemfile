@@ -80,4 +80,8 @@ gem 'git'
 gem 'gitable', require: "gitable/uri"
 
 # dependencies & sec fixes
-gem 'mini_racer' # minimal Google V8 JS engine for execjs
+gem 'mini_racer', '~> 0.16.0'    # minimal Google V8 JS engine for execjs
+gem 'libv8-node', '~> 18.19.0.0' # V8 JS engine
+
+# alpine specific
+gem 'google-protobuf', force_ruby_platform: true
