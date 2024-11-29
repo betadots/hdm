@@ -84,4 +84,6 @@ gem 'mini_racer', '~> 0.16.0'    # minimal Google V8 JS engine for execjs
 gem 'libv8-node', '~> 18.19.0.0' # V8 JS engine
 
 # alpine specific
+# this fixes an issue with the libv8-node gem
+# otherwise it will segfault when using the precompiled binary from the gem
 gem 'google-protobuf', force_ruby_platform: true
