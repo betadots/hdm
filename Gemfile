@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby file: '.ruby-version'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.1.4'
+gem 'rails', '~> 7.2.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 2.1'
 # Use Puma as the app server
@@ -60,10 +60,10 @@ group :test do
 end
 
 group :linter do
-  gem 'rubocop', '~> 1.66.1'
+  gem 'rubocop', '~> 1.67.0'
   gem 'rubocop-capybara', '~> 2.21.0'
   gem 'rubocop-performance', '~> 1.22.1'
-  gem 'rubocop-rails', '~> 2.26.2'
+  gem 'rubocop-rails', '~> 2.27.0'
   gem 'rubocop-rake', '~> 0.6.0'
 end
 

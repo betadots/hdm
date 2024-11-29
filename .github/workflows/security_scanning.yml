@@ -29,7 +29,7 @@ jobs:
           push: false
 
       - name: Scan image with Anchore Grype
-        uses: anchore/scan-action@v4
+        uses: anchore/scan-action@v5
         id: scan
         with:
           image: 'ci/hdm:${{ github.sha }}'

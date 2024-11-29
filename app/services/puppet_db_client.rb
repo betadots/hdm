@@ -1,8 +1,7 @@
 module PuppetDbClient
   module ClassMethods
-    def nodes(environment: nil)
-      query = environment ? [:'=', 'environment', environment] : nil
-      response = client.request('inventory', query, {})
+    def nodes
+      response = client.request('nodes', nil, {})
       response.data
     rescue
       []

@@ -16,7 +16,8 @@ class ValueTest < ActiveSupport::TestCase
     @data_file.stub(:hiera_file, hiera_file) do
       @value.update("23")
     end
-    hiera_file.verify
+
+    assert_mock(hiera_file)
   end
 
   test "#destroy uses underlying hiera_data object" do
@@ -25,6 +26,7 @@ class ValueTest < ActiveSupport::TestCase
     @data_file.stub(:hiera_file, hiera_file) do
       @value.destroy
     end
-    hiera_file.verify
+
+    assert_mock(hiera_file)
   end
 end
