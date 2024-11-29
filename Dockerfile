@@ -9,8 +9,7 @@ RUN apk update \
         libxml2-dev \
         libxslt-dev \
         tzdata \
-        bash \
-        gcompat
+        bash
 
 ENV APP_HOME=/hdm
 WORKDIR $APP_HOME
@@ -22,7 +21,7 @@ RUN bundle check || (bundle config set --local without 'development test release
 
 ###############################################################################
 
-FROM docker.io/library/ruby:3.4.1-slim-bookworm
+FROM ddocker.io/library/ruby:3.4.1-alpine3.21
 
 ENV APP_HOME=/hdm
 ENV RAILS_ENV=production
