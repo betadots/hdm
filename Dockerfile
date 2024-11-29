@@ -1,4 +1,4 @@
-FROM ruby:3.3.6-alpine3.20
+FROM ruby:3.3.6-alpine3.20 AS builder
 
 RUN apk update \
     && apk upgrade \
@@ -9,8 +9,7 @@ RUN apk update \
         libxml2-dev \
         libxslt-dev \
         tzdata \
-        bash \
-        gcompat
+        bash
 
 ENV APP_HOME=/hdm
 WORKDIR $APP_HOME
@@ -22,7 +21,7 @@ RUN bundle check || (bundle config set --local without 'development test release
 
 ###############################################################################
 
-FROM ruby:3.3.5-slim-bookworm
+FROM ruby:3.3.6-alpine3.20 AS final
 
 ENV APP_HOME=/hdm
 ENV RAILS_ENV=production
