@@ -18,7 +18,7 @@ bundle config set --local with 'release'
 bundle install
 
 CHANGELOG_GITHUB_TOKEN="token_MC_tokenface" bundle exec rake changelog
-git commit ---signoff -all --message "Release v${RELEASE_VERSION}"
+git commit --all --message "Release v${RELEASE_VERSION}"
 git push --set-upstream origin HEAD
 ```
 

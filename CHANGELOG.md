@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v3.1.0](https://github.com/betadots/hdm/tree/v3.1.0) (2024-12-03)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v3.0.0...v3.1.0)
+
+**Implemented enhancements:**
+
+- Performance tuning PQL queries [\#366](https://github.com/betadots/hdm/issues/366)
+- Upgrade to Rails 7.2 [\#463](https://github.com/betadots/hdm/pull/463) ([oneiros](https://github.com/oneiros))
+- feat: do multi stage build [\#455](https://github.com/betadots/hdm/pull/455) ([rwaffen](https://github.com/rwaffen))
+- Replace `inventory` with `nodes` endpoint [\#381](https://github.com/betadots/hdm/pull/381) ([oneiros](https://github.com/oneiros))
+
+**Merged pull requests:**
+
+- build\(deps\): bump rexml from 3.3.8 to 3.3.9 [\#470](https://github.com/betadots/hdm/pull/470) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 3 updates [\#469](https://github.com/betadots/hdm/pull/469) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group with 2 updates [\#466](https://github.com/betadots/hdm/pull/466) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 3 updates [\#465](https://github.com/betadots/hdm/pull/465) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump actiontext from 7.1.4 to 7.1.4.1 [\#460](https://github.com/betadots/hdm/pull/460) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group with 2 updates [\#459](https://github.com/betadots/hdm/pull/459) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump importmap-rails from 2.0.2 to 2.0.3 in the ruby group [\#457](https://github.com/betadots/hdm/pull/457) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump importmap-rails from 2.0.1 to 2.0.2 in the ruby group [\#456](https://github.com/betadots/hdm/pull/456) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v3.0.0](https://github.com/betadots/hdm/tree/v3.0.0) (2024-09-26)
 
 [Full Changelog](https://github.com/betadots/hdm/compare/v2.1.0...v3.0.0)
