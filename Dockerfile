@@ -1,21 +1,15 @@
-FROM ruby:3.3.5-slim-bookworm AS builder
+FROM ruby:3.3.6-alpine3.20 AS builder
 
-RUN apt update && apt install -y \
-      g++ \
-      gcc \
-      make \
-      libstdc++-12-dev \
-      libffi-dev \
-      libc-dev \
-      libxml2-dev \
-      libxslt-dev \
-      libgcrypt-dev \
-      libsqlite3-dev \
-      sqlite3 \
-      # not needed for gems, but for runtime
-      git \
-      tzdata \
-      && rm -rf /var/lib/apt/lists/*
+RUN apk update \
+    && apk upgrade \
+    && apk add --no-cache --update \
+        git \
+        sqlite \
+        alpine-sdk \
+        libxml2-dev \
+        libxslt-dev \
+        tzdata \
+        bash
 
 ENV APP_HOME=/hdm
 WORKDIR $APP_HOME
@@ -27,7 +21,7 @@ RUN bundle check || (bundle config set --local without 'development test release
 
 ###############################################################################
 
-FROM ruby:3.3.5-slim-bookworm
+FROM ruby:3.3.6-alpine3.20 AS final
 
 ENV APP_HOME=/hdm
 ENV RAILS_ENV=production
