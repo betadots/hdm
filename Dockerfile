@@ -1,4 +1,4 @@
-FROM ruby:3.3.5-slim-bookworm AS builder
+FROM ruby:3.4.1-slim-bookworm AS builder
 
 RUN apt update && apt install -y \
       g++ \
@@ -27,7 +27,7 @@ RUN bundle check || (bundle config set --local without 'development test release
 
 ###############################################################################
 
-FROM ruby:3.3.5-slim-bookworm
+FROM ruby:3.4.1-slim-bookworm
 
 ENV APP_HOME=/hdm
 ENV RAILS_ENV=production
