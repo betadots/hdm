@@ -6,6 +6,7 @@ class EnvironmentTest < ActiveSupport::TestCase
       development
       dynamic_datadir
       empty_defaults
+      enterprise
       eyaml
       globs
       hdm
