@@ -1,0 +1,6 @@
+---
+version: 5
+
+hierarchy:
+ - name: Classifier Configuration Data
+   data_hash: classifier_data
