@@ -1,0 +1,34 @@
+<div class="row my-3">
+  <div class="col-12">
+    <h1><%= @node.name %></h1>
+  </div>
+</div>
+
+<% if Rails.configuration.hdm.node_info %>
+  <div class="row my-3">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <% Rails.configuration.hdm.node_info[0..5].each_slice(2) do |facts| %>
+              <div class="col-4">
+                <dl>
+                  <% facts.each do |fact| %>
+                    <dt><%= fact %></dt>
+                    <dd>
+                      <% if value = @node.facts[fact.sub(/^facts\./, '')] %>
+                        <%= value %>
+                      <% else %>
+                        <span class="text-body-tertiary">&lt;missing&gt;</span>
+                      <% end %>
+                    </dd>
+                  <% end %>
+                </dl>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
