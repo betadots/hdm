@@ -16,7 +16,7 @@
                   <% facts.each do |fact| %>
                     <dt><%= fact %></dt>
                     <dd>
-                      <% if value = @node.facts[fact.sub(/^facts\./, '')] %>
+                      <% if value = @node.facts[fact] %>
                         <%= value %>
                       <% else %>
                         <span class="text-body-tertiary">&lt;missing&gt;</span>
