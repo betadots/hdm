@@ -6,9 +6,9 @@ ruby file: '.ruby-version'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.2.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 2.1'
+gem 'sqlite3', '~> 2.5'
 # Use Puma as the app server
-gem 'puma', '~> 6.4'
+gem 'puma', '~> 6.6'
 
 # Asset handling
 gem 'bootstrap', '~> 5.3.3'
@@ -60,10 +60,10 @@ group :test do
 end
 
 group :linter do
-  gem 'rubocop', '~> 1.67.0'
+  gem 'rubocop', '~> 1.71.0'
   gem 'rubocop-capybara', '~> 2.21.0'
-  gem 'rubocop-performance', '~> 1.22.1'
-  gem 'rubocop-rails', '~> 2.27.0'
+  gem 'rubocop-performance', '~> 1.23.1'
+  gem 'rubocop-rails', '~> 2.29.1'
   gem 'rubocop-rake', '~> 0.6.0'
 end
 
