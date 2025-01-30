@@ -70,5 +70,14 @@ class HieraData
         Pathname.new(Rails.configuration.hdm["config_dir"]).join("environments", "empty_defaults")
       end
     end
+
+    class ConfigWithClassifierDataHierarchyTest < ActiveSupport::TestCase
+      test "`classifier_data` hierarchy is being ignored" do
+        base_path = Pathname.new(Rails.configuration.hdm["config_dir"]).join("environments", "enterprise")
+        config = HieraData::Config.new(base_path.join("hiera.yaml"))
+
+        assert_equal [], config.hierarchies
+      end
+    end
   end
 end

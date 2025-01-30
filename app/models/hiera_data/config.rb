@@ -29,11 +29,13 @@ class HieraData
     end
 
     def initialize_hierarchies
-      @hierarchies = content['hierarchy'].map do |hierarchy|
-        Hierarchy.new(
-          raw_hash: content['defaults'].merge(hierarchy),
-          base_path: @base_path
-        )
+      @hierarchies = content['hierarchy'].filter_map do |hierarchy|
+        unless hierarchy['data_hash'] == 'classifier_data'
+          Hierarchy.new(
+            raw_hash: content['defaults'].merge(hierarchy),
+            base_path: @base_path
+          )
+        end
       end
     end
   end
