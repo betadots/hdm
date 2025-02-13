@@ -16,9 +16,9 @@ nodes:
     memory: 8192
     cpu: 4
     ip: 10.100.10.101
-  apache:
-    ip: 10.100.10.103
-  proxmox:
-    ip: 10.100.10.110
-    cpu: 4
-    memory: 8192
+  # apache:
+  #   ip: 10.100.10.103
+  # proxmox:
+  #   ip: 10.100.10.110
+  #   cpu: 4
+  #   memory: 8192
