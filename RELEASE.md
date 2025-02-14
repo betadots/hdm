@@ -31,7 +31,7 @@ git switch main
 git pull --rebase
 
 git describe > VERSION
-git commit -am 'chore: set version of release'
+git commit --message 'chore: set version of release' VERSION
 git push origin HEAD
 
 git tag v$RELEASE_VERSION -m "v$RELEASE_VERSION"
