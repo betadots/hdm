@@ -21,7 +21,7 @@ RUN bundle check || (bundle config set --local without 'development test release
 
 ###############################################################################
 
-FROM ddocker.io/library/ruby:3.4.1-alpine3.21 AS final
+FROM docker.io/library/ruby:3.4.1-alpine3.21 AS final
 
 ENV APP_HOME=/hdm
 ENV RAILS_ENV=production
