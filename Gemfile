@@ -33,6 +33,7 @@ gem 'hiera-eyaml'
 gem 'net-ldap', require: "net/ldap"
 gem 'puppet'
 gem 'puppetdb-ruby', require: 'puppetdb'
+gem 'syslog', '~> 0.2.0' # was ruby default, is not anymore since 3.4.1, is required by puppet
 gem 'ruby-saml'
 
 # To use retry middleware with Faraday v2.0+
