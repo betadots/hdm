@@ -13,8 +13,6 @@ git switch main
 git pull --rebase
 git switch -c release-v$RELEASE_VERSION
 
-git describe > VERSION
-
 bundle config set --local path vendor/bundle
 bundle config set --local with 'release'
 bundle install
@@ -31,6 +29,11 @@ Then open a PR, discuss and merge.
 ```shell
 git switch main
 git pull --rebase
+
+git describe > VERSION
+git commit -am 'chore: set version of release'
+git push origin HEAD
+
 git tag v$RELEASE_VERSION -m "v$RELEASE_VERSION"
 git push --tags
 ```
