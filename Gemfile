@@ -64,8 +64,8 @@ end
 group :linter do
   gem 'rubocop', '~> 1.71.2'
   gem 'rubocop-capybara', '~> 2.21.0'
-  gem 'rubocop-performance', '~> 1.22.1'
-  gem 'rubocop-rails', '~> 2.27.0'
+  gem 'rubocop-performance', '~> 1.23.1'
+  gem 'rubocop-rails', '~> 2.29.1'
   gem 'rubocop-rake', '~> 0.6.0'
 end
 
