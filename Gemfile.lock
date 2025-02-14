@@ -331,7 +331,7 @@ GEM
     puppetdb-ruby (1.2.0)
       httparty
     racc (1.8.1)
-    rack (3.1.8)
+    rack (3.1.10)
     rack-session (2.0.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
