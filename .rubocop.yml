@@ -28,7 +28,7 @@ Naming/PredicateName:
 Rails/I18nLocaleTexts:
   Enabled: false
 
-Style/SafeNavigationChainLength
+Style/SafeNavigationChainLength:
   Enabled: false
 
 Metrics/ClassLength:
