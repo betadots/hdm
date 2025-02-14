@@ -31,8 +31,10 @@ gem 'faker'
 gem 'friendly_id', '~> 5.5.1'
 gem 'hiera-eyaml'
 gem 'net-ldap', require: "net/ldap"
+gem 'ostruct', '~> 0.6.1' # was ruby default, is not anymore in 3.5.x, is required by net-ldap
 gem 'puppet'
 gem 'puppetdb-ruby', require: 'puppetdb'
+gem 'syslog', '~> 0.2.0' # was ruby default, is not anymore in 3.4.x, is required by puppet
 gem 'ruby-saml'
 
 # To use retry middleware with Faraday v2.0+
