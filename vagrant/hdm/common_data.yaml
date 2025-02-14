@@ -1,0 +1,10 @@
+---
+lookup_options:
+  classes:
+    merge: 'deep'
+
+classes: {}
+
+profile::base::additional_packages:
+  - 'htop'
+

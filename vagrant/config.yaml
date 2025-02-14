@@ -1,0 +1,24 @@
+---
+# Default settings for all vms (they can be overridden on each node)
+default:
+  memory: 1612 # MB or RAM to assign - CentOS Installer needs at leas 1512 MB
+  # box_url: 'http://cloud.centos.org/centos/8/x86_64/images/CentOS-8-Vagrant-8.4.2105-20210603.0.x86_64.vagrant-virtualbox.box'
+  box: boxomatic/centos-stream-9 # Box used for the VM
+  # box: debian/bookworm64 # Box used for the VM
+  cpu: 1 # Number of vCPU to assign to the VM
+  domain: workshop.betadots.training # Name of DNS domain for the created machines
+  script: './centos_script.sh'
+  # script: './debian_script.sh'
+
+# List of nodes shown in vagrant status
+nodes:
+  puppet:
+    memory: 8192
+    cpu: 4
+    ip: 10.100.10.101
+  # apache:
+  #   ip: 10.100.10.103
+  # proxmox:
+  #   ip: 10.100.10.110
+  #   cpu: 4
+  #   memory: 8192

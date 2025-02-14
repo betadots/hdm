@@ -9,3 +9,4 @@ docker-compose.yml
 Gemfile.lock
 screenshots/
 vendor/bundle
+vagrant

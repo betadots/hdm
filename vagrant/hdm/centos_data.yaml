@@ -1,0 +1,12 @@
+---
+classes:
+  '90_hdm_class': 'hdm'
+  '91_puppetdb_class': 'puppetdb'
+  '92_puppetdb_master_class': 'puppetdb::master::config'
+
+hdm::version: 'v3.1.0'
+hdm::disable_authentication: true
+postgresql::globals::manage_dnf_module: false
+puppetdb::manage_firewall: false
+puppetdb::postgres_version: '13'
+puppetdb::manage_package_repo: false
