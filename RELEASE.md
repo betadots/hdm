@@ -13,6 +13,8 @@ git switch main
 git pull --rebase
 git switch -c release-v$RELEASE_VERSION
 
+git describe > VERSION
+
 bundle config set --local path vendor/bundle
 bundle config set --local with 'release'
 bundle install
