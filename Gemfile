@@ -80,4 +80,13 @@ gem 'git'
 gem 'gitable', require: "gitable/uri"
 
 # dependencies & sec fixes
-gem 'mini_racer' # minimal Google V8 JS engine for execjs
+gem 'mini_racer', '~> 0.16.0'    # minimal Google V8 JS engine for execjs
+gem 'libv8-node', '~> 18.19.0.0' # V8 JS engine
+
+# Alpine specific
+#
+# There is an issue with rails -> sass-embedded -> libv8-node -> protobuf
+#
+# We have to force bundler to compile protobuf on the current platform
+# and do not download precompile binary-gems, otherwise the usage of relying gems will segfault
+gem 'google-protobuf', force_ruby_platform: true

@@ -1,21 +1,15 @@
-FROM docker.io/library/ruby:3.4.1-slim-bookworm AS builder
+FROM docker.io/library/ruby:3.4.1-alpine3.21 AS builder
 
-RUN apt update && apt install -y \
-      g++ \
-      gcc \
-      make \
-      libstdc++-12-dev \
-      libffi-dev \
-      libc-dev \
-      libxml2-dev \
-      libxslt-dev \
-      libgcrypt-dev \
-      libsqlite3-dev \
-      sqlite3 \
-      # not needed for gems, but for runtime
-      git \
-      tzdata \
-      && rm -rf /var/lib/apt/lists/*
+RUN apk update \
+    && apk upgrade \
+    && apk add --no-cache --update \
+        git \
+        sqlite \
+        alpine-sdk \
+        libxml2-dev \
+        libxslt-dev \
+        tzdata \
+        bash
 
 ENV APP_HOME=/hdm
 WORKDIR $APP_HOME
@@ -27,7 +21,15 @@ RUN bundle check || (bundle config set --local without 'development test release
 
 ###############################################################################
 
-FROM docker.io/library/ruby:3.4.1-slim-bookworm
+FROM docker.io/library/ruby:3.4.1-alpine3.21 AS final
+
+RUN apk update \
+    && apk upgrade \
+    && apk add --no-cache --update \
+        git \
+        sqlite \
+        tzdata \
+        bash
 
 ENV APP_HOME=/hdm
 ENV RAILS_ENV=production

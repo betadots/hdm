@@ -244,9 +244,10 @@ GEM
     json (2.10.1)
     language_server-protocol (3.17.0.4)
     libv8-node (18.19.0.0)
-    libv8-node (18.19.0.0-arm64-darwin)
-    libv8-node (18.19.0.0-x86_64-darwin)
+    libv8-node (18.19.0.0-aarch64-linux)
+    libv8-node (18.19.0.0-aarch64-linux-musl)
     libv8-node (18.19.0.0-x86_64-linux)
+    libv8-node (18.19.0.0-x86_64-linux-musl)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -325,18 +326,6 @@ GEM
     puma (6.6.0)
       nio4r (~> 2.0)
     puppet (8.10.0)
-      concurrent-ruby (~> 1.0)
-      deep_merge (~> 1.0)
-      facter (>= 4.3.0, < 5)
-      fast_gettext (>= 2.1, < 4)
-      getoptlong (~> 0.2.0)
-      locale (~> 2.1)
-      multi_json (~> 1.13)
-      puppet-resource_api (~> 1.5)
-      scanf (~> 1.0)
-      semantic_puppet (~> 1.0)
-    puppet (8.10.0-universal-darwin)
-      CFPropertyList (>= 3.0.6, < 4)
       concurrent-ruby (~> 1.0)
       deep_merge (~> 1.0)
       facter (>= 4.3.0, < 5)
@@ -512,10 +501,21 @@ GEM
     zeitwerk (2.7.1)
 
 PLATFORMS
-  arm64-darwin
+  aarch64-linux
+  aarch64-linux-gnu
+  aarch64-linux-musl
+  arm-linux
+  arm-linux-gnu
+  arm-linux-gnueabihf
+  arm-linux-musl
+  arm-linux-musleabihf
   ruby
-  x86_64-darwin
+  x86-linux
+  x86-linux-gnu
+  x86-linux-musl
   x86_64-linux
+  x86_64-linux-gnu
+  x86_64-linux-musl
 
 DEPENDENCIES
   bcrypt (~> 3.1.20)
@@ -536,10 +536,12 @@ DEPENDENCIES
   git
   gitable
   github_changelog_generator (>= 1.16.1)
+  google-protobuf
   hiera-eyaml
   importmap-rails
+  libv8-node (~> 18.19.0.0)
   listen (~> 3.9)
-  mini_racer
+  mini_racer (~> 0.16.0)
   net-ldap
   ostruct (~> 0.6.1)
   puma (~> 6.4)
