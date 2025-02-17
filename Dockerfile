@@ -1,4 +1,4 @@
-FROM docker.io/library/ruby:3.4.1-alpine3.21 AS builder
+FROM docker.io/library/ruby:3.4.2-alpine3.21 AS builder
 
 RUN apk update \
     && apk upgrade \
@@ -21,7 +21,7 @@ RUN bundle check || (bundle config set --local without 'development test release
 
 ###############################################################################
 
-FROM docker.io/library/ruby:3.4.1-alpine3.21 AS final
+FROM docker.io/library/ruby:3.4.2-alpine3.21 AS final
 
 RUN apk update \
     && apk upgrade \
