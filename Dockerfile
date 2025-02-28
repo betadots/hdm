@@ -8,6 +8,7 @@ RUN apk update \
         alpine-sdk \
         libxml2-dev \
         libxslt-dev \
+        yaml-dev \
         tzdata \
         bash
 
@@ -29,6 +30,7 @@ RUN apk update \
         git \
         sqlite \
         tzdata \
+        libstdc++ \
         bash
 
 ENV APP_HOME=/hdm
