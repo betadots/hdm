@@ -24,6 +24,15 @@ RUN bundle check || (bundle config set --local without 'development test release
 
 FROM docker.io/library/ruby:3.4.2-alpine3.21 AS final
 
+LABEL org.label-schema.maintainer="betadots GmbH" \
+      org.label-schema.vendor="betadots GmbH" \
+      org.label-schema.url="https://github.com/betadots/hdm" \
+      org.label-schema.license="AGPLv3+" \
+      org.label-schema.vcs-url="https://github.com/betadots/hdm" \
+      org.label-schema.schema-version="1.0" \
+      org.label-schema.dockerfile="/Dockerfile" \
+      org.label-schema.name="HDM - Hiera Data Manager"
+
 RUN apk update \
     && apk upgrade \
     && apk add --no-cache --update \
@@ -46,5 +55,8 @@ WORKDIR $APP_HOME
 # copy only the needed files from the builder image
 COPY --from=builder /usr/local/bundle /usr/local/bundle
 COPY --from=builder $APP_HOME $APP_HOME
+
+COPY Dockerfile /
+COPY VERSION /
 
 CMD ["sh", "-c", "/hdm/bin/entry.sh ${HDM_PORT} ${HDM_HOST}"]
