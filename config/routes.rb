@@ -18,10 +18,12 @@ Rails.application.routes.draw do
   end
 
   resources :environments, only: :index do
-    resources :hierarchies, only: [] do
-      resources :decrypted_values, only: [:create]
+    resources :layers, only: [] do
+      resources :hierarchies, only: [] do
+        resources :decrypted_values, only: [:create]
 
-      resources :encrypted_values, only: [:create]
+        resources :encrypted_values, only: [:create]
+      end
     end
 
     resources :keys, only: [] do
