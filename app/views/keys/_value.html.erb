@@ -1,5 +1,5 @@
 <% if file.has_differing_value_in_original_environment?(node: @node, key: @key) %>
-  <%= render "shared/tabbed_diff", dom_id: dom_id(file), original_value:file.value_from_original_environment(key: @key).value, current_value: value.value do %>
+  <%= render "shared/tabbed_diff", dom_id: dom_id(file), original_value: file.value_from_original_environment(node: @node, key: @key).value, current_value: value.value do %>
     <%= render "form", file: file, value: value %>
   <% end %>
 <% else %>
