@@ -1,4 +1,6 @@
 class Node < HieraModel
+  ENVIRONMENT_PRIORITY = %w[catalog_environment report_environment facts_environment].freeze
+
   attribute :hostname, :string
   attribute :environment
   alias name hostname
@@ -7,7 +9,8 @@ class Node < HieraModel
     node_records = PuppetDbClient.nodes
     environments = Environment.all.group_by(&:name)
     node_records.map do |node_record|
-      env = environments[node_record["catalog_environment"]].first
+      env_name = node_record.values_at(*ENVIRONMENT_PRIORITY).compact.first
+      env = environments[env_name].first
       new(hostname: node_record["certname"], environment: env)
     end
   end
