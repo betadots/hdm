@@ -3,7 +3,8 @@ class DecryptedValuesController < ApplicationController
 
   def create
     authorize! :decrypt, Value
-    hierarchy = Hierarchy.find(@environment, params[:hierarchy_id])
+    layer = @environment.find_layer(name: params[:layer_id])
+    hierarchy = Hierarchy.find(layer: layer, name: params[:hierarchy_id])
     @decrypted_value = hierarchy.decrypt_value(params[:value].chomp)
 
     render plain: @decrypted_value
