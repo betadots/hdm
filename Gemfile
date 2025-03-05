@@ -62,11 +62,11 @@ group :test do
 end
 
 group :linter do
-  gem 'rubocop', '~> 1.71.2'
+  gem 'rubocop', '~> 1.73.2'
   gem 'rubocop-capybara', '~> 2.21.0'
-  gem 'rubocop-performance', '~> 1.23.1'
-  gem 'rubocop-rails', '~> 2.29.1'
-  gem 'rubocop-rake', '~> 0.6.0'
+  gem 'rubocop-performance', '~> 1.24.0'
+  gem 'rubocop-rails', '~> 2.30.3'
+  gem 'rubocop-rake', '~> 0.7.1'
 end
 
 group :release do
@@ -80,8 +80,8 @@ gem 'git'
 gem 'gitable', require: "gitable/uri"
 
 # dependencies & sec fixes
-gem 'mini_racer', '~> 0.16.0'    # minimal Google V8 JS engine for execjs
-gem 'libv8-node', '~> 18.19.0.0' # V8 JS engine
+gem 'mini_racer', '~> 0.18.0'    # minimal Google V8 JS engine for execjs
+gem 'libv8-node', '~> 23.6.1.0' # V8 JS engine
 
 # Alpine specific
 #
