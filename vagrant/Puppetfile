@@ -1,7 +1,7 @@
 # mod 'golja-gnupg',  '1.2.3'
 mod 'gnupg', :git => 'https://github.com/flepoutre/golja-gnupg.git', :branch => 'master'
 mod 'ipcrm-echo', '0.1.8'
-mod 'puppet-hdm', :git => 'https://github.com/voxpupuli/puppet-hdm.git', :branch => 'fix_rvm'
+mod 'puppet-hdm', :git => 'https://github.com/voxpupuli/puppet-hdm.git', :branch => 'master'
 mod 'puppet-rvm', '3.0.0'
 mod 'puppet-systemd', '8.1.0'
 mod 'puppetlabs-apt', '10.0.1'
