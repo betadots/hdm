@@ -6,7 +6,7 @@ default:
   box: boxomatic/centos-stream-9 # Box used for the VM
   # box: debian/bookworm64 # Box used for the VM
   cpu: 1 # Number of vCPU to assign to the VM
-  domain: workshop.betadots.training # Name of DNS domain for the created machines
+  domain: hdm.betadots.training # Name of DNS domain for the created machines
   script: './centos_script.sh'
   # script: './debian_script.sh'
 

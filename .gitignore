@@ -54,6 +54,6 @@
 
 # Vagrant
 /.vagrant
-
+vagrant/.vagrant
 /app/assets/builds/*
 !/app/assets/builds/.keep

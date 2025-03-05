@@ -4,7 +4,9 @@ classes:
   '91_puppetdb_class': 'puppetdb'
   '92_puppetdb_master_class': 'puppetdb::master::config'
 
-hdm::version: 'v3.1.0'
+hdm::version: 'main'
+hdm::method: 'rvm'
+hdm::ruby_version: '3.4.2'
 hdm::disable_authentication: true
 postgresql::globals::manage_dnf_module: false
 puppetdb::manage_firewall: false
