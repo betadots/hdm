@@ -13,7 +13,7 @@ echo "DNF update"
 sudo dnf -y update
 
 echo "installing some tools: tree vim net-tools"
-sudo dnf -y install tree vim net-tools
+sudo dnf -y install tree vim net-tools git
 
 echo "Katello installation part"
 sudo dnf -y install foreman-installer
@@ -32,22 +32,29 @@ sudo foreman-installer \
   --enable-foreman-plugin-puppetdb \
   --foreman-initial-admin-password='betadots_foreman_2024'
 
+echo "Installing r10k"
+sudo /opt/puppetlabs/puppet/bin/gem install r10k --no-document
 echo "Installing puppet modules"
-sudo /opt/puppetlabs/puppet/bin/puppet module install puppetlabs-puppetdb
-sudo /opt/puppetlabs/puppet/bin/puppet module install puppet-hdm --ignore-dependencies
-sudo /opt/puppetlabs/puppet/bin/puppet module install puppetlabs-docker --ignore-dependencies
-sudo /opt/puppetlabs/puppet/bin/puppet module install ipcrm-echo --ignore-dependencies
+sudo mkdir -p /etc/puppetlabs/code/environments/production
+sudo cp /vagrant/Puppetfile /etc/puppetlabs/code/environments/production/
+pushd /etc/puppetlabs/code/environments/production
+sudo /opt/puppetlabs/puppet/bin/r10k puppetfile install -v
+popd
 
 echo "Preparing Puppet Environment"
 sudo mkdir -p /etc/puppetlabs/code/environments/production/data/nodes
 sudo mkdir -p /etc/puppetlabs/code/environments/production/manifests
 sudo cp /vagrant/hdm/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp
-sudo cp /vagrant/hdm/centos_data.yaml /etc/puppetlabs/code/environments/production/data/nodes/puppet.workshop.betadots.training.yaml
+sudo cp /vagrant/hdm/centos_data.yaml /etc/puppetlabs/code/environments/production/data/nodes/puppet.hdm.betadots.training.yaml
 sudo cp /vagrant/hdm/common_data.yaml /etc/puppetlabs/code/environments/production/data/common.yaml
+
+echo "preparing hdm for git"
+sudo mkdir -p /etc/hdm
+sudo git config --global --add safe.directory /etc/hdm
 
 echo "Running Puppet"
 sudo /opt/puppetlabs/puppet/bin/puppet agent -t
-sudo puppet config set --section main reports foreman,puppetdb
+sudo /opt/puppetlabs/puppet/bin/puppet config set --section main reports foreman,puppetdb
 sudo systemctl restart puppetserver
 
 echo "Installing Foreman HDM"
@@ -60,7 +67,7 @@ echo "Jetzt einloggen, root user werden"
 echo "vagrant ssh puppet.betadots.training"
 echo "sudo -i"
 echo "### HDM:"
-echo "Im Browser: https://puppet.betadots.training"
+echo "Im Browser: https://puppet.hdm.betadots.training"
 echo "Login: admin, Passwort: betadots_foreman_2024"
 echo " -> Infrastructure -> Smart Proxies -> Refresh"
-echo " -> Hosts -> All Hosts -> puppet.betadots.training -> Edit -> HDM Smart Proxy hinzufügen."
+echo " -> Hosts -> All Hosts -> puppet.hdm.betadots.training -> Edit -> HDM Smart Proxy hinzufügen."
