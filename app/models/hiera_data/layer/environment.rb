@@ -6,7 +6,9 @@ class HieraData
         @environment = HieraData::Environment.new(name: environment)
       end
 
+      # rubocop:disable Rails/Delegate
       def base_path = @environment.base_path
+      # rubocop:enable Rails/Delegate
 
       def name = "environment"
 
