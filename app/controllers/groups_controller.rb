@@ -52,8 +52,7 @@ class GroupsController < ApplicationController
 
   def group_params
     permitted_params = params
-                       .require(:group)
-                       .permit(:name, :restrict, rules: [])
+                       .expect(group: [:name, :restrict, { rules: [] }])
     permitted_params[:rules] ||= []
     permitted_params
   end

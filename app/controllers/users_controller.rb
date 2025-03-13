@@ -78,12 +78,12 @@ class UsersController < ApplicationController
       # The last admin can't change his/her role to a non admin role.
       #
       if User.admins.count == 1 && current_user == @user
-        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+        params.expect(user: [:first_name, :last_name, :email, :password, :password_confirmation])
       else
         if current_user.try(:admin?)
-          params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role)
+          params.expect(user: [:first_name, :last_name, :email, :password, :password_confirmation, :role])
         else
-          params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+          params.expect(user: [:first_name, :last_name, :email, :password, :password_confirmation])
         end
       end
     end

@@ -19,6 +19,6 @@ class GroupMembershipsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(user_ids: [])
+    params.expect(group: [user_ids: []])
   end
 end
