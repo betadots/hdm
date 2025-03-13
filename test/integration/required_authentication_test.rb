@@ -31,12 +31,12 @@ class RequiredAuthenticationTest < ActionDispatch::IntegrationTest
 
     test "authentication requirements for decrypted values" do
       authentication_required_for :post,
-        environment_hierarchy_decrypted_values_path("development", "Eyaml hierarchy")
+        environment_layer_hierarchy_decrypted_values_path("development", "environment", "Eyaml hierarchy")
     end
 
     test "authentication requirements for encrypted values" do
       authentication_required_for :post,
-        environment_hierarchy_encrypted_values_path("development", "Eyaml hierarchy")
+        environment_layer_hierarchy_encrypted_values_path("development", "environment", "Eyaml hierarchy")
     end
 
     test "authentication requirements for users" do

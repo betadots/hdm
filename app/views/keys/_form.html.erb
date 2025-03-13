@@ -4,8 +4,8 @@
   data: ({
     controller: "encryption",
     action: "reset->encryption#reset",
-    encryption_decrypt_url_value: environment_hierarchy_decrypted_values_path(@environment, hierarchy),
-    encryption_encrypt_url_value: environment_hierarchy_encrypted_values_path(@environment, hierarchy)
+    encryption_decrypt_url_value: environment_layer_hierarchy_decrypted_values_path(@environment, hierarchy.layer, hierarchy),
+    encryption_encrypt_url_value: environment_layer_hierarchy_encrypted_values_path(@environment, hierarchy.layer, hierarchy)
   } if hierarchy.encryption_possible?) do |f| %>
   <%= hidden_field_tag :hierarchy, hierarchy.name %>
   <%= hidden_field_tag :path, file.path %>
