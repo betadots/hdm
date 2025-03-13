@@ -49,7 +49,7 @@ class DataFile < HieraModel
   end
 
   def id
-    [node&.name, path].join("-").parameterize
+    path.parameterize
   end
 
   def has_differing_value_in_original_environment?(node:, key:)
