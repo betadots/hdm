@@ -21,6 +21,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Add VERSION file
+        run: git describe > VERSION
+
       - name: Build CI container
         uses: docker/build-push-action@v6
         with:
