@@ -56,6 +56,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{github.event.pull_request.head.ref}}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+
+      - name: Add VERSION file
+        run: |
+          git describe > VERSION
 
       - name: Build Docker image
         uses: docker/build-push-action@v6
