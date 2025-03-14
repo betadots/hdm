@@ -27,12 +27,35 @@ jobs:
       - name: Add VERSION file
         run: git describe > VERSION
 
-      - uses: voxpupuli/gha-build-and-publish-a-container@v2
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      # needed for multi-arch builds
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to the GitHub container registry
+        uses: docker/login-action@v3
         with:
-          registry_password: ${{ secrets.GITHUB_TOKEN }}
-          build_arch: linux/amd64,linux/arm64
-          docker_username: ${{ vars.DOCKERHUB_USER }}
-          docker_password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Log in to the Docker container registry
+        uses: docker/login-action@v3
+        with:
+          registry: docker.io
+          username: ${{ vars.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          provenance: true
+          push: true
+          sbom: true
           tags: |
             ghcr.io/${{ github.repository }}:${{ env.TAG }}
             ghcr.io/${{ github.repository }}:latest
