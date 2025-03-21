@@ -80,8 +80,16 @@ gem 'git'
 gem 'gitable', require: "gitable/uri"
 
 # dependencies & sec fixes
-gem 'mini_racer', '~> 0.18.0'    # minimal Google V8 JS engine for execjs
-gem 'libv8-node', '~> 23.6.1.0' # V8 JS engine
+# add an if if arch is arm
+if RUBY_PLATFORM.include?("x86_64")
+  gem 'mini_racer', '~> 0.18.0'   # minimal Google V8 JS engine for execjs
+  gem 'libv8-node', '~> 23.6.1.0' # V8 JS engine
+else
+  # see https://github.com/rubyjs/mini_racer/issues/344
+  gem 'mini_racer', '~> 0.16.0'    # minimal Google V8 JS engine for execjs
+  # see https://github.com/rubyjs/libv8-node/issues/60
+  gem 'libv8-node', '~> 18.19.0.0' # V8 JS engine
+end
 
 # Alpine specific
 #
