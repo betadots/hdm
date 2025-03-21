@@ -45,8 +45,8 @@ jobs:
     - name: Run tests
       run: bundle exec rake test:all
 
-  build_container_image_arm64:
-    name: 'Built test container image for ARM64'
+  build_container_arm64:
+    name: 'Build test container for ARM64'
     runs-on: ubuntu-24.04-arm
     permissions:
       actions: read
@@ -64,7 +64,7 @@ jobs:
         run: |
           git describe > VERSION
 
-      - name: Build container image
+      - name: Build container
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -72,8 +72,8 @@ jobs:
           push: false
           platforms: linux/arm64
 
-  build_container_image_x86:
-    name: 'Built test container image on x86'
+  build_container_x86:
+    name: 'Build test container on x86'
     runs-on: ubuntu-24.04
     permissions:
       actions: read
@@ -91,7 +91,7 @@ jobs:
         run: |
           git describe > VERSION
 
-      - name: Build Docker image
+      - name: Build container
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -103,8 +103,8 @@ jobs:
       - shellcheck
       - rubocop
       - unit_tests
-      - build_container_image_arm64
-      - build_container_image_x86
+      - build_container_arm64
+      - build_container_x86
     runs-on: ubuntu-latest
     name: Test suite
     steps:
