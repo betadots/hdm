@@ -4,6 +4,59 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v3.2.0](https://github.com/betadots/hdm/tree/v3.2.0) (2025-03-24)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v3.1.0...v3.2.0)
+
+**Implemented enhancements:**
+
+- Update to Ruby 3.4.2 [\#528](https://github.com/betadots/hdm/issues/528)
+- Upgrade Rails to 8.x.y [\#527](https://github.com/betadots/hdm/issues/527)
+- Ensure git version is shown in footer, also in container [\#518](https://github.com/betadots/hdm/issues/518)
+- Adjust diff form to new structure [\#540](https://github.com/betadots/hdm/pull/540) ([oneiros](https://github.com/oneiros))
+- Pick node environment from three different options [\#538](https://github.com/betadots/hdm/pull/538) ([oneiros](https://github.com/oneiros))
+- Update to rails 8 [\#537](https://github.com/betadots/hdm/pull/537) ([oneiros](https://github.com/oneiros))
+- Add configurable node info section to page headers [\#498](https://github.com/betadots/hdm/pull/498) ([oneiros](https://github.com/oneiros))
+- Ignore `classifier_data` hierarchies [\#497](https://github.com/betadots/hdm/pull/497) ([oneiros](https://github.com/oneiros))
+- feat: switch to alpine linux [\#416](https://github.com/betadots/hdm/pull/416) ([rwaffen](https://github.com/rwaffen))
+
+**Fixed bugs:**
+
+- mini\_racer cannot find libv8-node, breaks build [\#553](https://github.com/betadots/hdm/issues/553)
+- HDM fails to show data from foreign environment [\#512](https://github.com/betadots/hdm/issues/512)
+- HDM fails when using encryption [\#507](https://github.com/betadots/hdm/issues/507)
+- HDM fails to load Node data on Open Source Puppet 8 [\#503](https://github.com/betadots/hdm/issues/503)
+- fix: revert back on arm to older versions due to musl incompatibility [\#554](https://github.com/betadots/hdm/pull/554) ([rwaffen](https://github.com/rwaffen))
+- Fix de- and encryption controllers [\#539](https://github.com/betadots/hdm/pull/539) ([oneiros](https://github.com/oneiros))
+- fix: ensure git version is shown in footer [\#523](https://github.com/betadots/hdm/pull/523) ([rwaffen](https://github.com/rwaffen))
+
+**Closed issues:**
+
+- Provide a vagrant environment which runs HDM in development mode \(rvm\) [\#517](https://github.com/betadots/hdm/issues/517)
+- On Puppet Enterprise: unknown backend classifier\_data  [\#489](https://github.com/betadots/hdm/issues/489)
+- fix rubocop 1.69.0 offenses [\#482](https://github.com/betadots/hdm/issues/482)
+- Name-aliases for displaying nodes [\#473](https://github.com/betadots/hdm/issues/473)
+
+**Merged pull requests:**
+
+- build\(deps\): bump nokogiri from 1.18.3 to 1.18.4 [\#556](https://github.com/betadots/hdm/pull/556) ([dependabot[bot]](https://github.com/apps/dependabot))
+- fix: disable rubocop Rails/Delegate. its to complicated and does not make sense here [\#550](https://github.com/betadots/hdm/pull/550) ([rwaffen](https://github.com/rwaffen))
+- build\(deps\): bump the ruby group across 1 directory with 10 updates [\#549](https://github.com/betadots/hdm/pull/549) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump ruby-saml from 1.17.0 to 1.18.0 [\#546](https://github.com/betadots/hdm/pull/546) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump json from 2.10.1 to 2.10.2 [\#545](https://github.com/betadots/hdm/pull/545) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump rack from 3.1.10 to 3.1.12 [\#543](https://github.com/betadots/hdm/pull/543) ([dependabot[bot]](https://github.com/apps/dependabot))
+- rvm vagrant updates [\#536](https://github.com/betadots/hdm/pull/536) ([tuxmea](https://github.com/tuxmea))
+- build\(deps\): bump nokogiri from 1.18.2 to 1.18.3 [\#530](https://github.com/betadots/hdm/pull/530) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump library/ruby from 3.4.1-alpine3.21 to 3.4.2-alpine3.21 [\#525](https://github.com/betadots/hdm/pull/525) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump the ruby group across 1 directory with 2 updates [\#522](https://github.com/betadots/hdm/pull/522) ([dependabot[bot]](https://github.com/apps/dependabot))
+- feat: disable Style/SafeNavigationChainLength [\#520](https://github.com/betadots/hdm/pull/520) ([rwaffen](https://github.com/rwaffen))
+- feat: add Vagrant setup for testing and development [\#519](https://github.com/betadots/hdm/pull/519) ([tuxmea](https://github.com/tuxmea))
+- build\(deps\): bump rack from 3.1.8 to 3.1.10 [\#516](https://github.com/betadots/hdm/pull/516) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump net-imap from 0.5.0 to 0.5.6 [\#515](https://github.com/betadots/hdm/pull/515) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump ruby from 3.3.5-slim-bookworm to 3.4.1-slim-bookworm [\#496](https://github.com/betadots/hdm/pull/496) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump actionpack from 7.2.1.1 to 7.2.2.1 [\#491](https://github.com/betadots/hdm/pull/491) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump rails-html-sanitizer from 1.6.0 to 1.6.1 [\#483](https://github.com/betadots/hdm/pull/483) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v3.1.0](https://github.com/betadots/hdm/tree/v3.1.0) (2024-12-03)
 
 [Full Changelog](https://github.com/betadots/hdm/compare/v3.0.0...v3.1.0)
