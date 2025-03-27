@@ -8,6 +8,7 @@ hdm::version: 'main'
 hdm::method: 'rvm'
 hdm::ruby_version: '3.4.2'
 hdm::disable_authentication: true
+hdm::allow_encryption: true
 postgresql::globals::manage_dnf_module: false
 puppetdb::manage_firewall: false
 puppetdb::postgres_version: '13'
