@@ -1,8 +1,9 @@
 ---
+name: 🚦 CI
+
 on:
   - pull_request
 
-name: 🚦 CI
 
 jobs:
   shellcheck:
@@ -45,13 +46,16 @@ jobs:
     - name: Run tests
       run: bundle exec rake test:all
 
-  build_container_arm64:
-    name: 'Build test container for ARM64'
-    runs-on: ubuntu-24.04-arm
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
+  build_container:
+    name: 'Build CI container'
+    runs-on: ${{ matrix.builder }}
+    strategy:
+      matrix:
+        include:
+          - builder: ubuntu-24.04
+            platform: amd64
+          - builder: ubuntu-24.04-arm
+            platform: arm64
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -70,41 +74,14 @@ jobs:
           context: .
           tags: 'ci/hdm:${{ github.sha }}'
           push: false
-          platforms: linux/arm64
-
-  build_container_x86:
-    name: 'Build test container on x86'
-    runs-on: ubuntu-24.04
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{github.event.pull_request.head.ref}}
-          repository: ${{github.event.pull_request.head.repo.full_name}}
-
-      - name: Add VERSION file
-        run: |
-          git describe > VERSION
-
-      - name: Build container
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          tags: 'ci/hdm:${{ github.sha }}'
-          push: false
+          platforms: linux/${{ matrix.platform }}
 
   tests:
     needs:
       - shellcheck
       - rubocop
       - unit_tests
-      - build_container_arm64
-      - build_container_x86
+      - build_container
     runs-on: ubuntu-latest
     name: Test suite
     steps:
