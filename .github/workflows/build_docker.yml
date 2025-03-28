@@ -112,6 +112,9 @@ jobs:
     needs:
       - create-multiarch-manifests
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Update Docker Hub Description
         uses: peter-evans/dockerhub-description@v4
         with:
