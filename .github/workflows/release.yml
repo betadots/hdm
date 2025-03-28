@@ -1,10 +1,10 @@
 ---
+name: 🚀 Release
+
 on:
   push:
     tags:
       - '*'
-
-name: Release 🚀
 
 jobs:
   release:
