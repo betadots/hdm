@@ -62,10 +62,10 @@ group :test do
 end
 
 group :linter do
-  gem 'rubocop', '~> 1.75.1'
+  gem 'rubocop', '~> 1.75.2'
   gem 'rubocop-capybara', '~> 2.22.1'
-  gem 'rubocop-performance', '~> 1.24.0'
-  gem 'rubocop-rails', '~> 2.30.3'
+  gem 'rubocop-performance', '~> 1.25.0'
+  gem 'rubocop-rails', '~> 2.31.0'
   gem 'rubocop-rake', '~> 0.7.1'
 end
 
@@ -82,11 +82,11 @@ gem 'gitable', require: "gitable/uri"
 # dependencies & sec fixes
 # add an if if arch is arm
 if RUBY_PLATFORM.include?("x86_64")
-  gem 'mini_racer', '~> 0.18.0'   # minimal Google V8 JS engine for execjs
+  gem 'mini_racer', '~> 0.18.1'   # minimal Google V8 JS engine for execjs
   gem 'libv8-node', '~> 23.6.1.0' # V8 JS engine
 else
   # see https://github.com/rubyjs/mini_racer/issues/344
-  gem 'mini_racer', '~> 0.16.0'    # minimal Google V8 JS engine for execjs
+  gem 'mini_racer', '~> 0.18.1'    # minimal Google V8 JS engine for execjs
   # see https://github.com/rubyjs/libv8-node/issues/60
   gem 'libv8-node', '~> 18.19.0.0' # V8 JS engine
 end
