@@ -11,7 +11,7 @@ gem 'sqlite3', '~> 2.1'
 gem 'puma', '~> 6.4'
 
 # Asset handling
-gem 'bootstrap', '~> 5.3.3'
+gem 'bootstrap', '~> 5.3.5'
 gem 'bootstrap-icons-helper'
 gem 'dartsass-rails'
 gem 'dartsass-sprockets'
