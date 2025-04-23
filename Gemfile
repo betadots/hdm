@@ -11,7 +11,7 @@ gem 'sqlite3', '~> 2.1'
 gem 'puma', '~> 6.4'
 
 # Asset handling
-gem 'bootstrap', '~> 5.3.3'
+gem 'bootstrap', '~> 5.3.5'
 gem 'bootstrap-icons-helper'
 gem 'dartsass-rails'
 gem 'dartsass-sprockets'
@@ -62,7 +62,7 @@ group :test do
 end
 
 group :linter do
-  gem 'rubocop', '~> 1.75.2'
+  gem 'rubocop', '~> 1.75.3'
   gem 'rubocop-capybara', '~> 2.22.1'
   gem 'rubocop-performance', '~> 1.25.0'
   gem 'rubocop-rails', '~> 2.31.0'
