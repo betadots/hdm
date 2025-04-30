@@ -103,11 +103,11 @@ GEM
     bindex (0.8.1)
     bootstrap (5.3.5)
       popper_js (>= 2.11.8, < 3)
-    bootstrap-icons (1.0.14)
+    bootstrap-icons (1.0.15)
       nokogiri (~> 1)
-    bootstrap-icons-helper (2.0.2)
+    bootstrap-icons-helper (2.0.3)
       bootstrap-icons (~> 1)
-      rails (>= 7.0)
+      rails (>= 7.1)
     breadcrumbs_on_rails (4.1.0)
       railties (>= 5.0)
     builder (3.3.0)
@@ -123,7 +123,7 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     concurrent-ruby (1.3.5)
-    connection_pool (2.5.0)
+    connection_pool (2.5.3)
     console (1.29.3)
       fiber-annotation
       fiber-local (~> 1.1)
@@ -226,7 +226,7 @@ GEM
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    json (2.10.2)
+    json (2.11.3)
     language_server-protocol (3.17.0.4)
     libv8-node (23.6.1.0)
     libv8-node (23.6.1.0-aarch64-linux)
@@ -258,7 +258,7 @@ GEM
       bigdecimal (~> 3.1)
     net-http (0.6.0)
       uri
-    net-imap (0.5.6)
+    net-imap (0.5.8)
       date
       net-protocol
     net-ldap (0.19.0)
@@ -328,7 +328,7 @@ GEM
     puppetdb-ruby (1.2.0)
       httparty
     racc (1.8.1)
-    rack (3.1.12)
+    rack (3.1.13)
     rack-session (2.1.0)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -384,7 +384,7 @@ GEM
       rails-dom-testing
       rspec-core
     rspec-support (3.13.2)
-    rubocop (1.75.3)
+    rubocop (1.75.4)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -467,7 +467,7 @@ GEM
     sqlite3 (2.6.0-x86_64-linux-musl)
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
-    stringio (3.1.6)
+    stringio (3.1.7)
     syslog (0.3.0)
       logger
     thor (1.3.2)
@@ -541,7 +541,7 @@ DEPENDENCIES
   puppetdb-ruby
   rails (~> 8.0.2)
   rspec-openapi
-  rubocop (~> 1.75.3)
+  rubocop (~> 1.75.4)
   rubocop-capybara (~> 2.22.1)
   rubocop-performance (~> 1.25.0)
   rubocop-rails (~> 2.31.0)
