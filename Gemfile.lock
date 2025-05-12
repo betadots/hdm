@@ -238,7 +238,7 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.10)
     locale (2.1.4)
     logger (1.7.0)
-    loofah (2.24.0)
+    loofah (2.24.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.8.1)
@@ -379,11 +379,11 @@ GEM
     rexml (3.4.1)
     rspec-core (3.13.3)
       rspec-support (~> 3.13.0)
-    rspec-openapi (0.18.4)
+    rspec-openapi (0.19.0)
       actionpack (>= 5.2.0)
       rails-dom-testing
       rspec-core
-    rspec-support (3.13.2)
+    rspec-support (3.13.3)
     rubocop (1.75.5)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
