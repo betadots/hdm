@@ -1,6 +1,6 @@
 # Browse Hiera Data
 
-Login as an user belonging to role regular.
+Login as an user belonging to role 'regular'.
 
 ![Login](images/login_screen.png)
 

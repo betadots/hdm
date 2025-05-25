@@ -6,17 +6,17 @@ Now that the installation is complete, the configuration with SQLite Backend fir
 
 If you have selected the ‘Create admin user’ button, you have to enter the natural name for the new admin user, consisting of first and last name, the e-mail address used as the login name and a password of at least 9 characters.
 
-![Create Admin Account](images/create_admin-2.png)
+![Credentials Admin Account](images/create_admin-2.png)
 
 Admin accounts are only authorized to manage users, not to access the hiera data. Therefore, another non-admin user has to be created, which will later be used to access hiera.
 
 ![Create User Account](images/create_user-1.png)
 
-![Create User Account](images/create_user-2.png)
+![List User Account](images/create_user-2.png)
 
 You proceed as with the admin by entering your first and last name, e-mail address and password. Here also the mail address serves as the login name. Choose 'regular' as role. If you choose admin, a second admin account will be created. This account will also not have any access to hiera.
 
-![Create User Account](images/create_user-3.png)
+![Credentials User Account](images/create_user-3.png)
 
 The menu, which can be accessed via your login name at the top right-hand corner, allows you to leave (Logout), customize your profile (Edit Profile), create a new user, switch to the user list (List users) or to the group view (List Groups).
 
