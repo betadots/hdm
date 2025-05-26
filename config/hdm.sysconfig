@@ -1,0 +1,4 @@
+SECRET_KEY_BASE=supersecret
+BIND=0.0.0.0
+PORT=3000
+ENVIRONMENT=production
