@@ -47,6 +47,13 @@ bundle config set --local with 'release'
 bundle install
 ```
 
+On Arch Linux, LTO is in the default CFLAGS, which isn't supported by the google-protobuf gem.
+You need to disable it before running `bundle install`:
+
+```shell
+bundle config --local build.google-protobuf "-- --with-cflags='$(ruby -r rbconfig -e 'print RbConfig::CONFIG["CFLAGS"]' | sed -e 's/-Werror=format-security//' -e 's/-flto=auto/-fno-lto/')' --with-ldflags='$(ruby -r rbconfig -e 'print RbConfig::CONFIG["LDFLAGS"]' | sed -e 's/-flto=auto/-fno-lto/')'"
+```
+
 Adapt and apply the configuration, see [here](02_Configuration.md) for more details.
 
 ```console
