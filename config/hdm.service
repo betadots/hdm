@@ -4,11 +4,9 @@ Requires=network.target
 
 [Service]
 Type=simple
-# User=rails
-# Group=rails
+EnvironmentFile=/etc/sysconfig/hdm
 WorkingDirectory=/opt/hdm
-# ExecStart=/bin/bash -lc 'bundle exec rails server -e production --bind 0.0.0.0 --port 80'
-ExecStart=/bin/bash -lc 'bundle exec rails server -b 0.0.0.0'
+ExecStart=/bin/bash -lc 'bundle exec rails server -e $ENVIRONMENT -b $BIND -p $PORT'
 TimeoutSec=30
 RestartSec=15s
 Restart=always
