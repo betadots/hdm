@@ -4,7 +4,32 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v3.2.0](https://github.com/betadots/hdm/tree/v3.2.0) (2025-03-24)
+## [v3.3.0](https://github.com/betadots/hdm/tree/v3.3.0) (2025-05-28)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v3.2.0...v3.3.0)
+
+**Implemented enhancements:**
+
+- feat: update to ruby 3.4.4 [\#594](https://github.com/betadots/hdm/pull/594) ([rwaffen](https://github.com/rwaffen))
+
+**Merged pull requests:**
+
+- Add new documentation [\#592](https://github.com/betadots/hdm/pull/592) ([lbetz](https://github.com/lbetz))
+- build\(deps-dev\): bump selenium-webdriver from 4.32.0 to 4.33.0 in the ruby group [\#590](https://github.com/betadots/hdm/pull/590) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 3 updates [\#587](https://github.com/betadots/hdm/pull/587) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group with 3 updates [\#584](https://github.com/betadots/hdm/pull/584) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump rspec-openapi from 0.18.4 to 0.19.0 in the ruby group [\#583](https://github.com/betadots/hdm/pull/583) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump rack-session from 2.1.0 to 2.1.1 [\#581](https://github.com/betadots/hdm/pull/581) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 3 updates [\#579](https://github.com/betadots/hdm/pull/579) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 2 updates [\#574](https://github.com/betadots/hdm/pull/574) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump nokogiri from 1.18.7 to 1.18.8 [\#573](https://github.com/betadots/hdm/pull/573) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 6 updates [\#569](https://github.com/betadots/hdm/pull/569) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump faraday-retry from 2.2.1 to 2.3.0 in the ruby group [\#563](https://github.com/betadots/hdm/pull/563) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump byebug from 11.1.3 to 12.0.0 [\#562](https://github.com/betadots/hdm/pull/562) ([dependabot[bot]](https://github.com/apps/dependabot))
+- enable hdm encryption [\#559](https://github.com/betadots/hdm/pull/559) ([tuxmea](https://github.com/tuxmea))
+- build\(deps\): bump the ruby group across 1 directory with 3 updates [\#558](https://github.com/betadots/hdm/pull/558) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v3.2.0](https://github.com/betadots/hdm/tree/v3.2.0) (2025-03-26)
 
 [Full Changelog](https://github.com/betadots/hdm/compare/v3.1.0...v3.2.0)
 
