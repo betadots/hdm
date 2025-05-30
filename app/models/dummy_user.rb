@@ -7,7 +7,7 @@ class DummyUser
     nil
   end
 
-  def email
+  def username
     "anonymous"
   end
 

@@ -6,8 +6,8 @@ module HasGroups
     has_many :groups, through: :group_memberships
   end
 
-  def full_name_with_email
-    "#{first_name} #{last_name} <#{email}>"
+  def full_name_with_username
+    "#{first_name} #{last_name} (#{username})"
   end
 
   def may_access?(record)
