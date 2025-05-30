@@ -5,9 +5,9 @@ class User < ApplicationRecord
 
   has_secure_password validations: false
 
-  before_validation :downcase_email, on: [:create, :update]
+  normalizes :username, with: ->(username) { username.strip.downcase }
 
-  validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :first_name, :last_name, presence: true
   validates :password, length: { minimum: PASSWORD_MIN_LENGTH },
                        confirmation: true,
@@ -36,11 +36,5 @@ class User < ApplicationRecord
 
   def authenticate(given_password)
     password_digest.present? && super
-  end
-
-  private
-
-  def downcase_email
-    self.email = email.downcase
   end
 end

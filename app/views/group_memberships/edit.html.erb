@@ -3,10 +3,10 @@
 
   <%= form_with model: @group, url: group_group_memberships_path(@group), remote: false do |form| %>
     <div class="row">
-      <% User.regular.order(:email).in_groups(3) do |users| %>
+      <% User.regular.order(:username).in_groups(3) do |users| %>
         <div class="col-4">
           <ul class="list-unstyled">
-            <%= form.collection_check_boxes :user_ids, users.compact, :id, :full_name_with_email do |b| %>
+            <%= form.collection_check_boxes :user_ids, users.compact, :id, :full_name_with_username do |b| %>
               <li class="m-2">
                 <%= b.check_box %>
                 <%= b.label %>

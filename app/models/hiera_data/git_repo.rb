@@ -46,7 +46,7 @@ class HieraData
       message = "#{prefix} value via hdm"
       if user = Current.user
         message << "\n\n"
-        message << "hdm user: #{user.full_name} <#{user.email}>"
+        message << "hdm user: #{user.full_name}"
       end
       message
     end
