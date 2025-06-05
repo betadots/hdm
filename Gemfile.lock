@@ -350,7 +350,7 @@ GEM
     puppetdb-ruby (1.2.0)
       httparty
     racc (1.8.1)
-    rack (3.1.15)
+    rack (3.1.16)
     rack-session (2.1.1)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
