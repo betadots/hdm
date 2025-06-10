@@ -6,7 +6,7 @@ ruby file: '.ruby-version'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 8.0.2'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 2.1'
+gem 'sqlite3', '~> 2.7'
 # Use Puma as the app server
 gem 'puma', '~> 6.4'
 
@@ -62,7 +62,7 @@ group :test do
 end
 
 group :linter do
-  gem 'rubocop', '~> 1.75.7'
+  gem 'rubocop', '~> 1.76.1'
   gem 'rubocop-capybara', '~> 2.22.1'
   gem 'rubocop-performance', '~> 1.25.0'
   gem 'rubocop-rails', '~> 2.32.0'
@@ -80,9 +80,9 @@ gem 'git'
 gem 'gitable', require: "gitable/uri"
 
 # see https://github.com/rubyjs/mini_racer/issues/344
-gem 'mini_racer', '~> 0.16.0'    # minimal Google V8 JS engine for execjs
+gem 'mini_racer', '~> 0.18.0'    # minimal Google V8 JS engine for execjs
 # see https://github.com/rubyjs/libv8-node/issues/60
-gem 'libv8-node', '~> 18.19.0.0' # V8 JS engine
+gem 'libv8-node', '~> 23.6.1.0' # V8 JS engine
 
 # Alpine specific
 #
