@@ -5,7 +5,7 @@
       <tr>
         <th>First name</th>
         <th>Last name</th>
-        <th>Email</th>
+        <th>Username</th>
         <th>Role</th>
         <th></th>
       </tr>
@@ -15,18 +15,18 @@
         <tr>
           <td>
             <%= user.first_name %>
-          </td>      
+          </td>
           <td>
             <%= user.last_name %>
-          </td>      
+          </td>
           <td>
-            <%= user.email %>
-          </td>      
+            <%= user.username %>
+          </td>
           <td>
             <span class="badge <%= role_badge_color(user.role) %>">
               <%= user.role %>
             </span>
-          </td>      
+          </td>
           <td>
             <% if can? :show, user %>
               <%= link_to user, class:"btn btn-sm btn-light min-width-btn" do %>

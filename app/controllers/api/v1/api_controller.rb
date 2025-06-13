@@ -17,8 +17,8 @@ module Api
           if Rails.configuration.hdm.authentication_disabled
             DummyUser.new
           else
-            authenticate_with_http_basic do |email, password|
-              u = User.api.find_by(email: email.downcase)
+            authenticate_with_http_basic do |username, password|
+              u = User.api.find_by(username: username.downcase)
               u&.authenticate(password)
             end
           end
