@@ -40,7 +40,7 @@ class UsersController < ApplicationController
     end
 
     if @user.save
-      if User.count == 1
+      if User.one?
         session[:user_id] = @user.id
         redirect_to root_url, notice: "Welcome to the system! You are logged in with admin privileges."
       else
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
     def user_params
       # The last admin can't change his/her role to a non admin role.
       #
-      if User.admins.count == 1 && current_user == @user
+      if User.admins.one? && current_user == @user
         params.expect(user: [:first_name, :last_name, :email, :password, :password_confirmation])
       else
         if current_user.try(:admin?)

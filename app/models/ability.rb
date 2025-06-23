@@ -38,7 +38,7 @@ class Ability
       return if user.blank?
 
       if user.admin?
-        if User.admins.count > 1
+        if User.admins.many?
           can :manage, User, id: user.id
         else
           can [:read, :edit, :update], User, id: user.id
