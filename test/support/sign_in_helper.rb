@@ -1,6 +1,6 @@
 module SignInHelper
   def sign_in_as(user, password: "password")
-    post sessions_path(email: user.email, password:)
+    post sessions_path(username: user.username, password:)
     follow_redirect!
   end
 
@@ -8,7 +8,7 @@ module SignInHelper
     password = "apiuser23"
     user ||= FactoryBot.create(:user, :api, password:)
     authorization = ActionController::HttpAuthentication::Basic
-                    .encode_credentials(user.email, password)
+                    .encode_credentials(user.username, password)
     { 'HTTP_AUTHORIZATION' => authorization }
   end
 end

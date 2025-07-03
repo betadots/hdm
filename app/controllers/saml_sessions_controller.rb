@@ -27,7 +27,7 @@ class SamlSessionsController < ApplicationController
   private
 
   def find_or_create_user(saml_response)
-    User.find_or_create_by!(email: saml_response.nameid) do |user|
+    User.find_or_create_by!(username: saml_response.nameid) do |user|
       user.first_name = "SAML"
       user.last_name = "User"
     end

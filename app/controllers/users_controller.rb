@@ -8,13 +8,13 @@ class UsersController < ApplicationController
   # GET /users
   def index
     add_breadcrumb "Users", :users_path
-    @users = @users.order(:email)
+    @users = @users.order(:username)
   end
 
   # GET /users/1
   def show
     add_breadcrumb "Users", :users_path
-    add_breadcrumb @user.email, user_path(@user)
+    add_breadcrumb @user.username, user_path(@user)
   end
 
   # GET /users/new
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     add_breadcrumb "Users", :users_path
-    add_breadcrumb @user.email, user_path(@user)
+    add_breadcrumb @user.username, user_path(@user)
     add_breadcrumb "Edit", edit_user_path(@user)
   end
 
@@ -78,12 +78,12 @@ class UsersController < ApplicationController
       # The last admin can't change his/her role to a non admin role.
       #
       if User.admins.one? && current_user == @user
-        params.expect(user: [:first_name, :last_name, :email, :password, :password_confirmation])
+        params.expect(user: [:first_name, :last_name, :username, :password, :password_confirmation])
       else
         if current_user.try(:admin?)
-          params.expect(user: [:first_name, :last_name, :email, :password, :password_confirmation, :role])
+          params.expect(user: [:first_name, :last_name, :username, :password, :password_confirmation, :role])
         else
-          params.expect(user: [:first_name, :last_name, :email, :password, :password_confirmation])
+          params.expect(user: [:first_name, :last_name, :username, :password, :password_confirmation])
         end
       end
     end
