@@ -66,8 +66,13 @@ production:
 #     host: localhost
 #     port: 389
 #     base_dn: "ou=hdm,dc=nodomain"
-#     bind_dn: "cn=admin,dc=nodomain"
-#     bind_dn_password: "openldap"
+#     bind_dn: "cn=admin,dc=nodomain" # Optional
+#     bind_dn_password: "openldap" # Optional
+#     username_attribute: "mail" # Optional, "mail" is the default
+#     filter: "(gid=23)" # Optional
+#     ssl_mode: "simple" # Optional, can also be "starttls"
+#     ca_file: "/etc/ssl/certs/my_ca.pem" # Optional
+#     ssl_verify: true # Optional, defaults to true, only set to false if you really know what you are doing
 
 # Example for SAML SSO authentication
 # production:
