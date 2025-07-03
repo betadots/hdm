@@ -15,7 +15,7 @@
           <p></p>
         <% else %>
           <h2>First Step: Create a User</h2>
-          <p>Your account (<%= current_user.email %>) has admin priviliges which allow to manage users but which do not
+          <p>Your account (<%= current_user.username %>) has admin priviliges which allow to manage users but which do not
           allow to manage the puppet configuration.</p>
           <p><strong>=> <%= link_to "Create a new user", new_user_path %></strong> who is not an admin to
           get access to the puppet configuration.</p>

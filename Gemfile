@@ -6,7 +6,7 @@ ruby file: '.ruby-version'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 8.0.2'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 2.1'
+gem 'sqlite3', '~> 2.7'
 # Use Puma as the app server
 gem 'puma', '~> 6.4'
 
@@ -31,7 +31,7 @@ gem 'faker'
 gem 'friendly_id', '~> 5.5.1'
 gem 'hiera-eyaml'
 gem 'net-ldap', require: "net/ldap"
-gem 'ostruct', '~> 0.6.1' # was ruby default, is not anymore in 3.5.x, is required by net-ldap
+gem 'ostruct', '~> 0.6.2' # was ruby default, is not anymore in 3.5.x, is required by net-ldap
 gem 'puppet'
 gem 'puppetdb-ruby', require: 'puppetdb'
 gem 'syslog', '~> 0.3.0' # was ruby default, is not anymore in 3.4.x, is required by puppet
@@ -62,11 +62,12 @@ group :test do
 end
 
 group :linter do
-  gem 'rubocop', '~> 1.75.7'
+  gem 'rubocop', '~> 1.77.0'
   gem 'rubocop-capybara', '~> 2.22.1'
   gem 'rubocop-performance', '~> 1.25.0'
   gem 'rubocop-rails', '~> 2.32.0'
   gem 'rubocop-rake', '~> 0.7.1'
+  gem 'rubocop-factory_bot', '~> 2.27.1'
 end
 
 group :release do

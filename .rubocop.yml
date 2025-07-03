@@ -1,10 +1,11 @@
 ---
 inherit_from: .rubocop_todo.yml
 
-require:
+plugins:
   - rubocop-rails
   - rubocop-capybara
   - rubocop-performance
+  - rubocop-factory_bot
 
 AllCops:
   TargetRubyVersion: 3.4
@@ -20,7 +21,7 @@ AllCops:
     - vendor/**/*
     - .vendor/**/*
 
-Naming/PredicateName:
+Naming/PredicatePrefix:
   ForbiddenPrefixes:
     - "is_"
     - "have_"

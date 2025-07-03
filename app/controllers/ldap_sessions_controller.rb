@@ -11,7 +11,7 @@ class LdapSessionsController < ApplicationController
 
   def create
     ldap = Ldap.new
-    if (entries = ldap.authenticate(params[:email], params[:password]))
+    if (entries = ldap.authenticate(params[:username], params[:password]))
       user = find_or_create_user(entries.first)
       session[:user_id] = user.id
       if user.admin?
@@ -20,7 +20,7 @@ class LdapSessionsController < ApplicationController
         redirect_to root_url, notice: "Logged in!"
       end
     else
-      flash.now[:alert] = "Email or password is invalid"
+      flash.now[:alert] = "Username or password is invalid"
       render "new", status: :unprocessable_entity
     end
   end
@@ -28,7 +28,7 @@ class LdapSessionsController < ApplicationController
   private
 
   def find_or_create_user(ldap_user)
-    User.find_or_create_by!(email: params[:email].downcase) do |user|
+    User.find_or_create_by!(username: params[:username].downcase) do |user|
       user.first_name = ldap_user.givenname.first || "ldap"
       user.last_name = ldap_user.sn.first || "user"
     end
