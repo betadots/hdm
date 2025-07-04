@@ -14,6 +14,11 @@ updates:
           - "minor"
         patterns:
           - "*"
+    ignore:
+      # see https://github.com/rubyjs/libv8-node/issues/60
+      - dependency-name: "libv8-node"
+      # see https://github.com/rubyjs/mini_racer/issues/344
+      - dependency-name: "mini_racer"
 
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: github-actions
