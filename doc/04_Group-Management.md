@@ -6,7 +6,7 @@ Login to HDM as a user belonging to role 'admin'.
 
 Switch via 'List Groups' in the menu at the right top-hand to the list of groups.
 
-![Switch to groups](images/manage_users.png)
+![Switch to groups](images/list_groups.png)
 
 If you start with a blank setup, this list is empty of course. By pushing 'Edit' switches to the editing mode of the group, 'Delete' removes the group. To add a new group bush the button 'New Group'.
 
