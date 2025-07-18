@@ -19,7 +19,7 @@ echo "Katello installation part"
 sudo dnf -y install foreman-installer
 
 echo "Fix /etc/hosts"
-sudo sed -i -e "/127.0.1.1 p/d" /etc/hosts
+sudo sed -i -e "/127.0.1.1 o/d" /etc/hosts
 
 echo "Foreman Installation"
 sudo foreman-installer \
@@ -39,11 +39,11 @@ echo "preparing hdm for git"
 sudo mkdir -p /etc/hdm
 sudo git config --global --add safe.directory /etc/hdm
 
-=======
 echo "Preparing Puppet Environment"
 sudo mkdir -p /etc/puppetlabs/code/environments/
-sudo cp -R /vagrant/hdm/production /etc/puppetlabs/code/environments/production
-sudo cp -R /vagrant/hdm/feat_23498 /etc/puppetlabs/code/environments/feat_23498
+sudo rm -fr /etc/puppetlabs/code/environments/production
+sudo cp -r /vagrant/hdm/production /etc/puppetlabs/code/environments/
+sudo cp -r /vagrant/hdm/feat_23498 /etc/puppetlabs/code/environments/
 sudo cp -r /vagrant/hdm/keys /etc/puppetlabs/puppet/
 sudo chmod 0644 /etc/puppetlabs/puppet/keys/private_key.pkcs7.pem
 sudo chown -R puppet:puppet /etc/puppetlabs/puppet/keys/
@@ -57,10 +57,11 @@ sudo mkdir -p /etc/puppetlabs/facter/facts.d
 sudo cp /vagrant/hdm/openvox_facts.yaml /etc/puppetlabs/facter/facts.d/custom_facts.yaml
 
 echo "Running Puppet"
-sudo /opt/pupeptlabs/puppet/bin/puppet config set --section agent server openvox.hdm.workshop.betadots.training
-sudo /opt/puppetlabs/puppet/bin/puppet agent -t
+sudo /opt/puppetlabs/puppet/bin/puppet config set --section agent server openvox.hdm.workshop.betadots.training
 sudo /opt/puppetlabs/puppet/bin/puppet config set --section main reports foreman,puppetdb
+sudo /opt/puppetlabs/puppet/bin/puppet config set --section server autosign true
 sudo systemctl restart puppetserver
+sudo /opt/puppetlabs/puppet/bin/puppet agent -t
 
 echo "Installing Foreman HDM"
 sudo foreman-installer --enable-foreman-plugin-hdm --enable-foreman-proxy-plugin-hdm --foreman-proxy-plugin-hdm-hdm-url http://openvox.hdm.workshop.betadots.training:3000
