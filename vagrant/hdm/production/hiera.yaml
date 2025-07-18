@@ -1,0 +1,15 @@
+---
+version: 5
+defaults:
+  datadir: data
+  data_hash: yaml_data
+hierarchy:
+  - name: "Per Node"
+    path: "nodes/%{trusted.certname}.yaml"
+  - name: "Stage and Location Data"
+    paths:
+      - "location/%{custom_fact.stage}.yaml"
+      - "location/%{custom_fact.location}.yaml"
+  - name: "Default values"
+    path: common.yaml
+
