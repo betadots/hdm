@@ -65,8 +65,8 @@ Vagrant.configure('2') do |config|
       # bootstrap foreman server
       if node == 'puppet'
         setting.disksize.size = '100GB'
-        setting.vm.provision 'shell', path: settings['script'].to_s
       end
+      setting.vm.provision 'shell', path: settings['script'].to_s
       setting.vm.provider 'virtualbox' do |v|
         v.customize ['modifyvm', :id, '--name', settings['fqdn']]
         v.customize ['modifyvm', :id, '--cpus', settings['cpu'].to_s]

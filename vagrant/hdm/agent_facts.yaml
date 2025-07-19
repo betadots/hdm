@@ -1,0 +1,4 @@
+---
+custom_fact:
+  location: 'dmz'
+  stage: 'prod'

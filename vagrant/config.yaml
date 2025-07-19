@@ -6,18 +6,19 @@ default:
   box: boxomatic/centos-stream-9 # Box used for the VM
   # box: debian/bookworm64 # Box used for the VM
   cpu: 1 # Number of vCPU to assign to the VM
-  domain: hdm.betadots.training # Name of DNS domain for the created machines
-  script: './centos_script.sh'
+  domain: hdm.workshop.betadots.training # Name of DNS domain for the created machines
+  script: './agent.sh'
   # script: './debian_script.sh'
 
 # List of nodes shown in vagrant status
 nodes:
-  puppet:
+  openvox:
     memory: 8192
     cpu: 4
     ip: 10.100.10.101
-  # apache:
-  #   ip: 10.100.10.103
+    script: './foreman.sh'
+  apache:
+    ip: 10.100.10.103
   # proxmox:
   #   ip: 10.100.10.110
   #   cpu: 4

@@ -1,0 +1,13 @@
+---
+lookup_options:
+  classes:
+    merge: 'deep'
+
+classes: {}
+
+profile::base::additional_packages:
+  - 'htop'
+
+chrony::servers:
+  - '10.100.22.44'
+  - '10.101.44.22'
