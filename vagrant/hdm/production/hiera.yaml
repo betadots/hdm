@@ -12,7 +12,7 @@ hierarchy:
     path: "nodes/%{trusted.certname}.yaml"
   - name: "Stage and Location Data"
     paths:
-      - "stage%{facts.custom_fact.stage}.yaml"
+      - "stage/%{facts.custom_fact.stage}.yaml"
       - "location/%{facts.custom_fact.location}.yaml"
   - name: "Default values"
     path: common.yaml
