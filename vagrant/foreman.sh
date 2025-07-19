@@ -5,9 +5,9 @@ sudo dnf clean all
 
 echo "Installing Repo Packages"
 echo "foreman"
-sudo dnf -y localinstall https://yum.theforeman.org/releases/3.13/el9/x86_64/foreman-release.rpm
-echo "Puppet 8"
-sudo dnf -y localinstall https://yum.puppet.com/puppet8-release-el-9.noarch.rpm
+sudo dnf -y localinstall https://yum.theforeman.org/releases/3.15/el9/x86_64/foreman-release.rpm
+echo "OpenVox 8"
+sudo dnf -y localinstall https://yum.voxpupuli.org/openvox8-release-el-9.noarch.rpm
 
 echo "DNF update"
 sudo dnf -y update
@@ -30,7 +30,10 @@ sudo foreman-installer \
   --enable-foreman-cli-tasks \
   --enable-foreman-plugin-tasks \
   --enable-foreman-plugin-puppetdb \
-  --foreman-initial-admin-password='betadots_foreman_2025'
+  --foreman-initial-admin-password='betadots_foreman_2025' \
+  --puppet-autosign-entries='*' \
+  --puppet-client-package='openvox-agent' \
+  --puppet-server-package='openvox-server'
 
 echo "Installing r10k"
 sudo /opt/puppetlabs/puppet/bin/gem install r10k --no-document
@@ -55,6 +58,10 @@ popd
 echo "Preparing custom facts"
 sudo mkdir -p /etc/puppetlabs/facter/facts.d
 sudo cp /vagrant/hdm/openvox_facts.yaml /etc/puppetlabs/facter/facts.d/custom_facts.yaml
+
+echo "Fix for rvm.io certificate"
+wget --no-check-certificate -O- https://rvm.io/mpapis.asc | sudo gpg --batch --import
+wget --no-check-certificate -O- https://rvm.io/pkuczynski.asc | sudo gpg --batch --import
 
 echo "Running Puppet"
 sudo /opt/puppetlabs/puppet/bin/puppet config set --section agent server openvox.hdm.workshop.betadots.training

@@ -4,14 +4,14 @@ echo "DNF: Clean metadata"
 sudo dnf clean all
 
 echo "Installing Repo Packages"
-echo "Puppet 8"
-sudo dnf -y localinstall https://yum.puppet.com/puppet8-release-el-9.noarch.rpm
+echo "OpenVox 8"
+sudo dnf -y localinstall https://yum.voxpupuli.org/openvox8-release-el-9.noarch.rpm
 
 echo "DNF update"
 sudo dnf -y update
 
 echo "installing some tools: tree vim net-tools"
-sudo dnf -y install tree vim net-tools puppet-agent
+sudo dnf -y install tree vim net-tools openvox-agent
 
 echo "Fix /etc/hosts"
 echo '10.100.10.101 openvox.hdm.workshop.betadots.training' | sudo tee -a /etc/hosts

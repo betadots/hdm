@@ -2,8 +2,11 @@
 lookup_options:
   classes:
     merge: 'deep'
+  stdlib::manage::create_resources:
+    merge: 'deep'
 
-classes: {}
+classes:
+  '22_stdlib_manage': 'stdlib::manage'
 
 profile::base::additional_packages:
   - 'htop'
