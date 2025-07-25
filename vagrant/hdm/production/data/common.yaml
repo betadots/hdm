@@ -2,10 +2,16 @@
 lookup_options:
   classes:
     merge: 'deep'
+  stdlib::manage::create_resources:
+    merge: 'deep'
 
-classes: {}
+classes:
+  '22_stdlib_manage': 'stdlib::manage'
 
 profile::base::additional_packages:
   - 'htop'
 
 string: ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQEwDQYJKoZIhvcNAQEBBQAEggEAdvTCfUSTbctrTTX0oFhqR3kD/64WzOwjXwJFA/iU3/6Q1a8XdxwNEPVzAntpNuIF/jngGVtq1WAVAlNeDGE221fL7d4zsR9EEICLiYvoJjCsTermXFFhooJSvYcr0SOOsZW3nmBSL1fXzIQl93yrksr4XSJbS6V1IejbIkndr9pR5Yuatefj65Bv77pHN1e/UL2h8zQ7GVwhJn6YilV/2uGqGDhhGXg5tw+1k9P1jOuK6cu7P68VRt9IQ2heJjsPX64Ajd4N9e7h7luQN4TFBbtI31TdR2C6lOiQ0K52qRiYXzgO/u2Xz3uNAPUQSitYccP64cwkhED/SQiz330oRzA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBBwB0F3iJeC7oHO7LFmyAsLgBDcUXe4sCTuorDA5z429g6U]
+chrony::servers:
+  - '10.100.22.44'
+  - '10.101.44.22'

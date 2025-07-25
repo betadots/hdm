@@ -13,3 +13,16 @@ postgresql::globals::manage_dnf_module: false
 puppetdb::manage_firewall: false
 puppetdb::postgres_version: '13'
 puppetdb::manage_package_repo: false
+
+puppet::client_package: 'openvox-agent'
+puppet::server_package: 'openvox-server'
+puppetdb::puppetdb_package: 'openvoxdb'
+puppetdb::master::config::terminus_package: 'openvoxdb-termini'
+
+foreman::providers::oauth: false
+
+stdlib::manage::create_resources:
+  package:
+    'oauth':
+      ensure: 'installed'
+      provider: 'puppet_gem'
