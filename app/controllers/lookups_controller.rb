@@ -22,7 +22,7 @@ class LookupsController < ApplicationController
   end
 
   def lookup_in_original_environment
-    original_key = Key.new(environment: @node.environment, name: params[:key_id])
+    original_key = Key.new(name: params[:key_id], hiera_data: @node.environment.hiera_data)
     @original_result = original_key.lookup(@node)
   end
 end

@@ -12,4 +12,11 @@ class DiffEnvironmentsTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "button#tab-diff-data_file_common-yaml"
   end
+
+  test "performing a lookup in different environment displays diff" do
+    get environment_node_key_lookup_path("hdm", "1m73otky.betadots.training", "testmod::integer")
+
+    assert_response :success
+    assert_select "button#tab-diff-lookup-new_key"
+  end
 end
