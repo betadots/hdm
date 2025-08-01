@@ -220,7 +220,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    importmap-rails (2.2.0)
+    importmap-rails (2.2.2)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
@@ -232,7 +232,7 @@ GEM
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    json (2.13.1)
+    json (2.13.2)
     language_server-protocol (3.17.0.5)
     libv8-node (18.19.0.0)
     libv8-node (18.19.0.0-aarch64-linux)
@@ -298,7 +298,7 @@ GEM
     optimist (3.2.1)
     ostruct (0.6.3)
     parallel (1.27.0)
-    parser (3.3.8.0)
+    parser (3.3.9.0)
       ast (~> 2.4.1)
       racc
     popper_js (2.11.8)
@@ -322,7 +322,7 @@ GEM
       date
       stringio
     public_suffix (6.0.2)
-    puma (6.6.0)
+    puma (6.6.1)
       nio4r (~> 2.0)
     puppet (8.10.0)
       concurrent-ruby (~> 1.0)
@@ -352,7 +352,7 @@ GEM
     puppetdb-ruby (1.2.0)
       httparty
     racc (1.8.1)
-    rack (3.1.16)
+    rack (3.2.0)
     rack-session (2.1.1)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -409,7 +409,7 @@ GEM
       rails-dom-testing
       rspec-core
     rspec-support (3.13.3)
-    rubocop (1.79.0)
+    rubocop (1.79.1)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -419,7 +419,6 @@ GEM
       regexp_parser (>= 2.9.3, < 3.0)
       rubocop-ast (>= 1.46.0, < 2.0)
       ruby-progressbar (~> 1.7)
-      tsort (>= 0.2.0)
       unicode-display_width (>= 2.4.0, < 4.0)
     rubocop-ast (1.46.0)
       parser (>= 3.3.7.2)
@@ -507,7 +506,6 @@ GEM
     timeout (0.4.3)
     traces (0.15.2)
     track_open_instances (0.1.15)
-    tsort (0.2.0)
     turbo-rails (2.0.16)
       actionpack (>= 7.1.0)
       railties (>= 7.1.0)
@@ -571,12 +569,12 @@ DEPENDENCIES
   mini_racer (~> 0.16.0)
   net-ldap
   ostruct (~> 0.6.3)
-  puma (~> 6.4)
+  puma (~> 6.6)
   puppet
   puppetdb-ruby
   rails (~> 8.0.2)
   rspec-openapi
-  rubocop (~> 1.79.0)
+  rubocop (~> 1.79.1)
   rubocop-capybara (~> 2.22.1)
   rubocop-factory_bot (~> 2.27.1)
   rubocop-performance (~> 1.25.0)
