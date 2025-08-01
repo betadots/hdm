@@ -6,7 +6,7 @@ classes:
 
 hdm::version: 'main'
 hdm::method: 'rvm'
-hdm::ruby_version: '3.4.4'
+hdm::ruby_version: '3.4.5'
 hdm::disable_authentication: true
 hdm::allow_encryption: true
 postgresql::globals::manage_dnf_module: false
