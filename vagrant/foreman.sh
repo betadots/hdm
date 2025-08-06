@@ -87,3 +87,6 @@ echo "Login: admin, Passwort: betadots_foreman_2025"
 echo " -> Infrastructure -> Smart Proxies -> Refresh"
 echo " -> Hosts -> All Hosts -> openvox.hdm.workshop.betadots.training -> Edit -> HDM Smart Proxy hinzufügen."
 echo "Schritt wiederholen für apache host"
+
+sudo /opt/puppetlabs/puppet/bin/puppet config set --section main facts_terminus puppetdb
+sudo systemctl restart puppetserver
