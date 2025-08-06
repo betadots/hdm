@@ -67,6 +67,8 @@ echo "Running Puppet"
 sudo /opt/puppetlabs/puppet/bin/puppet config set --section agent server openvox.hdm.workshop.betadots.training
 sudo /opt/puppetlabs/puppet/bin/puppet config set --section main reports foreman,puppetdb
 sudo /opt/puppetlabs/puppet/bin/puppet config set --section server autosign true
+# damit puppet-lookup facts zur Verfuegung hat
+sudo /opt/puppetlabs/puppet/bin/puppet config set --section main facts_terminus puppetdb
 sudo systemctl restart puppetserver
 sudo /opt/puppetlabs/puppet/bin/puppet agent -t
 
