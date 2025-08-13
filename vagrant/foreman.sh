@@ -54,6 +54,10 @@ echo "Installing puppet modules"
 pushd /etc/puppetlabs/code/environments/production
 sudo /opt/puppetlabs/puppet/bin/r10k puppetfile install -v
 popd
+pushd /etc/puppetlabs/code/environments/feat_23498
+sudo /opt/puppetlabs/puppet/bin/r10k puppetfile install
+popd
+
 
 echo "Preparing custom facts"
 sudo mkdir -p /etc/puppetlabs/facter/facts.d
@@ -67,13 +71,19 @@ echo "Running Puppet"
 sudo /opt/puppetlabs/puppet/bin/puppet config set --section agent server openvox.hdm.workshop.betadots.training
 sudo /opt/puppetlabs/puppet/bin/puppet config set --section main reports foreman,puppetdb
 sudo /opt/puppetlabs/puppet/bin/puppet config set --section server autosign true
-# damit puppet-lookup facts zur Verfuegung hat
-sudo /opt/puppetlabs/puppet/bin/puppet config set --section main facts_terminus puppetdb
 sudo systemctl restart puppetserver
 sudo /opt/puppetlabs/puppet/bin/puppet agent -t
 
+
+
+
 echo "Installing Foreman HDM"
 sudo foreman-installer --enable-foreman-plugin-hdm --enable-foreman-proxy-plugin-hdm --foreman-proxy-plugin-hdm-hdm-url http://openvox.hdm.workshop.betadots.training:3000
+
+# damit puppet-lookup facts zur Verfuegung hat
+# wird vermutlich vom Foreman-Installer aus der puppet.conf geworfen
+sudo /opt/puppetlabs/puppet/bin/puppet config set --section main facts_terminus puppetdb
+sudo systemctl restart puppetserver
 
 echo "Uploading facts to PuppetDB"
 sudo /opt/puppetlabs/bin/puppet agent -t
@@ -88,5 +98,6 @@ echo " -> Infrastructure -> Smart Proxies -> Refresh"
 echo " -> Hosts -> All Hosts -> openvox.hdm.workshop.betadots.training -> Edit -> HDM Smart Proxy hinzufügen."
 echo "Schritt wiederholen für apache host"
 
-sudo /opt/puppetlabs/puppet/bin/puppet config set --section main facts_terminus puppetdb
-sudo systemctl restart puppetserver
+#sudo /opt/puppetlabs/puppet/bin/puppet config set --section main facts_terminus puppetdb
+#sudo systemctl restart puppetserver
+
