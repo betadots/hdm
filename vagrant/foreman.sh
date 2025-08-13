@@ -80,8 +80,8 @@ sudo /opt/puppetlabs/puppet/bin/puppet agent -t
 echo "Installing Foreman HDM"
 sudo foreman-installer --enable-foreman-plugin-hdm --enable-foreman-proxy-plugin-hdm --foreman-proxy-plugin-hdm-hdm-url http://openvox.hdm.workshop.betadots.training:3000
 
-# damit puppet-lookup facts zur Verfuegung hat
-# wird vermutlich vom Foreman-Installer aus der puppet.conf geworfen
+# provides $(puppet lookup) with factes
+# likely got removed by foreman-installer in a previous step
 sudo /opt/puppetlabs/puppet/bin/puppet config set --section main facts_terminus puppetdb
 sudo systemctl restart puppetserver
 
@@ -97,7 +97,3 @@ echo "Login: admin, Passwort: betadots_foreman_2025"
 echo " -> Infrastructure -> Smart Proxies -> Refresh"
 echo " -> Hosts -> All Hosts -> openvox.hdm.workshop.betadots.training -> Edit -> HDM Smart Proxy hinzufügen."
 echo "Schritt wiederholen für apache host"
-
-#sudo /opt/puppetlabs/puppet/bin/puppet config set --section main facts_terminus puppetdb
-#sudo systemctl restart puppetserver
-
