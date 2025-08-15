@@ -58,7 +58,6 @@ pushd /etc/puppetlabs/code/environments/feat_23498
 sudo /opt/puppetlabs/puppet/bin/r10k puppetfile install
 popd
 
-
 echo "Preparing custom facts"
 sudo mkdir -p /etc/puppetlabs/facter/facts.d
 sudo cp /vagrant/hdm/openvox_facts.yaml /etc/puppetlabs/facter/facts.d/custom_facts.yaml
@@ -73,9 +72,6 @@ sudo /opt/puppetlabs/puppet/bin/puppet config set --section main reports foreman
 sudo /opt/puppetlabs/puppet/bin/puppet config set --section server autosign true
 sudo systemctl restart puppetserver
 sudo /opt/puppetlabs/puppet/bin/puppet agent -t
-
-
-
 
 echo "Installing Foreman HDM"
 sudo foreman-installer --enable-foreman-plugin-hdm --enable-foreman-proxy-plugin-hdm --foreman-proxy-plugin-hdm-hdm-url http://openvox.hdm.workshop.betadots.training:3000
