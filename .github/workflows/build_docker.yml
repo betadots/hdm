@@ -27,7 +27,7 @@ jobs:
       packages: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           ref: ${{github.ref_name}}
@@ -113,7 +113,7 @@ jobs:
       - create-multiarch-manifests
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Update Docker Hub Description
         uses: peter-evans/dockerhub-description@v4
