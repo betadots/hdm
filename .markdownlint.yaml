@@ -1,0 +1,7 @@
+---
+default: true
+
+line-length:
+  line_length: 210
+descriptive-link-text: false
+no-alt-text: false

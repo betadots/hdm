@@ -1,9 +1,10 @@
 # Profile for HDM installation
 
-## Requirements:
-  - puppetlabs-docker Module
-  - must be added to a node where Puppet code gets deployed
-  - must have access to Puppet DB
+## Requirements
+
+- puppetlabs-docker Module
+- must be added to a node where Puppet code gets deployed
+- must have access to Puppet DB
 
 ## HDM on Puppet server
 
@@ -59,6 +60,7 @@ class profile::puppet::hdm () {
   }
 }
 ```
+
 ### HDM Database config
 
 ```yaml
@@ -156,6 +158,7 @@ class profile::puppet::hdm () {
 }
 ```
 
+<!-- markdownlint-disable-next-line -->
 ### HDM Database config
 
 ```yaml
@@ -178,6 +181,7 @@ production:
   database: /etc/hdm/db/production.sqlite3
 ```
 
+<!-- markdownlint-disable-next-line -->
 ### HDM config
 
 ```yaml
