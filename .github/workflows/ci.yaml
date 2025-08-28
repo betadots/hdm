@@ -19,6 +19,7 @@ jobs:
   markdown-lint:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v5
       - uses: DavidAnson/markdownlint-cli2-action@v20
         with:
           globs: '**/*.md'
