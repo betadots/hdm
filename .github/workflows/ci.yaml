@@ -90,6 +90,7 @@ jobs:
       - rubocop
       - unit_tests
       - build_container
+      - markdown-lint
     runs-on: ubuntu-latest
     name: Test suite
     steps:
