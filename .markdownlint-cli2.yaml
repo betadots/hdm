@@ -1,0 +1,9 @@
+---
+ignores:
+  - .github/**
+  - .idea/**
+  - .vendor/**
+  - .vscode/**
+  - CHANGELOG.md
+  - test/**
+  - vendor/**

@@ -2,7 +2,9 @@
 
 ## hdm.yml
 
-The main config file is divided into individual sections. Each section represents all OpenVox/Puppet environments of one Server and its control repositories (`config_dir`). So don't make the mistake of confusing the config sections here with the OpenVox/Puppet environments like production or test.
+The main config file is divided into individual sections.
+Each section represents all OpenVox/Puppet environments of one Server and its control repositories (`config_dir`).
+So don't make the mistake of confusing the config sections here with the OpenVox/Puppet environments like production or test.
 
 ```yaml
 test:
@@ -116,7 +118,7 @@ want to make sure that your repository is only edited by HDM.
 
 ## database.yml
 
-Only SQLite3 is currently supported as database backend. The config file `./config/database.yml` (Manual Setup) looks like the following: 
+Only SQLite3 is currently supported as database backend. The config file `./config/database.yml` (Manual Setup) looks like the following:
 
 ```yaml
 default: &default

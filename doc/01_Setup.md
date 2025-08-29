@@ -1,6 +1,8 @@
 # Installation (Manual)
 
-The Hiera Data Manager (HDM) is an ruby on rails application. So we do a setup based on the Ruby Version Manager (RVM) to serve the required ruby version. In general and for older platforms, we recommend operation in a [container](#installation-via-docker).
+The Hiera Data Manager (HDM) is an ruby on rails application.
+So we do a setup based on the Ruby Version Manager (RVM) to serve the required ruby version.
+In general and for older platforms, we recommend operation in a [container](#installation-via-docker).
 
 HDM application is **served on port 3000** by default.
 
@@ -125,7 +127,7 @@ The secret can also be store in memory (envvar SECRET_KEY_BASE) or as file:
 SECRET_KEY_BASE=$(openssl rand -hex 16)
 echo $SECRET_KEY_BASE | EDITOR="vim" bundle exec rails credentials:edit
 ```
-
+<!-- markdownlint-disable-next-line -->
 # Installation via Docker
 
 To have all the HDM external parts together we recommend to put this into a sub folder called `hdm_env`.
@@ -148,11 +150,14 @@ The structure might look like this:
   └── hiera.yaml
 ```
 
-If you are running this directly on the puppet compiler the directory `hiera` might not be needed. But if you have `hiera` as a seperate repository this might be helpfull. You also can mount it directly in the compose file.
+If you are running this directly on the puppet compiler the directory `hiera` might not be needed.
+But if you have `hiera` as a seperate repository this might be helpfull.
+You also can mount it directly in the compose file.
 
 To avoid any trouble with access to the cert files, it might be better to copy them to `certs` directory and adjust the mode so you can use them for sure.
 
-The folder `db` might be a volume mounted into your container to save the user database outside of the container. See [docker-compose.yaml](../docker-compose.yaml).
+The folder `db` might be a volume mounted into your container to save the user database outside of the container.
+See [docker-compose.yaml](../docker-compose.yaml).
 
 ```yaml
 ---
@@ -180,7 +185,8 @@ services:
     restart: unless-stopped
 ```
 
-To save the SQLite DB files outside of the container, we habe to inject a different `database.yml` to change the path. Full details for configuration is describe [here](02_Configuration.md).
+To save the SQLite DB files outside of the container, we have to inject a different `database.yml` to change the path.
+Full details for configuration is describe [here](02_Configuration.md).
 
 ```yaml
 default: &default
