@@ -40,7 +40,7 @@ jobs:
           platforms: linux/${{ matrix.platform }}
 
       - name: Scan image with Anchore Grype
-        uses: anchore/scan-action@v6
+        uses: anchore/scan-action@v7
         id: scan
         with:
           image: 'ci/hdm:${{ github.sha }}'
