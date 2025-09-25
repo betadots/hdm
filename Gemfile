@@ -62,7 +62,7 @@ group :test do
 end
 
 group :linter do
-  gem 'rubocop', '~> 1.80.2'
+  gem 'rubocop', '~> 1.81.0'
   gem 'rubocop-capybara', '~> 2.22.1'
   gem 'rubocop-performance', '~> 1.26.0'
   gem 'rubocop-rails', '~> 2.33.3'
