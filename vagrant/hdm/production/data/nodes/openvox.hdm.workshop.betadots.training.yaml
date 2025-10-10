@@ -9,6 +9,15 @@ hdm::method: 'rvm'
 hdm::ruby_version: '3.4.5'
 hdm::disable_authentication: true
 hdm::allow_encryption: true
+hdm::puppetdb_settings:
+  'server': 'https://localhost:8081'
+  'pem':
+    'key': '/etc/puppetlabs/puppet/ssl/private_keys/openvox.hdm.workshop.betadots.training.pem'
+    'cert': '/etc/puppetlabs/puppet/ssl/certs/openvox.hdm.workshop.betadots.training.pem'
+    'ca_file': '/etc/puppetlabs/puppet/ssl/certs/ca.pem'
+hdm::additional_mounts:
+  - '/etc/puppetlabs/puppet/ssl'
+
 postgresql::globals::manage_dnf_module: false
 puppetdb::manage_firewall: false
 puppetdb::postgres_version: '13'
