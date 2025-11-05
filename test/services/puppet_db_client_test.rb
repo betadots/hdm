@@ -6,7 +6,7 @@ class PuppetDbClientTest < ActiveSupport::TestCase
     Rails.configuration.hdm.puppet_db = {
       server: "https://localhost",
       pem: {
-        cert: "tmp/test.cert",
+        cert: "tmp/test.certomat",
         key: "tmp/test.key",
         ca_file: "tmp/test.ca"
       }
@@ -16,5 +16,7 @@ class PuppetDbClientTest < ActiveSupport::TestCase
     assert_kind_of PuppetDB::Client, client
 
     Rails.configuration.hdm.puppet_db = old_config
+    # Some of the options passed above get promoted to class level default options, so we need to reset them here
+    PuppetDB::Client.default_options = {}
   end
 end
