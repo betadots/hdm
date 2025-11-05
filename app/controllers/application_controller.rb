@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authentication_required
 
-  helper_method :current_user
+  helper_method :current_user, :rbac_enabled?
 
   private
 
@@ -58,5 +58,13 @@ class ApplicationController < ActionController::Base
 
   def admin_user_missing?
     User.none? && !Rails.configuration.hdm.authentication_disabled
+  end
+
+  def rbac_enabled?
+    Group.any?
+  end
+
+  def ensure_rbac_disabled
+    head :forbidden if rbac_enabled?
   end
 end

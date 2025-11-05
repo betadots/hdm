@@ -17,6 +17,12 @@ class DataFile < HieraModel
     self.replaced_from_git = hiera_file.replaced_from_git?
   end
 
+  def ==(other)
+    other.is_a?(DataFile) &&
+      hierarchy == other.hierarchy &&
+      path == other.path
+  end
+
   def keys
     @keys ||= hiera_file.keys.map do |key_name|
       Key.new(name: key_name)

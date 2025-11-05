@@ -12,7 +12,7 @@ class HieraData
       }
     }.freeze
 
-    attr_reader :raw_hash
+    attr_reader :base_path, :raw_hash
 
     def initialize(raw_hash:, base_path:)
       @raw_hash = raw_hash

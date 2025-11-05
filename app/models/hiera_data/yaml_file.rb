@@ -24,6 +24,11 @@ class HieraData
       content.keys
     end
 
+    def raw_content
+      return nil unless exist?
+      File.read(path)
+    end
+
     def content
       return nil unless exist?
       @content ||= YAML.load_file(path) || {}
