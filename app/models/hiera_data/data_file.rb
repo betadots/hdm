@@ -3,7 +3,7 @@ class HieraData
     attr_reader :path, :file
 
     delegate :content, :exist?, :writable?, :keys,
-             :content_for_key, :[],
+             :content_for_key, :[], :raw_content,
              to: :file
 
     def initialize(path:, facts: {}, options: {}, type: :yaml)

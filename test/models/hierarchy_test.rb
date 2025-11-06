@@ -35,6 +35,18 @@ class HierarchyTest < ActiveSupport::TestCase
     assert_not hierarchy.encryption_possible?
   end
 
+  test "#candidate_files returns an array of matching `DataFile` instances" do
+    environment = Environment.new(name: "multiple_hierarchies")
+    hierarchy = Hierarchy.find(layer: environment.environment_layer, name: "Per-datacenter business group data")
+
+    candidate_files = hierarchy.candidate_files
+    assert_kind_of Array, candidate_files
+    assert_not candidate_files.empty?
+    candidate_files.each do |file|
+      assert_kind_of DataFile, file
+    end
+  end
+
   private
 
   def create_hierarchy(backend: :eyaml, encryptable: true)

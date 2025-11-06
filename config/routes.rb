@@ -49,6 +49,16 @@ Rails.application.routes.draw do
         end
       end
     end
+
+    resource :tree, only: :show do
+      resources :layers, only: [] do
+        resources :hierarchies, only: [] do
+          resources :paths, only: [], constraints: { id: /.+/ } do
+            resource :tree_file, only: :show
+          end
+        end
+      end
+    end
   end
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
