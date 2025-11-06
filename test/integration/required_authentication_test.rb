@@ -51,6 +51,19 @@ class RequiredAuthenticationTest < ActionDispatch::IntegrationTest
       authentication_required_for :delete, user_path(user)
     end
 
+    test "authentication requirements for tree files" do
+      authentication_required_for :get,
+        environment_tree_path("development")
+
+      authentication_required_for :get,
+        environment_tree_layer_hierarchy_path_tree_file_path(
+          "development",
+          "environment",
+          "Eyaml hierarchy",
+          "common.yaml"
+        )
+    end
+
     private
 
     def authentication_required_for(method, path)

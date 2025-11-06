@@ -16,6 +16,12 @@ class Layer < HieraModel
     end
   end
 
+  def ==(other)
+    other.is_a?(Layer) &&
+      environment == other.environment &&
+      name == other.name
+  end
+
   def hierarchies
     Hierarchy.all(layer: self)
   end

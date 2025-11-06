@@ -1,0 +1,23 @@
+<% @environment.layers.each do |layer| %>
+  <div class="card mb-2">
+    <div class="card-header"><%= layer.name_and_description %></div>
+    <div class="card-body">
+      <% layer.hierarchies.each do |hierarchy| %>
+        <div class="list-group">
+          <div class="list-group-item">
+            <h2 class="list-group-header px-3 py-2">
+              <span class="fs-6">
+                <b><%= hierarchy.name %></b>
+                <span class="badge bg-primary text-light"><%= hierarchy.backend %></span>
+              </span>
+            </h2>
+          </div>
+          <% hierarchy.candidate_files.each do |file| %>
+            <%= link_to file.path, environment_tree_layer_hierarchy_path_tree_file_path(@environment, layer, hierarchy, file), class: "list-group-item list-group-item-action #{"active" if file == @data_file}" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+

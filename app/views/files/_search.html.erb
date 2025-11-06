@@ -1,6 +1,8 @@
 <%= form_tag "", data: {controller: "text-input-navigation", action: "submit->text-input-navigation#navigate", text_input_navigation_placeholder_value: "KEY_ID", text_input_navigation_url_value: environment_key_files_path(key_id: "KEY_ID")} do |form| %>
   <div class="form-group">
     <%= label_tag :key, "Search for a key" %>
-    <%= text_field_tag "key", @key&.name, class: "form-control", required: true, data: {text_input_navigation_target: "input"} %> 
-  </div>
+    <div class="input-group">
+      <%= text_field_tag "key", @key&.name, class: "form-control", required: true, data: {text_input_navigation_target: "input"} %>
+      <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </div>
 <% end %>

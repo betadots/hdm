@@ -21,14 +21,29 @@ class Hierarchy < HieraModel
     all(layer:).find { |h| h.name == name }
   end
 
-  def file(path:, node:)
-    hiera_file = hiera_hierarchy.file(path:, facts: node.facts)
+  def ==(other)
+    other.is_a?(Hierarchy) &&
+      layer == other.layer &&
+      name == other.name
+  end
+
+  def file(path:, node: nil)
+    hiera_file = hiera_hierarchy.file(path:, facts: node&.facts)
     DataFile.new(hierarchy: self, path:, hiera_file:)
   end
 
   def files_for(node:)
     hiera_hierarchy.resolved_paths(facts: node.facts).map do |path|
       file(path:, node:)
+    end
+  end
+
+  def candidate_files
+    hiera_hierarchy.candidate_files.map do |path|
+      relative_path = path
+                      .sub(hiera_hierarchy.datadir.to_s, "")
+                      .delete_prefix("/")
+      DataFile.new(hierarchy: self, path: relative_path)
     end
   end
 
