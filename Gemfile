@@ -8,7 +8,7 @@ gem 'rails', '~> 8.0.3'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 2.7'
 # Use Puma as the app server
-gem 'puma', '~> 7.0'
+gem 'puma', '~> 7.1'
 
 # Asset handling
 gem 'bootstrap', '~> 5.3.5'
@@ -64,7 +64,7 @@ end
 group :linter do
   gem 'rubocop', '~> 1.81.1'
   gem 'rubocop-capybara', '~> 2.22.1'
-  gem 'rubocop-performance', '~> 1.26.0'
+  gem 'rubocop-performance', '~> 1.26.1'
   gem 'rubocop-rails', '~> 2.33.4'
   gem 'rubocop-rake', '~> 0.7.1'
   gem 'rubocop-factory_bot', '~> 2.27.1'
