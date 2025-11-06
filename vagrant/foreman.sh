@@ -76,6 +76,25 @@ sudo foreman-installer --enable-foreman-plugin-hdm --enable-foreman-proxy-plugin
 echo "Uploading facts to PuppetDB"
 sudo /opt/puppetlabs/bin/puppet agent -t
 
+if [[ -e /vagrant/puppet-bolt-4.0.0-1.el9.x86_64.rpm && -e /vagrant/rubygem-smart_proxy_openbolt-0.0.1-1.el9.noarch.rpm && -e /vagrant/rubygem-foreman_openbolt-0.0.1-1.el9.noarch.rpm ]]; then
+  echo "Installing OpenVox Orchestrator"
+  sudo rpm -ihv /vagrant/puppet-bolt-4.0.0-1.el9.x86_64.rpm /vagrant/rubygem-smart_proxy_openbolt-0.0.1-1.el9.noarch.rpm /vagrant/rubygem-foreman_openbolt-0.0.1-1.el9.noarch.rpm
+  if [[ $(grep foreman-tasks /usr/share/gems/gems/foreman_openbolt-0.0.1/lib/foreman_openbolt.rb) ]]; then
+    echo "Patch already applied"
+  else
+    sudo sed -n -i "p;3a require 'foreman-tasks'" /usr/share/gems/gems/foreman_openbolt-0.0.1/lib/foreman_openbolt.rb
+  fi
+
+  echo "Activating OpenVox Orchestrator"
+  sudo systemctl restart foreman-proxy
+  sudo foreman-rake db:migrate
+  sudo foreman-rake db:seed
+  sudo foreman-rake openbolt:refresh_proxies
+  sudo systemctl restart foreman
+else
+  echo "No OpenVox Orchestrator Packages found. Skipping"
+fi
+
 echo "Jetzt einloggen, root user werden"
 echo "vagrant ssh openvox.hdm.workshop.betadots.training"
 echo "sudo -i"
