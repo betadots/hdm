@@ -63,7 +63,7 @@ Examples are shown in [hdm.yml.template](../config/hdm.yml.template).
 | --------- | -------- |
 | sp_entity_id | The entity id. |
 | idp_sso_service_url | The SAML service URL. |
-| idp_cert_fingerprint | Fingerprint to validate the service certificate. Do not use both `idp_cert_fingerprint` and `idp_cert`.|
+| idp_cert_fingerprint | Fingerprint to validate the service certificate. Do not use both `idp_cert_fingerprint` and `idp_cert`. |
 | idp_cert | CA cert to validate the service certificate. Do not use if `idp_cert_fingerprint` is already used. |
 
 ### git_data
