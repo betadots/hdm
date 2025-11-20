@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
       end
     else
       flash.now[:alert] = "Email or password is invalid"
-      render "new", status: :unprocessable_entity
+      render "new", status: :unprocessable_content
     end
   end
 
