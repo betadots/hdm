@@ -23,7 +23,7 @@ class LdapSessionsControllerTest < ActionDispatch::IntegrationTest
       post ldap_session_path,
            params: { username: "noboby@example.com", password: "secret" }
 
-      assert_response :unprocessable_entity
+      assert_response :unprocessable_content
     end
   end
 
