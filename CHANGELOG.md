@@ -18,6 +18,9 @@ These should not affect the functionality of the module.
 - Ability to run locally with Docker [\#155](https://github.com/betadots/hdm/issues/155)
 - Implement new "data tree" view [\#690](https://github.com/betadots/hdm/pull/690) ([oneiros](https://github.com/oneiros))
 - bump ruby version to 3.4.5 [\#637](https://github.com/betadots/hdm/pull/637) ([rwaffen](https://github.com/rwaffen))
+- chore: update rubocop to 1.77.0 [\#612](https://github.com/betadots/hdm/pull/612) ([rwaffen](https://github.com/rwaffen))
+- Enhance ldap configuration [\#601](https://github.com/betadots/hdm/pull/601) ([oneiros](https://github.com/oneiros))
+- Rename email to username \(\#575\) [\#598](https://github.com/betadots/hdm/pull/598) ([oneiros](https://github.com/oneiros))
 
 **Fixed bugs:**
 
@@ -27,16 +30,7 @@ These should not affect the functionality of the module.
 - Fix inconsistently used parameters [\#676](https://github.com/betadots/hdm/pull/676) ([oneiros](https://github.com/oneiros))
 - fix\(vagrant\): puppet lookup [\#644](https://github.com/betadots/hdm/pull/644) ([marcusdots](https://github.com/marcusdots))
 - Fix leftover old method signature [\#634](https://github.com/betadots/hdm/pull/634) ([oneiros](https://github.com/oneiros))
-
-**Closed issues:**
-
-- RuntimeError: Configuration error: https:// specified with pem, but pem is incomplete. [\#662](https://github.com/betadots/hdm/issues/662)
-- Cert errors for "Show Environments" [\#641](https://github.com/betadots/hdm/issues/641)
-- Update docs and screenshots regarding rename of email to username [\#599](https://github.com/betadots/hdm/issues/599)
-- Add feature to connect ldap host via startls or ldaps [\#593](https://github.com/betadots/hdm/issues/593)
-- Fix dropping a user group [\#589](https://github.com/betadots/hdm/issues/589)
-- After update of HDM container a User logs in via LDAP and sees another username in the top right corner [\#292](https://github.com/betadots/hdm/issues/292)
-- Example hiera.yaml file with multiple hierachies [\#80](https://github.com/betadots/hdm/issues/80)
+- Fix delete button \(\#589\) [\#600](https://github.com/betadots/hdm/pull/600) ([oneiros](https://github.com/oneiros))
 
 **Merged pull requests:**
 
@@ -74,12 +68,8 @@ These should not affect the functionality of the module.
 - build\(deps\): bump the ruby group across 1 directory with 5 updates [\#623](https://github.com/betadots/hdm/pull/623) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Update docs and screenshots regarding rename of email to use… [\#620](https://github.com/betadots/hdm/pull/620) ([lbetz](https://github.com/lbetz))
 - build\(deps\): bump git from 3.1.0 to 4.0.0 [\#619](https://github.com/betadots/hdm/pull/619) ([dependabot[bot]](https://github.com/apps/dependabot))
-- chore: update rubocop to 1.77.0 [\#612](https://github.com/betadots/hdm/pull/612) ([rwaffen](https://github.com/rwaffen))
 - build\(deps\): bump the ruby group across 1 directory with 9 updates [\#610](https://github.com/betadots/hdm/pull/610) ([dependabot[bot]](https://github.com/apps/dependabot))
 - build\(deps\): bump rack from 3.1.15 to 3.1.16 [\#604](https://github.com/betadots/hdm/pull/604) ([dependabot[bot]](https://github.com/apps/dependabot))
-- Enhance ldap configuration [\#601](https://github.com/betadots/hdm/pull/601) ([oneiros](https://github.com/oneiros))
-- Fix delete button \(\#589\) [\#600](https://github.com/betadots/hdm/pull/600) ([oneiros](https://github.com/oneiros))
-- Rename email to username \(\#575\) [\#598](https://github.com/betadots/hdm/pull/598) ([oneiros](https://github.com/oneiros))
 
 ## [v3.3.0](https://github.com/betadots/hdm/tree/v3.3.0) (2025-05-28)
 
