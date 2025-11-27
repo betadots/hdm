@@ -4,6 +4,83 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.0.0](https://github.com/betadots/hdm/tree/v4.0.0) (2025-11-27)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v3.3.0...v4.0.0)
+
+**Implemented enhancements:**
+
+- Show env data tree [\#654](https://github.com/betadots/hdm/issues/654)
+- Allow LDAP mapping for username, email [\#588](https://github.com/betadots/hdm/issues/588)
+- Allow users to log in using username instead of email address [\#575](https://github.com/betadots/hdm/issues/575)
+- Add option to use HDM without PuppetDB [\#570](https://github.com/betadots/hdm/issues/570)
+- Add option to write a git commit message when writing data to git [\#288](https://github.com/betadots/hdm/issues/288)
+- Ability to run locally with Docker [\#155](https://github.com/betadots/hdm/issues/155)
+- Implement new "data tree" view [\#690](https://github.com/betadots/hdm/pull/690) ([oneiros](https://github.com/oneiros))
+- bump ruby version to 3.4.5 [\#637](https://github.com/betadots/hdm/pull/637) ([rwaffen](https://github.com/rwaffen))
+
+**Fixed bugs:**
+
+- using https with puppetdb [\#674](https://github.com/betadots/hdm/issues/674)
+- ActiveModel::UnknownAttributeError in LookupsController\#show [\#628](https://github.com/betadots/hdm/issues/628)
+- fix\(release\): add openssl gem [\#703](https://github.com/betadots/hdm/pull/703) ([tuxmea](https://github.com/tuxmea))
+- Fix inconsistently used parameters [\#676](https://github.com/betadots/hdm/pull/676) ([oneiros](https://github.com/oneiros))
+- fix\(vagrant\): puppet lookup [\#644](https://github.com/betadots/hdm/pull/644) ([marcusdots](https://github.com/marcusdots))
+- Fix leftover old method signature [\#634](https://github.com/betadots/hdm/pull/634) ([oneiros](https://github.com/oneiros))
+
+**Closed issues:**
+
+- RuntimeError: Configuration error: https:// specified with pem, but pem is incomplete. [\#662](https://github.com/betadots/hdm/issues/662)
+- Cert errors for "Show Environments" [\#641](https://github.com/betadots/hdm/issues/641)
+- Update docs and screenshots regarding rename of email to username [\#599](https://github.com/betadots/hdm/issues/599)
+- Add feature to connect ldap host via startls or ldaps [\#593](https://github.com/betadots/hdm/issues/593)
+- Fix dropping a user group [\#589](https://github.com/betadots/hdm/issues/589)
+- After update of HDM container a User logs in via LDAP and sees another username in the top right corner [\#292](https://github.com/betadots/hdm/issues/292)
+- Example hiera.yaml file with multiple hierachies [\#80](https://github.com/betadots/hdm/issues/80)
+
+**Merged pull requests:**
+
+- build\(deps\): bump the ruby group with 3 updates [\#685](https://github.com/betadots/hdm/pull/685) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump google-protobuf from 4.32.1 to 4.33.0 in the ruby group [\#684](https://github.com/betadots/hdm/pull/684) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump rspec-openapi from 0.19.0 to 0.20.0 in the ruby group [\#683](https://github.com/betadots/hdm/pull/683) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump rack from 3.2.2 to 3.2.3 [\#682](https://github.com/betadots/hdm/pull/682) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Demo setup for HDM and OpenVox Orchestrator [\#681](https://github.com/betadots/hdm/pull/681) ([tuxmea](https://github.com/tuxmea))
+- build\(deps\): bump library/ruby from 3.4.5-alpine3.21 to 3.4.7-alpine3.21 [\#680](https://github.com/betadots/hdm/pull/680) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump rack from 3.2.1 to 3.2.2 [\#678](https://github.com/betadots/hdm/pull/678) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump selenium-webdriver from 4.35.0 to 4.36.0 in the ruby group [\#677](https://github.com/betadots/hdm/pull/677) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump the ruby group with 2 updates [\#673](https://github.com/betadots/hdm/pull/673) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump turbo-rails from 2.0.16 to 2.0.17 in the ruby group [\#672](https://github.com/betadots/hdm/pull/672) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump rubocop from 1.80.2 to 1.81.0 in the ruby group [\#671](https://github.com/betadots/hdm/pull/671) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump puma from 7.0.3 to 7.0.4 in the ruby group [\#670](https://github.com/betadots/hdm/pull/670) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 2 updates [\#669](https://github.com/betadots/hdm/pull/669) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump rexml from 3.4.1 to 3.4.2 [\#667](https://github.com/betadots/hdm/pull/667) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump puma from 7.0.2 to 7.0.3 in the ruby group [\#664](https://github.com/betadots/hdm/pull/664) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump google-protobuf from 4.32.0 to 4.32.1 in the ruby group [\#663](https://github.com/betadots/hdm/pull/663) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 3 updates [\#661](https://github.com/betadots/hdm/pull/661) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump puma from 6.6.1 to 7.0.1 [\#659](https://github.com/betadots/hdm/pull/659) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump rubocop from 1.80.1 to 1.80.2 in the ruby group [\#657](https://github.com/betadots/hdm/pull/657) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump rubocop from 1.80.0 to 1.80.1 in the ruby group [\#655](https://github.com/betadots/hdm/pull/655) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group with 2 updates [\#651](https://github.com/betadots/hdm/pull/651) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump git from 4.0.4 to 4.0.5 in the ruby group [\#650](https://github.com/betadots/hdm/pull/650) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump google-protobuf from 4.31.1 to 4.32.0 in the ruby group [\#649](https://github.com/betadots/hdm/pull/649) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump rubocop-rails from 2.33.2 to 2.33.3 in the ruby group [\#648](https://github.com/betadots/hdm/pull/648) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump activestorage from 8.0.2 to 8.0.2.1 [\#647](https://github.com/betadots/hdm/pull/647) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump the ruby group with 2 updates [\#645](https://github.com/betadots/hdm/pull/645) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump the ruby group across 1 directory with 2 updates [\#643](https://github.com/betadots/hdm/pull/643) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 3 updates [\#636](https://github.com/betadots/hdm/pull/636) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump ruby-saml from 1.18.0 to 1.18.1 [\#633](https://github.com/betadots/hdm/pull/633) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 3 updates [\#632](https://github.com/betadots/hdm/pull/632) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 2 updates [\#626](https://github.com/betadots/hdm/pull/626) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 5 updates [\#623](https://github.com/betadots/hdm/pull/623) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update docs and screenshots regarding rename of email to use… [\#620](https://github.com/betadots/hdm/pull/620) ([lbetz](https://github.com/lbetz))
+- build\(deps\): bump git from 3.1.0 to 4.0.0 [\#619](https://github.com/betadots/hdm/pull/619) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore: update rubocop to 1.77.0 [\#612](https://github.com/betadots/hdm/pull/612) ([rwaffen](https://github.com/rwaffen))
+- build\(deps\): bump the ruby group across 1 directory with 9 updates [\#610](https://github.com/betadots/hdm/pull/610) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump rack from 3.1.15 to 3.1.16 [\#604](https://github.com/betadots/hdm/pull/604) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Enhance ldap configuration [\#601](https://github.com/betadots/hdm/pull/601) ([oneiros](https://github.com/oneiros))
+- Fix delete button \(\#589\) [\#600](https://github.com/betadots/hdm/pull/600) ([oneiros](https://github.com/oneiros))
+- Rename email to username \(\#575\) [\#598](https://github.com/betadots/hdm/pull/598) ([oneiros](https://github.com/oneiros))
+
 ## [v3.3.0](https://github.com/betadots/hdm/tree/v3.3.0) (2025-05-28)
 
 [Full Changelog](https://github.com/betadots/hdm/compare/v3.2.0...v3.3.0)
