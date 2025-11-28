@@ -10,7 +10,7 @@ hdm::ruby_version: '3.4.7'
 hdm::disable_authentication: true
 hdm::allow_encryption: true
 hdm::puppetdb_settings:
-  'server': 'https://localhost:8081'
+  'server': 'https://openvox.hdm.workshop.betadots.training:8081'
   'pem':
     'key': '/etc/puppetlabs/puppet/ssl/private_keys/openvox.hdm.workshop.betadots.training.pem'
     'cert': '/etc/puppetlabs/puppet/ssl/certs/openvox.hdm.workshop.betadots.training.pem'
