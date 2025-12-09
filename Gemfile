@@ -28,7 +28,7 @@ gem 'cancancan'
 gem 'deep_merge', require: "deep_merge/core"
 gem 'diffy'
 gem 'faker'
-gem 'friendly_id', '~> 5.5.1'
+gem 'friendly_id', '~> 5.6.0'
 gem 'hiera-eyaml'
 gem 'net-ldap', require: "net/ldap"
 gem 'ostruct', '~> 0.6.3' # was ruby default, is not anymore in 3.5.x, is required by net-ldap
