@@ -33,6 +33,7 @@ gem 'hiera-eyaml'
 gem 'net-ldap', require: "net/ldap"
 gem 'ostruct', '~> 0.6.3' # was ruby default, is not anymore in 3.5.x, is required by net-ldap
 gem 'puppet'
+gem 'net-http', '~> 0.6.0' # Lock version, as newer ones seem to be incompatible with puppetdb
 gem 'puppetdb-ruby', require: 'puppetdb'
 gem 'syslog', '~> 0.3.0' # was ruby default, is not anymore in 3.4.x, is required by puppet
 gem 'ruby-saml'
