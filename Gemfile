@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby file: '.ruby-version'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 8.0.4'
+gem 'rails', '~> 8.1.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 2.8'
 # Use Puma as the app server
@@ -33,6 +33,7 @@ gem 'hiera-eyaml'
 gem 'net-ldap', require: "net/ldap"
 gem 'ostruct', '~> 0.6.3' # was ruby default, is not anymore in 3.5.x, is required by net-ldap
 gem 'puppet'
+gem 'net-http', '~> 0.6.0' # Lock version, as newer ones seem to be incompatible with puppetdb
 gem 'puppetdb-ruby', require: 'puppetdb'
 gem 'syslog', '~> 0.3.0' # was ruby default, is not anymore in 3.4.x, is required by puppet
 gem 'ruby-saml'
