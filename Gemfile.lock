@@ -233,7 +233,7 @@ GEM
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    json (2.17.1)
+    json (2.18.0)
     language_server-protocol (3.17.0.5)
     libv8-node (18.19.0.0)
     libv8-node (18.19.0.0-aarch64-linux)
@@ -267,8 +267,8 @@ GEM
     multi_json (1.18.0)
     multi_xml (0.7.2)
       bigdecimal (~> 3.1)
-    net-http (0.6.0)
-      uri
+    net-http (0.8.0)
+      uri (>= 0.11.1)
     net-imap (0.5.12)
       date
       net-protocol
@@ -414,7 +414,7 @@ GEM
     rexml (3.4.4)
     rspec-core (3.13.6)
       rspec-support (~> 3.13.0)
-    rspec-openapi (0.21.3)
+    rspec-openapi (0.21.4)
       actionpack (>= 5.2.0)
       rails-dom-testing
       rspec-core
@@ -583,7 +583,7 @@ DEPENDENCIES
   libv8-node (~> 18.19.0.0)
   listen (~> 3.9)
   mini_racer (~> 0.16.0)
-  net-http (~> 0.6.0)
+  net-http (~> 0.8.0)
   net-ldap
   openssl (~> 3.3)
   ostruct (~> 0.6.3)
