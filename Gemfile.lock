@@ -414,7 +414,7 @@ GEM
     rexml (3.4.4)
     rspec-core (3.13.6)
       rspec-support (~> 3.13.0)
-    rspec-openapi (0.21.3)
+    rspec-openapi (0.21.4)
       actionpack (>= 5.2.0)
       rails-dom-testing
       rspec-core
