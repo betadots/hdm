@@ -103,7 +103,7 @@ GEM
       async (>= 2.0)
     base64 (0.3.0)
     bcrypt (3.1.20)
-    bigdecimal (3.3.1)
+    bigdecimal (4.0.1)
     bindex (0.8.1)
     bootstrap (5.3.5)
       popper_js (>= 2.11.8, < 3)
@@ -215,7 +215,7 @@ GEM
     highline (3.1.2)
       reline
     hocon (1.4.0)
-    httparty (0.23.2)
+    httparty (0.24.0)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -263,13 +263,12 @@ GEM
     mini_mime (1.1.5)
     mini_racer (0.16.0)
       libv8-node (~> 18.19.0.0)
-    minitest (6.0.0)
-      prism (~> 1.5)
+    minitest (5.27.0)
     multi_json (1.18.0)
-    multi_xml (0.7.2)
-      bigdecimal (~> 3.1)
-    net-http (0.6.0)
-      uri
+    multi_xml (0.8.0)
+      bigdecimal (>= 3.1, < 5)
+    net-http (0.9.1)
+      uri (>= 0.11.1)
     net-imap (0.5.12)
       date
       net-protocol
@@ -316,7 +315,7 @@ GEM
     prime (0.1.4)
       forwardable
       singleton
-    prism (1.6.0)
+    prism (1.7.0)
     process_executer (4.0.0)
       track_open_instances (~> 0.1)
     protocol-hpack (1.5.1)
@@ -584,7 +583,8 @@ DEPENDENCIES
   libv8-node (~> 18.19.0.0)
   listen (~> 3.9)
   mini_racer (~> 0.16.0)
-  net-http (~> 0.6.0)
+  minitest (< 6)
+  net-http
   net-ldap
   openssl (~> 3.3)
   ostruct (~> 0.6.3)
