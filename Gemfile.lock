@@ -263,7 +263,8 @@ GEM
     mini_mime (1.1.5)
     mini_racer (0.16.0)
       libv8-node (~> 18.19.0.0)
-    minitest (5.27.0)
+    minitest (6.0.1)
+      prism (~> 1.5)
     multi_json (1.18.0)
     multi_xml (0.8.0)
       bigdecimal (>= 3.1, < 5)
@@ -583,7 +584,7 @@ DEPENDENCIES
   libv8-node (~> 18.19.0.0)
   listen (~> 3.9)
   mini_racer (~> 0.16.0)
-  minitest (< 6)
+  minitest (< 7)
   net-http
   net-ldap
   openssl (~> 3.3)
