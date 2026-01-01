@@ -21,7 +21,7 @@ gem 'stimulus-rails'
 gem 'turbo-rails'
 
 # Use Active Model has_secure_password
-gem 'bcrypt', '~> 3.1.20'
+gem 'bcrypt', '~> 3.1.21'
 
 gem 'breadcrumbs_on_rails'
 gem 'cancancan'
