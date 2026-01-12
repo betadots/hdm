@@ -31,8 +31,7 @@ gem 'faker'
 gem 'friendly_id', '~> 5.6.0'
 gem 'hiera-eyaml'
 gem 'net-ldap', require: "net/ldap"
-gem 'ostruct', '~> 0.6.3' # was ruby default, is not anymore in 3.5.x, is required by net-ldap
-gem 'puppet'
+gem 'openvox', '~> 8.24'
 gem 'net-http'
 gem 'puppetdb-ruby', require: 'puppetdb'
 gem 'syslog', '~> 0.3.0' # was ruby default, is not anymore in 3.4.x, is required by puppet
