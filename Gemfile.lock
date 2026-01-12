@@ -188,7 +188,7 @@ GEM
     friendly_id (5.6.0)
       activerecord (>= 4.0.0)
     getoptlong (0.2.1)
-    git (4.0.7)
+    git (4.1.0)
       activesupport (>= 5.0)
       addressable (~> 2.8)
       process_executer (~> 4.0)
@@ -221,7 +221,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
-    importmap-rails (2.2.2)
+    importmap-rails (2.2.3)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
@@ -316,7 +316,7 @@ GEM
       forwardable
       singleton
     prism (1.7.0)
-    process_executer (4.0.1)
+    process_executer (4.0.2)
       track_open_instances (~> 0.1)
     protocol-hpack (1.5.1)
     protocol-http (0.55.0)
@@ -329,7 +329,7 @@ GEM
     psych (5.3.1)
       date
       stringio
-    public_suffix (7.0.0)
+    public_suffix (7.0.2)
     puma (7.1.0)
       nio4r (~> 2.0)
     puppet (8.10.0)
@@ -414,7 +414,7 @@ GEM
     rexml (3.4.4)
     rspec-core (3.13.6)
       rspec-support (~> 3.13.0)
-    rspec-openapi (0.21.5)
+    rspec-openapi (0.22.1)
       actionpack (>= 5.2.0)
       rails-dom-testing
       rspec-core
@@ -443,7 +443,7 @@ GEM
       lint_roller (~> 1.1)
       rubocop (>= 1.75.0, < 2.0)
       rubocop-ast (>= 1.47.1, < 2.0)
-    rubocop-rails (2.34.2)
+    rubocop-rails (2.34.3)
       activesupport (>= 4.2.0)
       lint_roller (~> 1.1)
       rack (>= 1.1)
@@ -515,7 +515,7 @@ GEM
     stringio (3.2.0)
     syslog (0.3.0)
       logger
-    thor (1.4.0)
+    thor (1.5.0)
     tilt (2.6.1)
     timeout (0.5.0)
     traces (0.18.2)
@@ -597,7 +597,7 @@ DEPENDENCIES
   rubocop-capybara (~> 2.22.1)
   rubocop-factory_bot (~> 2.28.0)
   rubocop-performance (~> 1.26.1)
-  rubocop-rails (~> 2.34.2)
+  rubocop-rails (~> 2.34.3)
   rubocop-rake (~> 0.7.1)
   ruby-saml
   selenium-webdriver
