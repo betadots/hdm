@@ -60,7 +60,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'rspec-openapi'
   gem 'selenium-webdriver'
-  gem 'minitest', '< 6'
+  gem 'minitest', '< 7'
 end
 
 group :linter do
