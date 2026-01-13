@@ -72,7 +72,7 @@ group :linter do
 end
 
 group :release do
-  gem 'openssl', '~> 3.3'
+  gem 'openssl', '~> 4.0'
   gem 'github_changelog_generator', '>= 1.16.1', require: false
 end
 
