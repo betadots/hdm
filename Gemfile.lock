@@ -149,7 +149,7 @@ GEM
     diffy (3.4.4)
     docile (1.4.1)
     drb (2.2.3)
-    erb (6.0.1)
+    erb (6.0.2)
     erubi (1.13.1)
     factory_bot (6.5.6)
       activesupport (>= 6.1.0)
@@ -228,8 +228,9 @@ GEM
     io-endpoint (0.16.0)
     io-event (1.14.2)
     io-stream (0.11.1)
-    irb (1.16.0)
+    irb (1.17.0)
       pp (>= 0.6.0)
+      prism (>= 1.3.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.18.1)
@@ -263,7 +264,8 @@ GEM
     mini_mime (1.1.5)
     mini_racer (0.16.0)
       libv8-node (~> 18.19.0.0)
-    minitest (6.0.1)
+    minitest (6.0.2)
+      drb (~> 2.0)
       prism (~> 1.5)
     multi_json (1.19.1)
     multi_xml (0.8.0)
@@ -403,7 +405,7 @@ GEM
     rb-inotify (0.11.1)
       ffi (~> 1.0)
     rchardet (1.10.0)
-    rdoc (7.0.3)
+    rdoc (7.2.0)
       erb
       psych (>= 4.0.0)
       tsort
@@ -530,11 +532,10 @@ GEM
     unicode-emoji (4.2.0)
     uri (1.1.1)
     useragent (0.16.11)
-    web-console (4.2.1)
-      actionview (>= 6.0.0)
-      activemodel (>= 6.0.0)
+    web-console (4.3.0)
+      actionview (>= 8.0.0)
       bindex (>= 0.4.0)
-      railties (>= 6.0.0)
+      railties (>= 8.0.0)
     websocket (1.2.11)
     websocket-driver (0.8.0)
       base64
@@ -542,7 +543,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.7.4)
+    zeitwerk (2.7.5)
 
 PLATFORMS
   aarch64-linux
