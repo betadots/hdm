@@ -1,4 +1,4 @@
-FROM docker.io/library/ruby:3.4.7-alpine3.21 AS builder
+FROM docker.io/library/ruby:3.4.8-alpine3.23 AS builder
 
 RUN apk update \
     && apk upgrade \
