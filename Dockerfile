@@ -10,7 +10,8 @@ RUN apk update \
         libxslt-dev \
         yaml-dev \
         tzdata \
-        bash
+        bash \
+        libffi-dev # required for the fiddle gem, transitive openvox dependency
 
 ENV APP_HOME=/hdm
 WORKDIR $APP_HOME
