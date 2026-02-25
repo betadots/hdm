@@ -4,6 +4,52 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.1.0](https://github.com/betadots/hdm/tree/v4.1.0) (2026-02-25)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v4.0.0...v4.1.0)
+
+**Implemented enhancements:**
+
+- Update Rails to 8.1.x [\#692](https://github.com/betadots/hdm/issues/692)
+- Update to Rails 8.1 [\#713](https://github.com/betadots/hdm/pull/713) ([oneiros](https://github.com/oneiros))
+- fix: change response status from unprocessable\_entity to unprocessable\_content [\#705](https://github.com/betadots/hdm/pull/705) ([rwaffen](https://github.com/rwaffen))
+
+**Fixed bugs:**
+
+- Container: Install libffi-dev & Fix ruby version [\#757](https://github.com/betadots/hdm/pull/757) ([bastelfreak](https://github.com/bastelfreak))
+
+**Merged pull requests:**
+
+- build\(deps\): bump hiera-eyaml from 4.3.0 to 5.0.0 [\#754](https://github.com/betadots/hdm/pull/754) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump the ruby group with 2 updates [\#753](https://github.com/betadots/hdm/pull/753) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update Ruby 3.4.7-\>3.4.8 [\#752](https://github.com/betadots/hdm/pull/752) ([bastelfreak](https://github.com/bastelfreak))
+- build\(deps\): bump the ruby group across 1 directory with 4 updates [\#751](https://github.com/betadots/hdm/pull/751) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump nokogiri from 1.19.0 to 1.19.1 [\#750](https://github.com/betadots/hdm/pull/750) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump rack from 3.2.4 to 3.2.5 [\#749](https://github.com/betadots/hdm/pull/749) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump faraday from 2.14.0 to 2.14.1 [\#746](https://github.com/betadots/hdm/pull/746) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 3 updates [\#745](https://github.com/betadots/hdm/pull/745) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group with 2 updates [\#742](https://github.com/betadots/hdm/pull/742) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump puma from 7.1.0 to 7.2.0 in the ruby group [\#741](https://github.com/betadots/hdm/pull/741) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump byebug from 12.0.0 to 13.0.0 [\#740](https://github.com/betadots/hdm/pull/740) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 3 updates [\#739](https://github.com/betadots/hdm/pull/739) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group with 4 updates [\#735](https://github.com/betadots/hdm/pull/735) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Switch from puppet to openvox [\#734](https://github.com/betadots/hdm/pull/734) ([bastelfreak](https://github.com/bastelfreak))
+- build\(deps\): bump the ruby group across 1 directory with 4 updates [\#732](https://github.com/betadots/hdm/pull/732) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump bcrypt from 3.1.20 to 3.1.21 in the ruby group [\#728](https://github.com/betadots/hdm/pull/728) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump action\_text-trix from 2.1.15 to 2.1.16 [\#727](https://github.com/betadots/hdm/pull/727) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump minitest from 5.27.0 to 6.0.1 [\#726](https://github.com/betadots/hdm/pull/726) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 4 updates [\#725](https://github.com/betadots/hdm/pull/725) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Pin minitest, unpin net-http [\#724](https://github.com/betadots/hdm/pull/724) ([oneiros](https://github.com/oneiros))
+- build\(deps-dev\): bump rspec-openapi from 0.21.4 to 0.21.5 in the ruby group [\#721](https://github.com/betadots/hdm/pull/721) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump rubocop from 1.81.7 to 1.82.0 in the ruby group [\#720](https://github.com/betadots/hdm/pull/720) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump rspec-openapi from 0.21.3 to 0.21.4 in the ruby group across 1 directory [\#717](https://github.com/betadots/hdm/pull/717) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump rspec-openapi from 0.21.2 to 0.21.3 in the ruby group [\#712](https://github.com/betadots/hdm/pull/712) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group with 3 updates [\#710](https://github.com/betadots/hdm/pull/710) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 2 updates [\#709](https://github.com/betadots/hdm/pull/709) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group with 2 updates [\#707](https://github.com/betadots/hdm/pull/707) ([dependabot[bot]](https://github.com/apps/dependabot))
+- use correct fqdn when using PuppetDB ssl connect [\#706](https://github.com/betadots/hdm/pull/706) ([tuxmea](https://github.com/tuxmea))
+- build\(deps\): bump the ruby group across 1 directory with 9 updates [\#702](https://github.com/betadots/hdm/pull/702) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v4.0.0](https://github.com/betadots/hdm/tree/v4.0.0) (2025-11-27)
 
 [Full Changelog](https://github.com/betadots/hdm/compare/v3.3.0...v4.0.0)
