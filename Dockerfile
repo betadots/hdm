@@ -10,7 +10,8 @@ RUN apk update \
         libxslt-dev \
         yaml-dev \
         tzdata \
-        bash
+        bash \
+        libffi-dev # required for the fiddle gem, transitive openvox dependency
 
 ENV APP_HOME=/hdm
 WORKDIR $APP_HOME
@@ -22,7 +23,7 @@ RUN bundle check || (bundle config set --local without 'development test release
 
 ###############################################################################
 
-FROM docker.io/library/ruby:3.4.7-alpine3.21 AS final
+FROM docker.io/library/ruby:3.4.8-alpine3.23 AS final
 
 LABEL org.label-schema.maintainer="betadots GmbH" \
       org.label-schema.vendor="betadots GmbH" \
