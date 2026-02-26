@@ -1,4 +1,4 @@
-FROM docker.io/library/ruby:3.4.8-alpine3.23 AS builder
+FROM docker.io/library/ruby:4.0.1-alpine3.23 AS builder
 
 RUN apk update \
     && apk upgrade \
@@ -23,7 +23,7 @@ RUN bundle check || (bundle config set --local without 'development test release
 
 ###############################################################################
 
-FROM docker.io/library/ruby:3.4.8-alpine3.23 AS final
+FROM docker.io/library/ruby:4.0.1-alpine3.23 AS final
 
 LABEL org.label-schema.maintainer="betadots GmbH" \
       org.label-schema.vendor="betadots GmbH" \
