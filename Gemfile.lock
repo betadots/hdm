@@ -312,7 +312,7 @@ GEM
       logger (~> 1.5)
       ostruct (< 0.7)
       thor (>= 1.0.1, < 2)
-    openssl (3.3.2)
+    openssl (4.0.1)
     openvox (8.25.0)
       base64 (>= 0.1, < 0.4)
       benchmark (>= 0.2, < 0.6)
@@ -587,7 +587,7 @@ DEPENDENCIES
   minitest (< 7)
   net-http
   net-ldap
-  openssl (~> 3.3)
+  openssl (~> 4.0)
   openvox (~> 8.25)
   puma (~> 7.2)
   puppetdb-ruby
