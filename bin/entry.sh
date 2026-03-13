@@ -4,6 +4,7 @@ HDM_PORT=$1
 HDM_HOST=$2
 
 bundle exec rake db:setup
+bundle exec rake db:migrate
 bundle exec rake hdm:assets
 
 if [[ "${DEVELOP}" -eq 1 ]]; then
