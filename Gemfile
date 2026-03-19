@@ -21,7 +21,7 @@ gem 'stimulus-rails'
 gem 'turbo-rails'
 
 # Use Active Model has_secure_password
-gem 'bcrypt', '~> 3.1.21'
+gem 'bcrypt', '~> 3.1.22'
 
 gem 'breadcrumbs_on_rails'
 gem 'cancancan'
@@ -63,7 +63,7 @@ group :test do
 end
 
 group :linter do
-  gem 'rubocop', '~> 1.84.2'
+  gem 'rubocop', '~> 1.85.1'
   gem 'rubocop-capybara', '~> 2.22.1'
   gem 'rubocop-performance', '~> 1.26.1'
   gem 'rubocop-rails', '~> 2.34.3'
