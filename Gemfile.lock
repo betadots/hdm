@@ -101,7 +101,7 @@ GEM
     async-pool (0.11.1)
       async (>= 2.0)
     base64 (0.3.0)
-    bcrypt (3.1.21)
+    bcrypt (3.1.22)
     benchmark (0.5.0)
     bigdecimal (4.0.1)
     bindex (0.8.1)
@@ -560,7 +560,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  bcrypt (~> 3.1.21)
+  bcrypt (~> 3.1.22)
   bootstrap (~> 5.3.8)
   bootstrap-icons-helper
   breadcrumbs_on_rails
