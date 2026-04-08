@@ -268,6 +268,7 @@ GEM
     minitest (6.0.2)
       drb (~> 2.0)
       prism (~> 1.5)
+    minitest-mock (5.27.0)
     multi_json (1.19.1)
     multi_xml (0.8.0)
       bigdecimal (>= 3.1, < 5)
@@ -585,6 +586,7 @@ DEPENDENCIES
   listen (~> 3.10)
   mini_racer (~> 0.16.0)
   minitest (< 7)
+  minitest-mock (~> 5.27)
   net-http
   net-ldap
   openssl (~> 3.3)

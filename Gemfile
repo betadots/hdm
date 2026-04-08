@@ -60,6 +60,7 @@ group :test do
   gem 'rspec-openapi'
   gem 'selenium-webdriver'
   gem 'minitest', '< 7'
+  gem 'minitest-mock', '~> 5.27' # was in minitest 5.x
 end
 
 group :linter do
