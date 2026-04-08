@@ -32,7 +32,7 @@ jobs:
         run: echo "dummy" > VERSION
 
       - name: Build CI container
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           tags: 'ci/hdm:${{ github.sha }}'
