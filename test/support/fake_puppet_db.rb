@@ -57,7 +57,7 @@ class FakePuppetDB
     return {} unless query.is_a?(Array)
 
     terms = if query.first == "and"
-              query.select { |e| e.is_a?(Array) }
+              query.grep(Array)
             else
               [query]
             end
