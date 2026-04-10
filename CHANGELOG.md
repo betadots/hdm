@@ -4,7 +4,33 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v4.1.0](https://github.com/betadots/hdm/tree/v4.1.0) (2026-02-25)
+## [v4.1.1](https://github.com/betadots/hdm/tree/v4.1.1) (2026-04-10)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v4.1.0...v4.1.1)
+
+**Fixed bugs:**
+
+- Login via LDAP causes an exception [\#719](https://github.com/betadots/hdm/issues/719)
+- Add require 'puppet' to openvox gem [\#799](https://github.com/betadots/hdm/pull/799) ([tuxmea](https://github.com/tuxmea))
+- Ruby: Update 3.4.8-\>3.4.9 [\#795](https://github.com/betadots/hdm/pull/795) ([bastelfreak](https://github.com/bastelfreak))
+- feat\(container\): Run db:migrate rake task on container start [\#774](https://github.com/betadots/hdm/pull/774) ([tuxmea](https://github.com/tuxmea))
+
+**Closed issues:**
+
+- NameError: uninitialized constant HieraData::Config::Puppet [\#766](https://github.com/betadots/hdm/issues/766)
+
+**Merged pull requests:**
+
+- Add missing minitest-mock dependency [\#794](https://github.com/betadots/hdm/pull/794) ([bastelfreak](https://github.com/bastelfreak))
+- build\(deps\): bump addressable from 2.8.8 to 2.9.0 [\#792](https://github.com/betadots/hdm/pull/792) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump rack-session from 2.1.1 to 2.1.2 [\#791](https://github.com/betadots/hdm/pull/791) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump action\_text-trix from 2.1.17 to 2.1.18 [\#788](https://github.com/betadots/hdm/pull/788) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump bcrypt from 3.1.21 to 3.1.22 [\#779](https://github.com/betadots/hdm/pull/779) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump json from 2.19.1 to 2.19.2 [\#778](https://github.com/betadots/hdm/pull/778) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump loofah from 2.25.0 to 2.25.1 [\#776](https://github.com/betadots/hdm/pull/776) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump action\_text-trix from 2.1.16 to 2.1.17 [\#772](https://github.com/betadots/hdm/pull/772) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [v4.1.0](https://github.com/betadots/hdm/tree/v4.1.0) (2026-02-26)
 
 [Full Changelog](https://github.com/betadots/hdm/compare/v4.0.0...v4.1.0)
 
