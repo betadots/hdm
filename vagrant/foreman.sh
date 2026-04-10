@@ -5,7 +5,7 @@ sudo dnf clean all
 
 echo "Installing Repo Packages"
 echo "foreman"
-sudo dnf -y localinstall https://yum.theforeman.org/releases/3.15/el9/x86_64/foreman-release.rpm
+sudo dnf -y localinstall https://yum.theforeman.org/releases/3.18/el9/x86_64/foreman-release.rpm
 echo "OpenVox 8"
 sudo dnf -y localinstall https://yum.voxpupuli.org/openvox8-release-el-9.noarch.rpm
 
