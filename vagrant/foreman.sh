@@ -13,7 +13,7 @@ echo "DNF update"
 sudo dnf -y update
 
 echo "installing some tools: tree vim net-tools"
-sudo dnf -y install tree vim net-tools git
+sudo dnf -y install tree vim net-tools git bash-completion openbolt
 
 echo "Katello installation part"
 sudo dnf -y install foreman-installer
@@ -88,7 +88,7 @@ sudo systemctl restart puppetserver
 echo "Uploading facts to PuppetDB"
 sudo /opt/puppetlabs/bin/puppet agent -t
 
-if [[ -e /vagrant/puppet-bolt-4.0.0-1.el9.x86_64.rpm && -e /vagrant/rubygem-smart_proxy_openbolt-0.0.1-1.el9.noarch.rpm && -e /vagrant/rubygem-foreman_openbolt-0.0.1-1.el9.noarch.rpm ]]; then
+if [[ -e /vagrant/rubygem-smart_proxy_openbolt-0.0.1-1.el9.noarch.rpm && -e /vagrant/rubygem-foreman_openbolt-0.0.1-1.el9.noarch.rpm ]]; then
   echo "Installing OpenVox Orchestrator"
   sudo rpm -ihv /vagrant/puppet-bolt-4.0.0-1.el9.x86_64.rpm /vagrant/rubygem-smart_proxy_openbolt-0.0.1-1.el9.noarch.rpm /vagrant/rubygem-foreman_openbolt-0.0.1-1.el9.noarch.rpm
   if [[ $(grep foreman-tasks /usr/share/gems/gems/foreman_openbolt-0.0.1/lib/foreman_openbolt.rb) ]]; then
