@@ -28,10 +28,10 @@ gem 'cancancan'
 gem 'deep_merge', require: "deep_merge/core"
 gem 'diffy'
 gem 'faker'
-gem 'friendly_id', '~> 5.6.0'
+gem 'friendly_id', '~> 5.7.0'
 gem 'hiera-eyaml'
 gem 'net-ldap', require: "net/ldap"
-gem 'openvox', '~> 8.25', require: 'puppet'
+gem 'openvox', '~> 8.26', require: 'puppet'
 gem 'net-http'
 gem 'puppetdb-ruby', require: 'puppetdb'
 gem 'syslog', '~> 0.4.0' # was ruby default, is not anymore in 3.4.x, is required by puppet
@@ -65,7 +65,7 @@ end
 
 group :linter do
   gem 'rubocop', '~> 1.86.1'
-  gem 'rubocop-capybara', '~> 2.22.1'
+  gem 'rubocop-capybara', '~> 2.23.0'
   gem 'rubocop-performance', '~> 1.26.1'
   gem 'rubocop-rails', '~> 2.34.3'
   gem 'rubocop-rake', '~> 0.7.1'
