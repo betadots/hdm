@@ -73,6 +73,7 @@ class UsersController < ApplicationController
   end
 
   private
+
     # Only allow a trusted parameter "white list" through.
     def user_params
       # The last admin can't change his/her role to a non admin role.

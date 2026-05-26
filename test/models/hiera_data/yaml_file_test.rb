@@ -82,7 +82,7 @@ class HieraData
     path = Rails.root.join('test', 'fixtures', 'files', 'puppet', 'environments', 'development', 'data', 'nodes', 'writehost.yaml')
 
     with_temp_file(path) do
-      expected_hash = {"test_key"=>"true"}
+      expected_hash = {"test_key" => "true"}
       file = HieraData::YamlFile.new(path:)
       file.write_key('test_key', 'true')
       assert_equal expected_hash, YAML.load_file(path)
@@ -126,6 +126,7 @@ class HieraData
   end
 
     private
+
     def config_dir
       Pathname.new(Rails.configuration.hdm["config_dir"]).join('environments', 'development', 'data')
     end

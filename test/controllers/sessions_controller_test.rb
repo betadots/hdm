@@ -15,5 +15,4 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   #   get sessions_destroy_url
   #   assert_response :success
   # end
-
 end

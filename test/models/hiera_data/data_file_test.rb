@@ -26,7 +26,7 @@ class HieraData
         git_repo.expect(:commit!, true, [:add, PATH])
         HieraData::GitRepo.stub(:new, git_repo) do
           with_temp_file(PATH) do
-            expected_hash = {"test_key"=>"true"}
+            expected_hash = {"test_key" => "true"}
             file = HieraData::DataFile.new(path: PATH)
             file.write_key('test_key', 'true')
             assert_equal expected_hash, YAML.load_file(PATH)
