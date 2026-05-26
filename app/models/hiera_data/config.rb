@@ -18,6 +18,7 @@ class HieraData
                  unless parsed_file["version"] == 5
                    raise Hdm::Error, "hdm needs your hiera.yaml configuration to be in the version 5 format. Please convert your config file(s) before using hdm."
                  end
+
                  parsed_file
                else
                  {}

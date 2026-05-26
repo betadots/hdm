@@ -73,22 +73,23 @@ class UsersController < ApplicationController
   end
 
   private
-    # Only allow a trusted parameter "white list" through.
-    def user_params
-      # The last admin can't change his/her role to a non admin role.
-      #
-      if User.admins.one? && current_user == @user
-        params.expect(user: [:first_name, :last_name, :username, :password, :password_confirmation])
+
+  # Only allow a trusted parameter "white list" through.
+  def user_params
+    # The last admin can't change his/her role to a non admin role.
+    #
+    if User.admins.one? && current_user == @user
+      params.expect(user: [:first_name, :last_name, :username, :password, :password_confirmation])
+    else
+      if current_user.try(:admin?)
+        params.expect(user: [:first_name, :last_name, :username, :password, :password_confirmation, :role])
       else
-        if current_user.try(:admin?)
-          params.expect(user: [:first_name, :last_name, :username, :password, :password_confirmation, :role])
-        else
-          params.expect(user: [:first_name, :last_name, :username, :password, :password_confirmation])
-        end
+        params.expect(user: [:first_name, :last_name, :username, :password, :password_confirmation])
       end
     end
+  end
 
-    def conditional_authentication
-      authentication_required if User.exists?
-    end
+  def conditional_authentication
+    authentication_required if User.exists?
+  end
 end

@@ -21,16 +21,19 @@ class HieraData
 
     def keys
       return [] unless exist?
+
       content.keys
     end
 
     def raw_content
       return nil unless exist?
+
       File.read(path)
     end
 
     def content
       return nil unless exist?
+
       @content ||= YAML.load_file(path) || {}
     end
 
@@ -59,7 +62,7 @@ class HieraData
       new_content = content || {}
       new_content[key] = value
 
-      File.open(path, File::RDWR|File::CREAT, 0644) do |f|
+      File.open(path, File::RDWR | File::CREAT, 0644) do |f|
         f.flock(File::LOCK_EX)
         f.rewind
         f.write(new_content.to_yaml)
@@ -72,7 +75,7 @@ class HieraData
       new_content = (content ? content : {})
       new_content.delete(key)
 
-      File.open(path, File::RDWR|File::CREAT, 0644) do |f|
+      File.open(path, File::RDWR | File::CREAT, 0644) do |f|
         f.flock(File::LOCK_EX)
         f.rewind
         f.write(new_content.to_yaml)
