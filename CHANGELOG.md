@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.1.2](https://github.com/betadots/hdm/tree/v4.1.2) (2026-05-26)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v4.1.1...v4.1.2)
+
+**Fixed bugs:**
+
+- HDM 4.0.0 always uses random node facts for hiera data [\#796](https://github.com/betadots/hdm/issues/796)
+
+**Merged pull requests:**
+
+- Cleanup rubocop warnings [\#823](https://github.com/betadots/hdm/pull/823) ([bastelfreak](https://github.com/bastelfreak))
+- build\(deps\): bump the ruby group across 1 directory with 12 updates [\#822](https://github.com/betadots/hdm/pull/822) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump faraday from 2.14.1 to 2.14.2 [\#821](https://github.com/betadots/hdm/pull/821) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump nokogiri from 1.19.2 to 1.19.3 [\#815](https://github.com/betadots/hdm/pull/815) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump net-imap from 0.5.12 to 0.5.14 [\#814](https://github.com/betadots/hdm/pull/814) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump erb from 6.0.2 to 6.0.4 [\#812](https://github.com/betadots/hdm/pull/812) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 8 updates [\#802](https://github.com/betadots/hdm/pull/802) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump activestorage from 8.1.1 to 8.1.2.1 [\#785](https://github.com/betadots/hdm/pull/785) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v4.1.1](https://github.com/betadots/hdm/tree/v4.1.1) (2026-04-10)
 
 [Full Changelog](https://github.com/betadots/hdm/compare/v4.1.0...v4.1.1)
