@@ -420,7 +420,7 @@ GEM
     rexml (3.4.4)
     rspec-core (3.13.6)
       rspec-support (~> 3.13.0)
-    rspec-openapi (0.26.0)
+    rspec-openapi (0.27.0)
       actionpack (>= 5.2.0)
       rails-dom-testing
       rspec-core
@@ -449,7 +449,7 @@ GEM
       lint_roller (~> 1.1)
       rubocop (>= 1.75.0, < 2.0)
       rubocop-ast (>= 1.47.1, < 2.0)
-    rubocop-rails (2.35.2)
+    rubocop-rails (2.35.3)
       activesupport (>= 4.2.0)
       lint_roller (~> 1.1)
       rack (>= 1.1)
@@ -602,7 +602,7 @@ DEPENDENCIES
   rubocop-capybara (~> 2.23.0)
   rubocop-factory_bot (~> 2.28.0)
   rubocop-performance (~> 1.26.1)
-  rubocop-rails (~> 2.35.2)
+  rubocop-rails (~> 2.35.3)
   rubocop-rake (~> 0.7.1)
   ruby-saml
   selenium-webdriver
