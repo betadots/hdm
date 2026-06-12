@@ -31,7 +31,7 @@ gem 'faker'
 gem 'friendly_id', '~> 5.7.0'
 gem 'hiera-eyaml'
 gem 'net-ldap', require: "net/ldap"
-gem 'openvox', '~> 8.27', require: 'puppet'
+gem 'openvox', '~> 8.28', require: 'puppet'
 gem 'net-http'
 gem 'puppetdb-ruby', require: 'puppetdb'
 gem 'syslog', '~> 0.4.0' # was ruby default, is not anymore in 3.4.x, is required by puppet
@@ -64,10 +64,10 @@ group :test do
 end
 
 group :linter do
-  gem 'rubocop', '~> 1.86.2'
+  gem 'rubocop', '~> 1.87.0'
   gem 'rubocop-capybara', '~> 2.23.0'
   gem 'rubocop-performance', '~> 1.26.1'
-  gem 'rubocop-rails', '~> 2.35.2'
+  gem 'rubocop-rails', '~> 2.35.4'
   gem 'rubocop-rake', '~> 0.7.1'
   gem 'rubocop-factory_bot', '~> 2.28.0'
 end
