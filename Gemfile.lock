@@ -359,7 +359,7 @@ GEM
       date
       stringio
     public_suffix (7.0.5)
-    puma (7.2.0)
+    puma (7.2.1)
       nio4r (~> 2.0)
     puppet-resource_api (2.0.0)
       hocon (>= 1.0)
