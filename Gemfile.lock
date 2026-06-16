@@ -359,7 +359,7 @@ GEM
       date
       stringio
     public_suffix (7.0.5)
-    puma (7.2.0)
+    puma (8.0.2)
       nio4r (~> 2.0)
     puppet-resource_api (2.0.0)
       hocon (>= 1.0)
@@ -594,7 +594,7 @@ DEPENDENCIES
   net-ldap
   openssl (~> 3.3)
   openvox (~> 8.28)
-  puma (~> 7.2)
+  puma (~> 8.0)
   puppetdb-ruby
   rails (~> 8.1.1)
   rspec-openapi
