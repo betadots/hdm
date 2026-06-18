@@ -76,6 +76,7 @@ An array of environment names or regex patterns to exclude from being displayed 
 **Default value:** `[]` (empty array)
 
 **Supported formats:**
+
 - **Exact string match:** Environment name must match exactly
 - **Regex pattern:** Use `!ruby/regexp /pattern/` syntax for pattern matching
 
@@ -97,6 +98,7 @@ production:
 ```
 
 **How it works:**
+
 - Environments matching any pattern in the list will be excluded from display
 - Both `in_use` and `available` environments are filtered
 - Regex patterns are case-sensitive by default
