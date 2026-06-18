@@ -15,12 +15,8 @@ class Environment < HieraModel
       all_environments[e] = { name: e, in_use: true }
     end
     available_environments.sort.each do |e|
-        all_environments[e] ||= { name: e }
-      unless excluded?(e, exclude_environments)
-        all_environments[e][:available] = true
-      else
-        all_environments[e][:available] = false
-      end
+      all_environments[e] ||= { name: e }
+      all_environments[e][:available] = !excluded?(e, exclude_environments)
     end
     if display_unused_environments
       all_environments.map { |_, attributes| new(**attributes) }
