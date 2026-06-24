@@ -8,15 +8,31 @@ class Environment < HieraModel
     available_environments = HieraData.environments(
       config_dir: Rails.configuration.hdm.config_dir
     )
+    display_unused_environments = Rails.configuration.hdm.display_unused_environments
+    exclude_environments = Rails.configuration.hdm.exclude_environments
     all_environments = {}
     environments_in_use.sort.each do |e|
       all_environments[e] = { name: e, in_use: true }
     end
     available_environments.sort.each do |e|
       all_environments[e] ||= { name: e }
-      all_environments[e][:available] = true
+      all_environments[e][:available] = !excluded?(e, exclude_environments)
     end
-    all_environments.map { |_, attributes| new(**attributes) }
+    if display_unused_environments
+      all_environments.map { |_, attributes| new(**attributes) }
+    else
+      all_environments.select { |_, attributes| attributes[:in_use] }.map { |_, attributes| new(**attributes) }
+    end
+  end
+
+  def self.excluded?(environment_name, exclude_list)
+    exclude_list.any? do |pattern|
+      if pattern.is_a?(Regexp)
+        pattern.match?(environment_name)
+      else
+        pattern == environment_name
+      end
+    end
   end
 
   def self.find(name)
