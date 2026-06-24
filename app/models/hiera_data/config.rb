@@ -14,7 +14,7 @@ class HieraData
     def load_content
       defaults = Puppet::Pops::Lookup::HieraConfigV5::DEFAULT_CONFIG_HASH
       config = if File.exist?(@hiera_yaml)
-                 parsed_file = YAML.load_file(@hiera_yaml)
+                 parsed_file = YAML.load_file(@hiera_yaml, aliases: true)
                  unless parsed_file["version"] == 5
                    raise Hdm::Error, "hdm needs your hiera.yaml configuration to be in the version 5 format. Please convert your config file(s) before using hdm."
                  end
