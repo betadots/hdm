@@ -32,6 +32,8 @@ production:
 | hiera_config_file | File name of hiera config file. Default to `hiera.yaml`. |
 | global_hiera_yaml | Optional. Path to the global layer's `hiera.yaml`. |
 | base_module_path | Optional. If you wanna overwrite `basemodulepath` from `puppet.conf`. |
+| display_unused_environments | Optional. Display environments that are available but not in use. Defaults to `true`. Details see [here](#display_unused_environments). |
+| exclude_environments | Optional array. List of environment names or regex patterns to exclude from display. Details see [here](#exclude_environments). |
 | ldap | Optional. Settings for LDAP server for authentication. Details see [here](#ldap). |
 | saml | Optional. Settings for SAML service for authentication. Details see [here](#saml). |
 | git_data | Optional array. Replaces hiera data in the file system with data from a git repo. Details see [here](#git_data). |
@@ -46,6 +48,61 @@ Examples are shown in [hdm.yml.template](../config/hdm.yml.template).
 | pem | With subkeys `key`, `cert`, `ca_file`. Paths to private key, certificate and CA cert for client cert authentication. Use a copy of these files to avoid permission problems. |
 | token | Token to authenticate against `server`. |
 | cacert | Optional. CA cert from OpenVox/Puppet CA to validate cert from `server`. |
+
+### display_unused_environments
+
+Controls whether environments that are available in the file system but not currently in use by PuppetDB should be displayed in HDM.
+
+**Default value:** `true`
+
+**Example:**
+
+```yaml
+production:
+  read_only: true
+  allow_encryption: false
+  puppetdb:
+    server: http://localhost:8080
+  config_dir: /etc/puppetlabs/code
+  display_unused_environments: false  # Hide unused environments
+```
+
+When set to `false`, only environments that are actively in use (reported by PuppetDB) will be displayed. This is useful in production environments where you want to focus only on active environments.
+
+### exclude_environments
+
+An array of environment names or regex patterns to exclude from being displayed in HDM. This is useful for filtering out deprecated, test, or backup environments.
+
+**Default value:** `[]` (empty array)
+
+**Supported formats:**
+
+- **Exact string match:** Environment name must match exactly
+- **Regex pattern:** Use `!ruby/regexp /pattern/` syntax for pattern matching
+
+**Example:**
+
+```yaml
+production:
+  read_only: true
+  allow_encryption: false
+  puppetdb:
+    server: http://localhost:8080
+  config_dir: /etc/puppetlabs/code
+  exclude_environments:
+    - old_production              # Exact match: exclude "old_production"
+    - deprecated_env              # Exact match: exclude "deprecated_env"
+    - !ruby/regexp /^test_.*/     # Regex: exclude all environments starting with "test_"
+    - !ruby/regexp /.*_backup$/   # Regex: exclude all environments ending with "_backup"
+    - !ruby/regexp /^temp/        # Regex: exclude all environments starting with "temp"
+```
+
+**How it works:**
+
+- Environments matching any pattern in the list will be excluded from display
+- Both `in_use` and `available` environments are filtered
+- Regex patterns are case-sensitive by default
+- The exclusion is applied before the `display_unused_environments` filter
 
 ### ldap
 

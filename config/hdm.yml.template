@@ -26,6 +26,11 @@ production:
   puppet_db:
     server: "http://localhost:8083"
   config_dir: <%= Rails.root.join('test','fixtures','files','puppet') %>
+  #display_unused_environments: false # Optional: hide environments not in use (default: true)
+  #exclude_environments: # Optional: exclude specific environments or patterns
+  #  - old_production
+  #  - !ruby/regexp /^test_.*/
+  #  - !ruby/regexp /.*_backup$/
 
 # Example for PE token authentication
 # production:
