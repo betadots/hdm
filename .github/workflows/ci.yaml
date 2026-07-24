@@ -73,7 +73,7 @@ jobs:
           repository: ${{github.event.pull_request.head.repo.full_name}}
 
       - name: Add VERSION file
-        run: echo "dummy" > VERSION
+        run: git describe --tags --always > VERSION
 
       - name: Build container
         uses: docker/build-push-action@v7
