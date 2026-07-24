@@ -10,17 +10,17 @@ jobs:
     name: Shellcheck
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v7
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
     - name: Run ShellCheck
-      uses: ludeeus/action-shellcheck@2.0.0
+      uses: ludeeus/action-shellcheck@00cae500b08a931fb5698e11e79bfbd38e612a38 # 2.0.0
       with:
         scandir: './bin'
 
   markdown-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: DavidAnson/markdownlint-cli2-action@v23
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: DavidAnson/markdownlint-cli2-action@6bf21b07787794f89a243495939cd651942aeabe # v24.1.0
         with:
           globs: '**/*.md'
 
@@ -30,9 +30,9 @@ jobs:
     env:
       BUNDLE_WITHOUT: development:test
     steps:
-    - uses: actions/checkout@v7
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
     - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
+      uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
       with:
         bundler-cache: true
     - name: Run tests
@@ -44,9 +44,9 @@ jobs:
     env:
       COVERAGE: true
     steps:
-    - uses: actions/checkout@v7
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
     - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
+      uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
       with:
         bundler-cache: true
     - name: Setup config
@@ -66,7 +66,7 @@ jobs:
             platform: arm64
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           ref: ${{github.event.pull_request.head.ref}}
@@ -76,7 +76,7 @@ jobs:
         run: echo "dummy" > VERSION
 
       - name: Build container
-        uses: docker/build-push-action@v7
+        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
         with:
           context: .
           tags: 'ci/hdm:${{ github.sha }}'
@@ -110,7 +110,7 @@ jobs:
     steps:
       - name: Dependabot metadata
         id: metadata
-        uses: dependabot/fetch-metadata@v3.1.0
+        uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
 
