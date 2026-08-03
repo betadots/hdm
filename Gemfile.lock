@@ -188,7 +188,7 @@ GEM
     friendly_id (5.7.0)
       activerecord (>= 4.0.0)
     getoptlong (0.2.1)
-    git (4.4.0)
+    git (5.0.1)
       activesupport (>= 5.0)
       addressable (~> 2.8)
       process_executer (~> 4.0)
