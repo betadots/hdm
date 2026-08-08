@@ -36,6 +36,29 @@ class HieraData
       end
     end
 
+    class ConfigWithAliases < ActiveSupport::TestCase
+      test "resolves YAML aliases" do
+        Dir.mktmpdir do |tmpdir|
+          path = File.join(tmpdir, "hiera.yaml")
+          File.write(path, <<~YAML)
+            version: 5
+            defaults: &defaults
+              datadir: data
+              data_hash: yaml_data
+            hierarchy:
+              - name: Common
+                <<: *defaults
+                path: common.yaml
+          YAML
+
+          config = HieraData::Config.new(path)
+
+          assert_equal "data", config.hierarchies.first.raw_hash["datadir"]
+          assert_equal "yaml_data", config.hierarchies.first.raw_hash["data_hash"]
+        end
+      end
+    end
+
     class ConfigNoDatadirInYamlFile < ActiveSupport::TestCase
       test "uses default datadir from puppet" do
         config = HieraData::Config.new(base_path.join("hiera.yaml"))
