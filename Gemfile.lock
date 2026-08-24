@@ -206,7 +206,7 @@ GEM
       rake (>= 10.0)
     globalid (1.4.0)
       activesupport (>= 6.1)
-    google-protobuf (4.35.1)
+    google-protobuf (4.36.0)
       bigdecimal
       rake (~> 13.3)
     hiera-eyaml (5.0.1)
@@ -420,7 +420,7 @@ GEM
     rexml (3.4.4)
     rspec-core (3.13.6)
       rspec-support (~> 3.13.0)
-    rspec-openapi (0.33.0)
+    rspec-openapi (0.33.1)
       actionpack (>= 5.2.0)
       rails-dom-testing
       rspec-core
