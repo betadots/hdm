@@ -40,6 +40,21 @@ class HieraData
       assert_equal({}, file.content)
     end
 
+    test "#content resolves YAML aliases" do
+      Dir.mktmpdir do |tmpdir|
+        path = File.join(tmpdir, "aliases.yaml")
+        File.write(path, <<~YAML)
+          defaults: &defaults
+            enabled: true
+          copy: *defaults
+        YAML
+
+        file = HieraData::YamlFile.new(path:)
+
+        assert_equal({ "enabled" => true }, file.content["copy"])
+      end
+    end
+
     test "#content_for_key returns nil for unknown file and key" do
       file = HieraData::YamlFile.new(path: config_dir.join("role/hdm_test-development.yaml"))
       assert_nil file.content_for_key('noop_mode')

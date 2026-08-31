@@ -1,19 +1,9 @@
-# Ensure hdm configuration has proper defaults
 Rails.application.config.after_initialize do
-  # Ensure display_unused_environments has a default value of true
-  Rails.configuration.hdm.display_unused_environments = true if Rails.configuration.hdm.display_unused_environments.nil?
+  hdm_config = Rails.configuration.hdm
+  hdm_config.display_unused_environments = true if hdm_config.display_unused_environments.nil?
+  hdm_config.exclude_environments ||= []
 
-  # Ensure exclude_environments is always an array
-  Rails.configuration.hdm.exclude_environments ||= []
+  next if hdm_config.exclude_environments.is_a?(Array)
 
-  # Convert to array if it's not already
-  unless Rails.configuration.hdm.exclude_environments.is_a?(Array)
-    # If it's a hash, extract the keys
-    Rails.configuration.hdm.exclude_environments = if Rails.configuration.hdm.exclude_environments.is_a?(Hash)
-                                                     Rails.configuration.hdm.exclude_environments.keys
-                                                   else
-                                                     # Otherwise, reset to empty array
-                                                     []
-                                                   end
-  end
+  raise Hdm::Error, "exclude_environments must be an array"
 end

@@ -33,7 +33,7 @@ production:
 | global_hiera_yaml | Optional. Path to the global layer's `hiera.yaml`. |
 | base_module_path | Optional. If you wanna overwrite `basemodulepath` from `puppet.conf`. |
 | display_unused_environments | Optional. Display environments that are available but not in use. Defaults to `true`. Details see [here](#display_unused_environments). |
-| exclude_environments | Optional array. List of environment names or regex patterns to exclude from display. Details see [here](#exclude_environments). |
+| exclude_environments | Optional array. Environment names or regex patterns to make unavailable. Details see [here](#exclude_environments). |
 | ldap | Optional. Settings for LDAP server for authentication. Details see [here](#ldap). |
 | saml | Optional. Settings for SAML service for authentication. Details see [here](#saml). |
 | git_data | Optional array. Replaces hiera data in the file system with data from a git repo. Details see [here](#git_data). |
@@ -71,7 +71,8 @@ When set to `false`, only environments that are actively in use (reported by Pup
 
 ### exclude_environments
 
-An array of environment names or regex patterns to exclude from being displayed in HDM. This is useful for filtering out deprecated, test, or backup environments.
+An array of environment names or regex patterns to make unavailable for selection.
+This is useful for disabling deprecated, test, or backup environments without removing them from the overview.
 
 **Default value:** `[]` (empty array)
 
@@ -97,12 +98,12 @@ production:
     - !ruby/regexp /^temp/        # Regex: exclude all environments starting with "temp"
 ```
 
-**How it works:**
+**Behavior:**
 
-- Environments matching any pattern in the list will be excluded from display
-- Both `in_use` and `available` environments are filtered
+- Matching environments remain visible but cannot be selected from the environment dropdown
+- Both environments in use and unused environments can be marked unavailable
 - Regex patterns are case-sensitive by default
-- The exclusion is applied before the `display_unused_environments` filter
+- This setting is not an access-control mechanism; configured environments remain accessible through the API and direct URLs
 
 ### ldap
 

@@ -4,29 +4,37 @@ class Environment < HieraModel
   attribute :available, :boolean, default: false
 
   def self.all
-    environments_in_use = PuppetDbClient.environments
-    available_environments = HieraData.environments(
-      config_dir: Rails.configuration.hdm.config_dir
-    )
-    display_unused_environments = Rails.configuration.hdm.display_unused_environments
-    exclude_environments = Rails.configuration.hdm.exclude_environments
-    all_environments = {}
-    environments_in_use.sort.each do |e|
-      all_environments[e] = { name: e, in_use: true }
-    end
-    available_environments.sort.each do |e|
-      all_environments[e] ||= { name: e }
-      all_environments[e][:available] = !excluded?(e, exclude_environments)
-    end
-    if display_unused_environments
-      all_environments.map { |_, attributes| new(**attributes) }
-    else
-      all_environments.select { |_, attributes| attributes[:in_use] }.map { |_, attributes| new(**attributes) }
-    end
+    environments = environment_attributes
+    environments.select! { |attributes| attributes[:in_use] } unless display_unused_environments?
+    environments.map { |attributes| new(**attributes) }
   end
 
-  def self.excluded?(environment_name, exclude_list)
-    exclude_list.any? do |pattern|
+  def self.environment_attributes
+    environments = PuppetDbClient.environments.sort.index_with do |name|
+      { name:, in_use: true }
+    end
+
+    available_environment_names.each do |name|
+      environments[name] ||= { name: }
+      environments[name][:available] = !excluded?(name)
+    end
+
+    environments.values
+  end
+  private_class_method :environment_attributes
+
+  def self.available_environment_names
+    HieraData.environments(config_dir: Rails.configuration.hdm.config_dir).sort
+  end
+  private_class_method :available_environment_names
+
+  def self.display_unused_environments?
+    Rails.configuration.hdm.display_unused_environments
+  end
+  private_class_method :display_unused_environments?
+
+  def self.excluded?(environment_name)
+    Rails.configuration.hdm.exclude_environments.any? do |pattern|
       if pattern.is_a?(Regexp)
         pattern.match?(environment_name)
       else
@@ -34,6 +42,7 @@ class Environment < HieraModel
       end
     end
   end
+  private_class_method :excluded?
 
   def self.find(name)
     all.find { |e| e.name == name }
