@@ -25,7 +25,10 @@ class HieraData
 
       def file_contents(facts:, decrypt: false)
         super.map do |hash|
-          hash.select { |k, _v| key_matches_module?(k) }
+          contents = hash.select { |k, _v| key_matches_module?(k) }
+          module_lookup_options = scoped_lookup_options(hash["lookup_options"])
+          contents["lookup_options"] = module_lookup_options if module_lookup_options.present?
+          contents
         end
       end
 
@@ -33,6 +36,25 @@ class HieraData
 
       def key_matches_module?(key)
         key.match(/^#{@namespace}::/)
+      end
+
+      # A module may only declare lookup_options for keys within its own
+      # namespace (Puppet 8 / Hiera 5 behavior). Any entry targeting a key
+      # outside `<namespace>::` is ignored.
+      def scoped_lookup_options(lookup_options)
+        return unless lookup_options.is_a?(Hash)
+
+        lookup_options.select { |key, _options| lookup_options_key_matches_module?(key) }
+      end
+
+      def lookup_options_key_matches_module?(key)
+        if key.to_s.start_with?("^")
+          # Regexp entry: only keep it when it is strictly scoped to the module
+          # namespace to avoid a module influencing foreign keys.
+          key.to_s.start_with?("^#{@namespace}::")
+        else
+          key_matches_module?(key.to_s)
+        end
       end
     end
   end
