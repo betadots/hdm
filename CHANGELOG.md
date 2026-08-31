@@ -4,6 +4,39 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.2.0](https://github.com/betadots/hdm/tree/v4.2.0) (2026-08-31)
+
+[Full Changelog](https://github.com/betadots/hdm/compare/v4.1.2...v4.2.0)
+
+**Implemented enhancements:**
+
+- feat: enable module layer lookup\_options [\#902](https://github.com/betadots/hdm/pull/902) ([nicolas-morel-claranet](https://github.com/nicolas-morel-claranet))
+
+**Fixed bugs:**
+
+- feat: Manage aliases in yaml + Add options to filter env v2 [\#839](https://github.com/betadots/hdm/pull/839) ([rwaffen](https://github.com/rwaffen))
+
+**Closed issues:**
+
+- lookup\_options are only fetched from environemnt data [\#873](https://github.com/betadots/hdm/issues/873)
+
+**Merged pull requests:**
+
+- build\(deps\): bump the ruby group across 1 directory with 6 updates [\#893](https://github.com/betadots/hdm/pull/893) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump activestorage from 8.1.2.1 to 8.1.3.1 [\#874](https://github.com/betadots/hdm/pull/874) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump websocket-driver from 0.8.0 to 0.8.2 [\#859](https://github.com/betadots/hdm/pull/859) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump rspec-openapi from 0.30.0 to 0.30.1 in the ruby group [\#855](https://github.com/betadots/hdm/pull/855) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group with 3 updates [\#851](https://github.com/betadots/hdm/pull/851) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump rubocop from 1.88.1 to 1.88.2 in the ruby group [\#850](https://github.com/betadots/hdm/pull/850) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 3 updates [\#849](https://github.com/betadots/hdm/pull/849) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump rubocop-capybara from 2.23.0 to 3.0.0 [\#844](https://github.com/betadots/hdm/pull/844) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump faraday from 2.14.2 to 2.14.3 [\#842](https://github.com/betadots/hdm/pull/842) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump rubocop-rails from 2.35.4 to 2.35.5 in the ruby group [\#841](https://github.com/betadots/hdm/pull/841) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump the ruby group across 1 directory with 7 updates [\#837](https://github.com/betadots/hdm/pull/837) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump net-imap from 0.5.14 to 0.5.15 [\#834](https://github.com/betadots/hdm/pull/834) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps-dev\): bump openssl from 3.3.2 to 4.0.2 [\#827](https://github.com/betadots/hdm/pull/827) ([dependabot[bot]](https://github.com/apps/dependabot))
+- build\(deps\): bump puma from 7.2.0 to 8.0.2 [\#826](https://github.com/betadots/hdm/pull/826) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v4.1.2](https://github.com/betadots/hdm/tree/v4.1.2) (2026-05-26)
 
 [Full Changelog](https://github.com/betadots/hdm/compare/v4.1.1...v4.1.2)
