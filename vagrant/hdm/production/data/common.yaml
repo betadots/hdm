@@ -7,6 +7,23 @@ lookup_options:
 
 classes:
   '22_stdlib_manage': 'stdlib::manage'
+  '44_openscap': 'foreman_scap_client'
+
+foreman_scap_client::foreman_repo_rel: '3.15'
+foreman_scap_client::server: 'openvox.hdm.workshop.betadots.training'
+foreman_scap_client::port: 8443
+foreman_scap_client::policies:
+  - 'id': 1
+    'hour': '12'
+    'minute': '1'
+    'month': '*'
+    'monthday': '*'
+    'weekday': '1'
+    'profile_id': ''
+    'content_path': '/usr/share/xml/scap/ssg/fedora/ssg-fedora-ds.xml'
+    'download_path': '/compliance/policies/1/content'
+    'tailoring_path': '/var/lib/openacap/ssg-fedora-ds-tailored.xml'
+    'tailoring_download_path': '/compliance/policies/1/tailoring'
 
 profile::base::additional_packages:
   - 'htop'
