@@ -27,7 +27,7 @@ production:
     server: "http://localhost:8083"
   config_dir: <%= Rails.root.join('test','fixtures','files','puppet') %>
   #display_unused_environments: false # Optional: hide environments not in use (default: true)
-  #exclude_environments: # Optional: exclude specific environments or patterns
+  #exclude_environments: # Optional: make specific environments unavailable
   #  - old_production
   #  - !ruby/regexp /^test_.*/
   #  - !ruby/regexp /.*_backup$/

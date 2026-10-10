@@ -1,6 +1,18 @@
 require 'test_helper'
 
 class EnvironmentTest < ActiveSupport::TestCase
+  setup do
+    @display_unused_environments = Rails.configuration.hdm.display_unused_environments
+    @exclude_environments = Rails.configuration.hdm.exclude_environments
+    Rails.configuration.hdm.display_unused_environments = true
+    Rails.configuration.hdm.exclude_environments = []
+  end
+
+  teardown do
+    Rails.configuration.hdm.display_unused_environments = @display_unused_environments
+    Rails.configuration.hdm.exclude_environments = @exclude_environments
+  end
+
   test "::all lists the environments" do
     expected_environments = %w(
       development
@@ -28,6 +40,31 @@ class EnvironmentTest < ActiveSupport::TestCase
       unavailable_environment = environments.find { |e| e.name == "unavailable" }
       assert_not unavailable_environment.available?
     end
+  end
+
+  test "::all hides unused environments when configured" do
+    Rails.configuration.hdm.display_unused_environments = false
+
+    environments = Environment.all
+
+    assert_includes environments.map(&:name), "development"
+    assert_not_includes environments.map(&:name), "old_unused"
+  end
+
+  test "::all marks environments unavailable by exact name" do
+    Rails.configuration.hdm.exclude_environments = ["development"]
+
+    environment = Environment.find("development")
+
+    assert_not environment.available?
+  end
+
+  test "::all marks environments unavailable by regular expression" do
+    Rails.configuration.hdm.exclude_environments = [/^dev/]
+
+    environment = Environment.find("development")
+
+    assert_not environment.available?
   end
 
   test "::find correctly sets the `in_use` flag" do
