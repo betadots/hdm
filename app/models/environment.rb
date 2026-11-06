@@ -4,7 +4,7 @@ class Environment < HieraModel
   attribute :available, :boolean, default: false
 
   def self.all
-    environments_in_use = PuppetDbClient.environments
+    environments_in_use = PuppetDbClient.environments.compact_blank
     available_environments = HieraData.environments(
       config_dir: Rails.configuration.hdm.config_dir
     )
