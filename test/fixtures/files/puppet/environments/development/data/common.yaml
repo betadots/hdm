@@ -12,3 +12,6 @@ foobar::postfix::tp::resources_hash:
     postfix:
       template: foobar/postfix/main.cf.erb
 testmod::integer: 7
+testmod::matchs:
+  Group admins:
+    X11Forwarding: "yes"

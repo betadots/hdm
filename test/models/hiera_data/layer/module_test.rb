@@ -20,8 +20,15 @@ class HieraData
       end
 
       test "#all_keys only returns keys from module's namespace" do
-        expected = %w[testmod::float testmod::integer]
+        expected = %w[testmod::float testmod::integer testmod::matchs]
         assert_equal expected, @module_layer.all_keys(facts: {})
+      end
+
+      test "#file_contents keeps lookup_options scoped to the module's namespace" do
+        contents = @module_layer.file_contents(facts: {})
+        lookup_options = contents.filter_map { |hash| hash["lookup_options"] }.first
+
+        assert_equal({ "testmod::matchs" => { "merge" => "deep" } }, lookup_options)
       end
     end
   end

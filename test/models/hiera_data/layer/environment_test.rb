@@ -29,6 +29,7 @@ class HieraData
           hdm::float
           hdm::integer
           testmod::integer
+          testmod::matchs
         ]
         assert_equal expected, @environment_layer.all_keys(facts: {})
       end

@@ -8,7 +8,7 @@ class HieraDataTest < ActiveSupport::TestCase
   test "#all_keys return all keys" do
     hiera = HieraData.new(environment: 'development')
     expected_result = [
-      "classes", "foobar::enable_firstrun", "foobar::firstrun::linux_classes", "foobar::postfix::tp::resources_hash", "foobar::time::servers", "foobar::timezone", "hdm::float", "hdm::integer", "noop_mode", "testmod::integer"
+      "classes", "foobar::enable_firstrun", "foobar::firstrun::linux_classes", "foobar::postfix::tp::resources_hash", "foobar::time::servers", "foobar::timezone", "hdm::float", "hdm::integer", "noop_mode", "testmod::integer", "testmod::matchs"
     ]
 
     node = Node.new(hostname: "testhost", environment: "development")
@@ -46,6 +46,30 @@ class HieraDataTest < ActiveSupport::TestCase
     hiera = HieraData.new(environment: "lookup_tests")
 
     assert_equal "first", hiera.lookup_options_for(key: "hdm_integer")
+  end
+
+  test "#lookup_options_for honors lookup_options defined in a module" do
+    hiera = HieraData.new(environment: "development")
+
+    assert_equal "deep", hiera.lookup_options_for(key: "testmod::matchs")
+  end
+
+  test "#lookup_options_for ignores module lookup_options targeting a foreign key" do
+    hiera = HieraData.new(environment: "development")
+
+    assert_equal "first", hiera.lookup_options_for(key: "other::foreign")
+  end
+
+  test "#lookup deep-merges a module key using the module's lookup_options" do
+    hiera = HieraData.new(environment: "development")
+    node = Node.new(hostname: "testhost", environment: "development")
+
+    expected = {
+      "Group admins" => { "X11Forwarding" => "yes" },
+      "Group root" => { "PasswordAuthentication" => "no" }
+    }
+
+    assert_equal expected, hiera.lookup(key: "testmod::matchs", facts: node.facts)
   end
 
   class LookupWithMultipleLayersTest < ActiveSupport::TestCase
